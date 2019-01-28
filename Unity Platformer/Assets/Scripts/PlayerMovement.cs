@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour {
         onGround = true;
         jumpPressure = 0f;
         minJump = 2f;
-        maxJumpPressure = 10f;
+        maxJumpPressure = 5f;
         rbody = GetComponent<Rigidbody>();
 	}
 	
@@ -40,11 +40,11 @@ public class PlayerMovement : MonoBehaviour {
             }
             else
             {
-                //jump
+                //jump - slingshot 
                 if (jumpPressure > 0f)
                 {
                     jumpPressure = jumpPressure + minJump;
-                    rbody.velocity = new Vector3(jumpPressure/10f, jumpPressure, 0f);
+                    rbody.velocity = new Vector3(jumpPressure*3f, jumpPressure*1.5f, 0f); // Add velocity in X and Y (Height and Distance)
                     jumpPressure = 0f;
                     onGround = false;
                 }
