@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
+  - Wall
+  - Collectible
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - PostProcessing
   - Player
   - Projectile
-  - 
+  - Wall
   - 
   - 
   - 

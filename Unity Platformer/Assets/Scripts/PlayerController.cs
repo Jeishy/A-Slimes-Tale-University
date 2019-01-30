@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         //Reset variables when player is on the ground
         if (controller.isGrounded)
         {
+            
             Debug.Log("Resetting variables");
             vSpeed = 0;
             hSpeed = 0;
@@ -155,6 +156,15 @@ public class PlayerController : MonoBehaviour
         }
 
         return wallNormal;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Collectible"))
+        {
+            Debug.Log("Collected 2!");
+            Destroy(other.gameObject);
+        }
     }
 
 }
