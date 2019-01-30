@@ -2,95 +2,126 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     [SerializeField] float speed;
-    [SerializeField] float jumpSpeed;
+    [SerializeField] float maxHSpeed;
+    [SerializeField] float verticalJumpForce;
+    [SerializeField] float horizontalJumpForce;
     [SerializeField] float gravity;
     [SerializeField] float wallDetectDist;
     [SerializeField] float wallFriction;
+    [SerializeField] float wallSlideSpeedMax;
 
 
     CharacterController controller;
-    Vector3 movement;
+    Vector3 velocity;
 
+    float vSpeed = 0;
+    float hSpeed = 0;
+
+    float wallJumpForce;
+
+    bool wallSliding = false;
     bool canJump = true;
     bool hasWallJumped = false;
 
+    Rigidbody rb;
+    int layer_mask;
+
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         controller = GetComponent<CharacterController>();
+        layer_mask = LayerMask.GetMask("Wall");
     }
 
     void Update()
     {
 
-        Movement();
-
-    }
-
-    void Movement()
-    {
-
+        //Reset variables when player is on the ground
         if (controller.isGrounded)
         {
+            Debug.Log("Resetting variables");
+            vSpeed = 0;
+            hSpeed = 0;
             hasWallJumped = false;
             canJump = true;
+            wallJumpForce = horizontalJumpForce;
         }
 
         //Calculate horizontal movement
-        movement.x = Input.GetAxis("Horizontal") * speed;
+        velocity.x = Input.GetAxis("Horizontal") * speed;
 
-        WallFriction();
-        WallJumping();
-
-        if (canJump)
-
+        if (hSpeed != 0)
         {
-            Jump();
+            wallJumpForce -= Time.deltaTime;
         }
 
-        //Calculate vertical movement
-        movement.y -= (gravity * Time.deltaTime) * wallFriction;
+        //Check if player can wall jump 
+        WallJumping();
 
+
+        //Jumping
+        if (canJump && Input.GetButtonDown("Jump"))
+        {
+
+            if (!controller.isGrounded)
+            {
+                Debug.Log("Jumping off wall - wall normal: " + GetWallNormal());
+                hSpeed = wallJumpForce * GetWallNormal().x;
+            }
+
+            vSpeed = verticalJumpForce;
+            canJump = false;
+            Debug.Log("Jump");
+        }
+
+
+
+
+
+        //Calculate wall friction
+        WallFriction();
+
+        //Calculate gravity
+        vSpeed += gravity * Time.deltaTime;
+
+        //Apply vertical movement
+        velocity.y = vSpeed;
+        velocity.x += hSpeed;
 
         //Move character based on calculated movement above
-        controller.Move(movement);
+        controller.Move(velocity);
 
-        
 
     }
 
     void WallFriction()
     {
 
+
+        wallSliding = false;
+
         //Check if player is touching wall, if its in the air and if is dropping down
-        if (IsTouchingWall() && !controller.isGrounded && controller.velocity.y < 0)
+        if (IsTouchingWall() && !controller.isGrounded && vSpeed < 0)
         {
-            Debug.Log("Applying wall friction");
+            wallSliding = true;
 
-            //Apply gravity multiplier
-            wallFriction = 0.002f;
-        } else
-        {
-            //Revert gravity multiplier
-            wallFriction = 1;
+            if (vSpeed < -wallSlideSpeedMax)
+            {
+                vSpeed = -wallSlideSpeedMax;
+            }
         }
     }
 
-    void Jump()
-    {
-        if (Input.GetButton("Jump"))
-        {
-            movement.y = jumpSpeed;
-            canJump = false;
-        }
-    }
 
     void WallJumping()
     {
         if (IsTouchingWall() && !controller.isGrounded && !hasWallJumped)
         {
+            //Debug.Log("Player can jump again - touching: " + IsTouchingWall() + " , grounded: " + controller.isGrounded + " , wall jumped: " + hasWallJumped);
             canJump = true;
             hasWallJumped = true;
         }
@@ -101,8 +132,29 @@ public class PlayerController : MonoBehaviour {
     {
 
         RaycastHit hit;
-        return (Physics.Raycast(transform.position, Vector3.right, out hit, wallDetectDist) || Physics.Raycast(transform.position, Vector3.left, out hit, wallDetectDist));
-        
+        if (Physics.Raycast(transform.position, Vector3.right, out hit, wallDetectDist, layer_mask) || Physics.Raycast(transform.position, Vector3.left, out hit, wallDetectDist, layer_mask))
+        {
+            //Debug.Log("Touched wall: " + hit.collider.gameObject.name);
+            return true;
+        }
+
+        return false;
+
+    }
+
+
+    Vector3 GetWallNormal()
+    {
+
+        Vector3 wallNormal = Vector2.zero;
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.right, out hit, wallDetectDist, layer_mask) || Physics.Raycast(transform.position, Vector3.left, out hit, wallDetectDist, layer_mask))
+        {
+            wallNormal = hit.normal;
+        }
+
+        return wallNormal;
     }
 
 }
