@@ -120,7 +120,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 41566178}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 2.34, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -128,7 +128,7 @@ Transform:
   - {fileID: 534669905}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &41566178
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 41566181}
   - component: {fileID: 41566180}
   - component: {fileID: 41566179}
+  - component: {fileID: 41566187}
   - component: {fileID: 41566186}
   m_Layer: 9
   m_Name: Player
@@ -164,9 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3ec26892a421148b80e79c4ba407c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  proj: {fileID: 54765805153806586, guid: 413d7075ed604ea4e99b9e4dad86e900, type: 2}
+  isAimToShoot: 0
   projectileSpeed: 10
-  projectileSpawn: {fileID: 1208224404}
+  projectileSpawnTrans: {fileID: 1208224404}
   fireRate: 1
 --- !u!114 &41566180
 MonoBehaviour:
@@ -179,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b34104007b86b14e903598d3458978a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.7
+  speed: 0.5
   jumpSpeed: 0.3
   gravity: 0.7
   wallDetectDist: 0.08
@@ -285,6 +286,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &41566187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 41566178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd37fff32afde142a126ebe5d3a5671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: Projectiles
+    prefab: {fileID: 1596331177819224, guid: 413d7075ed604ea4e99b9e4dad86e900, type: 2}
+    size: 10
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,8 +437,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.165954, y: -0, z: -0, w: 0.9861335}
-  m_LocalPosition: {x: 0, y: 1.47, z: -6.5899997}
+  m_LocalRotation: {x: 0.1173472, y: -0.69730175, z: 0.1173472, w: 0.69730175}
+  m_LocalPosition: {x: 6.5900006, y: 1.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 41566177}
@@ -441,7 +457,7 @@ GameObject:
   - component: {fileID: 643046925}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -622,7 +638,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1521293550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.9, y: -0.32, z: 2.0305042}
+  m_LocalPosition: {x: 9.62, y: -0.32, z: 2.0305042}
   m_LocalScale: {x: 2.4958, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
