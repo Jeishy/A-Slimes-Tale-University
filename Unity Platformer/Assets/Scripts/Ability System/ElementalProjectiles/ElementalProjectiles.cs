@@ -14,10 +14,18 @@ public class ElementalProjectiles : MonoBehaviour {
 	// public AudioClip projectileSound; uncomment when sounds are added
     [HideInInspector] public bool IsBoosted;
     [HideInInspector] public DamageTypes DamageType;
+    [HideInInspector] public AbilityManager abilityManager;
+    [HideInInspector] public Transform playerTrans;
 	public float ProjectileSpeed;
 	public float BoostedDamage;
     private Vector3 projForce;
     private Vector3 hitPoint;
+
+    public virtual void LoadPlayerVariables()
+	{
+		playerTrans = PlayerAttributes.Instance.playerTransform;
+		abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
+	}
 
     public virtual Vector3 AimToFireProjectileForce(float projectileSpeed, Ray ray, float enter, Transform playerTrans)
     {

@@ -4,19 +4,22 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
-	private AbilityManager abilityManager;
 	private Rigidbody rb;
 	private Plane plane;
-	private Transform playerTrans;
 	private Vector3 distanceFromCamera;
 	
+	private void Awake()
+	{
+		rb = GetComponent<Rigidbody>();
+	}
+
 	public void Shoot()
 	{
+		if (playerTrans == null)
+			LoadPlayerVariables();
+			
 		// Note: Damage type is subject to change
 		DamageType = DamageTypes.FlatDamage;
-		rb = GetComponent<Rigidbody>();
-		playerTrans = GameObject.Find("Player").GetComponent<Transform>();
-		abilityManager = GameObject.Find("AbilityManager").GetComponent<AbilityManager>();
 		distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, playerTrans.position.z);
 		plane = new Plane(Vector3.forward, distanceFromCamera);
 

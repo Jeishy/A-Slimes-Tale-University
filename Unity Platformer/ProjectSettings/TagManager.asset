@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Projectile
   - Wall
+  - AbilityManager
   layers:
   - Default
   - TransparentFX
