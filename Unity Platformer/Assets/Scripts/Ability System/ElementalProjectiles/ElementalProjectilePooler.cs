@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectilePooler : MonoBehaviour {
+public class ElementalProjectilePooler : MonoBehaviour {
 
 	// Class for the pools in the game
 	// Contains a tag, a specified prefab, and a max size
@@ -18,7 +18,7 @@ public class ProjectilePooler : MonoBehaviour {
 		public int size;
 	}
 
-	public static ProjectilePooler Instance;
+	public static ElementalProjectilePooler Instance;
 
 	private void Awake()
 	{
@@ -63,17 +63,25 @@ public class ProjectilePooler : MonoBehaviour {
         }
 
 		// Store projectile from pool of specified tag to projectile variable
-        GameObject projectile = poolDictionary[tag].Dequeue();
+        GameObject elementalProj = poolDictionary[tag].Dequeue();
 
 		// Set projectile gameobject to true
-        projectile.SetActive(true);
+        elementalProj.SetActive(true);
 		// Set projectile's transform
-        projectile.transform.position = position;
+        elementalProj.transform.position = position;
 		// Set projectile's rotation
-        projectile.transform.rotation = rotation;
+        elementalProj.transform.rotation = rotation;
 
-        poolDictionary[tag].Enqueue(projectile);
+		
+        IPooledProjectile pooledProjectile = elementalProj.GetComponent<IPooledProjectile>();
 
-        return projectile;
+        if (pooledProjectile != null)
+        {
+            pooledProjectile.Shoot();
+        }
+
+        poolDictionary[tag].Enqueue(elementalProj);
+
+        return elementalProj;
     }
 }
