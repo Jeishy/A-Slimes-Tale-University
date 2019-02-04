@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float wallDetectDist;
     [SerializeField] float wallFriction;
     [SerializeField] float wallSlideSpeedMax;
-    AbilityManager am;
 
     CharacterController controller;
     Vector3 velocity;
@@ -34,6 +33,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+
+        
+
 
         //Reset variables when player is on the ground
         if (controller.isGrounded)
