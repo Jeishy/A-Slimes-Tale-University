@@ -6,33 +6,28 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] float speed;
-    [SerializeField] float maxHSpeed;
     [SerializeField] float verticalJumpForce;
     [SerializeField] float horizontalJumpForce;
     [SerializeField] float gravity;
     [SerializeField] float wallDetectDist;
     [SerializeField] float wallFriction;
     [SerializeField] float wallSlideSpeedMax;
-
+    AbilityManager am;
 
     CharacterController controller;
     Vector3 velocity;
 
     float vSpeed = 0;
     float hSpeed = 0;
-
     float wallJumpForce;
 
-    bool wallSliding = false;
     bool canJump = true;
     bool hasWallJumped = false;
 
-    Rigidbody rb;
     int layer_mask;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         controller = GetComponent<CharacterController>();
         layer_mask = LayerMask.GetMask("Wall");
     }
@@ -43,8 +38,6 @@ public class PlayerController : MonoBehaviour
         //Reset variables when player is on the ground
         if (controller.isGrounded)
         {
-            
-            Debug.Log("Resetting variables");
             vSpeed = 0;
             hSpeed = 0;
             hasWallJumped = false;
@@ -55,6 +48,7 @@ public class PlayerController : MonoBehaviour
         //Calculate horizontal movement
         velocity.x = Input.GetAxis("Horizontal") * speed;
 
+        //Dampen horizontal speed - air resistance
         if (hSpeed != 0)
         {
             wallJumpForce -= Time.deltaTime;
@@ -67,13 +61,15 @@ public class PlayerController : MonoBehaviour
         //Jumping
         if (canJump && Input.GetButtonDown("Jump"))
         {
-
+            //If the player is on the wall, the character is also launched horiontally away from the wall
             if (!controller.isGrounded)
             {
                 Debug.Log("Jumping off wall - wall normal: " + GetWallNormal());
                 hSpeed = wallJumpForce * GetWallNormal().x;
             }
 
+
+            //Apply force vertically
             vSpeed = verticalJumpForce;
             canJump = false;
             Debug.Log("Jump");
@@ -102,14 +98,11 @@ public class PlayerController : MonoBehaviour
     void WallFriction()
     {
 
-
-        wallSliding = false;
-
         //Check if player is touching wall, if its in the air and if is dropping down
         if (IsTouchingWall() && !controller.isGrounded && vSpeed < 0)
         {
-            wallSliding = true;
 
+            //Limit wall sliding speed
             if (vSpeed < -wallSlideSpeedMax)
             {
                 vSpeed = -wallSlideSpeedMax;
@@ -118,11 +111,12 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    //Check if player can wall jump
     void WallJumping()
     {
         if (IsTouchingWall() && !controller.isGrounded && !hasWallJumped)
         {
-            //Debug.Log("Player can jump again - touching: " + IsTouchingWall() + " , grounded: " + controller.isGrounded + " , wall jumped: " + hasWallJumped);
+            //Set variables to allow to jump once more and prevent from jumping again
             canJump = true;
             hasWallJumped = true;
         }
@@ -132,14 +126,8 @@ public class PlayerController : MonoBehaviour
     bool IsTouchingWall()
     {
 
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.right, out hit, wallDetectDist, layer_mask) || Physics.Raycast(transform.position, Vector3.left, out hit, wallDetectDist, layer_mask))
-        {
-            //Debug.Log("Touched wall: " + hit.collider.gameObject.name);
-            return true;
-        }
-
-        return false;
+        //Check if player touches the wall by casting a ray in the left and right direction
+        return (Physics.Raycast(transform.position, Vector3.right, wallDetectDist, layer_mask) || Physics.Raycast(transform.position, Vector3.left, wallDetectDist, layer_mask));
 
     }
 
@@ -162,7 +150,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Collectible"))
         {
-            Debug.Log("Collected 2!");
+            Debug.Log("Collected!");
             Destroy(other.gameObject);
         }
     }

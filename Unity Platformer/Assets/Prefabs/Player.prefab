@@ -234,8 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.3
-  maxHSpeed: 0
-  verticalJumpForce: 0.3
+  verticalJumpForce: 0.5
   horizontalJumpForce: 0.1
   gravity: -1
   wallDetectDist: 0.7
