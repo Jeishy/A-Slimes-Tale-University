@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WindPickup : MonoBehaviour {
+
 	private AbilityManager abilityManager;
-	// Use this for initialization
 	void Start () {
-		abilityManager = GameObject.Find("AbilityManager").GetComponent<AbilityManager>();
+		abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
 	}
 	
+	// If wind pickup interacts with player,
+	// set players elemental state to Wind
+	// and run method for running OnWindState event
 	private void OnTriggerEnter(Collider col)
 	{
 		if (col.CompareTag("Player"))

@@ -6,14 +6,17 @@ public class AbilityInputHandler : MonoBehaviour {
 
 	private AbilityManager abilityManager;
 	private AbilityProjectile abilityProjectile;
+	// The projectile time, used to determine cooldown
+	// of projectile
 	private float projFireTime;
+	// The fire rate of the projectile (seconds)
 	private float projFireRate;
 
 	// Use this for initialization
 	void Start () {
 		abilityManager = GetComponent<AbilityManager>();
 		abilityProjectile = GetComponent<AbilityProjectile>();
-		projFireTime = 0f;
+		projFireTime = 0f;	// Set fire time to zero at beginning of level, Note: This must be set to 0 when each level is left/complete
 	}
 	
 	// Update is called once per frame
@@ -26,6 +29,8 @@ public class AbilityInputHandler : MonoBehaviour {
 			ShootToggle();
         }
 
+		// Toggles between ability states
+		// Used for debugging
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
 			abilityManager.PlayerSwitchAbility();
