@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
             //Set variables to allow to jump once more and prevent from jumping again
             canJump = true;
             hasWallJumped = true;
+            
         }
     }
 
