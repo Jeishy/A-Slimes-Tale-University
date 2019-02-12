@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 626404789}
   - component: {fileID: 626404791}
   - component: {fileID: 626404790}
+  - component: {fileID: 626404792}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -256,6 +257,18 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &626404792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 626404788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c193bc10a86eef1479e35619beb20cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds: []
 --- !u!1 &1081847003
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +367,7 @@ GameObject:
   - component: {fileID: 1166561747}
   - component: {fileID: 1166561746}
   - component: {fileID: 1166561745}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -459,13 +472,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b34104007b86b14e903598d3458978a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  verticalJumpForce: 0
-  horizontalJumpForce: 0
+  speed: 0.3
+  verticalJumpForce: 0.3
+  horizontalJumpForce: 0.1
   gravity: -1
-  wallDetectDist: 0
-  wallFriction: 0
-  wallSlideSpeedMax: 0
+  wallDetectDist: 0.6
+  wallSlideSpeedMax: 0.01
+  wallJumpDampenForce: 0.001
 --- !u!65 &1484816962
 BoxCollider:
   m_ObjectHideFlags: 0

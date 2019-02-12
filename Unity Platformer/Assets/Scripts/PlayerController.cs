@@ -5,25 +5,29 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] float speed;
-    [SerializeField] float verticalJumpForce;
-    [SerializeField] float horizontalJumpForce;
-    [SerializeField] float gravity;
-    [SerializeField] float wallDetectDist;
-    [SerializeField] float wallFriction;
-    [SerializeField] float wallSlideSpeedMax;
+    [SerializeField] float speed = 0.3f;
+    [SerializeField] float verticalJumpForce = 0.3f;
+    [SerializeField] float horizontalJumpForce = 0.1f;
+    [SerializeField] float gravity = -1;
+    [SerializeField] float wallDetectDist = 0.6f;
+    [SerializeField] float wallSlideSpeedMax = 0.01f;
+    
+    //[SerializeField] float wallJumpForceDuration = 1f;
 
-    CharacterController controller;
-    Vector3 velocity;
+    private CharacterController controller;
+    private Vector3 velocity;
 
-    float vSpeed = 0;
-    float hSpeed = 0;
-    float wallJumpForce;
+    private float vSpeed = 0;
+    private float hSpeed = 0;
+    private float wallJumpForce;
+    
+    private float wallJumpForceTime;
+    [SerializeField] private float wallJumpDampenForce = 0.01f;
 
-    bool canJump = true;
-    bool hasWallJumped = false;
+    private bool canJump = true;
+    private bool hasWallJumped = false;
 
-    int layer_mask;
+    private int layer_mask;
 
     void Start()
     {
@@ -34,10 +38,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-
-        
-
-
         //Reset variables when player is on the ground
         if (controller.isGrounded)
         {
@@ -45,17 +45,17 @@ public class PlayerController : MonoBehaviour
             hSpeed = 0;
             hasWallJumped = false;
             canJump = true;
-            wallJumpForce = horizontalJumpForce;
+            wallJumpForce = 0;
         }
 
-        //Calculate horizontal movement
-        velocity.x = Input.GetAxis("Horizontal") * speed;
-
-        //Dampen horizontal speed - air resistance
-        if (hSpeed != 0)
+        if (Input.GetKey(KeyCode.A) && wallJumpForce > 0 || Input.GetKey(KeyCode.D) && wallJumpForce < 0)
         {
-            wallJumpForce -= Time.deltaTime;
+            wallJumpForce = 0;
         }
+        
+        //Calculate horizontal movement
+        hSpeed = Input.GetAxis("Horizontal") * speed;
+
 
         //Check if player can wall jump 
         WallJumping();
@@ -64,11 +64,14 @@ public class PlayerController : MonoBehaviour
         //Jumping
         if (canJump && Input.GetButtonDown("Jump"))
         {
-            //If the player is on the wall, the character is also launched horiontally away from the wall
+            //If the player is on the wall, the character is also launched horizontally away from the wall
             if (!controller.isGrounded)
             {
                 Debug.Log("Jumping off wall - wall normal: " + GetWallNormal());
-                hSpeed = wallJumpForce * GetWallNormal().x;
+                
+                wallJumpForce = horizontalJumpForce * GetWallNormal().x;
+                //RELATED TO FUNCTION BELOW, MIGHT BE USEFUL LATER
+                //StartCoroutine(DampedJumpForce(wallJumpForce));
             }
 
 
@@ -90,14 +93,33 @@ public class PlayerController : MonoBehaviour
 
         //Apply vertical movement
         velocity.y = vSpeed;
-        velocity.x += hSpeed;
+        velocity.x = hSpeed + wallJumpForce;
 
+        Debug.Log("HSpeed: " + hSpeed + " | Wall Jump Force: " + wallJumpForce);
+        
         //Move character based on calculated movement above
         controller.Move(velocity);
 
 
     }
 
+    /*
+     MIGHT BE USEFUL LATER
+     
+     IEnumerator DampedJumpForce(float startingForce)
+    {
+        float force = startingForce;
+        float t = 0f;
+        while (t < 1)
+        {
+            t += Time.deltaTime / wallJumpForceDuration;
+            wallJumpForce = Mathf.Lerp(startingForce, 0, t);
+            yield return null;
+        }
+
+    }*/
+    
+    
     void WallFriction()
     {
 
@@ -109,6 +131,7 @@ public class PlayerController : MonoBehaviour
             if (vSpeed < -wallSlideSpeedMax)
             {
                 vSpeed = -wallSlideSpeedMax;
+                wallJumpForce = 0;
             }
         }
     }
@@ -116,10 +139,10 @@ public class PlayerController : MonoBehaviour
 
     //Check if player can wall jump
     void WallJumping()
-    {
+    {        
         if (IsTouchingWall() && !controller.isGrounded && !hasWallJumped)
         {
-            //Set variables to allow to jump once more and prevent from jumping again
+            //Set variables to allow to jump once more and prevent from double jumping mid-air
             canJump = true;
             hasWallJumped = true;
             
