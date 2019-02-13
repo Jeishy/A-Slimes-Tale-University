@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - AbilityManager
   - Collectible
+  - Enemy
+  - Patrol Point
   layers:
   - Default
   - TransparentFX

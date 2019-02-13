@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] float speed = 0.3f;
-    [SerializeField] float verticalJumpForce = 0.3f;
-    [SerializeField] float horizontalJumpForce = 0.1f;
-    [SerializeField] float gravity = -1;
-    [SerializeField] float wallDetectDist = 0.6f;
-    [SerializeField] float wallSlideSpeedMax = 0.01f;
+    [SerializeField] private bool DEBUG = false;
+    
+    [SerializeField] private float speed = 0.3f;
+    [SerializeField] private float verticalJumpForce = 0.3f;
+    [SerializeField] private float horizontalJumpForce = 0.1f;
+    [SerializeField] private float gravity = -1;
+    [SerializeField] private float wallDetectDist = 0.6f;
+    [SerializeField] private float wallSlideSpeedMax = 0.01f;
     
     //[SerializeField] float wallJumpForceDuration = 1f;
 
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour
             //If the player is on the wall, the character is also launched horizontally away from the wall
             if (!controller.isGrounded)
             {
-                Debug.Log("Jumping off wall - wall normal: " + GetWallNormal());
+                if (DEBUG) Debug.Log("Jumping off wall - wall normal: " + GetWallNormal());
                 
                 wallJumpForce = horizontalJumpForce * GetWallNormal().x;
                 //RELATED TO FUNCTION BELOW, MIGHT BE USEFUL LATER
@@ -78,7 +80,7 @@ public class PlayerController : MonoBehaviour
             //Apply force vertically
             vSpeed = verticalJumpForce;
             canJump = false;
-            Debug.Log("Jump");
+            if (DEBUG) Debug.Log("Jump");
         }
 
 
@@ -95,7 +97,7 @@ public class PlayerController : MonoBehaviour
         velocity.y = vSpeed;
         velocity.x = hSpeed + wallJumpForce;
 
-        Debug.Log("HSpeed: " + hSpeed + " | Wall Jump Force: " + wallJumpForce);
+        if (DEBUG) Debug.Log("HSpeed: " + hSpeed + " | Wall Jump Force: " + wallJumpForce);
         
         //Move character based on calculated movement above
         controller.Move(velocity);
@@ -177,7 +179,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Collectible"))
         {
-            Debug.Log("Collected!");
+            if (DEBUG) Debug.Log("Collected!");
             Destroy(other.gameObject);
         }
     }

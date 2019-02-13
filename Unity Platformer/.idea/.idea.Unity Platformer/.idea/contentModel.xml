@@ -33,6 +33,7 @@
           <e p="AudioManager.cs" t="Include" />
           <e p="Collectible.cs" t="Include" />
           <e p="DDOL.cs" t="Include" />
+          <e p="EnemyAI.cs" t="Include" />
           <e p="PlayerAttributes.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="PlayerDurability.cs" t="Include" />
