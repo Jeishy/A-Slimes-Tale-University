@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-  productGUID: 1648f445768e462409f09723cea18e19
+  productGUID: 08cfc68707c75a84091aae48321441dc
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -650,8 +650,8 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: b13f5c4f-bff5-4f9d-9e33-aed4332a2473
-  projectName: Unity Platformer
+  cloudProjectId: 10df861a-6f07-466e-84e8-761044276e1b
+  projectName: Unity Platformer (2)
   organizationId: muubong
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
