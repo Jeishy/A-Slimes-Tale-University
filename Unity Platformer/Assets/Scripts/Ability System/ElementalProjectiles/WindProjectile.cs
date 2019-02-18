@@ -7,6 +7,10 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 	private Rigidbody rb;
 	private Plane plane;				// Plane used for plane.raycast in the Shoot function
 	private Vector3 distanceFromCamera;	// Distance from camera that the plane is created at
+	[SerializeField] private float knockbackForce;
+	[SerializeField] private float boostedKnockbackForce;
+	[SerializeField] private float baseDamage;
+	[SerializeField] private float boostedDamage;
 	
 	private void Awake()
 	{
@@ -19,9 +23,6 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 		if (playerTrans == null)
 			LoadPlayerVariables();
 		
-		// Damage type determines what kind of damage projecitle does
-		// to enemies
-		DamageType = DamageTypes.Knockback;
 		distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, playerTrans.position.z);
 		plane = new Plane(Vector3.forward, distanceFromCamera);
 
@@ -43,5 +44,21 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 			// Sets go's velocity if forward firing projectiles are chosen
     		rb.velocity = FireProjectileForward(ProjectileSpeed, playerTrans);
 		}
+	}
+
+	private void OnTriggerEnter(Collider col)
+	{
+		// Check if velocity of projectile is above certain amount
+		// Check if has hit the enemy already
+		if (col.CompareTag("Enemy"))
+		{
+			if (IsBoosted)
+				KnockbackDamageToEnemy(boostedDamage, boostedKnockbackForce, transform, col);
+			else
+				KnockbackDamageToEnemy(baseDamage, knockbackForce, transform, col);
+			// Add hit effects here
+		}
+		// Deactive projectile and display particle effect
+		gameObject.SetActive(false);
 	}
 }

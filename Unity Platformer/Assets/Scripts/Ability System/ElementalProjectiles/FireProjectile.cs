@@ -5,8 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 	private Rigidbody rb;
-	private Plane plane;				// Plane used for plane.raycast in the Shoot function
-	private Vector3 distanceFromCamera;	// Distance from camera that the plane is created at
+	private Plane plane;							// Plane used for plane.raycast in the Shoot function
+	private Vector3 distanceFromCamera;				// Distance from camera that the plane is created at
+	[SerializeField] private float dot;				// DOT for fire projectile
+	[SerializeField] private float boostedDot;		// Boosted DOT for fire projectile
+	[SerializeField] private int dotTime;			// Time over which dot is applied. Note: This is in seconds
+	[SerializeField] private int boostedDotTime;	// Time over which boosted dot is applied
 
 	// Rigidbody is set in awake
 	private void Awake()
@@ -20,9 +24,6 @@ public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 		if (playerTrans == null)
 			LoadPlayerVariables();
 
-		// Damage type determines what kind of damage projecitle does
-		// to enemies
-		DamageType = DamageTypes.DOT;
 		distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, playerTrans.position.z);
 		plane = new Plane(Vector3.forward, distanceFromCamera);
 
@@ -43,6 +44,18 @@ public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 		{
 			// Sets go's velocity if forward firing projectiles are chosen
     		rb.velocity = FireProjectileForward(ProjectileSpeed, playerTrans);
+		}
+	}
+
+	private void OnTriggerEnter(Collider col)
+	{
+		if (col.CompareTag("Enemy"))
+		{
+			// Apply dot to enemy with params
+			if (IsBoosted)
+				StartCoroutine(DOTToEnemy(boostedDot, boostedDotTime, gameObject, col));
+			else
+				StartCoroutine(DOTToEnemy(dot, dotTime, gameObject, col));
 		}
 	}
 }

@@ -19,6 +19,12 @@ public class AbilityManager : MonoBehaviour {
 	public event AbilityEventHandler OnPlayerSwitchAbility;
 	public event AbilityEventHandler OnProjectileFire;
 	public event AbilityEventHandler OnWindState;
+	public event AbilityEventHandler OnFireState;
+	public event AbilityEventHandler OnWaterState;
+	public event AbilityEventHandler OnEarthState;
+
+	public event AbilityEventHandler OnEarthCrash;
+
 	#endregion
 
     [HideInInspector] public bool IsAimToShoot;
@@ -36,6 +42,7 @@ public class AbilityManager : MonoBehaviour {
 	{
 		// Set elemental state to None at beginning of the game
 		CurrentPlayerElementalState = ElementalStates.None;
+		IsAimToShoot = true;
 	}
 
 	// Method for running methods subscribed to OnPlayerSwitchAbility event
@@ -66,6 +73,44 @@ public class AbilityManager : MonoBehaviour {
 		if (OnWindState != null)
 		{
 			OnWindState();
+		}
+	}
+
+	// Method for running methods subscribed to OnFireState event
+	// All fire state methods are run via this function
+	public void FireState()
+	{
+		if (OnFireState != null)
+		{
+			OnFireState();
+		}
+	}
+
+	// Method for running methods subscribed to OnWaterState event
+	// All water state methods are run via this function
+	public void WaterState()
+	{
+		if (OnWaterState != null)
+		{
+			OnWaterState();
+		}
+	}
+
+	// Method for running methods subscribed to OnEarthState event
+	// All earth state methods are run via this function
+	public void EarthState()
+	{
+		if (OnEarthState != null)
+		{
+			OnEarthState();
+		}
+	}
+
+	public void EarthCrash()
+	{
+		if (OnEarthCrash != null)
+		{
+			OnEarthCrash();
 		}
 	}
 }

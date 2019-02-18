@@ -50,6 +50,11 @@ public class AbilityInputHandler : MonoBehaviour {
             }
         }
 
+		// Left control activates the earth element ability smash
+		if (Input.GetKeyDown(KeyCode.LeftControl))
+		{
+			abilityManager.EarthCrash();
+		}
 	}
 
     private void ShootToggle()

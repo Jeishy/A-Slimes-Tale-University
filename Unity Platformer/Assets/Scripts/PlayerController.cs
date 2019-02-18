@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] float speed;
-    [SerializeField] float verticalJumpForce;
+    public float verticalJumpForce;
     [SerializeField] float horizontalJumpForce;
-    [SerializeField] float gravity;
+    public float gravity;
     [SerializeField] float wallDetectDist;
     [SerializeField] float wallFriction;
     [SerializeField] float wallSlideSpeedMax;
@@ -84,7 +84,6 @@ public class PlayerController : MonoBehaviour
 
         //Calculate wall friction
         WallFriction();
-
         //Calculate gravity
         vSpeed += gravity * Time.deltaTime;
 

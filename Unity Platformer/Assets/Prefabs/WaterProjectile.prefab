@@ -9,21 +9,21 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1557285439624582}
+  m_RootGameObject: {fileID: 1941906321393734}
   m_IsPrefabAsset: 1
---- !u!1 &1557285439624582
+--- !u!1 &1941906321393734
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4572143361782854}
-  - component: {fileID: 33659915033469720}
-  - component: {fileID: 23143881562238990}
-  - component: {fileID: 135890663610538252}
-  - component: {fileID: 54517540038486554}
-  - component: {fileID: 114169699176797660}
+  - component: {fileID: 4888118745038552}
+  - component: {fileID: 33651217574142088}
+  - component: {fileID: 23491716028604530}
+  - component: {fileID: 135387360090997552}
+  - component: {fileID: 54450538200673458}
+  - component: {fileID: 114131947719982008}
   m_Layer: 10
   m_Name: WaterProjectile
   m_TagString: Projectile
@@ -31,25 +31,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4572143361782854
+--- !u!4 &4888118745038552
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1557285439624582}
+  m_GameObject: {fileID: 1941906321393734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.43, y: 0.87, z: 0}
+  m_LocalPosition: {x: 7.669451, y: 0.32, z: -0.37740427}
   m_LocalScale: {x: 0.2658423, y: 0.2658423, z: 0.2658423}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23143881562238990
+--- !u!23 &23491716028604530
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1557285439624582}
+  m_GameObject: {fileID: 1941906321393734}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -79,19 +79,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33659915033469720
+--- !u!33 &33651217574142088
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1557285439624582}
+  m_GameObject: {fileID: 1941906321393734}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54517540038486554
+--- !u!54 &54450538200673458
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1557285439624582}
+  m_GameObject: {fileID: 1941906321393734}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -101,27 +101,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114169699176797660
+--- !u!114 &114131947719982008
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1557285439624582}
+  m_GameObject: {fileID: 1941906321393734}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9be7c60390ed48b41a8db06da0e0331d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsBoosted: 0
-  DamageType: 0
+  abilityManager: {fileID: 0}
+  playerTrans: {fileID: 0}
   ProjectileSpeed: 5
-  BoostedDamage: 10
---- !u!135 &135890663610538252
+  baseDamage: 5
+  boostedDamage: 10
+--- !u!135 &135387360090997552
 SphereCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1557285439624582}
+  m_GameObject: {fileID: 1941906321393734}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

@@ -8,6 +8,9 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 	private Rigidbody rb;
 	private Plane plane;				// Plane used for plane.raycast in the Shoot function
 	private Vector3 distanceFromCamera;	// Distance from camera that the plane is created at
+	[SerializeField] private float baseDamage;
+	[SerializeField] private float boostedDamage;
+	[SerializeField] private float boostedKnockbackForce;
 	
 	// Rigidbody is set in awake
 	private void Awake()
@@ -21,10 +24,6 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 		if (playerTrans == null)
 			LoadPlayerVariables();
 		
-		// Damage type determines what kind of damage projecitle does
-		// to enemies
-		// Note: Damage type is subject to change
-		DamageType = DamageTypes.FlatDamage;
 		distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, playerTrans.position.z);
 		plane = new Plane(Vector3.forward, distanceFromCamera);
 
@@ -46,5 +45,17 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 			// Sets go's velocity if forward firing projectiles are chosen
     		rb.velocity = FireProjectileForward(ProjectileSpeed, playerTrans);
 		}
+	}
+
+	private void OnTriggerEnter(Collider col)
+	{
+		if (col.CompareTag("Enemy"))
+		{
+			if (IsBoosted)
+				KnockbackDamageToEnemy(boostedDamage, boostedKnockbackForce, transform, col);
+			else
+				FlatDamageToEnemy(baseDamage, col);
+		}
+		gameObject.SetActive(false);
 	}
 }
