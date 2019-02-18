@@ -26,7 +26,7 @@ public class PlayerDurability : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.O))
-            Hit();
+            Hit(1);
 
         if (Input.GetKeyDown(KeyCode.P))
             armour++;
@@ -37,7 +37,7 @@ public class PlayerDurability : MonoBehaviour {
 	}
 
 
-    void Hit()
+    public void Hit(int damage = 1)
     {
 
         //Check if player has armour
@@ -48,7 +48,7 @@ public class PlayerDurability : MonoBehaviour {
         } else
         {
             //Oterwise, decrement health by 1
-            health--;
+            health -= damage;
         }
 
 
@@ -69,7 +69,7 @@ public class PlayerDurability : MonoBehaviour {
 
     void Die()
     {
-        Debug.LogWarning("Player Died!");
+        //Debug.LogWarning("Player Died!");
     }
 
 }

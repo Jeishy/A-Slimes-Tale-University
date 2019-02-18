@@ -11,10 +11,10 @@ public class EnemyAI : MonoBehaviour
 
 	[Space] [Header("Enemy Options")] 
 	[SerializeField] private bool flying;
-	[SerializeField] private bool melee;
-	[SerializeField] private float range;
-	
-	[Header("Patrol Options")]
+    [SerializeField] private EnemyAttack attackOptions;
+
+
+    [Header("Patrol Options")]
 	[SerializeField] private bool patrol;
 	[SerializeField] private WaypointFollowStyle waypointFollowStyle;
 	[SerializeField] private float patrolSpeed; 
@@ -34,15 +34,18 @@ public class EnemyAI : MonoBehaviour
     private int currentWaypoint = 0;							//Stores the value of the current waypoint index
     private int waypointIncrement = 1;							//Used for the Ping-Pong waypoint following method
     private bool waiting = false;								//When true the enemy pauses its patrol
+    private PlayerDurability playerHealth;
+    private float attackCountdown;
 
+    private void Start()
+    {
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDurability>();
+    }
 
-    void Update ()
+    void FixedUpdate ()
     {
 
-
-	    Vector3 target = waypoints[currentWaypoint].position;
-	    //target.y = transform.position.y;
-	    
+	    Vector3 target = waypoints[currentWaypoint].position;	    
 	    
 	    
 	    //Execute code when patrol boolean is true - Set in editor
@@ -61,7 +64,34 @@ public class EnemyAI : MonoBehaviour
 		    }
 	    }
 	    
-	    
+        //If enemy is melee...
+        if (attackOptions.melee)
+        {
+
+            if (attackCountdown <= Time.time && Physics2D.OverlapCircle(transform.position, attackOptions.meleeRange, attackOptions.attackMask))
+            {
+                
+                playerHealth.Hit();
+                attackCountdown = Time.time + attackOptions.attackSpeed;
+
+            }
+
+        } else
+        //If enemy is ranged...
+        {
+            Debug.DrawRay(transform.position, Vector3.Normalize(playerHealth.transform.position - transform.position) * attackOptions.range, Color.red);
+
+            if (attackCountdown <= Time.time && Vector2.Distance(transform.position, playerHealth.transform.position) < attackOptions.range)
+            {
+                GameObject proj = Instantiate(attackOptions.projectile, transform.position, Quaternion.identity);
+                Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
+                projRb.velocity = Vector3.Normalize(playerHealth.transform.position - transform.position) * attackOptions.projectileSpeed;
+                Destroy(proj, 5f);
+                attackCountdown = Time.time + attackOptions.attackSpeed;
+            }
+        }
+        
+
     }
 
 
@@ -105,9 +135,7 @@ public class EnemyAI : MonoBehaviour
 			currentWaypoint = Random.Range(0, waypoints.Length);
 		}
 		
-		
-		Debug.Log("Going to next waypoint (" + (currentWaypoint+1) + "/" + waypoints.Length + ")");
-	}
+			}
 
 	IEnumerator Wait()
 	{
@@ -121,10 +149,7 @@ public class EnemyAI : MonoBehaviour
 		{
 			seconds = waitTime;
 		}
-		
-		Debug.Log("Waiting at waypoint '" + (currentWaypoint + 1) + "' for " + seconds + " seconds...");
-
-		
+			
 		
 		waiting = true;
 		yield return new WaitForSeconds(seconds);
@@ -146,19 +171,14 @@ public class EnemyAI : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("Not Flying");
 			RaycastHit hit;
 
 			
 			if (Physics.Raycast(waypoints[currentWaypoint].position, Vector3.down, out hit, Mathf.Infinity))
 			{
 				waypointAtGround.y = hit.point.y;
-				Debug.Log("New waypoint: " + waypointAtGround.y);
 			}
-			
-			Debug.DrawLine(waypoints[currentWaypoint].position, hit.point, Color.red);
-
-			
+						
 		}
 		
 		return waypointAtGround;

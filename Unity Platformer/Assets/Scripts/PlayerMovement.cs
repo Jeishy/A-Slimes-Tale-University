@@ -59,7 +59,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
+        if (collision.gameObject.CompareTag("Collectible"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
 }
