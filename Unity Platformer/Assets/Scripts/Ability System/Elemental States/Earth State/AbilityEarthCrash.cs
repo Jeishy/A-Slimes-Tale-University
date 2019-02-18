@@ -27,7 +27,7 @@ public class AbilityEarthCrash : MonoBehaviour {
 
 	private void EarthCrash()
 	{
-		Vector3 downwardForceVector = new Vector3(0, -downwardForce, 0);
-		charController.Move(downwardForceVector);
+		//Vector3 downwardForceVector = new Vector3(0, -downwardForce, 0);
+		//charController.Move(downwardForceVector);
 	}
 }
