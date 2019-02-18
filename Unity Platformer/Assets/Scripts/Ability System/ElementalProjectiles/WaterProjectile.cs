@@ -57,6 +57,7 @@ public class WaterProjectile : ElementalProjectiles,IPooledProjectile {
 				FlatDamageToEnemy(baseDamage, col);
 		}
 		// Deactive projecitle and display a particle effect
+		Debug.Log("Water proj collided with something");
 		gameObject.SetActive(false);
 	}
 }

@@ -7,7 +7,6 @@ public class AbilityWindPassives : MonoBehaviour {
 	private AbilityManager abilityManager;
 	[SerializeField] private Rigidbody2D rb;
 	[SerializeField] private float windGravityDecrease;
-	[SerializeField] private float windVerticalJumpForceDecrease;
 	private void OnEnable()
 	{
 		Setup();
@@ -26,6 +25,6 @@ public class AbilityWindPassives : MonoBehaviour {
 
 	private void WindPassives()
 	{
-		rb.gravityScale += windGravityDecrease;
+		rb.gravityScale -= windGravityDecrease;
 	}
 }

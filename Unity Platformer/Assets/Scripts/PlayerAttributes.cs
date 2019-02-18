@@ -17,6 +17,5 @@ public class PlayerAttributes : MonoBehaviour {
 
 		// Caching player transform
 		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-		Debug.Log(playerTransform.name);
 	}
 }

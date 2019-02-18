@@ -60,5 +60,6 @@ public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 			else
 				StartCoroutine(DOTToEnemy(dot, dotTime, gameObject, col));
 		}
+		Debug.Log("Fire projectile collided with something");
 	}
 }
