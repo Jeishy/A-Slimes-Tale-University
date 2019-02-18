@@ -38,12 +38,12 @@ public class ElementalProjectiles : MonoBehaviour {
     }
 
     // Note, elemental projectile prefabs have rigidbodies on them
-    public virtual Vector3 FireProjectileForward(float projectileSpeed, Transform playerTrans)
+    public virtual Vector2 FireProjectileForward(float projectileSpeed, Transform playerTrans)
     {
         // Get transform's forward direction
-        Vector3 forwardDirection = playerTrans.forward;
+        Vector2 forwardDirection = playerTrans.forward;
         // Change velocity of projectile to forward direction vector * specified speed (magnitude)
-        Vector3 projForce = forwardDirection * projectileSpeed;
+        Vector2 projForce = forwardDirection * projectileSpeed;
         return projForce;
     }
  
@@ -62,7 +62,6 @@ public class ElementalProjectiles : MonoBehaviour {
     // Does DOT to hit enemy
     public virtual IEnumerator DOTToEnemy(float dot, int dotTime, GameObject proj, Collider2D enemyCol)
     {
-        proj.GetComponent<MeshRenderer>().enabled = false;
         // Apply dot over time, till dotTime is elapsed
         int dotCount = 0;
         while (dotCount < dotTime)
@@ -72,10 +71,6 @@ public class ElementalProjectiles : MonoBehaviour {
             Debug.Log("Damage done: " + dot);
             yield return new WaitForSeconds(1);
         }
-        // This is done here rather than in OnTriggerEnter in the fireprojectile class
-        // as the coroutine will stop execution when the gameobject is set to false
-        proj.GetComponent<MeshRenderer>().enabled = true;
-        proj.SetActive(false);
     }
 
     // Does knockback damage to hit enemy
