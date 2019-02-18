@@ -9,9 +9,10 @@ public class ElementalProjectiles : MonoBehaviour {
     [HideInInspector] public bool IsBoosted;
     [HideInInspector] public AbilityManager abilityManager;
     [HideInInspector] public Transform playerTrans;
+    [SerializeField] private int dropOffTime;
 	public float ProjectileSpeed;
-    private Vector3 projForce;
-    private Vector3 hitPoint;
+    private Vector2 projForce;
+    private Vector2 hitPoint;
 
     private void Awake()
     {
@@ -24,12 +25,13 @@ public class ElementalProjectiles : MonoBehaviour {
 		abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
 	}
 
-    public virtual Vector3 AimToFireProjectileForce(float projectileSpeed, Ray ray, float enter, Transform playerTrans)
+    public virtual Vector2 AimToFireProjectileForce(float projectileSpeed, Ray ray, float enter, Transform playerTrans)
     {
         hitPoint = ray.GetPoint(enter);
         // Get direction between mouse and player
-        Vector3 playerPos = playerTrans.position;
-        Vector3 direction = Vector3.Normalize(hitPoint - playerPos);
+        Vector2 playerPos = playerTrans.position;
+        Vector2 direction = hitPoint - playerPos;
+        direction = direction.normalized;
         // Change velocity of projectile to calculated normalized direction vector * specified speed (magnitude)
         projForce = direction * projectileSpeed;
         return projForce;
@@ -44,15 +46,21 @@ public class ElementalProjectiles : MonoBehaviour {
         Vector3 projForce = forwardDirection * projectileSpeed;
         return projForce;
     }
+ 
+	public virtual IEnumerator GravityDropOff(Rigidbody2D proj)
+	{
+		yield return new WaitForSeconds(dropOffTime);
+        proj.gravityScale = 3;
+	}
 
     // Does flat damage to hit enemy
-    public virtual void FlatDamageToEnemy(float damage, Collider enemyCol)
+    public virtual void FlatDamageToEnemy(float damage, Collider2D enemyCol)
     {
         // Reduce enemy's health by baseDamage
     }
 
     // Does DOT to hit enemy
-    public virtual IEnumerator DOTToEnemy(float dot, int dotTime, GameObject proj, Collider enemyCol)
+    public virtual IEnumerator DOTToEnemy(float dot, int dotTime, GameObject proj, Collider2D enemyCol)
     {
         proj.GetComponent<MeshRenderer>().enabled = false;
         // Apply dot over time, till dotTime is elapsed
@@ -71,7 +79,7 @@ public class ElementalProjectiles : MonoBehaviour {
     }
 
     // Does knockback damage to hit enemy
-    public virtual void KnockbackDamageToEnemy(float damage, float knockbackForce, Transform projTrans, Collider enemyCol)
+    public virtual void KnockbackDamageToEnemy(float damage, float knockbackForce, Transform projTrans, Collider2D enemyCol)
     {
         Vector3 enemyPos = enemyCol.transform.position;
         Vector3 projPos = projTrans.position;

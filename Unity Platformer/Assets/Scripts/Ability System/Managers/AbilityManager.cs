@@ -24,6 +24,7 @@ public class AbilityManager : MonoBehaviour {
 	public event AbilityEventHandler OnEarthState;
 
 	public event AbilityEventHandler OnEarthCrash;
+	public event AbilityEventHandler OnEarthWaterSink;
 
 	#endregion
 

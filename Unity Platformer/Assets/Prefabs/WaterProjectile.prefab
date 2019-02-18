@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4888118745038552}
   - component: {fileID: 33651217574142088}
   - component: {fileID: 23491716028604530}
-  - component: {fileID: 135387360090997552}
-  - component: {fileID: 54450538200673458}
   - component: {fileID: 114131947719982008}
+  - component: {fileID: 58708469459130600}
+  - component: {fileID: 50682129354803792}
   m_Layer: 10
   m_Name: WaterProjectile
   m_TagString: Projectile
@@ -86,21 +86,41 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1941906321393734}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54450538200673458
-Rigidbody:
+--- !u!50 &50682129354803792
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1941906321393734}
-  serializedVersion: 2
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
   m_Mass: 1
-  m_Drag: 0
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_Constraints: 0
+  m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &58708469459130600
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1941906321393734}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!114 &114131947719982008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,18 +135,7 @@ MonoBehaviour:
   IsBoosted: 0
   abilityManager: {fileID: 0}
   playerTrans: {fileID: 0}
+  dropOffTime: 2
   ProjectileSpeed: 5
   baseDamage: 5
   boostedDamage: 10
---- !u!135 &135387360090997552
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1941906321393734}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

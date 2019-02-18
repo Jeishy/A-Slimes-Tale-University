@@ -21,9 +21,10 @@ public class AbilitySetWindState : MonoBehaviour {
 		abilityManager = GetComponent<AbilityManager>();
 	}
 
+	// Method for setting the elemental state of the player to Wind
 	private void SetWindState()
 	{
 		abilityManager.CurrentPlayerElementalState = ElementalStates.Wind;
-		Debug.Log(abilityManager.CurrentPlayerElementalState);
+		//Debug.Log(abilityManager.CurrentPlayerElementalState);
 	}
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class FireProjectile : ElementalProjectiles,IPooledProjectile {
-	private Rigidbody rb;
+	private Rigidbody2D rb;
 	private Plane plane;							// Plane used for plane.raycast in the Shoot function
 	private Vector3 distanceFromCamera;				// Distance from camera that the plane is created at
 	[SerializeField] private float dot;				// DOT for fire projectile
@@ -15,7 +15,7 @@ public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 	// Rigidbody is set in awake
 	private void Awake()
 	{
-		rb = GetComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody2D>();
 	}
 
 	public void Shoot()
@@ -23,6 +23,8 @@ public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 		// Null check to ensure player variables are set
 		if (playerTrans == null)
 			LoadPlayerVariables();
+
+		StartCoroutine(GravityDropOff(rb));
 
 		distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, playerTrans.position.z);
 		plane = new Plane(Vector3.forward, distanceFromCamera);
@@ -36,6 +38,7 @@ public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 			{
 				// Set gameobjects velocity to returned value of AimToFireProjectileForce method
 				rb.velocity = AimToFireProjectileForce(ProjectileSpeed, ray, enter, playerTrans);
+				Debug.Log(rb.velocity);
 				// Debug ray to see raycast in viewport
 				Debug.DrawRay(ray.origin, ray.direction * enter, Color.green, 2f);
 			}
@@ -47,7 +50,7 @@ public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 		}
 	}
 
-	private void OnTriggerEnter(Collider col)
+	private void OnTriggerEnter2D(Collider2D col)
 	{
 		if (col.CompareTag("Enemy"))
 		{
