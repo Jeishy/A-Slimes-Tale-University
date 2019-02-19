@@ -4,6 +4,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class WaterProjectile : ElementalProjectiles,IPooledProjectile {
+	
+	private Vector3 originalScale;
 	private Rigidbody2D rb;
 	private Plane plane;				// Plane used for plane.raycast in the Shoot function
 	private Vector3 distanceFromCamera;	// Distance from camera that the plane is created at
@@ -14,6 +16,7 @@ public class WaterProjectile : ElementalProjectiles,IPooledProjectile {
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		originalScale = transform.localScale;
 	}	
 
 	public void Shoot()
@@ -29,7 +32,6 @@ public class WaterProjectile : ElementalProjectiles,IPooledProjectile {
 
 		if (abilityManager.IsAimToShoot)
 		{
-			Debug.Log("Aimed firing");
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			float enter = 1000.0f;
 			if (plane.Raycast(ray, out enter))
@@ -57,7 +59,13 @@ public class WaterProjectile : ElementalProjectiles,IPooledProjectile {
 				FlatDamageToEnemy(baseDamage, col);
 		}
 		// Deactive projecitle and display a particle effect
-		Debug.Log("Water proj collided with something");
+		// Set projectile back to normal once it hits something
+		if (IsBoosted)
+		{
+			transform.localScale = originalScale;
+			IsBoosted = false;
+		}
+		rb.gravityScale = 0;
 		gameObject.SetActive(false);
 	}
 }

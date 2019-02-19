@@ -113,6 +113,26 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &118205407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1950331587363064, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
+    type: 2}
+  m_PrefabInternal: {fileID: 1694031542}
+--- !u!114 &118205415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 118205407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 758e91c1d63fd0e4c8cfd7111cfacff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+  armour: 6
+  _healthText: {fileID: 0}
+  _armourText: {fileID: 0}
 --- !u!4 &160580253 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4503012138185060, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
@@ -137,6 +157,7 @@ GameObject:
   - component: {fileID: 308767839}
   - component: {fileID: 308767838}
   - component: {fileID: 308767849}
+  - component: {fileID: 308767851}
   - component: {fileID: 308767850}
   m_Layer: 0
   m_Name: AbilityManager
@@ -255,6 +276,7 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 4096
+  boostedProjectileMaxTime: 0.7
 --- !u!4 &308767847
 Transform:
   m_ObjectHideFlags: 0
@@ -292,8 +314,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawnTrans: {fileID: 1933769442}
-  fireRate: 1
   projPooler: {fileID: 1180175427}
+  fireRate: 1
 --- !u!114 &308767850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +328,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
+--- !u!114 &308767851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 308767837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f1170a6664a4da43bb352da1d0fd94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpawnTrans: {fileID: 1933769442}
+  projPooler: {fileID: 1180175427}
+  projectileSizeIncrease: 1.3
 --- !u!1 &417403132
 GameObject:
   m_ObjectHideFlags: 0

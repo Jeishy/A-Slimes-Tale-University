@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AbilityInputHandler : MonoBehaviour {
 
+	[SerializeField] private LayerMask enemyLayerMask;
+	[SerializeField] private float boostedProjectileMaxTime;	// The longest time mouse button 0 must be held to spawn boosted projectile
 	private AbilityManager abilityManager;
 	private AbilityProjectile abilityProjectile;
 	private AbilityEarthCrash abilityEarthCrash;
@@ -12,8 +14,10 @@ public class AbilityInputHandler : MonoBehaviour {
 	private float projFireTime;
 	// The fire rate of the projectile (seconds)
 	private float projFireRate;
-	private CharacterController2D characterController; 
-	[SerializeField] private LayerMask enemyLayerMask;
+	private CharacterController2D characterController;
+	private bool isMouseZeroPressed; 
+	private float mousePressedStartTime;
+	private float mousePressedEndTime;
 
 	// Use this for initialization
 	void Start () {
@@ -27,18 +31,7 @@ public class AbilityInputHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		InputHandler();
-
-		if (characterController.m_Grounded && abilityEarthCrash.CanDoSplashDamage)
-		{
-			// Get all enemy coliiders in range
-			Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(characterController.transform.position, abilityEarthCrash.splashRadius, enemyLayerMask);
-			if (enemyColliders.Length > 0)
-			{
-				// If there are enemies in range, do splash damage
-				abilityEarthCrash.SplashDamage(enemyColliders);
-			}
-			abilityEarthCrash.CanDoSplashDamage = false;
-		}
+		EarthCrashCheck();
 	}
 
     private void ShootToggle()
@@ -65,23 +58,57 @@ public class AbilityInputHandler : MonoBehaviour {
 
 		// Check if mouse button 0 (Left click) is clicked and 
         // if elapsed time is greater than fire time (Used for cooldown)
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Time.time > projFireTime)
-            {
-                // Set fire time variable to the fire rate + current time elapsed
-                // ensures projectile only fired when new fire time is elapsed
+			if (!isMouseZeroPressed)
+			{
+				mousePressedStartTime = Time.time;
+				isMouseZeroPressed = true;
+        	}
+		}
+		else if (Input.GetMouseButtonUp(0))
+		{
+			mousePressedEndTime = Time.time;
+			float mousePressedDeltaTime = mousePressedEndTime - mousePressedStartTime;
+			isMouseZeroPressed = false;
+
+			if (Time.time > projFireTime && mousePressedDeltaTime < boostedProjectileMaxTime)
+			{
+				// Set fire time variable to the fire rate + current time elapsed
+				// ensures projectile only fired when new fire time is elapsed
 				projFireRate = abilityProjectile.fireRate;
-                projFireTime = projFireRate + Time.time;
-                abilityManager.ProjectileFire();
-            }
-        }
+				projFireTime = projFireRate + Time.time;
+				abilityManager.ProjectileFire();
+			}
+			else if (mousePressedDeltaTime > boostedProjectileMaxTime)
+			{
+				// Spawn boosted projectile if mouse 0 is pressed long enough
+				projFireRate = abilityProjectile.fireRate;
+				projFireTime = projFireRate + Time.time;
+				abilityManager.BoostedProjectileFire();
+			}
+		}
 
 		// Left control activates the earth element ability smash
 		if (Input.GetKeyDown(KeyCode.LeftControl) && abilityManager.CurrentPlayerElementalState == ElementalStates.Earth)
 		{
 			abilityManager.EarthCrash();
 		}
+
 	}
 
+	private void EarthCrashCheck()
+	{
+		if (characterController.m_Grounded && abilityEarthCrash.CanDoSplashDamage)
+		{
+			// Get all enemy coliiders in range
+			Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(characterController.transform.position, abilityEarthCrash.splashRadius, enemyLayerMask);
+			if (enemyColliders.Length > 0)
+			{
+				// If there are enemies in range, do splash damage
+				abilityEarthCrash.SplashDamage(enemyColliders);
+			}
+			abilityEarthCrash.CanDoSplashDamage = false;
+		}
+	}
 }

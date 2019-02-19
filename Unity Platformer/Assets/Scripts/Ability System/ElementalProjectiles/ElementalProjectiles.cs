@@ -76,15 +76,15 @@ public class ElementalProjectiles : MonoBehaviour {
     // Does knockback damage to hit enemy
     public virtual void KnockbackDamageToEnemy(float damage, float knockbackForce, Transform projTrans, Collider2D enemyCol)
     {
-        Vector3 enemyPos = enemyCol.transform.position;
-        Vector3 projPos = projTrans.position;
-        Vector3 direciton = Vector3.Normalize(enemyPos - projPos);
+        Vector2 enemyPos = enemyCol.transform.position;
+        Vector2 projPos = projTrans.position;
+        Vector2 direciton = Vector3.Normalize(enemyPos - projPos);
         // Get x component of direciton vector
-        Vector3 directionInX = new Vector3(direciton.x, 0, 0);
-        Rigidbody enemyRB = enemyCol.GetComponent<Rigidbody>();
+        Vector2 directionInX = new Vector3(direciton.x, 0);
+        Rigidbody2D enemyRB = enemyCol.GetComponent<Rigidbody2D>();
 
         // Reduce enemy's health based on damage amount 
         // Only apply forces in x direction
-        enemyRB.AddForce(directionInX * knockbackForce, ForceMode.Impulse);
+        enemyRB.AddForce(directionInX * knockbackForce, ForceMode2D.Impulse);
     }
 }

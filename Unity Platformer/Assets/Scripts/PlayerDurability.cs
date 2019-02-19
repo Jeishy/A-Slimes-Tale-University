@@ -6,7 +6,11 @@ using UnityEngine.UI;
 public class PlayerDurability : MonoBehaviour {
 
     [SerializeField] int health;
-    [SerializeField] int armour;
+
+    // Made armour variable public to allow it
+    // to be changed outside of script
+    public int armour;
+
     [SerializeField] Text _healthText;
     [SerializeField] Text _armourText;
 
@@ -54,7 +58,7 @@ public class PlayerDurability : MonoBehaviour {
 
     }
 
-    void RemoveArmourSlot()
+    public void RemoveArmourSlot()
     {
         //1 hit = 3 armor, if player doesnt have full armour, a single hit cannot damage armour below 3 pieces
         if (armour > 3)
