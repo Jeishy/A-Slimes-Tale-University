@@ -10,6 +10,7 @@ TagManager:
   - Collectible
   - Enemy
   - Patrol Point
+  - EnemyProj
   layers:
   - Default
   - TransparentFX

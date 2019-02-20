@@ -35,18 +35,20 @@ public class EnemyAI : MonoBehaviour
     private int waypointIncrement = 1;							//Used for the Ping-Pong waypoint following method
     private bool waiting = false;								//When true the enemy pauses its patrol
     private PlayerDurability playerHealth;
+    private CharacterController2D controller;
     private float attackCountdown;
 
     private void Start()
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDurability>();
+        controller = playerHealth.GetComponent<CharacterController2D>();
     }
 
     void FixedUpdate ()
     {
 
 	    Vector3 target = waypoints[currentWaypoint].position;	    
-	    
+	   
 	    
 	    //Execute code when patrol boolean is true - Set in editor
 	    if (patrol && !waiting)
@@ -72,6 +74,7 @@ public class EnemyAI : MonoBehaviour
             {
                 
                 playerHealth.Hit();
+                controller.Knockback(transform.position.x > playerHealth.transform.position.x);
                 attackCountdown = Time.time + attackOptions.attackSpeed;
 
             }
@@ -86,7 +89,7 @@ public class EnemyAI : MonoBehaviour
                 GameObject proj = Instantiate(attackOptions.projectile, transform.position, Quaternion.identity);
                 Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
                 projRb.velocity = Vector3.Normalize(playerHealth.transform.position - transform.position) * attackOptions.projectileSpeed;
-                Destroy(proj, 5f);
+                Destroy(proj, 3f);
                 attackCountdown = Time.time + attackOptions.attackSpeed;
             }
         }

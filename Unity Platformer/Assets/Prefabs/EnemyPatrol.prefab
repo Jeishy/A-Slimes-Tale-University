@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114921523248111648}
   - component: {fileID: 50016294834566044}
   - component: {fileID: 61677765464017758}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -353,6 +353,7 @@ MonoBehaviour:
     attackSpeed: 3
     projectile: {fileID: 1179139433825628, guid: e244221de90d32b4c9b82b3530d00248,
       type: 2}
+    projectileSpeed: 20
     attackMask:
       serializedVersion: 2
       m_Bits: 512

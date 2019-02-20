@@ -89,7 +89,8 @@ GameObject:
   - component: {fileID: 61031149970099956}
   - component: {fileID: 50929110114951760}
   - component: {fileID: 61519780767610400}
-  m_Layer: 0
+  - component: {fileID: 114384543386890586}
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -129,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950331587363064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 2.65, z: 0}
+  m_LocalPosition: {x: -4.44, y: 3.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4953080561792170}
@@ -350,6 +351,8 @@ MonoBehaviour:
   m_WallCheck: {fileID: 4278450528689954}
   m_wallDetectRadius: 0.15
   m_CrouchDisableCollider: {fileID: 61519780767610400}
+  m_KnockbackForce: {x: 5, y: 7}
+  m_KnockbackLength: 0.5
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -360,6 +363,22 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: CharacterController2D+BoolEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114384543386890586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950331587363064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 758e91c1d63fd0e4c8cfd7111cfacff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  armour: 0
+  _healthText: {fileID: 0}
+  _armourText: {fileID: 0}
+  damageCooldown: 0.5
 --- !u!114 &114510808012603534
 MonoBehaviour:
   m_ObjectHideFlags: 1

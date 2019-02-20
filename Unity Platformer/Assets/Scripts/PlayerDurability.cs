@@ -5,17 +5,23 @@ using UnityEngine.UI;
 
 public class PlayerDurability : MonoBehaviour {
 
-    [SerializeField] int health;
-    [SerializeField] int armour;
-    [SerializeField] Text _healthText;
-    [SerializeField] Text _armourText;
+    [SerializeField] private int health;
+    [SerializeField] private int armour;
+    [SerializeField] private Text _healthText;
+    [SerializeField] private Text _armourText;
+    [SerializeField] private float damageCooldown = 0.5f;
+    
 
-    // Use this for initialization
-    void Start () {
-	   
-	}
-	
-	// Update is called once per frame
+
+    private Vector2 damagePoint;                                        // Position where the player was hit by projectile
+    private float nextDamageTime;
+    private CharacterController2D controller;
+    
+    private void Start()
+    {
+        controller = GetComponent<CharacterController2D>();
+    }
+
 	void Update () {
 
 
@@ -39,21 +45,30 @@ public class PlayerDurability : MonoBehaviour {
 
     public void Hit(int damage = 1)
     {
+        if (nextDamageTime <= Time.time)
+        {
+            //Check if player has armour
+            if (armour > 0)
+            {
+                //If so, remove armour slot
+                RemoveArmourSlot();
+            }
+            else
+            {
+                //Oterwise, decrement health by 1
+                health -= damage;
+            }
+            
 
-        //Check if player has armour
-        if (armour > 0)
-        {
-            //If so, remove armour slot
-            RemoveArmourSlot();
-        } else
-        {
-            //Oterwise, decrement health by 1
-            health -= damage;
+            nextDamageTime = Time.time + damageCooldown;
+
         }
 
 
     }
 
+    
+    
     void RemoveArmourSlot()
     {
         //1 hit = 3 armor, if player doesnt have full armour, a single hit cannot damage armour below 3 pieces
@@ -72,4 +87,16 @@ public class PlayerDurability : MonoBehaviour {
         //Debug.LogWarning("Player Died!");
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        {
+            if (other.CompareTag("EnemyProj"))
+            {
+                controller.Knockback(other.transform.position.x > transform.position.x);
+                Destroy(other.gameObject);
+                Hit();
+                
+            }
+        }
+    }
 }
