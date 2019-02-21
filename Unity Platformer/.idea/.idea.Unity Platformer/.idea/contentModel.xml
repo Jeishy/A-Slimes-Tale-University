@@ -51,6 +51,8 @@
           <e p="DDOL.cs" t="Include" />
           <e p="EnemyAI.cs" t="Include" />
           <e p="EnemyAttack.cs" t="Include" />
+          <e p="EnemyProjectile.cs" t="Include" />
+          <e p="LevelChanger.cs" t="Include" />
           <e p="PlayerAttributes.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="PlayerDurability.cs" t="Include" />

@@ -10,7 +10,9 @@ public class EnemyAttack {
     public float attackSpeed = 1f;
     public GameObject projectile;
     public float projectileSpeed = 10f;
-    public LayerMask attackMask;
+    public float projectileLifespan = 3f;
+    public LayerMask playerMask;
+    public LayerMask rangeAttackMask;
 
 
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -84,19 +85,31 @@ public class PlayerDurability : MonoBehaviour {
 
     void Die()
     {
-        //Debug.LogWarning("Player Died!");
+        Debug.LogWarning("Player Died!");
+        LevelChanger.singleton.FadeToLevel(1);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+
+    //Collision checks
+    private void OnCollisionEnter2D(Collision2D other)
     {
+        //Check if the player has collided with an enemy projectile
+        if (other.gameObject.CompareTag("EnemyProj"))
         {
-            if (other.CompareTag("EnemyProj"))
-            {
-                controller.Knockback(other.transform.position.x > transform.position.x);
-                Destroy(other.gameObject);
-                Hit();
-                
-            }
+            //Apply knockback
+            controller.Knockback(other.transform.position.x > transform.position.x);
+            
+            //Destroy projectile
+            Destroy(other.gameObject);
+            
+            //Calculate new health/armour
+            Hit();
+            
+        }
+
+        if (other.gameObject.CompareTag("DeathTrigger"))
+        {
+            Die();
         }
     }
 }

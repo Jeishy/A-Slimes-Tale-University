@@ -46,9 +46,6 @@ public class EnemyAI : MonoBehaviour
 
     void FixedUpdate ()
     {
-
-	    Vector3 target = waypoints[currentWaypoint].position;	    
-	   
 	    
 	    //Execute code when patrol boolean is true - Set in editor
 	    if (patrol && !waiting)
@@ -61,20 +58,25 @@ public class EnemyAI : MonoBehaviour
 		    //Or else keep moving to current waypoint
 		    else
 		    {
-			    transform.position = Vector2.MoveTowards(transform.position, GetWaypoint(),
+			    transform.position = Vector2.MoveTowards(transform.position, /*GetWaypoint()*/ waypoints[currentWaypoint].position,
 				    patrolSpeed * Time.deltaTime);
 		    }
 	    }
-	    
+
         //If enemy is melee...
         if (attackOptions.melee)
         {
 
-            if (attackCountdown <= Time.time && Physics2D.OverlapCircle(transform.position, attackOptions.meleeRange, attackOptions.attackMask))
+	        //Check if enemy's attack is off cooldown and it is within melee range of the player
+            if (attackCountdown <= Time.time && Physics2D.OverlapCircle(transform.position, attackOptions.meleeRange, attackOptions.playerMask))
             {
-                
+                //Call the Hit() method on the PlayerDurability script
                 playerHealth.Hit();
+                
+                //Call the Knockback(bool: right) method on the CharacterController2D script
                 controller.Knockback(transform.position.x > playerHealth.transform.position.x);
+                
+                //Calculate next attack time
                 attackCountdown = Time.time + attackOptions.attackSpeed;
 
             }
@@ -84,13 +86,34 @@ public class EnemyAI : MonoBehaviour
         {
             Debug.DrawRay(transform.position, Vector3.Normalize(playerHealth.transform.position - transform.position) * attackOptions.range, Color.red);
 
-            if (attackCountdown <= Time.time && Vector2.Distance(transform.position, playerHealth.transform.position) < attackOptions.range)
+            //Get the direction vector towards the player
+            Vector2 directionToPlayer = playerHealth.transform.position - transform.position;
+            
+            //Check if any object is not in between the enemy position and the player position, a.k.a if the line of fire is clear
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, attackOptions.range, attackOptions.rangeAttackMask);
+            
+	        //Make sure the enemy attack is available and check if the raycast has hit anything
+            if (attackCountdown <= Time.time && hit)
             {
-                GameObject proj = Instantiate(attackOptions.projectile, transform.position, Quaternion.identity);
-                Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
-                projRb.velocity = Vector3.Normalize(playerHealth.transform.position - transform.position) * attackOptions.projectileSpeed;
-                Destroy(proj, 3f);
-                attackCountdown = Time.time + attackOptions.attackSpeed;
+	            //Check if the raycast hit the player (therefore it hasn't hit anything in between, so line of fire is clear)
+	            if (hit.collider.CompareTag("Player"))
+	            {
+		            //Instantiate the projectile prefab
+		            GameObject proj = Instantiate(attackOptions.projectile, transform.position, Quaternion.identity);
+		            
+		            //Get projectile's rigidbody
+		            Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
+		            
+		            //Apply force to projectile's rigidbody
+		            projRb.velocity = Vector3.Normalize(playerHealth.transform.position - transform.position) *
+		                              attackOptions.projectileSpeed;
+		            
+		            //Destroy projectile after it's maximum lifespan has been reached
+		            Destroy(proj, attackOptions.projectileLifespan);
+		            
+		            //Calculate and store next attack time
+		            attackCountdown = Time.time + attackOptions.attackSpeed;
+	            }
             }
         }
         
@@ -103,8 +126,10 @@ public class EnemyAI : MonoBehaviour
 	void NextWaypoint()
 	{
 		
+		//If waitAtWaypoint boolean is true
 		if (waitAtWaypoint)
 		{
+			//Call the Wait() method
 			StartCoroutine(Wait());
 		}
 		
@@ -133,6 +158,7 @@ public class EnemyAI : MonoBehaviour
 			currentWaypoint += waypointIncrement;
 		}
 
+		//Random waypoint following method
 		if (waypointFollowStyle == WaypointFollowStyle.Random)
 		{
 			currentWaypoint = Random.Range(0, waypoints.Length);
@@ -144,16 +170,20 @@ public class EnemyAI : MonoBehaviour
 	{
 		float seconds;
 		
+		//If wait time is random
 		if (randomWaitTime)
 		{
+			//Wait time is chosen based on a random number between a minimum and maximum number
 			seconds = Random.Range(minimumRandomWaitTime, maximiumRandomWaitTime);
 		}
 		else
 		{
+			//If wait time is not random, set it to a preset value
 			seconds = waitTime;
 		}
 			
 		
+		//Set waiting to true for 'x' amount of seconds
 		waiting = true;
 		yield return new WaitForSeconds(seconds);
 		waiting = false;

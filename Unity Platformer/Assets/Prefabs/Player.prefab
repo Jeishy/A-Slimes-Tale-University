@@ -340,8 +340,8 @@ MonoBehaviour:
   m_WallJumpVerticalForceMultiplier: 0.8
   m_HorizontalJumpForce: 800
   m_CrouchSpeed: 0.4
-  m_GroundMovementSmoothing: 0.05
-  m_AirMovementSmoothing: 0.5
+  m_GroundMovementSmoothing: 0.2
+  m_AirMovementSmoothing: 0.6
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
