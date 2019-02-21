@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController2D))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerControls : MonoBehaviour
 {
 
 
@@ -25,14 +25,15 @@ public class PlayerMovement : MonoBehaviour
 	void Update ()
 	{
 		
-		
+		//Gets button presses for sideways movement
 		horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
 
+		
+		//Checks if player has pressed the jump button
 		if (Input.GetButtonDown("Jump"))
 		{
 			jump = true;
 		}
-		
 		
 		
 		//Crouching, saved for future
@@ -47,6 +48,9 @@ public class PlayerMovement : MonoBehaviour
 			Debug.Log("Crouch up");
 			crouch = false;
 		}*/
+		
+		
+		
 
 	}
 

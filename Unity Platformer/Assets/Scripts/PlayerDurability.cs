@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerDurability : MonoBehaviour {
@@ -85,8 +87,8 @@ public class PlayerDurability : MonoBehaviour {
 
     void Die()
     {
-        Debug.LogWarning("Player Died!");
-        LevelChanger.singleton.FadeToLevel(1);
+        //Load current scene
+        LevelChanger.singleton.FadeToLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
 
