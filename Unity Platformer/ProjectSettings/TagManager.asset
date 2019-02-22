@@ -10,6 +10,8 @@ TagManager:
   - Collectible
   - Enemy
   - Patrol Point
+  - VCamMain
+  - VCamZoom
   layers:
   - Default
   - TransparentFX
