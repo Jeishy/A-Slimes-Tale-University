@@ -12,6 +12,7 @@ TagManager:
   - Patrol Point
   - EnemyProj
   - DeathTrigger
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

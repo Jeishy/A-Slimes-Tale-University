@@ -34,14 +34,14 @@ public class EnemyAI : MonoBehaviour
     private int currentWaypoint = 0;							//Stores the value of the current waypoint index
     private int waypointIncrement = 1;							//Used for the Ping-Pong waypoint following method
     private bool waiting = false;								//When true the enemy pauses its patrol
-    private PlayerDurability playerHealth;
+    private Player player;
     private CharacterController2D controller;
     private float attackCountdown;
 
     private void Start()
     {
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDurability>();
-        controller = playerHealth.GetComponent<CharacterController2D>();
+	    player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        controller = player.GetComponent<CharacterController2D>();
     }
 
     void FixedUpdate ()
@@ -71,10 +71,10 @@ public class EnemyAI : MonoBehaviour
             if (attackCountdown <= Time.time && Physics2D.OverlapCircle(transform.position, attackOptions.meleeRange, attackOptions.playerMask))
             {
                 //Call the Hit() method on the PlayerDurability script
-                playerHealth.Hit();
+                player.Hit();
                 
                 //Call the Knockback(bool: right) method on the CharacterController2D script
-                controller.Knockback(transform.position.x > playerHealth.transform.position.x);
+                controller.Knockback(transform.position.x > player.transform.position.x);
                 
                 //Calculate next attack time
                 attackCountdown = Time.time + attackOptions.attackSpeed;
@@ -84,10 +84,10 @@ public class EnemyAI : MonoBehaviour
         } else
         //If enemy is ranged...
         {
-            Debug.DrawRay(transform.position, Vector3.Normalize(playerHealth.transform.position - transform.position) * attackOptions.range, Color.red);
+            Debug.DrawRay(transform.position, Vector3.Normalize(player.transform.position - transform.position) * attackOptions.range, Color.red);
 
             //Get the direction vector towards the player
-            Vector2 directionToPlayer = playerHealth.transform.position - transform.position;
+            Vector2 directionToPlayer = player.transform.position - transform.position;
             
             //Check if any object is not in between the enemy position and the player position, a.k.a if the line of fire is clear
             RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, attackOptions.range, attackOptions.rangeAttackMask);
@@ -105,7 +105,7 @@ public class EnemyAI : MonoBehaviour
 		            Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
 		            
 		            //Apply force to projectile's rigidbody
-		            projRb.velocity = Vector3.Normalize(playerHealth.transform.position - transform.position) *
+		            projRb.velocity = Vector3.Normalize(player.transform.position - transform.position) *
 		                              attackOptions.projectileSpeed;
 		            
 		            //Destroy projectile after it's maximum lifespan has been reached

@@ -6,23 +6,38 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerDurability : MonoBehaviour {
+public class Player : MonoBehaviour {
 
     [SerializeField] private int health;
     [SerializeField] private int armour;
     [SerializeField] private Text _healthText;
     [SerializeField] private Text _armourText;
     [SerializeField] private float damageCooldown = 0.5f;
+    [SerializeField] private Element element = Element.None;
     
 
 
     private Vector2 damagePoint;                                        // Position where the player was hit by projectile
     private float nextDamageTime;
     private CharacterController2D controller;
+    private GameData gm;
     
     private void Start()
     {
+        
+        
         controller = GetComponent<CharacterController2D>();
+        
+        gm = GameData.instance;
+        
+        if (gm.hasData)
+        {
+            health = gm.health;
+            armour = gm.armour;
+            transform.position = gm.position;
+            element = gm.element;
+        }
+        
     }
 
 	void Update () {
@@ -35,9 +50,15 @@ public class PlayerDurability : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.O))
-            Hit(1);
+            gm.SavePlayer(this);
 
         if (Input.GetKeyDown(KeyCode.P))
+            gm.LoadPlayer(true);
+        
+        if (Input.GetKeyDown(KeyCode.N))
+            Hit();
+
+        if (Input.GetKeyDown(KeyCode.M))
             armour++;
 
         //Display health and armour in UI
@@ -88,9 +109,33 @@ public class PlayerDurability : MonoBehaviour {
     void Die()
     {
         //Load current scene
-        LevelChanger.singleton.FadeToLevel(SceneManager.GetActiveScene().buildIndex);
+        gm.LoadPlayer(true);
     }
 
+
+    //GET FUNCTIONS
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public int GetArmour()
+    {
+        return armour;
+    }
+
+    public int GetCurrentLevel()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
+    }
+
+    public Element GetElement()
+    {
+        return element;
+    }
+    
+    
+    
 
     //Collision checks
     private void OnCollisionEnter2D(Collision2D other)
@@ -112,6 +157,14 @@ public class PlayerDurability : MonoBehaviour {
         if (other.gameObject.CompareTag("DeathTrigger"))
         {
             Die();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Checkpoint"))
+        {
+            gm.SavePlayer(this);
         }
     }
 }

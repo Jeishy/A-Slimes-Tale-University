@@ -52,10 +52,14 @@
           <e p="EnemyAI.cs" t="Include" />
           <e p="EnemyAttack.cs" t="Include" />
           <e p="EnemyProjectile.cs" t="Include" />
+          <e p="GameData.cs" t="Include" />
           <e p="LevelChanger.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
           <e p="PlayerAttributes.cs" t="Include" />
           <e p="PlayerControls.cs" t="Include" />
-          <e p="PlayerDurability.cs" t="Include" />
+          <e p="PlayerData.cs" t="Include" />
+          <e p="Preload.cs" t="Include" />
+          <e p="SaveSystem.cs" t="Include" />
           <e p="Sound.cs" t="Include" />
           <e p="UserInterface.cs" t="Include" />
         </e>
