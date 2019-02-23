@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AbilityEarthCrash : MonoBehaviour {
 	private AbilityManager abilityManager;
-	[SerializeField] private Rigidbody2D playerRB;
+	private Rigidbody2D playerRB;
 	[SerializeField] private float downwardForce;
 	[SerializeField] private float maxDamage;
 	[SerializeField] private int timeToDoDamage;
@@ -25,6 +25,7 @@ public class AbilityEarthCrash : MonoBehaviour {
 	private void Setup()
 	{
 		abilityManager = GetComponent<AbilityManager>();
+        playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
 	}
 
 	private void EarthCrash()

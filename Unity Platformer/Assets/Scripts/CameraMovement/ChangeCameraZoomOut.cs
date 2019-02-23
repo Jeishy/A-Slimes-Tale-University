@@ -5,7 +5,6 @@ using Cinemachine;
 
 public class ChangeCameraZoomOut : MonoBehaviour
 {
-
     private CinemachineVirtualCamera vCamZoomed;
     private CinemachineVirtualCamera vCamMain;
 
@@ -20,6 +19,7 @@ public class ChangeCameraZoomOut : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            // Make zoomed camera highest priority vcam
             vCamZoomed.Priority = vCamMain.Priority + 1;
             Debug.Log("Zooming out camera");
         }

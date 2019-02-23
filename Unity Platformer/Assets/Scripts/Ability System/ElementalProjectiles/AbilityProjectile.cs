@@ -52,7 +52,7 @@ public class AbilityProjectile : MonoBehaviour {
                     break;
                 case ElementalStates.None:
                     // Update UI or play particle effect here
-                    Debug.Log("State is None!");
+                    //Debug.Log("State is None!");
                     break;
                 default:
                     Debug.LogWarning("Ability state not set!");
