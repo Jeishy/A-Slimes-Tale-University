@@ -18,6 +18,7 @@ public class ElementalProjectilePooler : MonoBehaviour {
 		public int size;
 	}
 
+	// Instance for pooler
 	public static ElementalProjectilePooler Instance;
 
 	private void Awake()
@@ -75,6 +76,8 @@ public class ElementalProjectilePooler : MonoBehaviour {
 		
         IPooledProjectile pooledProjectile = elementalProj.GetComponent<IPooledProjectile>();
 
+		// Shoot on elemental projectile prefab is run
+		// if there is an implementation of the function
         if (pooledProjectile != null)
         {
             pooledProjectile.Shoot();

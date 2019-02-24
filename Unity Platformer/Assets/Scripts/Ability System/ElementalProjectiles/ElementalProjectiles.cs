@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DamageTypes
-{
-	DOT, Knockback, FlatDamage
-}
-
-// Creating asset menu so that SOs can be created in editor
+// Class that all elemental projectiles inherit from
 public class ElementalProjectiles : MonoBehaviour {
 
-    // Note: ACCESS ALL VARIABLES VIA GET AND SET ACCESSORS!
 	// public AudioClip projectileSound; uncomment when sounds are added
     [HideInInspector] public bool IsBoosted;
-    [HideInInspector] public DamageTypes DamageType;
     [HideInInspector] public AbilityManager abilityManager;
     [HideInInspector] public Transform playerTrans;
+    [SerializeField] private int dropOffTime;
 	public float ProjectileSpeed;
-	public float BoostedDamage;
-    private Vector3 projForce;
-    private Vector3 hitPoint;
+    private Vector2 projForce;
+    private Vector2 hitPoint;
+
+    private void Awake()
+    {
+        IsBoosted = false;
+    }
 
     public virtual void LoadPlayerVariables()
 	{
@@ -27,13 +25,13 @@ public class ElementalProjectiles : MonoBehaviour {
 		abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
 	}
 
-    public virtual Vector3 AimToFireProjectileForce(float projectileSpeed, Ray ray, float enter, Transform playerTrans)
+    public virtual Vector2 AimToFireProjectileForce(float projectileSpeed, Ray ray, float enter, Transform playerTrans)
     {
         hitPoint = ray.GetPoint(enter);
         // Get direction between mouse and player
-        Vector3 playerPos = playerTrans.position;
-        hitPoint = new Vector3(hitPoint.x, hitPoint.y, playerPos.z);
-        Vector3 direction = Vector3.Normalize(hitPoint - playerPos);
+        Vector2 playerPos = playerTrans.position;
+        Vector2 direction = hitPoint - playerPos;
+        direction = direction.normalized;
         // Change velocity of projectile to calculated normalized direction vector * specified speed (magnitude)
         projForce = direction * projectileSpeed;
         return projForce;
@@ -48,14 +46,50 @@ public class ElementalProjectiles : MonoBehaviour {
         Vector3 projForce = forwardDirection * projectileSpeed;
         return projForce;
     }
+ 
+	public virtual IEnumerator GravityDropOff(Rigidbody2D proj)
+	{
+		yield return new WaitForSeconds(dropOffTime);
+        proj.gravityScale = 3;
+	}
 
-    public virtual void Damage(float damage, DamageTypes damageType)
+    // Does flat damage to hit enemy
+    public virtual void FlatDamageToEnemy(float damage, Collider2D enemyCol)
     {
-        // Do normal damage to enemy here
+        // Reduce enemy's health by baseDamage
     }
 
-    public virtual void Damage(float boostedDamage, DamageTypes damageType, bool isBoosted)
+    // Does DOT to hit enemy
+    public virtual IEnumerator DOTToEnemy(float dot, int dotTime, GameObject proj, Collider2D enemyCol)
     {
-        // Do boosted damage to enemy here
+        proj.GetComponent<MeshRenderer>().enabled = false;
+        // Apply dot over time, till dotTime is elapsed
+        int dotCount = 0;
+        while (dotCount < dotTime)
+        {
+            dotCount++;
+            // Do damage to enemy
+            Debug.Log("Damage done: " + dot);
+            yield return new WaitForSeconds(1);
+        }
+        // This is done here rather than in OnTriggerEnter in the fireprojectile class
+        // as the coroutine will stop execution when the gameobject is set to false
+        proj.GetComponent<MeshRenderer>().enabled = true;
+        proj.SetActive(false);
+    }
+
+    // Does knockback damage to hit enemy
+    public virtual void KnockbackDamageToEnemy(float damage, float knockbackForce, Transform projTrans, Collider2D enemyCol)
+    {
+        Vector3 enemyPos = enemyCol.transform.position;
+        Vector3 projPos = projTrans.position;
+        Vector3 direciton = Vector3.Normalize(enemyPos - projPos);
+        // Get x component of direciton vector
+        Vector3 directionInX = new Vector3(direciton.x, 0, 0);
+        Rigidbody enemyRB = enemyCol.GetComponent<Rigidbody>();
+
+        // Reduce enemy's health based on damage amount 
+        // Only apply forces in x direction
+        enemyRB.AddForce(directionInX * knockbackForce, ForceMode.Impulse);
     }
 }
