@@ -6,6 +6,7 @@ using UnityEngine;
 public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 
 	private Rigidbody2D rb;
+	private Vector3 originalScale;
 	private Plane plane;				// Plane used for plane.raycast in the Shoot function
 	private Vector3 distanceFromCamera;	// Distance from camera that the plane is created at
 	[SerializeField] private float baseDamage;
@@ -16,6 +17,7 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		originalScale = transform.localScale;
 	}
 
 	public void Shoot()
@@ -31,7 +33,6 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 
 		if (abilityManager.IsAimToShoot)
 		{
-			Debug.Log("Aimed firing");
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			float enter = 1000.0f;
 			if (plane.Raycast(ray, out enter))
@@ -58,6 +59,14 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 			else
 				FlatDamageToEnemy(baseDamage, col);
 		}
+		// Deactive projectile and display particle effect
+		// Set projectile back to normal once it hits something
+		if (IsBoosted)
+		{
+			transform.localScale = originalScale;
+			IsBoosted = false;
+		}
+		rb.gravityScale = 0;
 		gameObject.SetActive(false);
 	}
 }

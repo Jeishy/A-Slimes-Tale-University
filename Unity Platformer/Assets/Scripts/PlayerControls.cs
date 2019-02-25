@@ -60,14 +60,4 @@ public class PlayerControls : MonoBehaviour
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
 		jump = false;
 	}
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Collectible"))
-        {
-            Destroy(collision.gameObject);
-        }
-    }
-
 }

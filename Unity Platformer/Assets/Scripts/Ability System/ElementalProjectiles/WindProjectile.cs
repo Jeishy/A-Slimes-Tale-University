@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 	private Rigidbody2D rb;
+	private Vector3 originalScale;
 	private Plane plane;				// Plane used for plane.raycast in the Shoot function
 	private Vector3 distanceFromCamera;	// Distance from camera that the plane is created at
 	[SerializeField] private float knockbackForce;
@@ -15,6 +16,7 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		originalScale = transform.localScale;
 	}
 
 	public void Shoot()
@@ -22,15 +24,12 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 		// Null check to ensure player variables are set
 		if (playerTrans == null)
 			LoadPlayerVariables();
-
-		StartCoroutine(GravityDropOff(rb));
 		
 		distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, playerTrans.position.z);
 		plane = new Plane(Vector3.forward, distanceFromCamera);
 
 		if (abilityManager.IsAimToShoot)
 		{
-			Debug.Log("Aimed firing");
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			float enter = 1000.0f;
 			if (plane.Raycast(ray, out enter))
@@ -59,6 +58,12 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 			// Add hit effects here
 		}
 		// Deactive projectile and display particle effect
+		// Set projectile back to normal once it hits something
+		if (IsBoosted)
+		{
+			transform.localScale = originalScale;
+			IsBoosted = false;
+		}
 		gameObject.SetActive(false);
 	}
 }

@@ -14,6 +14,8 @@ TagManager:
   - DeathTrigger
   - Checkpoint
   - NextLevel
+  - VCamMain
+  - VCamZoom
   layers:
   - Default
   - TransparentFX
@@ -29,6 +31,8 @@ TagManager:
   - Wall
   - EnemyProjectile
   - Enemy
+  - Enemy
+  - CameraTriggers
   - 
   - 
   - 

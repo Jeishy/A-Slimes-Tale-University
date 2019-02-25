@@ -4,6 +4,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class FireProjectile : ElementalProjectiles,IPooledProjectile {
+
+	private Vector3 originalScale;
 	private Rigidbody2D rb;
 	private Plane plane;							// Plane used for plane.raycast in the Shoot function
 	private Vector3 distanceFromCamera;				// Distance from camera that the plane is created at
@@ -16,6 +18,7 @@ public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		originalScale = transform.localScale;
 	}
 
 	public void Shoot()
@@ -31,14 +34,12 @@ public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 
 		if (abilityManager.IsAimToShoot)
 		{
-			Debug.Log("Aimed firing");
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			float enter = 1000.0f;
 			if (plane.Raycast(ray, out enter))
 			{
 				// Set gameobjects velocity to returned value of AimToFireProjectileForce method
 				rb.velocity = AimToFireProjectileForce(ProjectileSpeed, ray, enter, playerTrans);
-				Debug.Log(rb.velocity);
 				// Debug ray to see raycast in viewport
 				Debug.DrawRay(ray.origin, ray.direction * enter, Color.green, 2f);
 			}
@@ -60,5 +61,14 @@ public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 			else
 				StartCoroutine(DOTToEnemy(dot, dotTime, gameObject, col));
 		}
+		// Deactive projectile and display particle effect
+		// Set projectile back to normal once it hits something
+		if (IsBoosted)
+		{
+			transform.localScale = originalScale;
+			IsBoosted = false;
+		}
+		rb.gravityScale = 0;
+		gameObject.SetActive(false);
 	}
 }
