@@ -5,6 +5,7 @@ using UnityEngine;
 public class AbilitySetStateWater : MonoBehaviour {
 
 	private AbilityManager abilityManager;
+
 	private void OnEnable()
 	{
 		Setup();
@@ -19,11 +20,12 @@ public class AbilitySetStateWater : MonoBehaviour {
 	private void Setup()
 	{
 		abilityManager = GetComponent<AbilityManager>();
-	}
+    }
 
 	private void SetWaterState()
 	{
 		abilityManager.CurrentPlayerElementalState = ElementalStates.Water;
-		Debug.Log(abilityManager.CurrentPlayerElementalState);
+        abilityManager.playerRB.gravityScale = abilityManager.InitialGravityScale;
+        Debug.Log(abilityManager.CurrentPlayerElementalState);
 	}
 }

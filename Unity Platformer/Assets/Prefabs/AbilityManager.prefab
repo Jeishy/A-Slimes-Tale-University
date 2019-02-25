@@ -1,0 +1,217 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1027883659887526}
+  m_IsPrefabAsset: 1
+--- !u!1 &1027883659887526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4667170411779568}
+  - component: {fileID: 114824307246110900}
+  - component: {fileID: 114779645510999674}
+  - component: {fileID: 114068231915806748}
+  - component: {fileID: 114004596130694576}
+  - component: {fileID: 114241298443560040}
+  - component: {fileID: 114152213540542730}
+  - component: {fileID: 114692777493824474}
+  - component: {fileID: 114173882969932438}
+  - component: {fileID: 114301560330848006}
+  - component: {fileID: 114298609340141486}
+  - component: {fileID: 114595142674372036}
+  - component: {fileID: 114764723753644786}
+  - component: {fileID: 114269117427966608}
+  m_Layer: 0
+  m_Name: AbilityManager
+  m_TagString: AbilityManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4667170411779568
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.37790936, y: 1.803608, z: -6.847174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114004596130694576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba86098f7a342041be5df4305f8e1e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SplashRadius: 5
+  InitialVelocity: {x: 0, y: 0, z: 0}
+  IsCrashAbilityActivated: 0
+  downwardForce: 30
+  maxDamage: 20
+  timeAbilityActive: 2
+  enemyKnockbackForce: 2
+--- !u!114 &114068231915806748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e89107ded5c4740947d94cdd375c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114152213540542730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afa597d6a2f8ba44ea1634280124b197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114173882969932438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81598c8b1d66aee4c993bd66993014d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114241298443560040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de1f71005eeafb9479d839e61c9b1a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114269117427966608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea5deb26173c5b4aa1aa33b885752ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+--- !u!114 &114298609340141486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6822695b31beac646a28ccea4fec3acb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windGravityDecrease: 1
+--- !u!114 &114301560330848006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 535d44edea6d5984b8d80cb3de92b725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114595142674372036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3ec26892a421148b80e79c4ba407c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpawnTrans: {fileID: 0}
+  projPooler: {fileID: 0}
+  fireRate: 1
+--- !u!114 &114692777493824474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2dd93adf367f864da19c7f3e724dbea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114764723753644786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f1170a6664a4da43bb352da1d0fd94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpawnTrans: {fileID: 0}
+  projPooler: {fileID: 0}
+  projectileSizeIncrease: 1.3
+--- !u!114 &114779645510999674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2c92069aaf6104e8d829c457259490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  boostedProjectileMaxTime: 0.7
+--- !u!114 &114824307246110900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da6a43b04d24bf498fbecd7b821b1ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsAimToShoot: 0

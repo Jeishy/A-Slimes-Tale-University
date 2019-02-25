@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pools:
   - tag: FireProj
-    prefab: {fileID: 1651763757667724, guid: c6e8b3a8a7d49b34b888407d4e0708f5, type: 2}
+    prefab: {fileID: 1706052494266008, guid: 2e52635bda300ce448823d628e6cefff, type: 2}
     size: 3
   - tag: WaterProj
     prefab: {fileID: 1941906321393734, guid: 4495d61ee44378f47ad4655d8ada9a5c, type: 2}

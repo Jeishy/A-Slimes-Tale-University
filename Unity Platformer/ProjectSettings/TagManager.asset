@@ -16,6 +16,7 @@ TagManager:
   - VCamMain
   - VCamZoom
   - Shop
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -31,16 +32,8 @@ TagManager:
   - Wall
   - EnemyProjectile
   - Enemy
-  - Enemy
+  - 
   - CameraTriggers
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   - 
   - 
   - 

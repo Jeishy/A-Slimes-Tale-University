@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4759521195951856}
   - component: {fileID: 61560150953219142}
   - component: {fileID: 114448675831368654}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: ZoomMainTrigger
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}

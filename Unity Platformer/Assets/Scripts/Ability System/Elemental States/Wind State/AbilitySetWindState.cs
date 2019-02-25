@@ -25,6 +25,5 @@ public class AbilitySetWindState : MonoBehaviour {
 	private void SetWindState()
 	{
 		abilityManager.CurrentPlayerElementalState = ElementalStates.Wind;
-		//Debug.Log(abilityManager.CurrentPlayerElementalState);
 	}
 }

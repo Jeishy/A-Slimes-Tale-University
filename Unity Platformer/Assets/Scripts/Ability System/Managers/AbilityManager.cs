@@ -30,6 +30,8 @@ public class AbilityManager : MonoBehaviour {
 	#endregion
 
     [HideInInspector] public bool IsAimToShoot;
+    [HideInInspector] public float InitialGravityScale;
+    [HideInInspector] public Rigidbody2D playerRB;
 
 	// Holds the elemental state of the player,
 	// uses accessors to encapsulate current elemental state
@@ -44,7 +46,9 @@ public class AbilityManager : MonoBehaviour {
 	{
 		// Set elemental state to None at beginning of the game
 		CurrentPlayerElementalState = ElementalStates.None;
-		IsAimToShoot = true;
+        InitialGravityScale = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().gravityScale;
+        playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        IsAimToShoot = true;
 	}
 
 	// Method for running methods subscribed to OnPlayerSwitchAbility event

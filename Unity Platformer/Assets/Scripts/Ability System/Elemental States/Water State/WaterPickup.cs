@@ -12,7 +12,7 @@ public class WaterPickup : MonoBehaviour {
 	// If wind pickup interacts with player,
 	// set players elemental state to Wind
 	// and run method for running OnWindState event
-	private void OnTriggerEnter(Collider col)
+	private void OnTriggerEnter2D(Collider2D col)
 	{
 		if (col.CompareTag("Player"))
 		{
