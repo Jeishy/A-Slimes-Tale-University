@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerSlingshot : MonoBehaviour {
 
     private bool onGround;
     private float jumpPressure;

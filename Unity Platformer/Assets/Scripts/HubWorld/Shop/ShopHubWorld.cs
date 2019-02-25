@@ -10,7 +10,7 @@ public class ShopHubWorld : MonoBehaviour
     //Script adapated from multiple shops to a single shop. Usually would change what items are shown dependent on what shop the player goes to but in this case
     //It just displays items for a single shop which can be edited from the Global Shop Script.
     
-    private GameObject ShopRef;
+    public GameObject ShopRef;
     public GameObject ShopInventory;
     public GameObject Item01Text;
     public GameObject Item02Text;
@@ -20,30 +20,37 @@ public class ShopHubWorld : MonoBehaviour
     public GameObject Item06Text;
     public GameObject ItemCompletion;
     public GameObject CompleteText;
+    
 
     
 
     private void Awake()
     {
-        ShopRef = GameObject.Find("ShopTrigger");      
+
+        ShopRef.GetComponent<GlobalShop>().ShopHub = true; //Activates the shop
+
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter2D(Collider2D col)
+    {        
         Debug.Log("Collision Detected");
-        GlobalShop globalShop = ShopRef.GetComponent<GlobalShop>();
-        globalShop.ShopHub = true;
-        ShopInventory.SetActive(true);
-        Item01Text.GetComponent<Text>().text = "" + GlobalShop.Item01;
+        ShopInventory.SetActive(true); //Activates the shop panel UI
+        Debug.Log("Shop Panel is now active");
+        Item01Text.GetComponent<Text>().text = "" + GlobalShop.Item01; 
         Item02Text.GetComponent<Text>().text = "" + GlobalShop.Item02;
         Item03Text.GetComponent<Text>().text = "" + GlobalShop.Item03;
         Item04Text.GetComponent<Text>().text = "" + GlobalShop.Item04;
         Item05Text.GetComponent<Text>().text = "" + GlobalShop.Item05;
         Item06Text.GetComponent<Text>().text = "" + GlobalShop.Item06;
 
+        /* Previously designed so that you could have multiple shops in different parts of the level and it would have different items
+         *  stripped back and modified for just a single hub world shop */
     }
     
-   
+   private void OnTriggerExit2D(Collider2D other)
+{
+        ShopInventory.SetActive(false);
+}
     
     //Not currently very effecient way of writing if they are sure they want to buy the item they have picked.
 

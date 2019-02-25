@@ -57,9 +57,9 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(collision.gameObject);
-    }
+    }*/ //Commented out as it was deleting the shop when interacting with it lol. 
 
 }
