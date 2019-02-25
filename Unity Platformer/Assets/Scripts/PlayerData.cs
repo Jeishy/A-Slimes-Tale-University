@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
-
-[System.Serializable]
+﻿[System.Serializable]
 public class PlayerData
 {
 

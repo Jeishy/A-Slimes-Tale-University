@@ -186,7 +186,7 @@ public class CharacterController2D : MonoBehaviour
 		{
 
 			m_Grounded = false;
-			
+
 			// ... and player is touching the wall
 			if (m_wallSliding)
 			{
@@ -231,14 +231,6 @@ public class CharacterController2D : MonoBehaviour
 		{
 			m_WallNormal = other.contacts[0].normal.x;
 			
-		}
-	}
-
-	private void OnCollisionStay2D(Collision2D other)
-	{
-		if (Input.GetAxisRaw("Horizontal") == 0 && !m_WallJumped)
-		{
-			m_Rigidbody2D.velocity = new Vector2(0f, m_Rigidbody2D.velocity.y);
 		}
 	}
 }

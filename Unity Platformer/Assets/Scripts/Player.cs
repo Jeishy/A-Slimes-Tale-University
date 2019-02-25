@@ -158,6 +158,12 @@ public class Player : MonoBehaviour {
         {
             Die();
         }
+
+        if (other.gameObject.CompareTag("NextLevel"))
+        {
+            Debug.Log("Level complete!!");
+            LevelChanger.instance.FadeToLevel(GetCurrentLevel() + 1);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -166,5 +172,13 @@ public class Player : MonoBehaviour {
         {
             gm.SavePlayer(this);
         }
+
+
+        if (other.CompareTag("NextLevel"))
+        {
+            Debug.Log("Level complete!!");
+            LevelChanger.instance.FadeToLevel(GetCurrentLevel() + 1);
+        }
+
     }
 }
