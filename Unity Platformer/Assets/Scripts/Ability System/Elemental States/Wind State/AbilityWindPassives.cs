@@ -5,7 +5,7 @@ using UnityEngine;
 public class AbilityWindPassives : MonoBehaviour {
 
 	private AbilityManager abilityManager;
-	[SerializeField] private Rigidbody2D rb;
+	private Rigidbody2D playerRB;
 	[SerializeField] private float windGravityDecrease;
 	private void OnEnable()
 	{
@@ -21,10 +21,12 @@ public class AbilityWindPassives : MonoBehaviour {
 	private void Setup()
 	{
 		abilityManager = GetComponent<AbilityManager>();
-	}
+        playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+
+    }
 
 	private void WindPassives()
 	{
-		rb.gravityScale -= windGravityDecrease;
+        playerRB.gravityScale -= windGravityDecrease;
 	}
 }

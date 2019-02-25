@@ -89,8 +89,8 @@ public class AbilityInputHandler : MonoBehaviour {
 			}
 		}
 
-		// Left control activates the earth element ability smash
-		if (Input.GetKeyDown(KeyCode.LeftControl) && abilityManager.CurrentPlayerElementalState == ElementalStates.Earth)
+		// Left control activates the earth element ability crash
+		if (Input.GetKeyDown(KeyCode.LeftControl) && abilityManager.CurrentPlayerElementalState == ElementalStates.Earth && !characterController.m_Grounded)
 		{
 			abilityManager.EarthCrash();
 		}
@@ -99,16 +99,16 @@ public class AbilityInputHandler : MonoBehaviour {
 
 	private void EarthCrashCheck()
 	{
-		if (characterController.m_Grounded && abilityEarthCrash.CanDoSplashDamage)
+		if (characterController.m_Grounded && abilityEarthCrash.IsCrashAbilityActivated)
 		{
 			// Get all enemy coliiders in range
-			Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(characterController.transform.position, abilityEarthCrash.splashRadius, enemyLayerMask);
+			Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(characterController.transform.position, abilityEarthCrash.SplashRadius, enemyLayerMask);
 			if (enemyColliders.Length > 0)
 			{
 				// If there are enemies in range, do splash damage
 				abilityEarthCrash.SplashDamage(enemyColliders);
 			}
-			abilityEarthCrash.CanDoSplashDamage = false;
+			abilityEarthCrash.IsCrashAbilityActivated = false;
 		}
 	}
 }
