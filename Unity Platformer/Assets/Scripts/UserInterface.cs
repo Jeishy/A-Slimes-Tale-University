@@ -1,13 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Experimental.UIElements;
+﻿using UnityEngine;
 
 public class UserInterface : MonoBehaviour
 {
 
-
-	
 	//Pause Menu
 	[SerializeField] private CanvasGroup pauseMenu;
 	[SerializeField] private CanvasGroup settingsMenu;
@@ -20,6 +15,8 @@ public class UserInterface : MonoBehaviour
 	void Update () {
 		if (Input.GetButtonDown("Pause"))
 		{
+
+
 			pauseMenuShowing = !pauseMenuShowing;
 
 			if (pauseMenuShowing)
@@ -27,21 +24,29 @@ public class UserInterface : MonoBehaviour
 				Time.timeScale = 0f;
 				pauseMenu.alpha = 1f;
 				pauseMenu.blocksRaycasts = true;
-			}
-			else
-			{
-				OnContinueGame();
-			}
+			} else
+            {
+                OnContinueGame();
+            }
 		}
 	}
 
 	public void OnContinueGame()
 	{
+
+        Debug.Log("Hide pause");
+
 		Time.timeScale = 1f;
 		pauseMenuShowing = false;
 		pauseMenu.alpha = 0f;
 		pauseMenu.blocksRaycasts = false;
-	}
+
+
+        settingsMenuShowing = false;
+        settingsMenu.alpha = 0f;
+        settingsMenu.blocksRaycasts = false;
+
+    }
 
 	public void OnSettingsOpen()
 	{
@@ -83,6 +88,12 @@ public class UserInterface : MonoBehaviour
 		Debug.Log("Music volume changed: " + volume + "/1");
 	}
 	
+    public void OnQuitToHubWorld()
+    {
+        OnContinueGame();
+        LevelChanger.instance.FadeToLevel(1);
+    }
+
 	public void OnQuitGame()
 	{
 		Application.Quit();

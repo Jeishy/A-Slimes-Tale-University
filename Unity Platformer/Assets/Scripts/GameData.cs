@@ -57,7 +57,7 @@ public class GameData : MonoBehaviour
 
         if (LoadLevel)
         {
-            SceneManager.LoadScene(data.level);
+            LevelChanger.instance.FadeToLevel(data.level);
         }
 
     }
