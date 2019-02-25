@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilityEarthCrash : MonoBehaviour {
-
-    public float SplashRadius;
-	//[HideInInspector] public bool CanDoSplashDamage;
-    [HideInInspector] public bool IsCrashAbilityActivated;
-    [HideInInspector] public Vector3 InitialVelocity;
-
+	private AbilityManager abilityManager;
+	private Rigidbody2D playerRB;
 	[SerializeField] private float downwardForce;
 	[SerializeField] private float maxDamage;
 	[SerializeField] private int timeAbilityActive;
@@ -32,10 +28,8 @@ public class AbilityEarthCrash : MonoBehaviour {
 	private void Setup()
 	{
 		abilityManager = GetComponent<AbilityManager>();
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        playerDur = player.GetComponent<PlayerDurability>();
-        playerRB = player.GetComponent<Rigidbody2D>();
-    }
+        playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+	}
 
 	private void EarthCrash()
 	{

@@ -22,7 +22,6 @@ public class AbilityWindPassives : MonoBehaviour {
 	{
 		abilityManager = GetComponent<AbilityManager>();
         playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-
     }
 
 	private void WindPassives()

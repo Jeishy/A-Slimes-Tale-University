@@ -65,7 +65,6 @@ public class FireProjectile : ElementalProjectiles,IPooledProjectile {
 		// Set projectile back to normal once it hits something
 		if (IsBoosted)
 		{
-			Debug.Log(originalScale);
 			transform.localScale = originalScale;
 			IsBoosted = false;
 		}
