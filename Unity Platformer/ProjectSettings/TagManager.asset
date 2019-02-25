@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Projectile
   - Wall
   - AbilityManager
   - Collectible
@@ -16,6 +15,7 @@ TagManager:
   - NextLevel
   - VCamMain
   - VCamZoom
+  - Shop
   layers:
   - Default
   - TransparentFX
@@ -33,6 +33,12 @@ TagManager:
   - Enemy
   - Enemy
   - CameraTriggers
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
