@@ -35,7 +35,6 @@ public class AbilityProjectile : MonoBehaviour {
         if (playerDurability.armour > 0)
         {
             playerDurability.armour--;
-
             switch (state)
             {
                 case ElementalStates.Fire:
@@ -64,7 +63,7 @@ public class AbilityProjectile : MonoBehaviour {
             // Update UI to screen
             // Set players current state to None
             // Check if players state isnt already none
-            Debug.Log("Used up all armour points!");
+            Debug.Log("Used up all armour points! Elemental state set to none");
             if (abilityManager.CurrentPlayerElementalState != ElementalStates.None)
                 abilityManager.CurrentPlayerElementalState = ElementalStates.None;
         }         
