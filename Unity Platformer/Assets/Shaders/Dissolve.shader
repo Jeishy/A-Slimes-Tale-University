@@ -11,7 +11,7 @@
 
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
-		#pragma surface surf Standard fullforwardshadows
+		#pragma surface surf Standard fullforwardshadows alpha
 
 		// Use shader model 3.0 target, to get nicer looking lighting
 		#pragma target 3.0
@@ -95,7 +95,7 @@
 			o.Albedo = c.rgb;
 			float4 remap;
 			Unity_Remap_float4(_SinTime, (-1,1), (0,1), remap);
-			float a = remap + 0.01;
+			float a = remap + (0.01);
 			float suv;
 			Unity_SimpleNoise_float(IN.uv_MainTex, 30, suv);
 			float s = step(suv, a);
