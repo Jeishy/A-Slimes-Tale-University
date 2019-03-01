@@ -8,8 +8,12 @@ public class PlayerControls : MonoBehaviour
 
 
 	[SerializeField] private float speed = 40f;
-	
-	private CharacterController2D controller;
+    [SerializeField] private GameObject normalJumpParticles;
+    [SerializeField] private ParticleSystem slimeTrail;
+    [SerializeField] private Transform grounCheckTrans;
+
+
+    private CharacterController2D controller;
 	private float horizontalMove;
 	private bool jump = false;
 	private bool wallJump = true;
@@ -19,7 +23,7 @@ public class PlayerControls : MonoBehaviour
 	void Start ()
 	{
 		controller = GetComponent<CharacterController2D>();
-	}
+    }
     
 	
 	// Update is called once per frame
@@ -28,12 +32,22 @@ public class PlayerControls : MonoBehaviour
 		
 		//Gets button presses for sideways movement
 		horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+        if (!controller.m_Grounded)
+            slimeTrail.Stop();
+        else
+            slimeTrail.Play();
 
-		
-		//Checks if player has pressed the jump button
-		if (Input.GetButtonDown("Jump"))
+
+        //Checks if player has pressed the jump button
+        if (Input.GetButtonDown("Jump"))
 		{
 			jump = true;
+            if (controller.m_Grounded)
+            {
+                // Spawn particle effect at base of player
+                GameObject jumpParticles = Instantiate(normalJumpParticles, grounCheckTrans.position, Quaternion.Euler(-90, 0, 0));
+                Destroy(jumpParticles, 1f);
+            }
 		}
 		
 		
