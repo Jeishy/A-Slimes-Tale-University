@@ -122,7 +122,7 @@
 			Unity_GradientNoise_float(tg, _DistortionScale, tuvg);
 
 			// Add voronoi
-			Unity_Voronoi_float(IN.uv_MainTex, 2, _DissolveScale, tuvv);
+			Unity_Voronoi_float(tv, 2, _DissolveScale, tuvv);
 			tuvv = pow(tuvv, _DissolveAmount);
 			float uvgradvor = tuvg * tuvv;
 			IN.uv_MainTex = lerp(IN.uv_MainTex, tuvg, _DistortionAmount);

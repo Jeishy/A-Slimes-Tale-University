@@ -20,7 +20,7 @@ public class AbilityInputHandler : MonoBehaviour {
 	private float mousePressedEndTime;
 
 	// Use this for initialization
-	void Start () {
+	private void Start () {
 		abilityManager = GetComponent<AbilityManager>();
 		abilityProjectile = GetComponent<AbilityProjectile>();
 		projFireTime = 0f;	// Set fire time to zero at beginning of level, Note: This must be set to 0 when each level is left/complete
@@ -29,7 +29,7 @@ public class AbilityInputHandler : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		InputHandler();
 		EarthCrashCheck();
 	}
@@ -44,10 +44,10 @@ public class AbilityInputHandler : MonoBehaviour {
 		// Toggles aiming mode from aimed to forward
         // Note: Ensure button mapping is set for this action
         // instead of Input.GetKeyDown
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
         {
 			ShootToggle();
-        }
+        }*/
 
 		// Toggles between ability states
 		// Used for debugging
@@ -58,7 +58,7 @@ public class AbilityInputHandler : MonoBehaviour {
 
 		// Check if mouse button 0 (Left click) is clicked and 
         // if elapsed time is greater than fire time (Used for cooldown)
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Fire1"))
         {
 			if (!isMouseZeroPressed)
 			{
@@ -66,7 +66,7 @@ public class AbilityInputHandler : MonoBehaviour {
 				isMouseZeroPressed = true;
         	}
 		}
-		else if (Input.GetMouseButtonUp(0))
+		else if (Input.GetButtonUp("Fire1"))
 		{
 			mousePressedEndTime = Time.time;
 			float mousePressedDeltaTime = mousePressedEndTime - mousePressedStartTime;
@@ -94,21 +94,18 @@ public class AbilityInputHandler : MonoBehaviour {
 		{
 			abilityManager.EarthCrash();
 		}
-
 	}
 
 	private void EarthCrashCheck()
 	{
-		if (characterController.m_Grounded && abilityEarthCrash.IsCrashAbilityActivated)
-		{
-			// Get all enemy coliiders in range
-			Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(characterController.transform.position, abilityEarthCrash.SplashRadius, enemyLayerMask);
-			if (enemyColliders.Length > 0)
-			{
-				// If there are enemies in range, do splash damage
-				abilityEarthCrash.SplashDamage(enemyColliders);
-			}
-			abilityEarthCrash.IsCrashAbilityActivated = false;
-		}
-	}
+        if (!characterController.m_Grounded || !abilityEarthCrash.IsCrashAbilityActivated) return;
+        // Get all enemy coliiders in range
+        Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(characterController.transform.position, abilityEarthCrash.SplashRadius, enemyLayerMask);
+        if (enemyColliders.Length > 0)
+        {
+            // If there are enemies in range, do splash damage
+            abilityEarthCrash.SplashDamage(enemyColliders);
+        }
+        abilityEarthCrash.IsCrashAbilityActivated = false;
+    }
 }

@@ -7,6 +7,7 @@ public class AbilityProjectile : MonoBehaviour {
     private PlayerDurability playerDurability;
     [SerializeField] private Transform projectileSpawnTrans;
     [SerializeField] private ElementalProjectilePooler projPooler;
+    [SerializeField] private GameObject muzzleFlash;
     
     public float fireRate;                                              // Used by AbilityInputHandler class to determine rate of fire
     
@@ -39,6 +40,8 @@ public class AbilityProjectile : MonoBehaviour {
             {
                 case ElementalStates.Fire:
                     projPooler.SpawnProjectileFromPool("FireProj", projectileSpawnTrans.position, Quaternion.identity);
+                    GameObject muzzle = Instantiate(muzzleFlash, projectileSpawnTrans.position, Quaternion.identity);
+                    Destroy(muzzle, 1f);
                     break;
                 case ElementalStates.Water:
                     projPooler.SpawnProjectileFromPool("WaterProj", projectileSpawnTrans.position, Quaternion.identity);
