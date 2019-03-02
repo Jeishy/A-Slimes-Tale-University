@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilitySwtich : MonoBehaviour {
-	private AbilityManager abilityManager;
+	private AbilityManager _abilityManager;
 	
 	private void OnEnable()
 	{
 		Setup();
-		abilityManager.OnPlayerSwitchAbility += Switch;
+		_abilityManager.OnPlayerSwitchAbility += Switch;
 	}
 
 	private void OnDisable()
 	{
-		abilityManager.OnPlayerSwitchAbility -= Switch;
+		_abilityManager.OnPlayerSwitchAbility -= Switch;
 	}
 
 	private void Setup()
 	{
-		abilityManager = GetComponent<AbilityManager>();
+		_abilityManager = GetComponent<AbilityManager>();
 	}
 
 	private void Switch()
 	{
-		ElementalStates state = abilityManager.CurrentPlayerElementalState;
+		ElementalStates state = _abilityManager.CurrentPlayerElementalState;
 		// Can use switch
 		// or
 		// Can cycle through enum states like ints
@@ -46,7 +46,7 @@ public class AbilitySwtich : MonoBehaviour {
 				state = ElementalStates.Fire;
 				break;
 		}
-		abilityManager.CurrentPlayerElementalState = state;
-		Debug.Log(abilityManager.CurrentPlayerElementalState);
+		_abilityManager.CurrentPlayerElementalState = state;
+		Debug.Log(_abilityManager.CurrentPlayerElementalState);
 	}
 }

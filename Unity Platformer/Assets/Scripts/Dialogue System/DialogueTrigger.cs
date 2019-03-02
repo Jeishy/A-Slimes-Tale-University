@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour {
 
-    [SerializeField] Dialogue dialogue;
+    [SerializeField] Dialogue _dialogue;
 	public void TriggerDialogue ()
     {
         // Start dialogue, parsing in dialogue to be displayed
-        DialogueManager.Instance.StartDialogue(dialogue);
+        DialogueManager.Instance.StartDialogue(_dialogue);
 	}
 }

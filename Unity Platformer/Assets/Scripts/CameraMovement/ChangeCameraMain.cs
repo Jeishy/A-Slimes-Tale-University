@@ -5,13 +5,13 @@ using Cinemachine;
 
 public class ChangeCameraMain : MonoBehaviour
 {
-    private CinemachineVirtualCamera vCamZoomed;
-    private CinemachineVirtualCamera vCamMain;
+    private CinemachineVirtualCamera _vCamZoomed;
+    private CinemachineVirtualCamera _vCamMain;
 
     private void Start()
     {
-        vCamZoomed = GameObject.FindGameObjectWithTag("VCamZoom").GetComponent<CinemachineVirtualCamera>();
-        vCamMain = GameObject.FindGameObjectWithTag("VCamMain").GetComponent<CinemachineVirtualCamera>();
+        _vCamZoomed = GameObject.FindGameObjectWithTag("VCamZoom").GetComponent<CinemachineVirtualCamera>();
+        _vCamMain = GameObject.FindGameObjectWithTag("VCamMain").GetComponent<CinemachineVirtualCamera>();
     }
 
     // Use this for initialization
@@ -20,7 +20,7 @@ public class ChangeCameraMain : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             // Make main camera highest priority vcam
-            vCamZoomed.Priority = vCamMain.Priority - 1;
+            _vCamZoomed.Priority = _vCamMain.Priority - 1;
             Debug.Log("Zooming in camera");
         }
     }

@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class AbilitySetEarthState : MonoBehaviour {
 
-	private AbilityManager abilityManager;
+	private AbilityManager _abilityManager;
 	private void OnEnable()
 	{
 		Setup();
-		abilityManager.OnEarthState += SetEarthState;
+		_abilityManager.OnEarthState += SetEarthState;
 	}
 
 	private void OnDisable()
 	{
-		abilityManager.OnEarthState -= SetEarthState;
+		_abilityManager.OnEarthState -= SetEarthState;
 	}
 
 	private void Setup()
 	{
-		abilityManager = GetComponent<AbilityManager>();
+		_abilityManager = GetComponent<AbilityManager>();
 	}
 
 	private void SetEarthState()
 	{
-		abilityManager.CurrentPlayerElementalState = ElementalStates.Earth;
-        abilityManager.playerRB.gravityScale = abilityManager.InitialGravityScale;
-		Debug.Log(abilityManager.CurrentPlayerElementalState);
+		_abilityManager.CurrentPlayerElementalState = ElementalStates.Earth;
+        _abilityManager.playerRb.gravityScale = _abilityManager.InitialGravityScale;
+		Debug.Log(_abilityManager.CurrentPlayerElementalState);
 	}
 }

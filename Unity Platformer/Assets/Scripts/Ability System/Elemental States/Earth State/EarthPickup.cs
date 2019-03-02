@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EarthPickup : MonoBehaviour {
 
-	private AbilityManager abilityManager;
+	private AbilityManager _abilityManager;
 	void Start () {
-		abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
+		_abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
 	}
 	
 	// If wind pickup interacts with player,
@@ -16,7 +16,7 @@ public class EarthPickup : MonoBehaviour {
 	{
 		if (col.CompareTag("Player"))
 		{
-			abilityManager.EarthState();
+			_abilityManager.EarthState();
 			Destroy(gameObject);
 		}
 	}

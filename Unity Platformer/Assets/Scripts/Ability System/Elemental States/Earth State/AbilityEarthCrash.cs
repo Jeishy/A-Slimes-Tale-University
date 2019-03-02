@@ -8,45 +8,45 @@ public class AbilityEarthCrash : MonoBehaviour {
     [HideInInspector] public Vector3 InitialVelocity;
     [HideInInspector] public bool IsCrashAbilityActivated;
 
-    [SerializeField] private float downwardForce;
-	[SerializeField] private float maxDamage;
-	[SerializeField] private int timeAbilityActive;
-    [SerializeField] private float enemyKnockbackForce;
+    [SerializeField] private float _downwardForce;
+	[SerializeField] private float _maxDamage;
+	[SerializeField] private int _timeAbilityActive;
+    [SerializeField] private float _enemyKnockbackForce;
 
     
-    private PlayerDurability playerDur;
-    private AbilityManager abilityManager;
-    private Rigidbody2D playerRB;
+    private PlayerDurability _playerDur;
+    private AbilityManager _abilityManager;
+    private Rigidbody2D _playerRb;
 
     private void OnEnable()
 	{
 		Setup();
-		abilityManager.OnEarthCrash += EarthCrash;
+		_abilityManager.OnEarthCrash += EarthCrash;
 	}
 
 	private void OnDisable()
 	{
-		abilityManager.OnEarthCrash -= EarthCrash;		
+		_abilityManager.OnEarthCrash -= EarthCrash;		
 	}
 
 	private void Setup()
 	{
-		abilityManager = GetComponent<AbilityManager>();
+		_abilityManager = GetComponent<AbilityManager>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        playerRB = player.GetComponent<Rigidbody2D>();
-        playerDur = player.GetComponent<PlayerDurability>();
+        _playerRb = player.GetComponent<Rigidbody2D>();
+        _playerDur = player.GetComponent<PlayerDurability>();
     }
 
 	private void EarthCrash()
 	{
-        if (playerDur.armour >= 3)
+        if (_playerDur.armour >= 3)
         {
             // Armour slot is removed when ability is used
-            playerDur.RemoveArmourSlot();
-            playerRB.AddForce(new Vector2(0, -downwardForce), ForceMode2D.Impulse);
+            _playerDur.RemoveArmourSlot();
+            _playerRb.AddForce(new Vector2(0, -_downwardForce), ForceMode2D.Impulse);
             IsCrashAbilityActivated = true;
             StartCoroutine(WaitTimeToActivateAbility());
-            InitialVelocity = playerRB.velocity;
+            InitialVelocity = _playerRb.velocity;
         }
         else
         {
@@ -70,12 +70,12 @@ public class AbilityEarthCrash : MonoBehaviour {
             // Normalize the direction vector
             direction = direction.normalized;
             // Get enemies rigidbody2D component
-            Rigidbody2D enemyRB = enemyCol.GetComponent<Rigidbody2D>();
+            Rigidbody2D enemyRb = enemyCol.GetComponent<Rigidbody2D>();
 
             // Apply force to enemies in range
-            enemyRB.AddForce(direction * enemyKnockbackForce, ForceMode2D.Impulse);
+            enemyRb.AddForce(direction * _enemyKnockbackForce, ForceMode2D.Impulse);
 			// Do higher damage the closer an enemy is
-            float damage = (1f / distance) * maxDamage;
+            float damage = (1f / distance) * _maxDamage;
 			Debug.Log("Damage done to enemy " + enemyCol.name + ": " + damage);
 			// Reduce health of enemy using damage variable
 		}
@@ -83,7 +83,7 @@ public class AbilityEarthCrash : MonoBehaviour {
 
 	private IEnumerator WaitTimeToActivateAbility()
 	{
-		yield return new WaitForSeconds(timeAbilityActive);
+		yield return new WaitForSeconds(_timeAbilityActive);
 
         if (IsCrashAbilityActivated)
             IsCrashAbilityActivated = false;

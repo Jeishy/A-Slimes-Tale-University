@@ -5,19 +5,19 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 
-	private Rigidbody2D rb;
-	private Vector3 originalScale;
-	private Plane plane;				// Plane used for plane.raycast in the Shoot function
-	private Vector3 distanceFromCamera;	// Distance from camera that the plane is created at
-	[SerializeField] private float baseDamage;
-	[SerializeField] private float boostedDamage;
-	[SerializeField] private float boostedKnockbackForce;
+	private Rigidbody2D _rb;
+	private Vector3 _originalScale;
+	private Plane _plane;				// Plane used for plane.raycast in the Shoot function
+	private Vector3 _distanceFromCamera;	// Distance from camera that the plane is created at
+	[SerializeField] private float _baseDamage;
+	[SerializeField] private float _boostedDamage;
+	[SerializeField] private float _boostedKnockbackForce;
 	
 	// Rigidbody is set in awake
 	private void Awake()
 	{
-		rb = GetComponent<Rigidbody2D>();
-		originalScale = transform.localScale;
+		_rb = GetComponent<Rigidbody2D>();
+		_originalScale = transform.localScale;
 	}
 
 	public void Shoot()
@@ -26,19 +26,19 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 		if (playerTrans == null)
 			LoadPlayerVariables();
 
-		StartCoroutine(GravityDropOff(rb));
+		StartCoroutine(GravityDropOff(_rb));
 
-		distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, playerTrans.position.z);
-		plane = new Plane(Vector3.forward, distanceFromCamera);
+		_distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, playerTrans.position.z);
+		_plane = new Plane(Vector3.forward, _distanceFromCamera);
 
 		if (abilityManager.IsAimToShoot)
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			float enter = 1000.0f;
-			if (plane.Raycast(ray, out enter))
+			if (_plane.Raycast(ray, out enter))
 			{
 				// Set gameobjects velocity to returned value of AimToFireProjectileForce method
-				rb.velocity = AimToFireProjectileForce(ProjectileSpeed, ray, enter, playerTrans);
+				_rb.velocity = AimToFireProjectileForce(ProjectileSpeed, ray, enter, playerTrans);
 				// Debug ray to see raycast in viewport
 				Debug.DrawRay(ray.origin, ray.direction * enter, Color.green, 2f);
 			}
@@ -46,7 +46,7 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 		else
 		{
 			// Sets go's velocity if forward firing projectiles are chosen
-    		rb.velocity = FireProjectileForward(ProjectileSpeed, playerTrans);
+    		_rb.velocity = FireProjectileForward(ProjectileSpeed, playerTrans);
 		}
 	}
 
@@ -55,18 +55,18 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 		if (col.CompareTag("Enemy"))
 		{
 			if (IsBoosted)
-				KnockbackDamageToEnemy(boostedDamage, boostedKnockbackForce, transform, col);
+				KnockbackDamageToEnemy(_boostedDamage, _boostedKnockbackForce, transform, col);
 			else
-				FlatDamageToEnemy(baseDamage, col);
+				FlatDamageToEnemy(_baseDamage, col);
 		}
 		// Deactive projectile and display particle effect
 		// Set projectile back to normal once it hits something
 		if (IsBoosted)
 		{
-			transform.localScale = originalScale;
+			transform.localScale = _originalScale;
 			IsBoosted = false;
 		}
-		rb.gravityScale = 0;
+		_rb.gravityScale = 0;
 		gameObject.SetActive(false);
 	}
 }

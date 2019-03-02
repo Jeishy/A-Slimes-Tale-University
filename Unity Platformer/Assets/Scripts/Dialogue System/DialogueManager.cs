@@ -5,37 +5,37 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour {
 
-    [SerializeField] private Text nameText;
-    [SerializeField] private Text dialogueText;
-    [SerializeField] [Range(0.001f, 0.2f)] private float slowTypeSpeed;             // How slow dialogue text appears on the screen. Decrease to slow the effect
-    [SerializeField] private Animator anim;
+    [SerializeField] private Text _nameText;
+    [SerializeField] private Text _dialogueText;
+    [SerializeField] [Range(0.001f, 0.2f)] private float _slowTypeSpeed;             // How slow dialogue text appears on the screen. Decrease to slow the effect
+    [SerializeField] private Animator _anim;
 
     [HideInInspector] public static DialogueManager Instance = null;
-    private Queue<string> sentences;
+    private Queue<string> _sentences;
 
 	private void Awake()
     {
         if (Instance == null)
             Instance = this;
 
-        sentences = new Queue<string>();
+        _sentences = new Queue<string>();
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
         // Animate text bubble onto screen
-        anim.SetBool("IsOpen", true);
+        _anim.SetBool("IsOpen", true);
 
         // Set name of text bubble to the character name of the dialogue variable
-        nameText.text = dialogue.characterName;
+        _nameText.text = dialogue.characterName;
 
         // Clear any previously queued sentences
-        sentences.Clear();
+        _sentences.Clear();
 
         // Set sentences in dialogue to the sentences queue
         foreach (string sentence in dialogue.sentences)
         {
-            sentences.Enqueue(sentence);
+            _sentences.Enqueue(sentence);
         }
 
         // Display all the sentences in order of what is in the queue
@@ -44,13 +44,13 @@ public class DialogueManager : MonoBehaviour {
 
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
+        if (_sentences.Count == 0)
         {
             EndDialogue();
             return;
         }
 
-        string sentence = sentences.Dequeue();
+        string sentence = _sentences.Dequeue();
         // Stop all coroutines that may be running
         StopAllCoroutines();
         // Start the slow typing coroutine
@@ -60,11 +60,11 @@ public class DialogueManager : MonoBehaviour {
     private IEnumerator SentenceSlowType(string sentence)
     {
         // Appends sentence to dialogue text UI element character by character, pausing after slowTypeSpeed seconds
-        dialogueText.text = "";
+        _dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(slowTypeSpeed);
+            _dialogueText.text += letter;
+            yield return new WaitForSeconds(_slowTypeSpeed);
         }
     }
 
@@ -72,6 +72,6 @@ public class DialogueManager : MonoBehaviour {
     {
         // End the conversation
         // Animate text bubble off screen
-        anim.SetBool("IsOpen", false);
+        _anim.SetBool("IsOpen", false);
     }
 }

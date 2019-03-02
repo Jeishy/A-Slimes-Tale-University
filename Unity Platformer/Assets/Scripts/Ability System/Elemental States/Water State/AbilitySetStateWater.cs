@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class AbilitySetStateWater : MonoBehaviour {
 
-	private AbilityManager abilityManager;
+	private AbilityManager _abilityManager;
 
 	private void OnEnable()
 	{
 		Setup();
-		abilityManager.OnWaterState += SetWaterState;
+		_abilityManager.OnWaterState += SetWaterState;
 	}
 
 	private void OnDisable()
 	{
-		abilityManager.OnWaterState -= SetWaterState;
+		_abilityManager.OnWaterState -= SetWaterState;
 	}
 
 	private void Setup()
 	{
-		abilityManager = GetComponent<AbilityManager>();
+		_abilityManager = GetComponent<AbilityManager>();
     }
 
 	private void SetWaterState()
 	{
-		abilityManager.CurrentPlayerElementalState = ElementalStates.Water;
-        abilityManager.playerRB.gravityScale = abilityManager.InitialGravityScale;
-        Debug.Log(abilityManager.CurrentPlayerElementalState);
+		_abilityManager.CurrentPlayerElementalState = ElementalStates.Water;
+        _abilityManager.playerRb.gravityScale = _abilityManager.InitialGravityScale;
+        Debug.Log(_abilityManager.CurrentPlayerElementalState);
 	}
 }

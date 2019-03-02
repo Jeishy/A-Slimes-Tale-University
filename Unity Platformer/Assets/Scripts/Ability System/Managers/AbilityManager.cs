@@ -31,15 +31,15 @@ public class AbilityManager : MonoBehaviour {
 
     [HideInInspector] public bool IsAimToShoot;
     [HideInInspector] public float InitialGravityScale;
-    [HideInInspector] public Rigidbody2D playerRB;
+    [HideInInspector] public Rigidbody2D playerRb;
 
 	// Holds the elemental state of the player,
 	// uses accessors to encapsulate current elemental state
-	private ElementalStates currentPlayerElementalState;
+	private ElementalStates _currentPlayerElementalState;
 	public ElementalStates CurrentPlayerElementalState
 	{
-		get { return currentPlayerElementalState;}
-		set { currentPlayerElementalState = value;}
+		get { return _currentPlayerElementalState;}
+		set { _currentPlayerElementalState = value;}
 	}
 
 	private void Start()
@@ -47,7 +47,7 @@ public class AbilityManager : MonoBehaviour {
 		// Set elemental state to None at beginning of the game
 		CurrentPlayerElementalState = ElementalStates.None;
         InitialGravityScale = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().gravityScale;
-        playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         IsAimToShoot = true;
 	}
 

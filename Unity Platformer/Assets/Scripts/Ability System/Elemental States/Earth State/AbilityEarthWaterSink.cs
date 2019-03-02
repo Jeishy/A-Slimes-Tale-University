@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AbilityEarthWaterSink : MonoBehaviour {
 
-	private AbilityManager abilityManager;
+	private AbilityManager _abilityManager;
 	private void OnEnable()
 	{
 		Setup();
@@ -18,7 +18,7 @@ public class AbilityEarthWaterSink : MonoBehaviour {
 	
 	private void Setup()
 	{
-		abilityManager = GetComponent<AbilityManager>();
+		_abilityManager = GetComponent<AbilityManager>();
 	}
 
 	

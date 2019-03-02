@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FirePickup : MonoBehaviour {
 
-	private AbilityManager abilityManager;
+	private AbilityManager _abilityManager;
 	void Start () {
-		abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
+		_abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
 	}
 	
 	// If wind pickup interacts with player,
@@ -16,7 +16,7 @@ public class FirePickup : MonoBehaviour {
 	{
 		if (col.CompareTag("Player"))
 		{
-			abilityManager.FireState();
+			_abilityManager.FireState();
 			Destroy(gameObject);
 		}
 	}
