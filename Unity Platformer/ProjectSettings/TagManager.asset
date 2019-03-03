@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Shop
+  - Door
   layers:
   - Default
   - TransparentFX
