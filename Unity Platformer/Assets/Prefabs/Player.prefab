@@ -299,7 +299,7 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950331587363064}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -351,8 +351,9 @@ MonoBehaviour:
   m_WallCheck: {fileID: 4278450528689954}
   m_wallDetectRadius: 0.15
   m_CrouchDisableCollider: {fileID: 61519780767610400}
-  m_KnockbackForce: {x: 5, y: 7}
-  m_KnockbackLength: 0.5
+  m_KnockbackForce: {x: 0, y: 0}
+  m_KnockbackLength: 0
+  m_Grounded: 0
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -378,7 +379,6 @@ MonoBehaviour:
   armour: 0
   _healthText: {fileID: 0}
   _armourText: {fileID: 0}
-  damageCooldown: 0.5
 --- !u!114 &114510808012603534
 MonoBehaviour:
   m_ObjectHideFlags: 1

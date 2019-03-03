@@ -31,7 +31,7 @@ public class AbilityInputHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		InputHandler();
-		EarthCrashCheck();
+		//EarthCrashCheck();
 	}
 
     private void ShootToggle()
@@ -97,7 +97,7 @@ public class AbilityInputHandler : MonoBehaviour {
 
 	}
 
-	private void EarthCrashCheck()
+	/*private void EarthCrashCheck()
 	{
 		if (characterController.m_Grounded && abilityEarthCrash.IsCrashAbilityActivated)
 		{
@@ -110,5 +110,5 @@ public class AbilityInputHandler : MonoBehaviour {
 			}
 			abilityEarthCrash.IsCrashAbilityActivated = false;
 		}
-	}
+	}*/
 }

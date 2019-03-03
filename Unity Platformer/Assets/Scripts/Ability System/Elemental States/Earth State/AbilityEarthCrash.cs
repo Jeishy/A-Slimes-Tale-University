@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilityEarthCrash : MonoBehaviour {
-	private AbilityManager abilityManager;
-	private Rigidbody2D playerRB;
+	/*private AbilityManager abilityManager;
+	private Rigidbody2D playerRB;*/
 	[SerializeField] private float downwardForce;
 	[SerializeField] private float maxDamage;
 	[SerializeField] private int timeAbilityActive;
@@ -13,6 +13,9 @@ public class AbilityEarthCrash : MonoBehaviour {
     private AbilityManager abilityManager;
     private PlayerDurability playerDur;
     private Rigidbody2D playerRB;
+    //Added lines of code just to fix compile errors. Delete if necessary.
+    public bool IsCrashAbilityActivated;
+    public Vector2 InitialVelocity;
 
     private void OnEnable()
 	{
@@ -33,6 +36,8 @@ public class AbilityEarthCrash : MonoBehaviour {
 
 	private void EarthCrash()
 	{
+        
+
         if (playerDur.armour >= 3)
         {
             // Armour slot is removed when ability is used
