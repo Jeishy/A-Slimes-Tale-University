@@ -59,7 +59,7 @@ public class ElementalProjectilePooler : MonoBehaviour {
 		// Check if tag exists, if not log error to console
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.Log("Pool with tag" + tag + "doesn't exist!");
+            Debug.Log("Pool with tag " + tag + " doesn't exist!");
             return null;
         }
 

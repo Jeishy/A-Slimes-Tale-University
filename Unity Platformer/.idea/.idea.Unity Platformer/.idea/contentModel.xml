@@ -11,8 +11,23 @@
             <e p="AbilityInputHandler.cs" t="Include" />
             <e p="AbilitySwtich.cs" t="Include" />
             <e p="Elemental States" t="Include">
+              <e p="Earth State" t="Include">
+                <e p="AbilityEarthCrash.cs" t="Include" />
+                <e p="AbilityEarthWaterSink.cs" t="Include" />
+                <e p="AbilitySetEarthState.cs" t="Include" />
+                <e p="EarthPickup.cs" t="Include" />
+              </e>
+              <e p="FireState" t="Include">
+                <e p="AbilitySetFireState.cs" t="Include" />
+                <e p="FirePickup.cs" t="Include" />
+              </e>
+              <e p="Water State" t="Include">
+                <e p="AbilitySetStateWater.cs" t="Include" />
+                <e p="WaterPickup.cs" t="Include" />
+              </e>
               <e p="Wind State" t="Include">
                 <e p="AbilitySetWindState.cs" t="Include" />
+                <e p="AbilityWindPassives.cs" t="Include" />
                 <e p="WindPickup.cs" t="Include" />
               </e>
             </e>
@@ -35,11 +50,18 @@
           <e p="Collectible.cs" t="Include" />
           <e p="DDOL.cs" t="Include" />
           <e p="EnemyAI.cs" t="Include" />
+          <e p="EnemyAttack.cs" t="Include" />
+          <e p="EnemyProjectile.cs" t="Include" />
+          <e p="GameData.cs" t="Include" />
+          <e p="LevelChanger.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
           <e p="PlayerAttributes.cs" t="Include" />
-          <e p="PlayerController.cs" t="Include" />
-          <e p="PlayerDurability.cs" t="Include" />
-          <e p="PlayerMovement.cs" t="Include" />
+          <e p="PlayerControls.cs" t="Include" />
+          <e p="PlayerData.cs" t="Include" />
+          <e p="Preload.cs" t="Include" />
+          <e p="SaveSystem.cs" t="Include" />
           <e p="Sound.cs" t="Include" />
+          <e p="UserInterface.cs" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Resources" t="Include">

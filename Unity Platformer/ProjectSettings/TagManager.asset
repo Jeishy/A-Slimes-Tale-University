@@ -5,6 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - AbilityManager
+  - Collectible
+  - Enemy
+  - Patrol Point
+  - EnemyProj
+  - DeathTrigger
+  - Checkpoint
+  - NextLevel
+  - VCamMain
+  - VCamZoom
   - Shop
   - Door
   layers:
@@ -16,6 +26,14 @@ TagManager:
   - UI
   - 
   - 
+  - PostProcessing
+  - Player
+  - Projectile
+  - Wall
+  - EnemyProjectile
+  - Enemy
+  - Enemy
+  - CameraTriggers
   - 
   - 
   - 

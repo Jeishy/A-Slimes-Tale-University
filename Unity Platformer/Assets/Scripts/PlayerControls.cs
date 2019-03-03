@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController2D))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerControls : MonoBehaviour
 {
 
 
@@ -20,19 +20,21 @@ public class PlayerMovement : MonoBehaviour
 	{
 		controller = GetComponent<CharacterController2D>();
 	}
+    
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		
-		
+		//Gets button presses for sideways movement
 		horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
 
+		
+		//Checks if player has pressed the jump button
 		if (Input.GetButtonDown("Jump"))
 		{
 			jump = true;
 		}
-		
 		
 		
 		//Crouching, saved for future
@@ -47,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
 			Debug.Log("Crouch up");
 			crouch = false;
 		}*/
+		
+		
+		
 
 	}
 
@@ -55,11 +60,4 @@ public class PlayerMovement : MonoBehaviour
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
 		jump = false;
 	}
-
-
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Destroy(collision.gameObject);
-    }*/ //Commented out as it was deleting the shop when interacting with it lol. 
-
 }

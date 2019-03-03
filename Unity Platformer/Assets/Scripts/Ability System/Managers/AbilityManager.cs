@@ -18,6 +18,7 @@ public class AbilityManager : MonoBehaviour {
 	// their state by pressing Q
 	public event AbilityEventHandler OnPlayerSwitchAbility;
 	public event AbilityEventHandler OnProjectileFire;
+	public event AbilityEventHandler OnBoostedProjectileFire;
 	public event AbilityEventHandler OnWindState;
 	public event AbilityEventHandler OnFireState;
 	public event AbilityEventHandler OnWaterState;
@@ -64,6 +65,14 @@ public class AbilityManager : MonoBehaviour {
 		if (OnProjectileFire != null)
 		{
 			OnProjectileFire();
+		}
+	}
+
+	public void BoostedProjectileFire()
+	{
+		if (OnBoostedProjectileFire != null)
+		{
+			OnBoostedProjectileFire();
 		}
 	}
 

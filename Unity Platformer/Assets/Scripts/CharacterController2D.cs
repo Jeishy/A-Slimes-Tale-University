@@ -15,12 +15,15 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;							// A position marking where to check for ceilings
-	[SerializeField] private Transform m_WallCheck;
-	[SerializeField] private float m_wallDetectRadius = 0.1f;
+	[SerializeField] private Transform m_WallCheck;								// Transform of a wall check object
+	[SerializeField] private float m_wallDetectRadius = 0.1f;					// Radius of a sphere cast
 	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
+	[SerializeField] private Vector2 m_KnockbackForce;							// Force applied when hit by an enemy
+	[SerializeField] private float m_KnockbackLength;							// Period of time the player will not be able to move after getting knocked bakck
+	
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-	private bool m_Grounded;            // Whether or not the player is grounded.
+	[HideInInspector] public bool m_Grounded;            // Whether or not the player is grounded.
 	private bool m_wallSliding;			// Whether or not the player is touching the wall
 	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
@@ -30,6 +33,8 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_WallJumped = false;
 	private int m_LayerMask;
 	private bool m_PhysicsWallCheck;
+	private float m_KnockbackCount;
+	private bool m_KnockbackRight;		// Used to determine direction when applying knockback force
 	
 	[Header("Events")]
 	[Space]
@@ -72,7 +77,7 @@ public class CharacterController2D : MonoBehaviour
 				if (!wasGrounded)
 					OnLandEvent.Invoke();
 			}
-		}
+		}	
 	}
 
 
@@ -121,8 +126,29 @@ public class CharacterController2D : MonoBehaviour
 				}
 			}
 
-			// Move the character by finding the target velocity
-			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+
+			Vector3 targetVelocity;
+			if (m_KnockbackCount <= 0)
+			{
+				// Move the character by finding the target velocity
+				targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+			}
+			else
+			{
+				if (m_KnockbackRight)
+				{
+					Debug.Log("Right");
+					targetVelocity = new Vector2(-m_KnockbackForce.x, m_KnockbackForce.y);
+				}
+				else
+				{
+					Debug.Log("left");
+					targetVelocity = new Vector2(m_KnockbackForce.x, m_KnockbackForce.y);
+				}
+
+				m_KnockbackCount -= Time.deltaTime;
+			}
+
 			// And then smoothing it out and applying it to the character
 			if (m_Grounded) 
 				m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_GroundMovementSmoothing);
@@ -162,7 +188,7 @@ public class CharacterController2D : MonoBehaviour
 		{
 
 			m_Grounded = false;
-			
+
 			// ... and player is touching the wall
 			if (m_wallSliding)
 			{
@@ -183,9 +209,14 @@ public class CharacterController2D : MonoBehaviour
 		}
 	}
 
+	public void Knockback(bool right)
+	{
+		m_KnockbackRight = right;
+		m_KnockbackCount = m_KnockbackLength;
+	}
+	
 	private void Flip()
 	{
-		Debug.Log("Flip");
 		// Switch the way the player is labelled as facing.
 		m_FacingRight = !m_FacingRight;
 
@@ -202,14 +233,6 @@ public class CharacterController2D : MonoBehaviour
 		{
 			m_WallNormal = other.contacts[0].normal.x;
 			
-		}
-	}
-
-	private void OnCollisionStay2D(Collision2D other)
-	{
-		if (Input.GetAxisRaw("Horizontal") == 0 && !m_WallJumped)
-		{
-			m_Rigidbody2D.velocity = new Vector2(0f, m_Rigidbody2D.velocity.y);
 		}
 	}
 }
