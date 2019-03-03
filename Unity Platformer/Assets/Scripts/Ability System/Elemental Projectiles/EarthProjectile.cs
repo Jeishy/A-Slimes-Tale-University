@@ -28,7 +28,10 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 
 		StartCoroutine(GravityDropOff(_rb));
 
-		_distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, playerTrans.position.z);
+        // Destroy the projectile after specified number of seconds
+        Destroy(gameObject, TimeTillDestroy);
+
+        _distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, playerTrans.position.z);
 		_plane = new Plane(Vector3.forward, _distanceFromCamera);
 
 		if (abilityManager.IsAimToShoot)
@@ -67,6 +70,6 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 			IsBoosted = false;
 		}
 		_rb.gravityScale = 0;
-		gameObject.SetActive(false);
+		Destroy(gameObject);
 	}
 }

@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilityProjectile : MonoBehaviour {
-    private AbilityManager _abilityManager;
-    private PlayerDurability _playerDurability;
-    [SerializeField] private Transform _projectileSpawnTrans;
-    [SerializeField] private ElementalProjectilePooler _projPooler;
-    [SerializeField] private GameObject _fireMuzzleFlash;
-    [SerializeField] private GameObject _waterMuzzleFlash;
-
 
     public float fireRate;                                              // Used by AbilityInputHandler class to determine rate of fire
-    
+
+    [SerializeField] private Transform _projectileSpawnTrans;
+    [SerializeField] private GameObject _fireProj;
+    [SerializeField] private GameObject _waterProj;
+    [SerializeField] private GameObject _windProj;
+    [SerializeField] private GameObject _earthProj;
+    [Space]
+    [SerializeField] private GameObject _fireMuzzleFlash;
+    [SerializeField] private GameObject _waterMuzzleFlash;
+    [SerializeField] private GameObject _windMuzzleFlash;
+    [SerializeField] private GameObject _earthMuzzleFlash;
+
+    private AbilityManager _abilityManager;
+    private PlayerDurability _playerDurability;
+    private Transform _playerTrans;
 
     private void OnEnable()
     {
@@ -28,7 +35,9 @@ public class AbilityProjectile : MonoBehaviour {
     private void Setup()
     {
         _abilityManager = GetComponent<AbilityManager>();
-        _playerDurability = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDurability>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        _playerTrans = player.GetComponent<Transform>();
+        _playerDurability = player.GetComponent<PlayerDurability>();
     }
 
     private void SpawnProjectile()
@@ -41,20 +50,28 @@ public class AbilityProjectile : MonoBehaviour {
             switch (state)
             {
                 case ElementalStates.Fire:
-                    _projPooler.SpawnProjectileFromPool("FireProj", _projectileSpawnTrans.position, Quaternion.identity);
-                    GameObject muzzleFlash = Instantiate(_fireMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity);
-                    Destroy(muzzleFlash, 1f);
+                    GameObject fire = Instantiate(_fireProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    fire.GetComponent<FireProjectile>().Shoot();
+                    GameObject fireMf = Instantiate(_fireMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
+                    Destroy(fireMf, 1f);
                     break;
                 case ElementalStates.Water:
-                    _projPooler.SpawnProjectileFromPool("WaterProj", _projectileSpawnTrans.position, Quaternion.identity);
-                    GameObject muzzle = Instantiate(_waterMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity);
-                    Destroy(muzzle, 1f);
+                    GameObject water = Instantiate(_waterProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    water.GetComponent<WaterProjectile>().Shoot();
+                    GameObject waterMf = Instantiate(_waterMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
+                    Destroy(waterMf, 1f);
                     break;
                 case ElementalStates.Wind:
-                    _projPooler.SpawnProjectileFromPool("WindProj", _projectileSpawnTrans.position, Quaternion.identity);
+                    GameObject wind = Instantiate(_windProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    wind.GetComponent<WindProjectile>().Shoot();
+                    GameObject windMf = Instantiate(_windMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
+                    Destroy(windMf, 1f);
                     break;
                 case ElementalStates.Earth:
-                    _projPooler.SpawnProjectileFromPool("EarthProj", _projectileSpawnTrans.position, Quaternion.identity);
+                    GameObject earth = Instantiate(_earthProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    earth.GetComponent<EarthProjectile>().Shoot();
+                    GameObject earthMf = Instantiate(_earthMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
+                    Destroy(earthMf, 1f);
                     break;
                 case ElementalStates.None:
                     // Update UI or play particle effect here
@@ -69,7 +86,7 @@ public class AbilityProjectile : MonoBehaviour {
         {
             // Update UI to screen
             // Set players current state to None
-            // Check if players state isnt already none
+            // Check if players state isn't already none
             Debug.Log("Used up all armour points! Elemental state set to none");
             if (_abilityManager.CurrentPlayerElementalState != ElementalStates.None)
                 _abilityManager.CurrentPlayerElementalState = ElementalStates.None;

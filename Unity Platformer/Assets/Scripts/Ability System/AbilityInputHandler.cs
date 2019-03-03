@@ -99,6 +99,7 @@ public class AbilityInputHandler : MonoBehaviour {
 	private void EarthCrashCheck()
 	{
         if (!_characterController.m_Grounded || !_abilityEarthCrash.IsCrashAbilityActivated) return;
+
         // Get all enemy coliiders in range
         Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(_characterController.transform.position, _abilityEarthCrash.SplashRadius, _enemyLayerMask);
         if (enemyColliders.Length > 0)

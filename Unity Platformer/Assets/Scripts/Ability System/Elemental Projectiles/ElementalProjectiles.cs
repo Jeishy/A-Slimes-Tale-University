@@ -5,15 +5,19 @@ using UnityEngine;
 // Class that all elemental projectiles inherit from
 public class ElementalProjectiles : MonoBehaviour {
 
-	// public AudioClip projectileSound; uncomment when sounds are added
+    public float ProjectileSpeed;
+    public float TimeTillDestroy;
+
+    // public AudioClip projectileSound; uncomment when sounds are added
+    [HideInInspector] public bool IsProjectileSpawned;
     [HideInInspector] public bool IsBoosted;
     [HideInInspector] public AbilityManager abilityManager;
     [HideInInspector] public Transform playerTrans;
-    [SerializeField] private int _dropOffTime;
-	public float ProjectileSpeed;
+
+    [SerializeField] private float _dropOffTime;
+
     private Vector2 _projForce;
     private Vector2 _hitPoint;
-
     private void Awake()
     {
         IsBoosted = false;
@@ -48,8 +52,8 @@ public class ElementalProjectiles : MonoBehaviour {
     }
  
 	public virtual IEnumerator GravityDropOff(Rigidbody2D proj)
-	{
-		yield return new WaitForSeconds(_dropOffTime);
+    {
+        yield return new WaitForSeconds(_dropOffTime);
         proj.gravityScale = 3;
 	}
 
@@ -60,8 +64,9 @@ public class ElementalProjectiles : MonoBehaviour {
     }
 
     // Does DOT to hit enemy
-    public virtual IEnumerator DotToEnemy(float dot, int dotTime, GameObject proj, Collider2D enemyCol)
+    public virtual IEnumerator DotToEnemy(float initialDmg, float dot, int dotTime, GameObject proj, Collider2D enemyCol)
     {
+        // Do intial damage to enemy with intialDmg
         // Apply dot over time, till dotTime is elapsed
         int dotCount = 0;
         while (dotCount < dotTime)
@@ -78,13 +83,13 @@ public class ElementalProjectiles : MonoBehaviour {
     {
         Vector2 enemyPos = enemyCol.transform.position;
         Vector2 projPos = projTrans.position;
-        Vector2 direciton = Vector3.Normalize(enemyPos - projPos);
+        Vector2 dir = Vector3.Normalize(enemyPos - projPos);
         // Get x component of direciton vector
-        Vector2 directionInX = new Vector3(direciton.x, 0);
+        Vector2 dirInX = new Vector3(dir.x, 0);
         Rigidbody2D enemyRb = enemyCol.GetComponent<Rigidbody2D>();
 
         // Reduce enemy's health based on damage amount 
         // Only apply forces in x direction
-        enemyRb.AddForce(directionInX * knockbackForce, ForceMode2D.Impulse);
+        enemyRb.AddForce(dirInX * knockbackForce, ForceMode2D.Impulse);
     }
 }

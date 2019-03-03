@@ -14,7 +14,7 @@ public class ElementalProjectilePooler : MonoBehaviour {
 		public string tag;
 		[Tooltip("Set prefab to be used for the pool")]
 		public GameObject prefab;
-		[Tooltip("Set amount of gameobjects instantiated. Ensure size is set to more than 0")]
+		[Tooltip("Set amount of game objects instantiated. Ensure size is set to more than 0")]
 		public int size;
 	}
 
@@ -48,7 +48,7 @@ public class ElementalProjectilePooler : MonoBehaviour {
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
-			// Adds queue to the dictionary
+			// Adds pool to the dictionary
             poolDictionary.Add(pool.tag, objectPool);
         }
 	}
@@ -66,20 +66,21 @@ public class ElementalProjectilePooler : MonoBehaviour {
 		// Store projectile from pool of specified tag to projectile variable
         GameObject elementalProj = poolDictionary[tag].Dequeue();
 
-		// Set projectile gameobject to true
+
+        // Set projectile gameobject to true
         elementalProj.SetActive(true);
 		// Set projectile's transform
         elementalProj.transform.position = position;
 		// Set projectile's rotation
         elementalProj.transform.rotation = rotation;
 
-		
         IPooledProjectile pooledProjectile = elementalProj.GetComponent<IPooledProjectile>();
 
 		// Shoot on elemental projectile prefab is run
 		// if there is an implementation of the function
         if (pooledProjectile != null)
         {
+            Debug.Log("projectile shoot function called");
             pooledProjectile.Shoot();
         }
 

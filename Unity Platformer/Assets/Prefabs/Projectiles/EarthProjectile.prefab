@@ -194,14 +194,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b432e32ff154c443b6e2b80c7dfedf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProjectileSpeed: 8
+  TimeTillDestroy: 3
+  IsProjectileSpawned: 0
   IsBoosted: 0
   abilityManager: {fileID: 0}
   playerTrans: {fileID: 0}
-  dropOffTime: 1
-  ProjectileSpeed: 5
-  baseDamage: 5
-  boostedDamage: 10
-  boostedKnockbackForce: 5
+  _dropOffTime: 1
+  _baseDamage: 10
+  _boostedDamage: 20
+  _boostedKnockbackForce: 10
 --- !u!198 &198628620810877256
 ParticleSystem:
   m_ObjectHideFlags: 1

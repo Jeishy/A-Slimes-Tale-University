@@ -20,6 +20,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
 	[SerializeField] private Vector2 m_KnockbackForce;							// Force applied when hit by an enemy
 	[SerializeField] private float m_KnockbackLength;							// Period of time the player will not be able to move after getting knocked bakck
+    [SerializeField] private GameObject m_WallJumpEffect;
 	
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -35,6 +36,7 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_PhysicsWallCheck;
 	private float m_KnockbackCount;
 	private bool m_KnockbackRight;		// Used to determine direction when applying knockback force
+    private Vector3 m_TouchedWallPoint;
 	
 	[Header("Events")]
 	[Space]
@@ -195,7 +197,9 @@ public class CharacterController2D : MonoBehaviour
 				// Add a vertical and horizontal force to the player if he is sliding on the wall
 				m_Rigidbody2D.AddForce(new Vector2((m_HorizontalJumpForce * m_WallNormal) , (m_JumpForce * m_WallJumpVerticalForceMultiplier)));
 				m_WallJumped = true;
-				
+                // Display wall jumping particle effect
+                GameObject pWallJump = Instantiate(m_WallJumpEffect, m_TouchedWallPoint, Quaternion.identity);
+                Destroy(pWallJump, 1f);
 				// Flip because character will jump off the wall in the other direction
 				Flip();
 			}
@@ -232,7 +236,8 @@ public class CharacterController2D : MonoBehaviour
 		if (other.gameObject.CompareTag("Wall"))
 		{
 			m_WallNormal = other.contacts[0].normal.x;
-			
-		}
+            m_TouchedWallPoint = other.contacts[0].point;       // Getting the point last touched 
+
+        }
 	}
 }

@@ -5,12 +5,21 @@ using UnityEngine;
 public class AbilityBoostedProjectile : MonoBehaviour {
 
     [SerializeField] private Transform _projectileSpawnTrans;
-    [SerializeField] private ElementalProjectilePooler _projPooler;
 	[SerializeField] private float _projectileSizeIncrease;
-	private AbilityManager _abilityManager;
-    private PlayerDurability _playerDurability;
+    [SerializeField] private GameObject _boostedFireProj;
+    [SerializeField] private GameObject _boostedWaterProj;
+    [SerializeField] private GameObject _boostedEarthProj;
+    [SerializeField] private GameObject _boostedWindProj;
+    [Space]
+    [SerializeField] private GameObject _fireMuzzleFlash;
+    [SerializeField] private GameObject _waterMuzzleFlash;
+    [SerializeField] private GameObject _windMuzzleFlash;
+    [SerializeField] private GameObject _earthMuzzleFlash;
 
-	private GameObject _boostedProjectile;
+    private AbilityManager _abilityManager;
+    private PlayerDurability _playerDurability;
+    private Transform _playerTrans;
+    private GameObject _boostedProjectile;
 
 	private void OnEnable()
 	{
@@ -26,8 +35,10 @@ public class AbilityBoostedProjectile : MonoBehaviour {
 	private void Setup()
 	{
 		_abilityManager = GetComponent<AbilityManager>();
-        _playerDurability = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDurability>();
-	}
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        _playerTrans = player.GetComponent<Transform>();
+        _playerDurability = player.GetComponent<PlayerDurability>();
+    }
 
 	private void SpawnBoostedProjectile()
 	{
@@ -38,30 +49,42 @@ public class AbilityBoostedProjectile : MonoBehaviour {
 			// Remove armour slot if boosted projectile is fired
 			_playerDurability.RemoveArmourSlot();
 
-			switch (state)
+            switch (state)
             {
                 case ElementalStates.Fire:
-                    _boostedProjectile = _projPooler.SpawnProjectileFromPool("FireProj", _projectileSpawnTrans.position, Quaternion.identity);
+                    GameObject fire = Instantiate(_boostedFireProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    _boostedProjectile = fire;
+                    fire.GetComponent<FireProjectile>().Shoot();
+                    GameObject fireMf = Instantiate(_fireMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
+                    Destroy(fireMf, 1f);
                     break;
                 case ElementalStates.Water:
-                    _boostedProjectile = _projPooler.SpawnProjectileFromPool("WaterProj", _projectileSpawnTrans.position, Quaternion.identity);
+                    GameObject water = Instantiate(_boostedWaterProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    _boostedProjectile = water;
+                    water.GetComponent<WaterProjectile>().Shoot();
+                    GameObject waterMf = Instantiate(_waterMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity);
+                    Destroy(waterMf, 1f);
                     break;
                 case ElementalStates.Wind:
-                    _boostedProjectile = _projPooler.SpawnProjectileFromPool("WindProj", _projectileSpawnTrans.position, Quaternion.identity);
+                    GameObject wind = Instantiate(_boostedWindProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    _boostedProjectile = wind;
+                    wind.GetComponent<WindProjectile>().Shoot();
                     break;
                 case ElementalStates.Earth:
-                    _boostedProjectile = _projPooler.SpawnProjectileFromPool("EarthProj", _projectileSpawnTrans.position, Quaternion.identity);
+                    GameObject earth = Instantiate(_boostedEarthProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    _boostedProjectile = earth;
+                    earth.GetComponent<EarthProjectile>().Shoot();
                     break;
                 case ElementalStates.None:
                     // Update UI or play particle effect here
-                    Debug.Log("State is None!");
+                    //Debug.Log("State is None!");
                     break;
                 default:
                     Debug.LogWarning("Ability state not set!");
                     break;
             }
 
-			SetupBoostedProjectile(_boostedProjectile);
+            SetupBoostedProjectile(_boostedProjectile);
 		}
 		else
 		{
@@ -72,11 +95,8 @@ public class AbilityBoostedProjectile : MonoBehaviour {
 		}
 	}
 
-	private void SetupBoostedProjectile(GameObject projectile)
+	private static void SetupBoostedProjectile(GameObject projectile)
 	{
-		// Enlarge size of projectile
-		projectile.transform.localScale += new Vector3(_projectileSizeIncrease, _projectileSizeIncrease, _projectileSizeIncrease);
-
 		// Set projectile to be boosted
 		projectile.GetComponent<ElementalProjectiles>().IsBoosted = true;
 	}

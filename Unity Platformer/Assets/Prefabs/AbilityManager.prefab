@@ -66,10 +66,10 @@ MonoBehaviour:
   SplashRadius: 5
   InitialVelocity: {x: 0, y: 0, z: 0}
   IsCrashAbilityActivated: 0
-  downwardForce: 30
-  maxDamage: 20
-  timeAbilityActive: 2
-  enemyKnockbackForce: 2
+  _downwardForce: 5
+  _maxDamage: 10
+  _timeAbilityActive: 5
+  _enemyKnockbackForce: 5
 --- !u!114 &114068231915806748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6822695b31beac646a28ccea4fec3acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windGravityDecrease: 1.5
+  _windGravityDecrease: 1
 --- !u!114 &114301560330848006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,9 +160,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3ec26892a421148b80e79c4ba407c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpawnTrans: {fileID: 0}
-  projPooler: {fileID: 0}
-  muzzleFlash: {fileID: 1932668319670538, guid: 81955bb42919da045b4f0e01a81a2153,
+  _projectileSpawnTrans: {fileID: 0}
+  _projPooler: {fileID: 0}
+  _fireProj: {fileID: 1706052494266008, guid: 2e52635bda300ce448823d628e6cefff, type: 2}
+  _waterProj: {fileID: 1941906321393734, guid: 4495d61ee44378f47ad4655d8ada9a5c, type: 2}
+  _windProj: {fileID: 1321281812385548, guid: 2a7986d9d57a0e34cacb0ed73b50a945, type: 2}
+  _earthProj: {fileID: 1002834657366536, guid: 0278e24186a039b40b5dbc5a8292acfa, type: 2}
+  _fireMuzzleFlash: {fileID: 1932668319670538, guid: 81955bb42919da045b4f0e01a81a2153,
+    type: 2}
+  _waterMuzzleFlash: {fileID: 1783387421260400, guid: becd49337d1c5854c9fbf5cc7e884730,
     type: 2}
   fireRate: 1
 --- !u!114 &114692777493824474
@@ -187,9 +193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f1170a6664a4da43bb352da1d0fd94f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpawnTrans: {fileID: 0}
-  projPooler: {fileID: 0}
-  projectileSizeIncrease: 0.3
+  _projectileSpawnTrans: {fileID: 0}
+  _projPooler: {fileID: 0}
+  _projectileSizeIncrease: 0.2
 --- !u!114 &114779645510999674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,10 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2c92069aaf6104e8d829c457259490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayerMask:
+  _enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
-  boostedProjectileMaxTime: 0.5
+    m_Bits: 8192
+  _boostedProjectileMaxTime: 0.5
 --- !u!114 &114824307246110900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -216,6 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da6a43b04d24bf498fbecd7b821b1ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsAimToShoot: 0
-  InitialGravityScale: 0
-  playerRB: {fileID: 0}
+  IsAimToShoot: 1
+  InitialGravityScale: 3
+  playerRb: {fileID: 0}
