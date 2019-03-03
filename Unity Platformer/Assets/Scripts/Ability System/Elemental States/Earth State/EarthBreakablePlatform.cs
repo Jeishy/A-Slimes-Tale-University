@@ -7,7 +7,7 @@ public class EarthBreakablePlatform : MonoBehaviour {
 	private AbilityEarthCrash _abilityEarthCrash;
 	private void Start()
 	{
-		_abilityEarthCrash = GameObject.Find("AbilityManager").GetComponent<AbilityEarthCrash>();
+		_abilityEarthCrash = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityEarthCrash>();
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)

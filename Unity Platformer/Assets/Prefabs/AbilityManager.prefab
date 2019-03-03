@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 114779645510999674}
   - component: {fileID: 114068231915806748}
   - component: {fileID: 114004596130694576}
-  - component: {fileID: 114241298443560040}
   - component: {fileID: 114152213540542730}
   - component: {fileID: 114692777493824474}
   - component: {fileID: 114173882969932438}
@@ -103,17 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81598c8b1d66aee4c993bd66993014d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114241298443560040
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1027883659887526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de1f71005eeafb9479d839e61c9b1a04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114269117427966608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3ec26892a421148b80e79c4ba407c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireRate: 1
   _projectileSpawnTrans: {fileID: 0}
-  _projPooler: {fileID: 0}
   _fireProj: {fileID: 1706052494266008, guid: 2e52635bda300ce448823d628e6cefff, type: 2}
   _waterProj: {fileID: 1941906321393734, guid: 4495d61ee44378f47ad4655d8ada9a5c, type: 2}
   _windProj: {fileID: 1321281812385548, guid: 2a7986d9d57a0e34cacb0ed73b50a945, type: 2}
@@ -170,7 +158,10 @@ MonoBehaviour:
     type: 2}
   _waterMuzzleFlash: {fileID: 1783387421260400, guid: becd49337d1c5854c9fbf5cc7e884730,
     type: 2}
-  fireRate: 1
+  _windMuzzleFlash: {fileID: 1595434405380306, guid: 59435720319181947bb0c11939941325,
+    type: 2}
+  _earthMuzzleFlash: {fileID: 1631482120910838, guid: 6244757bc52558d4fa55900b75aff32e,
+    type: 2}
 --- !u!114 &114692777493824474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -194,8 +185,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileSpawnTrans: {fileID: 0}
-  _projPooler: {fileID: 0}
-  _projectileSizeIncrease: 0.2
+  _boostedFireProj: {fileID: 1471222689371114, guid: 6c67c42d9bbb2cb43b70ce1148b19e06,
+    type: 2}
+  _boostedWaterProj: {fileID: 1612239383915032, guid: 69a8a307e07c5b14dbbdf9f705a56045,
+    type: 2}
+  _boostedEarthProj: {fileID: 1578627839899940, guid: 2a3cc2e2f496f304f96501ec19ef0c61,
+    type: 2}
+  _boostedWindProj: {fileID: 1996649569356870, guid: efbb524070f25db45b6911c4da5a960f,
+    type: 2}
+  _fireMuzzleFlash: {fileID: 1932668319670538, guid: 81955bb42919da045b4f0e01a81a2153,
+    type: 2}
+  _waterMuzzleFlash: {fileID: 1783387421260400, guid: becd49337d1c5854c9fbf5cc7e884730,
+    type: 2}
+  _windMuzzleFlash: {fileID: 1595434405380306, guid: 59435720319181947bb0c11939941325,
+    type: 2}
+  _earthMuzzleFlash: {fileID: 1631482120910838, guid: 6244757bc52558d4fa55900b75aff32e,
+    type: 2}
 --- !u!114 &114779645510999674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -210,7 +215,7 @@ MonoBehaviour:
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 8192
-  _boostedProjectileMaxTime: 0.5
+  _boostedProjectileMaxTime: 0.3
 --- !u!114 &114824307246110900
 MonoBehaviour:
   m_ObjectHideFlags: 1

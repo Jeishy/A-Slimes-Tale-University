@@ -25,9 +25,7 @@ public class AbilityManager : MonoBehaviour {
 	public event AbilityEventHandler OnEarthState;
 
 	public event AbilityEventHandler OnEarthCrash;
-	public event AbilityEventHandler OnEarthWaterSink;
-
-	#endregion
+    #endregion
 
     [HideInInspector] public bool IsAimToShoot;
     [HideInInspector] public float InitialGravityScale;
@@ -120,7 +118,9 @@ public class AbilityManager : MonoBehaviour {
 		}
 	}
 
-	public void EarthCrash()
+    // Method for running methods subscribed to OnEarthCrash event
+    // This is an active ability available to the player when they enter the earth state
+    public void EarthCrash()
 	{
 		if (OnEarthCrash != null)
 		{

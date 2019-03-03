@@ -5,7 +5,6 @@ using UnityEngine;
 public class AbilityBoostedProjectile : MonoBehaviour {
 
     [SerializeField] private Transform _projectileSpawnTrans;
-	[SerializeField] private float _projectileSizeIncrease;
     [SerializeField] private GameObject _boostedFireProj;
     [SerializeField] private GameObject _boostedWaterProj;
     [SerializeField] private GameObject _boostedEarthProj;
@@ -69,11 +68,15 @@ public class AbilityBoostedProjectile : MonoBehaviour {
                     GameObject wind = Instantiate(_boostedWindProj, _projectileSpawnTrans.position, Quaternion.identity);
                     _boostedProjectile = wind;
                     wind.GetComponent<WindProjectile>().Shoot();
+                    GameObject windMf = Instantiate(_windMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity);
+                    Destroy(windMf, 1f);
                     break;
                 case ElementalStates.Earth:
                     GameObject earth = Instantiate(_boostedEarthProj, _projectileSpawnTrans.position, Quaternion.identity);
                     _boostedProjectile = earth;
                     earth.GetComponent<EarthProjectile>().Shoot();
+                    GameObject earthMf = Instantiate(_earthMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity);
+                    Destroy(earthMf, 1f);
                     break;
                 case ElementalStates.None:
                     // Update UI or play particle effect here
