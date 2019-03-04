@@ -14,6 +14,7 @@ public class PlayerControls : MonoBehaviour
 
 
     private CharacterController2D controller;
+    private Player player;
 	private float horizontalMove;
 	private bool jump = false;
 	private bool wallJump = true;
@@ -22,6 +23,7 @@ public class PlayerControls : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+        player = GetComponent<Player>();
 		controller = GetComponent<CharacterController2D>();
     }
     
@@ -29,43 +31,46 @@ public class PlayerControls : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		
-		//Gets button presses for sideways movement
-		horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
-        if (!controller.m_Grounded)
-            slimeTrail.Stop();
-        else
-            slimeTrail.Play();
+
+        if (!player.isDead)
+        {
+
+            //Gets button presses for sideways movement
+            horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+            if (!controller.m_Grounded)
+                slimeTrail.Stop();
+            else
+                slimeTrail.Play();
 
 
-        //Checks if player has pressed the jump button
-        if (Input.GetButtonDown("Jump"))
-		{
-			jump = true;
-            if (controller.m_Grounded)
+            //Checks if player has pressed the jump button
+            if (Input.GetButtonDown("Jump"))
             {
-                // Spawn particle effect at base of player
-                GameObject jumpParticles = Instantiate(normalJumpParticles, grounCheckTrans.position, Quaternion.Euler(-90, 0, 0));
-                Destroy(jumpParticles, 1f);
+                jump = true;
+                if (controller.m_Grounded)
+                {
+                    // Spawn particle effect at base of player
+                    GameObject jumpParticles = Instantiate(normalJumpParticles, grounCheckTrans.position, Quaternion.Euler(-90, 0, 0));
+                    Destroy(jumpParticles, 1f);
+                }
             }
-		}
-		
-		
-		//Crouching, saved for future
-		/*if (Input.GetButtonDown("Crouch"))
-		{
-			Debug.Log("Crouch down");
-			crouch = true;
-		}
-		
-		else if (Input.GetButtonUp("Crouch"))
-		{
-			Debug.Log("Crouch up");
-			crouch = false;
-		}*/
-		
-		
-		
+
+
+            //Crouching, saved for future
+            /*if (Input.GetButtonDown("Crouch"))
+            {
+                Debug.Log("Crouch down");
+                crouch = true;
+            }
+
+            else if (Input.GetButtonUp("Crouch"))
+            {
+                Debug.Log("Crouch up");
+                crouch = false;
+            }*/
+
+
+        }
 
 	}
 

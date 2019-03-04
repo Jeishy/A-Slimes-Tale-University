@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/_preload.unity
+    guid: 2a29996aa1b08a64f91e993c785b568d
+  - enabled: 1
+    path: Assets/Scenes/dungeon_1.unity
+    guid: 80ddc4f9f3553064e8caf669773ae605
   m_configObjects: {}

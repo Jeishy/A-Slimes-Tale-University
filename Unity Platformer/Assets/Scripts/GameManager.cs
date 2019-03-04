@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class GameData : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
 
     public bool hasData;
@@ -10,10 +9,11 @@ public class GameData : MonoBehaviour
     public int level;
     public int health;
     public int armour;
+    public int collectibles;
     
     public Element element;
 
-    public static GameData instance = null;
+    public static GameManager instance = null;
 
     private void Awake()
     {
@@ -36,6 +36,17 @@ public class GameData : MonoBehaviour
 
     }
     
+    public void OnCollectiblePickup()
+    {
+        collectibles++;
+    }
+
+    public void OnGemstonePickup()
+    {
+        
+        LevelChanger.instance.OnLevelComplete();
+    }
+
     public void LoadPlayer(bool LoadLevel = false)
     {
         

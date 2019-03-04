@@ -5,9 +5,11 @@ using UnityEngine;
 public class EarthPickup : MonoBehaviour {
 
 	private AbilityManager _abilityManager;
+        private Player player;
 	void Start () {
 		_abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
-	}
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 	
 	// If wind pickup interacts with player,
 	// set players elemental state to Wind
@@ -16,7 +18,8 @@ public class EarthPickup : MonoBehaviour {
 	{
 		if (col.CompareTag("Player"))
 		{
-			_abilityManager.EarthState();
+            player.AddArmourSlot();
+            _abilityManager.EarthState();
 			Destroy(gameObject);
 		}
 	}

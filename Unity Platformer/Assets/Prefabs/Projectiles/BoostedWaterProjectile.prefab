@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4844377229333024}
   - component: {fileID: 198067815684534294}
   - component: {fileID: 199798718814572896}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: WaterSpray
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 58743196845432568}
   - component: {fileID: 50966168663993970}
   - component: {fileID: 114971646239485760}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: BoostedWaterProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -58,9 +58,9 @@ GameObject:
   - component: {fileID: 4640453208893158}
   - component: {fileID: 198888132167238716}
   - component: {fileID: 199231946479280200}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Trails
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be7c60390ed48b41a8db06da0e0331d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectileSpeed: 8
+  ProjectileSpeed: 12
   TimeTillDestroy: 3
   IsProjectileSpawned: 0
   IsBoosted: 0

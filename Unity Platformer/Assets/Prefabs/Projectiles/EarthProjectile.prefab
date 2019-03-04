@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 58822308178744924}
   - component: {fileID: 50579762637584510}
   - component: {fileID: 114429267096576260}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: EarthProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -41,9 +41,9 @@ GameObject:
   - component: {fileID: 4989040882916658}
   - component: {fileID: 198628620810877256}
   - component: {fileID: 199589593500079376}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Trails
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,9 +58,9 @@ GameObject:
   - component: {fileID: 4196851700527100}
   - component: {fileID: 198804467677135396}
   - component: {fileID: 199199226628064850}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: EarthDust
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b432e32ff154c443b6e2b80c7dfedf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectileSpeed: 8
+  ProjectileSpeed: 12
   TimeTillDestroy: 3
   IsProjectileSpawned: 0
   IsBoosted: 0

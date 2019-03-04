@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4520983007346680}
   - component: {fileID: 198881933446631056}
   - component: {fileID: 199350190802422240}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Trails
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,9 +37,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4822035910159880}
   - component: {fileID: 108914725243911296}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Point Light
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,9 +54,9 @@ GameObject:
   - component: {fileID: 4368524362657932}
   - component: {fileID: 198291428886034882}
   - component: {fileID: 199070138144989370}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Embers
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 58051190121679980}
   - component: {fileID: 50570259659739746}
   - component: {fileID: 114513603332116728}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: FireProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96e5e3f0b45cc641a2d6ed1a657f145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectileSpeed: 8
+  ProjectileSpeed: 12
   TimeTillDestroy: 3
   IsProjectileSpawned: 0
   IsBoosted: 0

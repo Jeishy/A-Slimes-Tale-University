@@ -11,6 +11,21 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1950331587363064}
   m_IsPrefabAsset: 1
+--- !u!1 &1019270171875642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4763663452435368}
+  m_Layer: 9
+  m_Name: ProjectileSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1448453227826552
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,15 +145,29 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950331587363064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.44, y: 3.04, z: 0}
+  m_LocalPosition: {x: -0.29, y: 27.391193, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4953080561792170}
   - {fileID: 4475560020013268}
   - {fileID: 4948325435663198}
   - {fileID: 4278450528689954}
+  - {fileID: 4763663452435368}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4763663452435368
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1019270171875642}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4503012138185060}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4948325435663198
 Transform:
@@ -353,6 +382,7 @@ MonoBehaviour:
   m_CrouchDisableCollider: {fileID: 61519780767610400}
   m_KnockbackForce: {x: 0, y: 0}
   m_KnockbackLength: 0
+  m_WallJumpEffect: {fileID: 0}
   m_Grounded: 0
   OnLandEvent:
     m_PersistentCalls:
@@ -376,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  armour: 0
+  armour: 6
   _healthText: {fileID: 0}
   _armourText: {fileID: 0}
 --- !u!114 &114510808012603534
@@ -391,6 +421,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 120
+  normalJumpParticles: {fileID: 0}
+  slimeTrail: {fileID: 0}
+  grounCheckTrans: {fileID: 0}
 --- !u!114 &114586488525618636
 MonoBehaviour:
   m_ObjectHideFlags: 1

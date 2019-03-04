@@ -38,7 +38,10 @@ public class LevelChanger : MonoBehaviour
 		animator.SetTrigger("FadeOut");
 	}
 
-	
+	public void OnLevelComplete()
+    {
+        FadeToLevel(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 	
 	//Called when the FadeOut animation has finished playing
 	public void OnFadeComplete()
