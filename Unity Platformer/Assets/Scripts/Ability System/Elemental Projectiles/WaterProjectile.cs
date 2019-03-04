@@ -11,6 +11,7 @@ public class WaterProjectile : ElementalProjectiles,IPooledProjectile {
 	private Vector3 _distanceFromCamera;	// Distance from camera that the plane is created at
 	[SerializeField] private float _baseDamage;
 	[SerializeField] private float _boostedDamage;
+    [SerializeField] private GameObject _OnLandPE;
 	
 	// Rigidbody is set in awake
 	private void Awake()
@@ -52,23 +53,28 @@ public class WaterProjectile : ElementalProjectiles,IPooledProjectile {
 		}
 	}
 
-	private void OnTriggerEnter2D(Collider2D col)
-	{
-		if (col.CompareTag("Enemy"))
-		{
-			if (IsBoosted)
-				FlatDamageToEnemy(_boostedDamage, col);
-			else
-				FlatDamageToEnemy(_baseDamage, col);
-		}
-		// Deactive projecitle and display a particle effect
-		// Set projectile back to normal once it hits something
-		if (IsBoosted)
-		{
-			transform.localScale = _originalScale;
-			IsBoosted = false;
-		}
-		_rb.gravityScale = 0;
-		Destroy(gameObject);
-	}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject onLand = Instantiate(_OnLandPE, collision.contacts[0].point, Quaternion.identity);
+        if (IsBoosted)
+            onLand.transform.localScale *= 2.0f;
+        Destroy(onLand, 1f);
+        Collider2D col = collision.collider;
+        if (col.CompareTag("Enemy"))
+        {
+            if (IsBoosted)
+                FlatDamageToEnemy(_boostedDamage, col);
+            else
+                FlatDamageToEnemy(_baseDamage, col);
+        }
+        // Deactive projecitle and display a particle effect
+        // Set projectile back to normal once it hits something
+        if (IsBoosted)
+        {
+            transform.localScale = _originalScale;
+            IsBoosted = false;
+        }
+        _rb.gravityScale = 0;
+        Destroy(gameObject);
+    }
 }

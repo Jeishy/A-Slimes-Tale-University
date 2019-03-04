@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4466082397407992}
   - component: {fileID: 33607503190950060}
   - component: {fileID: 23668182797257944}
-  - component: {fileID: 58388649695652424}
+  - component: {fileID: 58051190121679980}
   - component: {fileID: 50570259659739746}
   - component: {fileID: 114513603332116728}
   m_Layer: 10
@@ -198,7 +198,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58388649695652424
+--- !u!58 &58051190121679980
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,7 +207,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -273,6 +273,7 @@ MonoBehaviour:
   _boostedDot: 5
   _dotTime: 3
   _boostedDotTime: 6
+  _onLandPE: {fileID: 1762409889873160, guid: edc1a075cb552bd41baec12a4566dc54, type: 2}
 --- !u!198 &198291428886034882
 ParticleSystem:
   m_ObjectHideFlags: 1

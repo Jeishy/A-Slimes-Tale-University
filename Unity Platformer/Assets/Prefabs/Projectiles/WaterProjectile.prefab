@@ -55,9 +55,9 @@ GameObject:
   - component: {fileID: 4888118745038552}
   - component: {fileID: 33651217574142088}
   - component: {fileID: 23491716028604530}
-  - component: {fileID: 114131947719982008}
   - component: {fileID: 58708469459130600}
   - component: {fileID: 50682129354803792}
+  - component: {fileID: 114131947719982008}
   m_Layer: 10
   m_Name: WaterProjectile
   m_TagString: Projectile
@@ -177,7 +177,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -203,6 +203,7 @@ MonoBehaviour:
   _dropOffTime: 2
   _baseDamage: 5
   _boostedDamage: 10
+  _OnLandPE: {fileID: 1766197264438252, guid: 299682866e3810148b4b974417238ceb, type: 2}
 --- !u!198 &198524141947369256
 ParticleSystem:
   m_ObjectHideFlags: 1

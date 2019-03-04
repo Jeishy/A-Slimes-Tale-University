@@ -38,9 +38,9 @@ GameObject:
   - component: {fileID: 4043757067763202}
   - component: {fileID: 33479846179228394}
   - component: {fileID: 23806643119006752}
-  - component: {fileID: 114376217818138618}
   - component: {fileID: 58828793584705836}
   - component: {fileID: 50691591439499636}
+  - component: {fileID: 114376217818138618}
   m_Layer: 10
   m_Name: WindProjectile
   m_TagString: Projectile
@@ -177,7 +177,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -205,6 +205,7 @@ MonoBehaviour:
   _boostedKnockbackForce: 8
   _baseDamage: 10
   _boostedDamage: 20
+  _OnLandPE: {fileID: 1237923862178386, guid: bc68e9969ce7e434e9307620af8e25af, type: 2}
 --- !u!198 &198093820632001122
 ParticleSystem:
   m_ObjectHideFlags: 1

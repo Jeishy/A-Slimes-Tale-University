@@ -12,8 +12,9 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 	[SerializeField] private float _boostedKnockbackForce;
 	[SerializeField] private float _baseDamage;
 	[SerializeField] private float _boostedDamage;
-	
-	private void Awake()
+    [SerializeField] private GameObject _OnLandPE;
+
+    private void Awake()
 	{
 		_rb = GetComponent<Rigidbody2D>();
 		_originalScale = transform.localScale;
@@ -50,23 +51,29 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 		}
 	}
 
-	private void OnTriggerEnter2D(Collider2D col)
-	{
-		if (col.CompareTag("Enemy"))
-		{
-			if (IsBoosted)
-				KnockbackDamageToEnemy(_boostedDamage, _boostedKnockbackForce, transform, col);
-			else
-				KnockbackDamageToEnemy(_baseDamage, _knockbackForce, transform, col);
-			// Add hit effects here
-		}
-		// Deactive projectile and display particle effect
-		// Set projectile back to normal once it hits something
-		if (IsBoosted)
-		{
-			transform.localScale = _originalScale;
-			IsBoosted = false;
-		}
-		Destroy(gameObject);
-	}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject onLand = Instantiate(_OnLandPE, collision.contacts[0].point, Quaternion.identity);
+        if (IsBoosted)
+            onLand.transform.localScale *= 2.0f;
+        Destroy(onLand, 1f);
+
+        Collider2D col = collision.collider;
+        if (col.CompareTag("Enemy"))
+        {
+            if (IsBoosted)
+                KnockbackDamageToEnemy(_boostedDamage, _boostedKnockbackForce, transform, col);
+            else
+                KnockbackDamageToEnemy(_baseDamage, _knockbackForce, transform, col);
+            // Add hit effects here
+        }
+        // Deactive projectile and display particle effect
+        // Set projectile back to normal once it hits something
+        if (IsBoosted)
+        {
+            transform.localScale = _originalScale;
+            IsBoosted = false;
+        }
+        Destroy(gameObject);
+    }
 }

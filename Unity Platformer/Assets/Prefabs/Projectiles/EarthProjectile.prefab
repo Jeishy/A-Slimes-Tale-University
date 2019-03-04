@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4471324670842682}
   - component: {fileID: 33085253764456168}
   - component: {fileID: 23704500545934676}
-  - component: {fileID: 114429267096576260}
   - component: {fileID: 58822308178744924}
   - component: {fileID: 50579762637584510}
+  - component: {fileID: 114429267096576260}
   m_Layer: 10
   m_Name: EarthProjectile
   m_TagString: Projectile
@@ -177,7 +177,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -204,6 +204,7 @@ MonoBehaviour:
   _baseDamage: 10
   _boostedDamage: 20
   _boostedKnockbackForce: 10
+  _OnLandPE: {fileID: 1558192354684444, guid: b8d37fa396945f947ad06125e7803220, type: 2}
 --- !u!198 &198628620810877256
 ParticleSystem:
   m_ObjectHideFlags: 1

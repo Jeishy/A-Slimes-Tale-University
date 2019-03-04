@@ -9,11 +9,13 @@ public class FireProjectile : ElementalProjectiles {
 	private Rigidbody2D _rb;
 	private Plane _plane;							// Plane used for plane.raycast in the Shoot function
 	private Vector3 _distanceFromCamera;		    // Distance from camera that the plane is created at
+
     [SerializeField] private float _initialDmg;  // Initial damage done by projectile
 	[SerializeField] private float _dot;			// DOT for fire projectile
 	[SerializeField] private float _boostedDot;		// Boosted DOT for fire projectile
 	[SerializeField] private int _dotTime;			// Time over which dot is applied. Note: This is in seconds
 	[SerializeField] private int _boostedDotTime;	// Time over which boosted dot is applied
+    [SerializeField] private GameObject _onLandPE;
 
 	// Rigidbody is set in awake
 	private void Awake()
@@ -53,23 +55,29 @@ public class FireProjectile : ElementalProjectiles {
 		}
 	}
 
-	private void OnTriggerEnter2D(Collider2D col)
-	{
-		if (col.CompareTag("Enemy"))
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject onLand = Instantiate(_onLandPE, collision.contacts[0].point, Quaternion.identity);
+        if (IsBoosted)
+            onLand.transform.localScale *= 2.0f;
+        Destroy(onLand, 1f);
+
+        Collider2D col = collision.collider;
+        if (col.CompareTag("Enemy"))
         {
             // Apply dot to enemy with params
             StartCoroutine(IsBoosted
                 ? DotToEnemy(_initialDmg, _boostedDot, _boostedDotTime, gameObject, col)
                 : DotToEnemy(_initialDmg, _dot, _dotTime, gameObject, col));
         }
-		// Deactive projectile and display particle effect
-		// Set projectile back to normal once it hits something
-		if (IsBoosted)
-		{
-			transform.localScale = _originalScale;
-			IsBoosted = false;
-		}
-		_rb.gravityScale = 0;
-		Destroy(gameObject);
-	}
+        // Deactive projectile and display particle effect
+        // Set projectile back to normal once it hits something
+        if (IsBoosted)
+        {
+            transform.localScale = _originalScale;
+            IsBoosted = false;
+        }
+        _rb.gravityScale = 0;
+        Destroy(gameObject);
+    }
 }

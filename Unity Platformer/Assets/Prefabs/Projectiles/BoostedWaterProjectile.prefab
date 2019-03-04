@@ -38,9 +38,9 @@ GameObject:
   - component: {fileID: 4566491268956502}
   - component: {fileID: 33672745112963454}
   - component: {fileID: 23833978757894872}
-  - component: {fileID: 114971646239485760}
   - component: {fileID: 58743196845432568}
   - component: {fileID: 50966168663993970}
+  - component: {fileID: 114971646239485760}
   m_Layer: 10
   m_Name: BoostedWaterProjectile
   m_TagString: Projectile
@@ -177,7 +177,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -203,6 +203,7 @@ MonoBehaviour:
   _dropOffTime: 2
   _baseDamage: 5
   _boostedDamage: 10
+  _OnLandPE: {fileID: 1766197264438252, guid: 299682866e3810148b4b974417238ceb, type: 2}
 --- !u!198 &198067815684534294
 ParticleSystem:
   m_ObjectHideFlags: 1
