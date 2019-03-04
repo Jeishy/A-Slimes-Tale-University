@@ -14,7 +14,7 @@ public class AbilityEarthCrash : MonoBehaviour {
     [SerializeField] private float _enemyKnockbackForce;
 
     
-    private PlayerDurability _playerDur;
+    private Player _playerDur;
     private AbilityManager _abilityManager;
     private Rigidbody2D _playerRb;
 
@@ -34,7 +34,7 @@ public class AbilityEarthCrash : MonoBehaviour {
 		_abilityManager = GetComponent<AbilityManager>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         _playerRb = player.GetComponent<Rigidbody2D>();
-        _playerDur = player.GetComponent<PlayerDurability>();
+        _playerDur = player.GetComponent<Player>();
     }
 
 	private void EarthCrash()

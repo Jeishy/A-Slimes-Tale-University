@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class EnemyAI : MonoBehaviour
 
 	[Space] [Header("Enemy Options")] 
 	[SerializeField] private bool flying;
+    [SerializeField] private EnemyDurability enemyDurability;
     [SerializeField] private EnemyAttack attackOptions;
 
 
@@ -34,19 +36,31 @@ public class EnemyAI : MonoBehaviour
     private int currentWaypoint = 0;							//Stores the value of the current waypoint index
     private int waypointIncrement = 1;							//Used for the Ping-Pong waypoint following method
     private bool waiting = false;								//When true the enemy pauses its patrol
-    private Player player;
+    private GameObject player;
+    private Player playerScript;
     private CharacterController2D controller;
     private float attackCountdown;
 
     private void Start()
     {
-	    player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerScript = player.GetComponent<Player>();
         controller = player.GetComponent<CharacterController2D>();
+
+
     }
 
     void FixedUpdate ()
     {
 	    
+
+        if (enemyDurability.health <= 0)
+        {
+            Die();
+        }
+
+
+
 	    //Execute code when patrol boolean is true - Set in editor
 	    if (patrol && !waiting)
 	    {
@@ -58,7 +72,7 @@ public class EnemyAI : MonoBehaviour
 		    //Or else keep moving to current waypoint
 		    else
 		    {
-			    transform.position = Vector2.MoveTowards(transform.position, /*GetWaypoint()*/ waypoints[currentWaypoint].position,
+			    transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypoint].position,
 				    patrolSpeed * Time.deltaTime);
 		    }
 	    }
@@ -71,7 +85,7 @@ public class EnemyAI : MonoBehaviour
             if (attackCountdown <= Time.time && Physics2D.OverlapCircle(transform.position, attackOptions.meleeRange, attackOptions.playerMask))
             {
                 //Call the Hit() method on the PlayerDurability script
-                player.Hit();
+                playerScript.Hit();
                 
                 //Call the Knockback(bool: right) method on the CharacterController2D script
                 controller.Knockback(transform.position.x > player.transform.position.x);
@@ -84,7 +98,7 @@ public class EnemyAI : MonoBehaviour
         } else
         //If enemy is ranged...
         {
-            Debug.DrawRay(transform.position, Vector3.Normalize(player.transform.position - transform.position) * attackOptions.range, Color.red);
+            //Debug.DrawRay(transform.position, Vector3.Normalize(player.transform.position - transform.position) * attackOptions.range, Color.red);
 
             //Get the direction vector towards the player
             Vector2 directionToPlayer = player.transform.position - transform.position;
@@ -103,7 +117,9 @@ public class EnemyAI : MonoBehaviour
 		            
 		            //Get projectile's rigidbody
 		            Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
-		            
+
+                    Debug.Log("Spawning projectile");
+
 		            //Apply force to projectile's rigidbody
 		            projRb.velocity = Vector3.Normalize(player.transform.position - transform.position) *
 		                              attackOptions.projectileSpeed;
@@ -120,7 +136,16 @@ public class EnemyAI : MonoBehaviour
 
     }
 
+    public void Hit(float amount = 1f)
+    {
+        enemyDurability.health -= amount;
 
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }
 
 	//Increments current waypoint variable, then it makes sure it doesnt go over the amount of set waypoints
 	void NextWaypoint()

@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
-    [SerializeField] private int health;
-    [SerializeField] private int armour;
+    [SerializeField] public int health;
+    [SerializeField] public int armour;
     [SerializeField] private Text _healthText;
     [SerializeField] private Text _armourText;
     [SerializeField] private float damageCooldown = 0.5f;
@@ -20,15 +20,16 @@ public class Player : MonoBehaviour {
     private Vector2 damagePoint;                                        // Position where the player was hit by projectile
     private float nextDamageTime;
     private CharacterController2D controller;
-    private GameData gm;
-    
+    private GameManager gm;
+    public bool isDead;
+
     private void Start()
     {
         
         
         controller = GetComponent<CharacterController2D>();
         
-        gm = GameData.instance;
+        gm = GameManager.instance;
         
         if (gm.hasData)
         {
@@ -92,8 +93,12 @@ public class Player : MonoBehaviour {
     }
 
     
-    
-    void RemoveArmourSlot()
+    public void AddArmourSlot()
+    {
+            armour = 6;
+    }
+
+    public void RemoveArmourSlot()
     {
         //1 hit = 3 armor, if player doesnt have full armour, a single hit cannot damage armour below 3 pieces
         if (armour > 3)
@@ -109,6 +114,7 @@ public class Player : MonoBehaviour {
     void Die()
     {
         //Load current scene
+        isDead = true;
         gm.LoadPlayer(true);
     }
 
@@ -173,6 +179,19 @@ public class Player : MonoBehaviour {
             gm.SavePlayer(this);
         }
 
+        if (other.CompareTag("Collectible"))
+        {
+            Debug.Log("Collectible");
+            gm.OnCollectiblePickup();
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("Gemstone"))
+        {
+            Debug.Log("Gemstone");
+            gm.OnGemstonePickup();
+            Destroy(other.gameObject);
+        }
 
         if (other.CompareTag("NextLevel"))
         {

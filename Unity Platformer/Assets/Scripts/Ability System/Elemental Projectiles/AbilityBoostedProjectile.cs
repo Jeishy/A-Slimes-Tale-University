@@ -16,7 +16,7 @@ public class AbilityBoostedProjectile : MonoBehaviour {
     [SerializeField] private GameObject _earthMuzzleFlash;
 
     private AbilityManager _abilityManager;
-    private PlayerDurability _playerDurability;
+    private Player _playerDurability;
     private Transform _playerTrans;
     private GameObject _boostedProjectile;
 
@@ -36,7 +36,7 @@ public class AbilityBoostedProjectile : MonoBehaviour {
 		_abilityManager = GetComponent<AbilityManager>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         _playerTrans = player.GetComponent<Transform>();
-        _playerDurability = player.GetComponent<PlayerDurability>();
+        _playerDurability = player.GetComponent<Player>();
     }
 
 	private void SpawnBoostedProjectile()

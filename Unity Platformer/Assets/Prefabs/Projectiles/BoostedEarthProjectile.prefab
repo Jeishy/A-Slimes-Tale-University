@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4064937925129142}
   - component: {fileID: 198753293440214760}
   - component: {fileID: 199892153321080666}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: EarthEmbers
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,9 +38,9 @@ GameObject:
   - component: {fileID: 4739950721254426}
   - component: {fileID: 198352872967056398}
   - component: {fileID: 199049241979251794}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: EarthDust
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 58244149094114482}
   - component: {fileID: 50009126950219322}
   - component: {fileID: 114054011086103872}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: BoostedEarthProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -75,9 +75,9 @@ GameObject:
   - component: {fileID: 4716503043992344}
   - component: {fileID: 198286901318862598}
   - component: {fileID: 199092745330381858}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Trails
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b432e32ff154c443b6e2b80c7dfedf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectileSpeed: 8
+  ProjectileSpeed: 12
   TimeTillDestroy: 3
   IsProjectileSpawned: 0
   IsBoosted: 0

@@ -99,7 +99,7 @@ public class AbilityInputHandler : MonoBehaviour {
 		}
 	}
 
-	/*private void EarthCrashCheck()
+	private void EarthCrashCheck()
 	{
         if (!_characterController.m_Grounded || !_abilityEarthCrash.IsCrashAbilityActivated) return;
 

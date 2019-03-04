@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4465101790236664}
   - component: {fileID: 198093820632001122}
   - component: {fileID: 199054619616259380}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: WindPartles
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 58828793584705836}
   - component: {fileID: 50691591439499636}
   - component: {fileID: 114376217818138618}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: WindProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -58,9 +58,9 @@ GameObject:
   - component: {fileID: 4750801476403340}
   - component: {fileID: 198907464974288052}
   - component: {fileID: 199753638790846552}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Trails
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabb84b6d4bd490439dac11d9232b82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectileSpeed: 8
+  ProjectileSpeed: 12
   TimeTillDestroy: 3
   IsProjectileSpawned: 0
   IsBoosted: 0

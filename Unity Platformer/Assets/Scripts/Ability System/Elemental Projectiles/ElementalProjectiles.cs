@@ -60,13 +60,16 @@ public class ElementalProjectiles : MonoBehaviour {
     // Does flat damage to hit enemy
     public virtual void FlatDamageToEnemy(float damage, Collider2D enemyCol)
     {
+        Debug.Log("Doing flat damage");
         // Reduce enemy's health by baseDamage
+        enemyCol.GetComponent<EnemyAI>().Hit(damage);
     }
 
     // Does DOT to hit enemy
     public virtual IEnumerator DotToEnemy(float initialDmg, float dot, int dotTime, GameObject proj, Collider2D enemyCol)
     {
         // Do intial damage to enemy with intialDmg
+        enemyCol.GetComponent<EnemyAI>().Hit(initialDmg);
         // Apply dot over time, till dotTime is elapsed
         int dotCount = 0;
         while (dotCount < dotTime)
@@ -74,6 +77,7 @@ public class ElementalProjectiles : MonoBehaviour {
             dotCount++;
             // Do damage to enemy
             Debug.Log("Damage done: " + dot);
+            enemyCol.GetComponent<EnemyAI>().Hit(dot);
             yield return new WaitForSeconds(1);
         }
     }
@@ -81,6 +85,7 @@ public class ElementalProjectiles : MonoBehaviour {
     // Does knockback damage to hit enemy
     public virtual void KnockbackDamageToEnemy(float damage, float knockbackForce, Transform projTrans, Collider2D enemyCol)
     {
+        enemyCol.GetComponent<EnemyAI>().Hit(damage);
         Vector2 enemyPos = enemyCol.transform.position;
         Vector2 projPos = projTrans.position;
         Vector2 dir = Vector3.Normalize(enemyPos - projPos);
