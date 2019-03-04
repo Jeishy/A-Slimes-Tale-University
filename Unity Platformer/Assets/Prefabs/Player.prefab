@@ -749,7 +749,7 @@ MonoBehaviour:
   element: 0
   _onCoinCollectPE: {fileID: 1659524767510216, guid: 4b6c94ec3a170854e9ebd3f7c2203ba7,
     type: 2}
-  _anim: {fileID: 0}
+  _coinAnim: {fileID: 0}
   isDead: 0
 --- !u!114 &114364773818319250
 MonoBehaviour:

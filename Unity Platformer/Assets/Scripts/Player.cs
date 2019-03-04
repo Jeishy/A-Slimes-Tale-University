@@ -65,8 +65,8 @@ public class Player : MonoBehaviour {
             armour++;
 
         //Display health and armour in UI
-        _healthText.text = "Health: " + health;
-        _armourText.text = "Armour: " + armour;
+        //_healthText.text = "Health: " + health;
+        //_armourText.text = "Armour: " + armour;
 	}
 
 
@@ -185,11 +185,9 @@ public class Player : MonoBehaviour {
         {
             Debug.Log("Collectible");
             //gm.OnCollectiblePickup();
-            Vector3 spawnPos = new Vector3(other.transform.position.x - 2f, other.transform.position.y,
-                other.transform.position.z);
-            GameObject coinCollect = Instantiate(_onCoinCollectPE, spawnPos, Quaternion.identity);
-            Destroy(coinCollect, 1f);
-            Destroy(other.gameObject);
+            StartCoroutine(WaitToCoinCollect(other.gameObject));
+            other.GetComponent<Animator>().SetTrigger("Collect");
+            Destroy(other.gameObject, 1f);
         }
 
         if (other.CompareTag("Gemstone"))
@@ -205,4 +203,14 @@ public class Player : MonoBehaviour {
             LevelChanger.instance.FadeToLevel(GetCurrentLevel() + 1);
         }
     }
+
+    private IEnumerator WaitToCoinCollect(GameObject other)
+    {
+        yield return new WaitForSeconds(0.6f);
+        Vector3 spawnPos = new Vector3(other.transform.position.x - 0.7f, other.transform.position.y,
+            other.transform.position.z);
+        GameObject coinCollect = Instantiate(_onCoinCollectPE, spawnPos, Quaternion.identity);
+        Destroy(coinCollect, 1f);
+    }
+
 }
