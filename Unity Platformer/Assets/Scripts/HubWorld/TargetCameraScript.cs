@@ -5,34 +5,40 @@ using UnityEngine;
 public class TargetCameraScript : MonoBehaviour {
 
     public Transform target;
+    [SerializeField] private GameObject[] possibleTargets;
     public float speed = 3f;
     
-    private int currentTarget = 0;
+    private int currentTarget = 3;
     private int previousTarget;
     private int nextTarget;
     //private int previousTarget;
     Quaternion newRot;
     Vector3 relPos;
-	
-	
-	// Update is called once per frame
-	void Update ()
+
+
+    private void Start()
+    {
+        possibleTargets = GameObject.FindGameObjectsWithTag("Door");
+        target = possibleTargets[currentTarget].transform;
+    }
+
+    // Update is called once per frame
+    void Update ()
     {       
-            GetNewTarget();
-        if (target == true)
-        {
-            relPos = target.position - transform.position;
-            newRot = Quaternion.LookRotation(relPos);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, newRot, speed);
-        }    
+            
+        GetNewTarget();
+        
+        relPos = target.position - transform.position;
+        newRot = Quaternion.LookRotation(relPos);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, newRot, speed);
+            
     }
 
     void GetNewTarget()
     {
-        GameObject[] possibleTargets;
-        possibleTargets = GameObject.FindGameObjectsWithTag("Door");
-        Debug.Log(possibleTargets[currentTarget]);
-
+        
+        
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (currentTarget < possibleTargets.Length)
@@ -45,8 +51,9 @@ public class TargetCameraScript : MonoBehaviour {
                 nextTarget = currentTarget;
                 
             }
-            
+            target = possibleTargets[nextTarget].transform;
         }
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (currentTarget > 0)
@@ -56,11 +63,12 @@ public class TargetCameraScript : MonoBehaviour {
                 nextTarget = currentTarget;
 
             }
-        }
-        
             target = possibleTargets[nextTarget].transform;
+        }
 
         
+
+
     }
 
 }

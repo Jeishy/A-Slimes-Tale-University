@@ -239,6 +239,45 @@ ModelImporter:
     4300072: pPlane52
     4300074: pPlane6
     4300076: pPlane9
+    6400000: pCube1
+    6400002: pCube2
+    6400004: pCube3
+    6400006: pCube4
+    6400008: pCube5
+    6400010: pCube6
+    6400012: pCube7
+    6400014: pCube9
+    6400016: pPlane10
+    6400018: pPlane11
+    6400020: pPlane12
+    6400022: pPlane13
+    6400024: pPlane14
+    6400026: pPlane15
+    6400028: pPlane16
+    6400030: pPlane17
+    6400032: pPlane18
+    6400034: pPlane19
+    6400036: pPlane21
+    6400038: pPlane22
+    6400040: pPlane23
+    6400042: pPlane24
+    6400044: pPlane25
+    6400046: pPlane30
+    6400048: pPlane32_pPlane39
+    6400050: pPlane34_pPlane32
+    6400052: pPlane38
+    6400054: pPlane41_pPlane36
+    6400056: pPlane43
+    6400058: pPlane44
+    6400060: pPlane45
+    6400062: pPlane46
+    6400064: pPlane47
+    6400066: pPlane48
+    6400068: pPlane49
+    6400070: pPlane5
+    6400072: pPlane52
+    6400074: pPlane6
+    6400076: pPlane9
   externalObjects: {}
   materials:
     importMaterials: 1
