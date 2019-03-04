@@ -27,12 +27,21 @@ public class WaterSinkTrigger : MonoBehaviour
         // If water is entered, reduce buoyancy density
         if (col.CompareTag("Player") && _abilityManager.CurrentPlayerElementalState == ElementalStates.Earth && !_isWaterEnter)
         {
-            _buoyancyEffector.density = _newBuoyancyDensity;
             _isWaterEnter = true;
+            _buoyancyEffector.density = _newBuoyancyDensity;
         }
         else if (col.CompareTag("Player") && _abilityManager.CurrentPlayerElementalState != ElementalStates.Earth)
         {
             _buoyancyEffector.density = _originalBuoyancyDensity;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            _buoyancyEffector.density = _originalBuoyancyDensity;
+            _isWaterEnter = false;
         }
     }
 }
