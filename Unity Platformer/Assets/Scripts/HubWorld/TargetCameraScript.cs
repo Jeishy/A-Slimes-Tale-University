@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TargetCameraScript : MonoBehaviour {
 
-    public Transform target;
-    [SerializeField] private GameObject[] possibleTargets;
-    public float speed = 3f;
+    public Transform target; 
+    [SerializeField] private GameObject[] possibleTargets = new GameObject[7];
+    public float speed = 1.5f;
     
-    private int currentTarget = 3;
+    private int currentTarget = 0;
     private int previousTarget;
     private int nextTarget;
     //private int previousTarget;
@@ -18,7 +18,15 @@ public class TargetCameraScript : MonoBehaviour {
 
     private void Start()
     {
-        possibleTargets = GameObject.FindGameObjectsWithTag("Door");
+        //possibleTargets = GameObject.FindGameObjectsWithTag("Door");
+        possibleTargets[0] = GameObject.Find("DungeonCentre");
+        possibleTargets[1] = GameObject.Find("WindCentre");
+        possibleTargets[2] = GameObject.Find("WaterCentre");
+        possibleTargets[3] = GameObject.Find("FireCentre");
+        possibleTargets[4] = GameObject.Find("EarthCentre");
+        possibleTargets[5] = GameObject.Find("Boss Door");
+        possibleTargets[6] = GameObject.Find("Shop");
+
         target = possibleTargets[currentTarget].transform;
     }
 
@@ -31,6 +39,7 @@ public class TargetCameraScript : MonoBehaviour {
         relPos = target.position - transform.position;
         newRot = Quaternion.LookRotation(relPos);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, newRot, speed);
+         Debug.Log(possibleTargets[nextTarget]);
             
     }
 
@@ -64,6 +73,7 @@ public class TargetCameraScript : MonoBehaviour {
 
             }
             target = possibleTargets[nextTarget].transform;
+           
         }
 
         
