@@ -13,11 +13,11 @@ public class PlayerDurability : MonoBehaviour {
 
     [SerializeField] Text _healthText;
     [SerializeField] Text _armourText;
-
     // Use this for initialization
-    void Start () {
-	   
-	}
+    void Start ()
+    {
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -38,12 +38,11 @@ public class PlayerDurability : MonoBehaviour {
         //Display health and armour in UI
         _healthText.text = "Health: " + health;
         _armourText.text = "Armour: " + armour;
-	}
+    }
 
 
     void Hit()
     {
-
         //Check if player has armour
         if (armour > 0)
         {
