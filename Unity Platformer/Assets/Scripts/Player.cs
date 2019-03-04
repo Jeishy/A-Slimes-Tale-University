@@ -14,6 +14,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private Text _armourText;
     [SerializeField] private float damageCooldown = 0.5f;
     [SerializeField] private Element element = Element.None;
+    [Space]
+    [SerializeField] private GameObject _onCoinCollectPE;
     
 
 
@@ -21,7 +23,7 @@ public class Player : MonoBehaviour {
     private float nextDamageTime;
     private CharacterController2D controller;
     private GameManager gm;
-    public bool isDead;
+    [HideInInspector] public bool isDead;
 
     private void Start()
     {
@@ -182,7 +184,11 @@ public class Player : MonoBehaviour {
         if (other.CompareTag("Collectible"))
         {
             Debug.Log("Collectible");
-            gm.OnCollectiblePickup();
+            //gm.OnCollectiblePickup();
+            Vector3 spawnPos = new Vector3(other.transform.position.x - 2f, other.transform.position.y,
+                other.transform.position.z);
+            GameObject coinCollect = Instantiate(_onCoinCollectPE, spawnPos, Quaternion.identity);
+            Destroy(coinCollect, 1f);
             Destroy(other.gameObject);
         }
 
@@ -198,6 +204,5 @@ public class Player : MonoBehaviour {
             Debug.Log("Level complete!!");
             LevelChanger.instance.FadeToLevel(GetCurrentLevel() + 1);
         }
-
     }
 }
