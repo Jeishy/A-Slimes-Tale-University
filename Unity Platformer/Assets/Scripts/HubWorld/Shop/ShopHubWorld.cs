@@ -20,18 +20,32 @@ public class ShopHubWorld : MonoBehaviour
     public GameObject Item06Text;
     public GameObject ItemCompletion;
     public GameObject CompleteText;
-    
 
     
+  
+
+
 
     private void Awake()
     {
 
         ShopRef.GetComponent<GlobalShop>().ShopHub = true; //Activates the shop
-
+        
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void Update()
+    {
+        Transform theShop = GameObject.Find("Shop").transform;
+        Transform lookingAtShop = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TargetCameraScript>().target;
+        if (lookingAtShop == theShop)
+        {
+            Debug.Log("Activate the Shop");
+            ShopActivator();
+        }
+        else { ShopInventory.SetActive(false); }
+    }
+
+    /*private void OnTriggerEnter2D(Collider2D col)
     {        
         Debug.Log("Collision Detected");
         ShopInventory.SetActive(true); //Activates the shop panel UI
@@ -43,14 +57,28 @@ public class ShopHubWorld : MonoBehaviour
         Item05Text.GetComponent<Text>().text = "" + GlobalShop.Item05;
         Item06Text.GetComponent<Text>().text = "" + GlobalShop.Item06;
 
-        /* Previously designed so that you could have multiple shops in different parts of the level and it would have different items
-         *  stripped back and modified for just a single hub world shop */
+        // Previously designed so that you could have multiple shops in different parts of the level and it would have different items
+        //  stripped back and modified for just a single hub world shop 
+    }*/
+
+
+    private void ShopActivator() //Activated if the Camera is currently targetting the shop
+    {
+        //Debug.Log("Collision Detected");
+        ShopInventory.SetActive(true); //Activates the shop panel UI
+        Debug.Log("Shop Panel is now active");
+        Item01Text.GetComponent<Text>().text = "" + GlobalShop.Item01;
+        Item02Text.GetComponent<Text>().text = "" + GlobalShop.Item02;
+        Item03Text.GetComponent<Text>().text = "" + GlobalShop.Item03;
+        Item04Text.GetComponent<Text>().text = "" + GlobalShop.Item04;
+        Item05Text.GetComponent<Text>().text = "" + GlobalShop.Item05;
+        Item06Text.GetComponent<Text>().text = "" + GlobalShop.Item06;
     }
     
-   private void OnTriggerExit2D(Collider2D other)
+   /*private void OnTriggerExit2D(Collider2D other)
 {
         ShopInventory.SetActive(false);
-}
+}*/
     
     //Not currently very effecient way of writing if they are sure they want to buy the item they have picked.
 
