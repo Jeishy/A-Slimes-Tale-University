@@ -206,7 +206,7 @@ public class Player : MonoBehaviour {
 
     private IEnumerator WaitToCoinCollect(GameObject other)
     {
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.3f);
         Vector3 spawnPos = new Vector3(other.transform.position.x - 0.7f, other.transform.position.y,
             other.transform.position.z);
         GameObject coinCollect = Instantiate(_onCoinCollectPE, spawnPos, Quaternion.identity);

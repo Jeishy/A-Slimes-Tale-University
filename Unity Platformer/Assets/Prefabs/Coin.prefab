@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4575675598855700}
   - component: {fileID: 58098287378959102}
   - component: {fileID: 95897132924760430}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Coin (Untextured)
   m_TagString: Collectible
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4479886622879348}
   - component: {fileID: 33008803594268694}
   - component: {fileID: 23402986781460990}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: pSphere18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4250693959713086}
   - component: {fileID: 198999792694375812}
   - component: {fileID: 199546715946171602}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shimmer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4907753715524902}
   - component: {fileID: 33567334073267036}
   - component: {fileID: 23109006560005186}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: pSphere19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4579765331812284}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Coin
   m_TagString: Collectible
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 4231893471265786}
   - component: {fileID: 33523899468314376}
   - component: {fileID: 23497400068536364}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: pCylinder3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 4204130981156812}
   - component: {fileID: 33099449789294428}
   - component: {fileID: 23512629359993194}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: pSphere12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4986381558286818}
   - component: {fileID: 33889954159252546}
   - component: {fileID: 23162737045664566}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: pSphere17
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EarthPickup : MonoBehaviour {
+public class EarthPickup : MonoBehaviour
+{
+
+    [SerializeField] private GameObject _onEarthCollectPE;
 
 	private AbilityManager _abilityManager;
-        private Player player;
+    private Player _player;
+    private Animator _pickupAnim;
+
 	void Start () {
 		_abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _pickupAnim = GetComponent<Animator>();
     }
 	
 	// If wind pickup interacts with player,
@@ -17,10 +23,19 @@ public class EarthPickup : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D col)
 	{
 		if (col.CompareTag("Player"))
-		{
-            player.AddArmourSlot();
+        {
+            _pickupAnim.SetTrigger("Earth");
+            StartCoroutine(WaitToCollect());
+            _player.AddArmourSlot();
             _abilityManager.EarthState();
-			Destroy(gameObject);
+			Destroy(gameObject, 1f);
 		}
 	}
+
+    private IEnumerator WaitToCollect( )
+    {
+        yield return new WaitForSeconds(0.3f);
+        GameObject onEarthCollect = Instantiate(_onEarthCollectPE, transform.position, Quaternion.identity);
+        Destroy(onEarthCollect, 1f);
+    }
 }

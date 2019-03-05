@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class WindPickup : MonoBehaviour {
 
-	private AbilityManager _abilityManager;
-    private Player player;
+    [SerializeField] private GameObject _onWindCollectPE;
+
+    private AbilityManager _abilityManager;
+    private Player _player;
+    private Animator _pickupAnim;
 
     void Start () {
 		_abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _pickupAnim = GetComponent<Animator>();
     }
 
     // If wind pickup interacts with player,
@@ -20,9 +23,18 @@ public class WindPickup : MonoBehaviour {
 	{
 		if (col.CompareTag("Player"))
 		{
-            player.AddArmourSlot();
+            _pickupAnim.SetTrigger("Wind");
+            StartCoroutine(WaitToCollect());
+            _player.AddArmourSlot();
             _abilityManager.WindState();
-			Destroy(gameObject);
+			Destroy(gameObject, 1f);
 		}
 	}
+
+    private IEnumerator WaitToCollect()
+    {
+        yield return new WaitForSeconds(0.3f);
+        GameObject onWindCollect = Instantiate(_onWindCollectPE, transform.position, Quaternion.identity);
+        Destroy(onWindCollect, 1f);
+    }
 }
