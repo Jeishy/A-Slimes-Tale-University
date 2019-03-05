@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 23383488584777802}
   - component: {fileID: 114793161289662630}
   - component: {fileID: 61524792685567936}
+  - component: {fileID: 95535530257478452}
   m_Layer: 0
   m_Name: WindPickup
   m_TagString: Untagged
@@ -83,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1923339061133358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.32, y: 1, z: 0}
+  m_LocalPosition: {x: -6.02, y: 0.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4171869370051780}
@@ -171,6 +172,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &95535530257478452
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923339061133358}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6db8f0a922ac44d4f9e3707686e969b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!108 &108746999284183820
 Light:
   m_ObjectHideFlags: 1
@@ -219,6 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4493f7864610b68448c9ae15b2c014b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onWindCollectPE: {fileID: 1245812749890516, guid: 1cedac085ec66a54393f811bb33c6df6,
+    type: 2}
 --- !u!198 &198307036781692566
 ParticleSystem:
   m_ObjectHideFlags: 1
