@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PS4;
 
 // The 5 different states the player can be in
 // numbers assigned to states can be used for 
@@ -46,8 +47,16 @@ public class AbilityManager : MonoBehaviour {
 		CurrentPlayerElementalState = ElementalStates.None;
         InitialGravityScale = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().gravityScale;
         playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+#if UNITY_EDITOR
         IsAimToShoot = true;
-	}
+#elif UNITY_STANDALONE_WIN
+        IsAimToShoot = true;
+#elif UNITY_PS4
+        IsAimToShoot = false;
+        PS4Input.PadSetLightBar(0, 255, 0, 0);
+        Debug.Log("PS4");
+#endif
+    }
 
 	// Method for running methods subscribed to OnPlayerSwitchAbility event
 	// Currently used for debugging purposes only
@@ -84,7 +93,8 @@ public class AbilityManager : MonoBehaviour {
 	{
 		if (OnWindState != null)
 		{
-			OnWindState();
+            PS4Input.PadSetLightBar(0, 255, 255, 255);
+            OnWindState();
 		}
 	}
 
@@ -92,9 +102,10 @@ public class AbilityManager : MonoBehaviour {
 	// All fire state methods are run via this function
 	public void FireState()
 	{
-		if (OnFireState != null)
+        if (OnFireState != null)
 		{
-			OnFireState();
+            PS4Input.PadSetLightBar(0, 255, 220, 0);
+            OnFireState();
 		}
 	}
 
@@ -102,9 +113,10 @@ public class AbilityManager : MonoBehaviour {
 	// All water state methods are run via this function
 	public void WaterState()
 	{
-		if (OnWaterState != null)
+        if (OnWaterState != null)
 		{
-			OnWaterState();
+            PS4Input.PadSetLightBar(0, 50, 50, 255);
+            OnWaterState();
 		}
 	}
 
@@ -112,9 +124,10 @@ public class AbilityManager : MonoBehaviour {
 	// All earth state methods are run via this function
 	public void EarthState()
 	{
-		if (OnEarthState != null)
+        if (OnEarthState != null)
 		{
-			OnEarthState();
+            PS4Input.PadSetLightBar(0, 0, 255, 0);
+            OnEarthState();
 		}
 	}
 

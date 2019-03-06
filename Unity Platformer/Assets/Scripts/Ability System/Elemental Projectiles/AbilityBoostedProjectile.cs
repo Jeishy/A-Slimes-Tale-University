@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PS4;
 
 public class AbilityBoostedProjectile : MonoBehaviour {
 
@@ -94,8 +95,13 @@ public class AbilityBoostedProjectile : MonoBehaviour {
 			// Update UI to screen
 			// Set players current state to none
 			if (_abilityManager.CurrentPlayerElementalState != ElementalStates.None)
-				_abilityManager.CurrentPlayerElementalState = ElementalStates.None;
-		}
+            {
+#if UNITY_PS4
+                PS4Input.PadSetLightBar(0, 255, 0, 0);
+#endif
+                _abilityManager.CurrentPlayerElementalState = ElementalStates.None;
+            }
+        }
 	}
 
 	private static void SetupBoostedProjectile(GameObject projectile)

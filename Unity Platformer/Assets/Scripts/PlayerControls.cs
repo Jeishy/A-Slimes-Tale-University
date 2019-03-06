@@ -36,7 +36,7 @@ public class PlayerControls : MonoBehaviour
         {
 
             //Gets button presses for sideways movement
-            horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+            horizontalMove = Input.GetAxisRaw("LeftStickHorizontal") * speed;
             if (!controller.m_Grounded)
                 slimeTrail.Stop();
             else

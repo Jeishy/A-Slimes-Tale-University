@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PS4;
 
 public class AbilityProjectile : MonoBehaviour {
 
@@ -89,7 +90,12 @@ public class AbilityProjectile : MonoBehaviour {
             // Check if players state isn't already none
             Debug.Log("Used up all armour points! Elemental state set to none");
             if (_abilityManager.CurrentPlayerElementalState != ElementalStates.None)
+            {
+#if UNITY_PS4
+                PS4Input.PadSetLightBar(0, 255, 0, 0);
+#endif
                 _abilityManager.CurrentPlayerElementalState = ElementalStates.None;
+            }
         }         
     }
 }

@@ -42,16 +42,14 @@ public class ElementalProjectiles : MonoBehaviour {
     }
 
     // Note, elemental projectile prefabs have rigidbodies on them
-    public virtual Vector2 FireProjectileForward(float projectileSpeed, Transform playerTrans)
+    public virtual Vector2 JoystickFiringForce(float projectileSpeed, Transform playerTrans, Vector2 joystickDir)
     {
-        // Get transform's forward direction
-        Vector2 forwardDirection = playerTrans.forward;
-        // Change velocity of projectile to forward direction vector * specified speed (magnitude)
-        Vector2 projForce = forwardDirection * projectileSpeed;
+        // Set force to be the direction the right joystick is held in * the speed of the projectile
+        Vector2 projForce = joystickDir * projectileSpeed;
         return projForce;
     }
- 
-	public virtual IEnumerator GravityDropOff(Rigidbody2D proj)
+
+    public virtual IEnumerator GravityDropOff(Rigidbody2D proj)
     {
         yield return new WaitForSeconds(_dropOffTime);
         proj.gravityScale = 3;

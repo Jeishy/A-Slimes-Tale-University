@@ -1,13 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.PS4;
 
 public class AbilityInputHandler : MonoBehaviour {
 
+    [HideInInspector] public Vector2 RightStickAxis;
+
 	[SerializeField] private LayerMask _enemyLayerMask;
 	[SerializeField] private float _boostedProjectileMaxTime;	// The longest time mouse button 0 must be held to spawn boosted projectile
+    [SerializeField] [Range(0.01f, 0.5f)] private float _rightStickDeadzone;
+    public Text _rightHorizontalAxis;
+    public Text _rightVerticalAxis;
 
-	private AbilityManager _abilityManager;
+
+    private AbilityManager _abilityManager;
 	private AbilityProjectile _abilityProjectile;
 	private AbilityEarthCrash _abilityEarthCrash;
 	// The projectile time, used to determine cooldown
@@ -19,9 +27,10 @@ public class AbilityInputHandler : MonoBehaviour {
 	private bool _isMouseZeroPressed; 
 	private float _mousePressedStartTime;
 	private float _mousePressedEndTime;
-
-	// Use this for initialization
-	private void Start () {
+    private float ps4Horizontal;
+    private float ps4Vertical;
+    // Use this for initialization
+    private void Start () {
 		_abilityManager = GetComponent<AbilityManager>();
 		_abilityProjectile = GetComponent<AbilityProjectile>();
 		_projFireTime = 0f;	// Set fire time to zero at beginning of level, Note: This must be set to 0 when each level is left/complete
@@ -43,7 +52,12 @@ public class AbilityInputHandler : MonoBehaviour {
 
 	private void InputHandler()
 	{
-		// Toggles aiming mode from aimed to forward
+        // Read input from dualshock controller
+        ps4Horizontal = Input.GetAxis("RightStickHorizontal");
+        ps4Vertical = Input.GetAxis("RightStickVertical");
+        _rightHorizontalAxis.text = ps4Horizontal.ToString();
+        _rightVerticalAxis.text = ps4Vertical.ToString();
+        // Toggles aiming mode from aimed to forward
         // Note: Ensure button mapping is set for this action
         // instead of Input.GetKeyDown
         /*if (Input.GetKeyDown(KeyCode.E))
@@ -51,9 +65,9 @@ public class AbilityInputHandler : MonoBehaviour {
 			ShootToggle();
         }*/
 
-		// Toggles between ability states
-		// Used for debugging
-		if (Input.GetKeyDown(KeyCode.Q))
+        // Toggles between ability states
+        // Used for debugging
+        if (Input.GetKeyDown(KeyCode.Q))
 		{
 			_abilityManager.PlayerSwitchAbility();
 		}
@@ -62,7 +76,7 @@ public class AbilityInputHandler : MonoBehaviour {
         // if elapsed time is greater than fire time (Used for cooldown)
         if (Input.GetButtonDown("Fire1"))
         {
-			if (!_isMouseZeroPressed)
+            if (!_isMouseZeroPressed)
 			{
 				_mousePressedStartTime = Time.time;
 				_isMouseZeroPressed = true;
@@ -70,7 +84,11 @@ public class AbilityInputHandler : MonoBehaviour {
 		}
 		else if (Input.GetButtonUp("Fire1"))
 		{
-			_mousePressedEndTime = Time.time;
+            // Check if aimtoshoot is false, if so then set right stick axis variable
+            if (!_abilityManager.IsAimToShoot)
+                RightStickAxis = new Vector2(ps4Horizontal, ps4Vertical);
+
+            _mousePressedEndTime = Time.time;
 			float mousePressedDeltaTime = _mousePressedEndTime - _mousePressedStartTime;
             Debug.Log(mousePressedDeltaTime);
 			_isMouseZeroPressed = false;
@@ -81,16 +99,31 @@ public class AbilityInputHandler : MonoBehaviour {
 				// ensures projectile only fired when new fire time is elapsed
 				_projFireRate = _abilityProjectile.fireRate;
 				_projFireTime = _projFireRate + Time.time;
-				_abilityManager.ProjectileFire();
-			}
-			else if (mousePressedDeltaTime > _boostedProjectileMaxTime)
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+                _abilityManager.ProjectileFire();
+#elif UNITY_PS4
+                if (RightStickAxis.x > _rightStickDeadzone || RightStickAxis.x < -_rightStickDeadzone || RightStickAxis.y > _rightStickDeadzone || RightStickAxis.y < -_rightStickDeadzone)
+                {
+                    Debug.Log("Ps4 firing");
+                    _abilityManager.ProjectileFire();
+                }
+
+#endif
+            }
+            else if (mousePressedDeltaTime > _boostedProjectileMaxTime)
 			{
 				// Spawn boosted projectile if mouse 0 is pressed long enough
 				_projFireRate = _abilityProjectile.fireRate;
 				_projFireTime = _projFireRate + Time.time;
-				_abilityManager.BoostedProjectileFire();
-			}
-		}
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+                _abilityManager.BoostedProjectileFire();
+#elif UNITY_PS4
+                if (RightStickAxis.x > _rightStickDeadzone || RightStickAxis.x < -_rightStickDeadzone || RightStickAxis.y > _rightStickDeadzone || RightStickAxis.y < -_rightStickDeadzone)
+                    _abilityManager.BoostedProjectileFire();
+#endif
+
+            }
+        }
 
 		// Left control activates the earth element ability crash
 		if (Input.GetKeyDown(KeyCode.LeftControl) && _abilityManager.CurrentPlayerElementalState == ElementalStates.Earth && !_characterController.m_Grounded)

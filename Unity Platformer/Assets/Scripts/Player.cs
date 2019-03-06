@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.PS4;
 
 public class Player : MonoBehaviour {
 
@@ -86,6 +87,9 @@ public class Player : MonoBehaviour {
             }
             else
             {
+#if UNITY_PS4
+                PS4Input.PadSetLightBar(0, 255, 0, 0);
+#endif
                 //Oterwise, decrement health by 1
                 health -= damage;
             }
