@@ -14,9 +14,11 @@ public class Player : MonoBehaviour {
     [SerializeField] private Text _armourText;
     [SerializeField] private float damageCooldown = 0.5f;
     [SerializeField] private Element element = Element.None;
+    [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField] private Color _damagedColour;
     [Space]
     [SerializeField] private GameObject _onCoinCollectPE;
-    
+
 
 
     private Vector2 damagePoint;                                        // Position where the player was hit by projectile
@@ -43,8 +45,8 @@ public class Player : MonoBehaviour {
         
     }
 
-	void Update () {
-
+	void Update ()
+    {
 
         //Call Die() function when player is at or below 0 health
         if (health <= 0)
@@ -69,9 +71,11 @@ public class Player : MonoBehaviour {
         //_armourText.text = "Armour: " + armour;
 	}
 
-
     public void Hit(int damage = 1)
     {
+        // Show damage effect on player
+        StartCoroutine(ShowDamageMaterial());
+
         if (nextDamageTime <= Time.time)
         {
             //Check if player has armour
@@ -94,7 +98,15 @@ public class Player : MonoBehaviour {
 
     }
 
-    
+    private IEnumerator ShowDamageMaterial()
+    {
+        Debug.Log("Changing material");
+        Color originalColour = _meshRenderer.material.color;
+        _meshRenderer.material.color = _damagedColour;
+        yield return new WaitForSeconds(0.2f);
+        _meshRenderer.material.color = originalColour;
+    }
+
     public void AddArmourSlot()
     {
             armour = 6;
