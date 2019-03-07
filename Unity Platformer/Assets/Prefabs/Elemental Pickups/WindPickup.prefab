@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4995901645800340}
   - component: {fileID: 108746999284183820}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114793161289662630}
   - component: {fileID: 61524792685567936}
   - component: {fileID: 95535530257478452}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: WindPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 4171869370051780}
   - component: {fileID: 198307036781692566}
   - component: {fileID: 199478539585970958}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: WindPartles
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1923339061133358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.02, y: 0.93, z: 0}
+  m_LocalPosition: {x: 1.74, y: 40.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4171869370051780}

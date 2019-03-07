@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4291290759733062}
   - component: {fileID: 108001767074521630}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4403986295227800}
   - component: {fileID: 198730113216724694}
   - component: {fileID: 199170701684099754}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: WaterSpray
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 114873634337920848}
   - component: {fileID: 61604269804830308}
   - component: {fileID: 95904319287383206}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: WaterPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1596504059048298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.024539, y: 0.82, z: 0}
+  m_LocalPosition: {x: 5.13, y: 41.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4403986295227800}

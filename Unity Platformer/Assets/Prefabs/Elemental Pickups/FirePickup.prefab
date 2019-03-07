@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114341320810752630}
   - component: {fileID: 61412431922953004}
   - component: {fileID: 95453116612125380}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: FirePickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4654961794500866}
   - component: {fileID: 198540662170907880}
   - component: {fileID: 199280191097903216}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Embers
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4560588158985458}
   - component: {fileID: 108108552996966716}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621276019277252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 1.51, z: 0}
+  m_LocalPosition: {x: 7.02, y: 41.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4654961794500866}
