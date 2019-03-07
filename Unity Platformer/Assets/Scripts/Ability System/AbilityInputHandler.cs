@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_PS4
 using UnityEngine.PS4;
+#endif
 
 public class AbilityInputHandler : MonoBehaviour {
 
@@ -52,11 +54,13 @@ public class AbilityInputHandler : MonoBehaviour {
 
 	private void InputHandler()
 	{
+#if UNITY_PS4
         // Read input from dualshock controller
         ps4Horizontal = Input.GetAxis("RightStickHorizontal");
         ps4Vertical = Input.GetAxis("RightStickVertical");
         _rightHorizontalAxis.text = ps4Horizontal.ToString();
         _rightVerticalAxis.text = ps4Vertical.ToString();
+#endif
         // Toggles aiming mode from aimed to forward
         // Note: Ensure button mapping is set for this action
         // instead of Input.GetKeyDown

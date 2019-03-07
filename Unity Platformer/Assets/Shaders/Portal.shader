@@ -107,7 +107,7 @@
 			fixed4 main = c * vor;
 			main *= _Color;
 			o.Emission = main.rgb;
-			o.Alpha = main.a;
+			o.Alpha = main.a;											
 		}
 		ENDCG
 	}

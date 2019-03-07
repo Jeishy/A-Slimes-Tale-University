@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_PS4
 using UnityEngine.PS4;
+#endif
 
 // The 5 different states the player can be in
 // numbers assigned to states can be used for 
@@ -93,7 +95,9 @@ public class AbilityManager : MonoBehaviour {
 	{
 		if (OnWindState != null)
 		{
+#if UNITY_PS4
             PS4Input.PadSetLightBar(0, 255, 255, 255);
+#endif
             OnWindState();
 		}
 	}
@@ -104,7 +108,9 @@ public class AbilityManager : MonoBehaviour {
 	{
         if (OnFireState != null)
 		{
+#if UNITY_PS4
             PS4Input.PadSetLightBar(0, 255, 220, 0);
+#endif
             OnFireState();
 		}
 	}
@@ -115,7 +121,9 @@ public class AbilityManager : MonoBehaviour {
 	{
         if (OnWaterState != null)
 		{
+#if UNITY_PS4			
             PS4Input.PadSetLightBar(0, 50, 50, 255);
+#endif			
             OnWaterState();
 		}
 	}
@@ -126,7 +134,9 @@ public class AbilityManager : MonoBehaviour {
 	{
         if (OnEarthState != null)
 		{
+#if UNITY_PS4			
             PS4Input.PadSetLightBar(0, 0, 255, 0);
+#endif			
             OnEarthState();
 		}
 	}

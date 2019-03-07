@@ -5,7 +5,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+#if UNITY_PS4
 using UnityEngine.PS4;
+#endif
 
 public class Player : MonoBehaviour {
 
