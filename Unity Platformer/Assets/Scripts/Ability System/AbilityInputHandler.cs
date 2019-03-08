@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 #if UNITY_PS4
@@ -31,6 +32,7 @@ public class AbilityInputHandler : MonoBehaviour {
 	private float _mousePressedEndTime;
     private float ps4Horizontal;
     private float ps4Vertical;
+
     // Use this for initialization
     private void Start () {
 		_abilityManager = GetComponent<AbilityManager>();
@@ -39,6 +41,7 @@ public class AbilityInputHandler : MonoBehaviour {
 		_characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
 		_abilityEarthCrash = GetComponent<AbilityEarthCrash>();
         _isMouseZeroPressed = false;
+
     }
 	
 	// Update is called once per frame
@@ -58,16 +61,7 @@ public class AbilityInputHandler : MonoBehaviour {
         // Read input from dualshock controller
         ps4Horizontal = Input.GetAxis("RightStickHorizontal");
         ps4Vertical = Input.GetAxis("RightStickVertical");
-        _rightHorizontalAxis.text = ps4Horizontal.ToString();
-        _rightVerticalAxis.text = ps4Vertical.ToString();
 #endif
-        // Toggles aiming mode from aimed to forward
-        // Note: Ensure button mapping is set for this action
-        // instead of Input.GetKeyDown
-        /*if (Input.GetKeyDown(KeyCode.E))
-        {
-			ShootToggle();
-        }*/
 
         // Toggles between ability states
         // Used for debugging
@@ -88,6 +82,7 @@ public class AbilityInputHandler : MonoBehaviour {
 		}
 		else if (Input.GetButtonUp("Fire1"))
 		{
+            Debug.Log("PS4 Firing, L1 pressed.");
             // Check if aimtoshoot is false, if so then set right stick axis variable
             if (!_abilityManager.IsAimToShoot)
                 RightStickAxis = new Vector2(ps4Horizontal, ps4Vertical);
@@ -108,7 +103,6 @@ public class AbilityInputHandler : MonoBehaviour {
 #elif UNITY_PS4
                 if (RightStickAxis.x > _rightStickDeadzone || RightStickAxis.x < -_rightStickDeadzone || RightStickAxis.y > _rightStickDeadzone || RightStickAxis.y < -_rightStickDeadzone)
                 {
-                    Debug.Log("Ps4 firing");
                     _abilityManager.ProjectileFire();
                 }
 
@@ -123,7 +117,9 @@ public class AbilityInputHandler : MonoBehaviour {
                 _abilityManager.BoostedProjectileFire();
 #elif UNITY_PS4
                 if (RightStickAxis.x > _rightStickDeadzone || RightStickAxis.x < -_rightStickDeadzone || RightStickAxis.y > _rightStickDeadzone || RightStickAxis.y < -_rightStickDeadzone)
+                {
                     _abilityManager.BoostedProjectileFire();
+                }
 #endif
 
             }

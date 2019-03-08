@@ -49,9 +49,7 @@ public class AbilityManager : MonoBehaviour {
 		CurrentPlayerElementalState = ElementalStates.None;
         InitialGravityScale = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().gravityScale;
         playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-#if UNITY_EDITOR
-        IsAimToShoot = true;
-#elif UNITY_STANDALONE_WIN
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
         IsAimToShoot = true;
 #elif UNITY_PS4
         IsAimToShoot = false;
@@ -60,9 +58,23 @@ public class AbilityManager : MonoBehaviour {
 #endif
     }
 
-	// Method for running methods subscribed to OnPlayerSwitchAbility event
-	// Currently used for debugging purposes only
-	public void PlayerSwitchAbility()
+
+#if UNITY_PS4
+    public IEnumerator ControllerVibration(bool isLargeVibration)
+    {
+        if (isLargeVibration)
+            PS4Input.PadSetVibration(0, 70, 0);
+        else
+            PS4Input.PadSetVibration(0, 0, 80);
+
+        yield return new WaitForSeconds(0.2f);
+        PS4Input.PadSetVibration(0, 0, 0);
+    }
+#endif
+
+    // Method for running methods subscribed to OnPlayerSwitchAbility event
+    // Currently used for debugging purposes only
+    public void PlayerSwitchAbility()
 	{
 		if (OnPlayerSwitchAbility != null)
 		{

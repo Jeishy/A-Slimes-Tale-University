@@ -49,6 +49,9 @@ public class AbilityProjectile : MonoBehaviour {
         // 0 = Fire, 1 = Water, 2 = Wind, 3 = Earth
         if (_playerDurability.armour > 0)
         {
+#if UNITY_PS4
+            StartCoroutine(_abilityManager.ControllerVibration(false));
+#endif
             _playerDurability.armour--;
             switch (state)
             {

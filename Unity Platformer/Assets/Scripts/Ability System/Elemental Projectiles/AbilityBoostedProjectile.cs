@@ -48,8 +48,11 @@ public class AbilityBoostedProjectile : MonoBehaviour {
 
 		if (_playerDurability.armour > 0)
 		{
-			// Remove armour slot if boosted projectile is fired
-			_playerDurability.RemoveArmourSlot();
+#if UNITY_PS4
+            StartCoroutine(_abilityManager.ControllerVibration(true));
+#endif
+            // Remove armour slot if boosted projectile is fired
+            _playerDurability.RemoveArmourSlot();
 
             switch (state)
             {
