@@ -13,17 +13,16 @@ public class Player : MonoBehaviour {
 
     [SerializeField] public int health;
     [SerializeField] public int armour;
-    [SerializeField] private Text _healthText;
-    [SerializeField] private Text _armourText;
     [SerializeField] private float damageCooldown = 0.5f;
     [SerializeField] private Element element = Element.None;
     [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField] private Color _damagedColour;
     [Space]
     [SerializeField] private GameObject _onCoinCollectPE;
+    [SerializeField] private Image _healthBar;
 
 
-
+    private const int MaxHealth = 3;
     private Vector2 damagePoint;                                        // Position where the player was hit by projectile
     private float nextDamageTime;
     private CharacterController2D controller;
@@ -32,8 +31,7 @@ public class Player : MonoBehaviour {
 
     private void Start()
     {
-        
-        
+
         controller = GetComponent<CharacterController2D>();
         
         gm = GameManager.instance;
@@ -50,6 +48,14 @@ public class Player : MonoBehaviour {
 
 	void Update ()
     {
+        //Display health and armour in UI
+        _healthBar.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
+        //_armourText.text = "Armour: " + armour;
+
+        for (int i = 0; i < 6; i++)
+        {
+
+        }
 
         //Call Die() function when player is at or below 0 health
         if (health <= 0)
@@ -69,9 +75,7 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.M))
             armour++;
 
-        //Display health and armour in UI
-        //_healthText.text = "Health: " + health;
-        //_armourText.text = "Armour: " + armour;
+
 	}
 
     public void Hit(int damage = 1)
