@@ -54,6 +54,15 @@ public class AbilityBoostedProjectile : MonoBehaviour {
             // Remove armour slot if boosted projectile is fired
             _playerDurability.RemoveArmourSlot();
 
+            if (_playerDurability.armour == 0 && _abilityManager.CurrentPlayerElementalState != ElementalStates.None)
+            {
+#if UNITY_PS4
+                PS4Input.PadSetLightBar(0, 255, 0, 0);
+#endif
+                Debug.Log("Calling none state");
+                _abilityManager.NoneState();
+            }
+
             switch (state)
             {
                 case ElementalStates.Fire:
@@ -104,7 +113,7 @@ public class AbilityBoostedProjectile : MonoBehaviour {
 #if UNITY_PS4
                 PS4Input.PadSetLightBar(0, 255, 0, 0);
 #endif
-                _abilityManager.CurrentPlayerElementalState = ElementalStates.None;
+                _abilityManager.NoneState();
             }
         }
 	}

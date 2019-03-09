@@ -46,7 +46,6 @@ public class PlayerControls : MonoBehaviour
             else
                 slimeTrail.Play();
 
-
             //Checks if player has pressed the jump button
             if (Input.GetButtonDown("Jump"))
             {

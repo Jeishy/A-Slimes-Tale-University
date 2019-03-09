@@ -26,6 +26,7 @@ public class AbilityManager : MonoBehaviour {
 	public event AbilityEventHandler OnFireState;
 	public event AbilityEventHandler OnWaterState;
 	public event AbilityEventHandler OnEarthState;
+    public event AbilityEventHandler OnNoneState;
 
 	public event AbilityEventHandler OnEarthCrash;
     #endregion
@@ -54,7 +55,6 @@ public class AbilityManager : MonoBehaviour {
 #elif UNITY_PS4
         IsAimToShoot = false;
         PS4Input.PadSetLightBar(0, 255, 0, 0);
-        Debug.Log("PS4");
 #endif
     }
 
@@ -162,4 +162,14 @@ public class AbilityManager : MonoBehaviour {
 			OnEarthCrash();
 		}
 	}
+
+    // Method for running methods subscribed to OnNoneState event
+    // This function is called when the players state is set to none
+    public void NoneState()
+    {
+        if (OnNoneState != null)
+        {
+            OnNoneState();
+        }
+    }
 }
