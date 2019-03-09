@@ -346,6 +346,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DEBUG: 1
   flying: 0
+  enemyDurability:
+    health: 1
+    element: 0
   attackOptions:
     melee: 0
     meleeRange: 0.5
@@ -354,9 +357,13 @@ MonoBehaviour:
     projectile: {fileID: 1179139433825628, guid: e244221de90d32b4c9b82b3530d00248,
       type: 2}
     projectileSpeed: 20
-    attackMask:
+    projectileLifespan: 3
+    playerMask:
       serializedVersion: 2
-      m_Bits: 512
+      m_Bits: 0
+    rangeAttackMask:
+      serializedVersion: 2
+      m_Bits: 0
   patrol: 1
   waypointFollowStyle: 2
   patrolSpeed: 10
