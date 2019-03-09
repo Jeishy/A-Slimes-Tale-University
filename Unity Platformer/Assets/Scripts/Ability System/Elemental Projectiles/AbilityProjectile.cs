@@ -52,16 +52,16 @@ public class AbilityProjectile : MonoBehaviour {
 #if UNITY_PS4
             StartCoroutine(_abilityManager.ControllerVibration(false));
 #endif
-                _playerDurability.armour--;
+            _playerDurability.armour--;
 
-                if (_playerDurability.armour == 0 && _abilityManager.CurrentPlayerElementalState != ElementalStates.None)
-                {
+            if (_playerDurability.armour == 0 && _abilityManager.CurrentPlayerElementalState != ElementalStates.None)
+            {
 #if UNITY_PS4
-                PS4Input.PadSetLightBar(0, 255, 0, 0);
+            PS4Input.PadSetLightBar(0, 255, 0, 0);
 #endif
-                    Debug.Log("Calling none state");
-                    _abilityManager.NoneState();
-                }
+                Debug.Log("Calling none state");
+                _abilityManager.NoneState();
+            }
 
             switch (state)
             {

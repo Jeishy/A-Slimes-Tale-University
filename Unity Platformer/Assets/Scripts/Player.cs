@@ -27,11 +27,12 @@ public class Player : MonoBehaviour {
     private float nextDamageTime;
     private CharacterController2D controller;
     private GameManager gm;
+    private AbilityManager _abilityManager;
     [HideInInspector] public bool isDead;
 
     private void Start()
     {
-
+        _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
         controller = GetComponent<CharacterController2D>();
         
         gm = GameManager.instance;
@@ -51,11 +52,6 @@ public class Player : MonoBehaviour {
         //Display health and armour in UI
         _healthBar.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
         //_armourText.text = "Armour: " + armour;
-
-        for (int i = 0; i < 6; i++)
-        {
-
-        }
 
         //Call Die() function when player is at or below 0 health
         if (health <= 0)
@@ -90,6 +86,8 @@ public class Player : MonoBehaviour {
             {
                 //If so, remove armour slot
                 RemoveArmourSlot();
+                if (armour <= 0)
+                    _abilityManager.NoneState();
             }
             else
             {
@@ -110,7 +108,6 @@ public class Player : MonoBehaviour {
 
     private IEnumerator ShowDamageMaterial()
     {
-        Debug.Log("Changing material");
         Color originalColour = _meshRenderer.material.color;
         _meshRenderer.material.color = _damagedColour;
         yield return new WaitForSeconds(0.2f);

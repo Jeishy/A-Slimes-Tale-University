@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114152213540542730}
   - component: {fileID: 114692777493824474}
   - component: {fileID: 114173882969932438}
+  - component: {fileID: 114271983188252970}
   - component: {fileID: 114301560330848006}
   - component: {fileID: 114298609340141486}
   - component: {fileID: 114145043572709000}
@@ -126,6 +127,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
+--- !u!114 &114271983188252970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027883659887526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c240b435cac08e4ba4ab0fe255f907d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _armourGUI: {fileID: 0}
+  _earthColour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114298609340141486
 MonoBehaviour:
   m_ObjectHideFlags: 1

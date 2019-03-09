@@ -31,7 +31,7 @@ public class AbilitySetNoneState : MonoBehaviour
     {
         Debug.Log("Setting state to none");
         _abilityManager.CurrentPlayerElementalState = ElementalStates.None;
-        if (_playerRb.gravityScale != 3)
-            _playerRb.gravityScale = 3;
+        if (_playerRb.gravityScale < 3f)
+            _playerRb.gravityScale = 3f;
     }
 }

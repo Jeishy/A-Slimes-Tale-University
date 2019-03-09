@@ -82,14 +82,13 @@ public class AbilityInputHandler : MonoBehaviour {
 		}
 		else if (Input.GetButtonUp("Fire1"))
 		{
-            Debug.Log("PS4 Firing, L1 pressed.");
             // Check if aimtoshoot is false, if so then set right stick axis variable
             if (!_abilityManager.IsAimToShoot)
                 RightStickAxis = new Vector2(ps4Horizontal, ps4Vertical);
 
             _mousePressedEndTime = Time.time;
 			float mousePressedDeltaTime = _mousePressedEndTime - _mousePressedStartTime;
-            Debug.Log(mousePressedDeltaTime);
+            //Debug.Log(mousePressedDeltaTime);
 			_isMouseZeroPressed = false;
 
 			if (Time.time > _projFireTime && mousePressedDeltaTime < _boostedProjectileMaxTime)
