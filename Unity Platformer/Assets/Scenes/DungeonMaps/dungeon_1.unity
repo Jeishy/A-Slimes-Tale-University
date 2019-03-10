@@ -1413,7 +1413,7 @@ Prefab:
     - target: {fileID: 2300000, guid: 33d0997c035ffa84091e403f17f39237, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2dc528265ea77da4c803fdc71a5a7d38, type: 2}
+      objectReference: {fileID: 2100000, guid: 251528f2435682b4a881894017cd85df, type: 2}
     - target: {fileID: 100002, guid: 33d0997c035ffa84091e403f17f39237, type: 3}
       propertyPath: m_TagString
       value: Wall
