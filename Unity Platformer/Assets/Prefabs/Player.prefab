@@ -128,7 +128,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1783445394387516
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
@@ -343,7 +343,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950331587363064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09, y: 0.84, z: 0}
+  m_LocalPosition: {x: -0.29, y: 41.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4475560020013268}
@@ -354,25 +354,6 @@ Transform:
   - {fileID: 4849393005362484}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4631860154840846
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1146119294000282}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.057, y: 0.044386, z: -0.0037998}
-  m_LocalScale: {x: -69.8338, y: 69.8338, z: 69.8338}
-  m_Children:
-  - {fileID: 4080417998136306}
-  - {fileID: 4920682191780796}
-  - {fileID: 4373190116309224}
-  - {fileID: 4432983128312800}
-  - {fileID: 4939924967716534}
-  - {fileID: 4914370228431528}
-  m_Father: {fileID: 4503012138185060}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4763663452435368
 Transform:
@@ -758,18 +739,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e07dc45c04018324d8d4f978b98a4299, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   health: 3
-  armour: 6
-  _healthText: {fileID: 0}
-  _armourText: {fileID: 0}
+  armour: 0
   damageCooldown: 0.5
   element: 0
   _meshRenderer: {fileID: 23697544085437378}
   _damagedColour: {r: 1, g: 0.2216981, b: 0.2216981, a: 0}
   _onCoinCollectPE: {fileID: 1659524767510216, guid: 4b6c94ec3a170854e9ebd3f7c2203ba7,
     type: 2}
+  _healthBar: {fileID: 0}
   isDead: 0
 --- !u!114 &114364773818319250
 MonoBehaviour:
@@ -780,8 +760,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 481d6d2ae76ba4b47b15ecd42846e0db, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_JumpForce: 700
   m_WallJumpVerticalForceMultiplier: 0.75
   m_HorizontalJumpForce: 600
@@ -791,7 +771,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 3383
+    m_Bits: 3379
   m_GroundCheck: {fileID: 4948325435663198}
   m_CeilingCheck: {fileID: 4475560020013268}
   m_WallCheck: {fileID: 4278450528689954}
@@ -821,8 +801,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d2e4da338bc2e642aa3f86412725d47, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   speed: 70
   normalJumpParticles: {fileID: 1405286440405556, guid: f24291d303995de45ae0bd002237d6cb,
     type: 2}
