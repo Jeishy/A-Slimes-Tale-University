@@ -39,7 +39,7 @@ public class TargetCameraScript : MonoBehaviour {
         relPos = target.position - transform.position;
         newRot = Quaternion.LookRotation(relPos);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, newRot, speed);
-         Debug.Log(possibleTargets[nextTarget]);
+        //Debug.Log(possibleTargets[nextTarget]);
             
     }
 
