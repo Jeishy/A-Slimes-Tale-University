@@ -108,10 +108,10 @@ public class Player : MonoBehaviour {
 
     private IEnumerator ShowDamageMaterial()
     {
-        Color originalColour = _meshRenderer.material.color;
-        _meshRenderer.material.color = _damagedColour;
-        yield return new WaitForSeconds(0.2f);
-        _meshRenderer.material.color = originalColour;
+        Color originalColour = _meshRenderer.material.GetColor("_EmissionColor");
+        _meshRenderer.material.SetColor("_EmissionColor", _damagedColour);
+        yield return new WaitForSeconds(0.1f);
+        _meshRenderer.material.SetColor("_EmissionColor", originalColour);
     }
 
     public void AddArmourSlot()
