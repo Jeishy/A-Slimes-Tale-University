@@ -289,12 +289,12 @@ Prefab:
         type: 2}
       propertyPath: _projectileSpawnTrans
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1187876780}
     - target: {fileID: 114764723753644786, guid: a5eb62e9129fd2148bbb8815c8a50721,
         type: 2}
       propertyPath: _projectileSpawnTrans
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1187876780}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5eb62e9129fd2148bbb8815c8a50721, type: 2}
   m_IsPrefabAsset: 0
@@ -1395,7 +1395,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 516650945}
   m_LocalRotation: {x: 0.10170061, y: -0.017361932, z: 0.0017751951, w: 0.994662}
-  m_LocalPosition: {x: -311.5861, y: -77.57, z: -15.21}
+  m_LocalPosition: {x: -312.4661, y: -13.12, z: -15.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3412,6 +3412,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1186350303}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1187876780 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4763663452435368, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
+    type: 2}
+  m_PrefabInternal: {fileID: 1967035884}
 --- !u!1 &1190444243
 GameObject:
   m_ObjectHideFlags: 0
@@ -6901,11 +6906,11 @@ Prefab:
       objectReference: {fileID: 884745873}
     - target: {fileID: 4131943811763874, guid: 0169414c3aecea042946a5256eaf29ca, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -317.19
+      value: -318.07
       objectReference: {fileID: 0}
     - target: {fileID: 4131943811763874, guid: 0169414c3aecea042946a5256eaf29ca, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -79.30266
+      value: -14.852662
       objectReference: {fileID: 0}
     - target: {fileID: 4131943811763874, guid: 0169414c3aecea042946a5256eaf29ca, type: 2}
       propertyPath: m_LocalPosition.z
@@ -6913,11 +6918,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4133758344023704, guid: 0169414c3aecea042946a5256eaf29ca, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -317.19
+      value: -318.07
       objectReference: {fileID: 0}
     - target: {fileID: 4133758344023704, guid: 0169414c3aecea042946a5256eaf29ca, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -79.30266
+      value: -14.852662
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0169414c3aecea042946a5256eaf29ca, type: 2}
@@ -6931,11 +6936,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4503012138185060, guid: 575189cb5ed4cbd4b8cc553e46a10a54, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -310.8
+      value: -311.68
       objectReference: {fileID: 0}
     - target: {fileID: 4503012138185060, guid: 575189cb5ed4cbd4b8cc553e46a10a54, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -81.1
+      value: -16.65
       objectReference: {fileID: 0}
     - target: {fileID: 4503012138185060, guid: 575189cb5ed4cbd4b8cc553e46a10a54, type: 2}
       propertyPath: m_LocalPosition.z
@@ -6961,19 +6966,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 4503012138185060, guid: 575189cb5ed4cbd4b8cc553e46a10a54, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4503012138185060, guid: 575189cb5ed4cbd4b8cc553e46a10a54, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4503012138185060, guid: 575189cb5ed4cbd4b8cc553e46a10a54, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114150655687040544, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
+    - target: {fileID: 114529983506472564, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
         type: 2}
       propertyPath: _healthBar
       value: 

@@ -18,7 +18,8 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;							// A position marking where to check for ceilings
 	[SerializeField] private Transform m_WallCheck;								// Transform of a wall check object
-	[SerializeField] private float m_wallDetectRadius = 0.1f;					// Radius of a sphere cast
+    [SerializeField] private Transform m_BehindWallCheck;
+    [SerializeField] private float m_wallDetectRadius = 0.1f;					// Radius of a sphere cast
 	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
 	[SerializeField] private Vector2 m_KnockbackForce;							// Force applied when hit by an enemy
 	[SerializeField] private float m_KnockbackLength;							// Period of time the player will not be able to move after getting knocked bakck
@@ -39,6 +40,7 @@ public class CharacterController2D : MonoBehaviour
 	private float m_KnockbackCount;
 	private bool m_KnockbackRight;		// Used to determine direction when applying knockback force
     private Vector3 m_TouchedWallPoint;
+    private float m_FlipDelay;
     
 	[Header("Events")]
 	[Space]
@@ -168,24 +170,26 @@ public class CharacterController2D : MonoBehaviour
 			{
 				// ... flip the player.
 				Flip();
-			}
-			// Otherwise if the input is moving the player left and the player is facing right...
-			else if (move < 0 && m_FacingRight)
+
+            }
+            // Otherwise if the input is moving the player left and the player is facing right...
+            else if (move < 0 && m_FacingRight)
 			{
 				// ... flip the player.
 				Flip();
-			}
-		}
+
+            }
+        }
 		
 		// Wall Sliding
 		Vector2 facingDirection = new Vector2(Input.GetAxis("Horizontal"), 0f);
 		
 		//m_wallSliding = Physics2D.Raycast(transform.position, facingDirection, m_wallDetectRadius, m_WallLayer);
-		m_wallSliding = Physics2D.OverlapCircle(m_WallCheck.position, m_wallDetectRadius, m_WallLayer);
+		m_wallSliding = Physics2D.OverlapCircle(m_WallCheck.position, m_wallDetectRadius, m_WallLayer) || Physics2D.OverlapCircle(m_BehindWallCheck.position, m_wallDetectRadius, m_WallLayer);
 
-		
-		// Limit player wall slide speed
-		if (m_wallSliding && m_Rigidbody2D.velocity.y <= -m_MaxWallSlideSpeed)
+
+        // Limit player wall slide speed
+        if (m_wallSliding && m_Rigidbody2D.velocity.y <= -m_MaxWallSlideSpeed)
 		{
 			
 			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, -m_MaxWallSlideSpeed);
@@ -194,7 +198,7 @@ public class CharacterController2D : MonoBehaviour
 
         if (m_WallNormal == Input.GetAxis("Horizontal") && m_WallNormal != 0)
         {
-            Debug.Log("Unsticking from wall");
+            //Debug.Log("Unsticking from wall");
             StickToWall(false);
         }
 
@@ -208,7 +212,7 @@ public class CharacterController2D : MonoBehaviour
 
 			// ... and player is touching the wall
 			if (m_wallSliding)
-			{
+			{   
 				// Add a vertical and horizontal force to the player if he is sliding on the wall
 				m_Rigidbody2D.AddForce(new Vector2((m_HorizontalJumpForce * m_WallNormal) , (m_JumpForce * m_WallJumpVerticalForceMultiplier)));
 				m_WallJumped = true;
@@ -217,7 +221,8 @@ public class CharacterController2D : MonoBehaviour
                 Destroy(pWallJump, 1f);
 				// Flip because character will jump off the wall in the other direction
 				Flip();
-				Debug.Log("Wall jump, Wall normal: " + m_WallNormal);
+                Debug.Log("Flipping wall jump");
+                //Debug.Log("Wall jump, Wall normal: " + m_WallNormal);
 			}
 			
 			// ... and player is not touching the wall
@@ -239,14 +244,19 @@ public class CharacterController2D : MonoBehaviour
 	
 	private void Flip()
 	{
-		// Switch the way the player is labelled as facing.
-		m_FacingRight = !m_FacingRight;
+        if (m_FlipDelay <= Time.time)
+            
+        {
+            //Debug.Log("flipping");
+            // Switch the way the player is labelled as facing.
+            m_FacingRight = !m_FacingRight;
 
-		
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
+            // Multiply the player's x local scale by -1.
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+            m_FlipDelay = 0.1f + Time.time;
+        }
 	}
  
     private void StickToWall(bool stick)
@@ -267,8 +277,6 @@ public class CharacterController2D : MonoBehaviour
 			
 			
 			m_WallNormal = other.contacts[0].normal.x;
-
-
             
 	         //Possible alternative fix for poor wall jumping
             if (Mathf.Abs(m_WallNormal) == 1)
