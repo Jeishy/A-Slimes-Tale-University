@@ -8,6 +8,9 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
 	[Range(0.25f, 1)] [SerializeField] private float m_WallJumpVerticalForceMultiplier = 0.3f;	// Amount the jump force is multiplied by when jumping off a wall
 	[SerializeField] private float m_HorizontalJumpForce = 200f;				// Amount of lateral force added when the player jumps from a wall
+	[SerializeField] private float m_JumpDelay = 0.1f;							// Leeway time which the player can still jump away from the wall after unsticking from it 
+	[SerializeField] private float m_MaxWallSlideSpeed;							// Maximum wall sliding speed
+	[SerializeField] private LayerMask m_WallLayer;
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, 2f)] [SerializeField] private float m_GroundMovementSmoothing = .05f;	// How much to smooth out the movement
 	[Range(0, 2f)] [SerializeField] private float m_AirMovementSmoothing = .05f;	// How much to smooth out the movement
@@ -32,12 +35,13 @@ public class CharacterController2D : MonoBehaviour
 	private Vector3 m_Velocity = Vector3.zero;
 	private float m_WallNormal;
 	private bool m_WallJumped = false;
-	private int m_LayerMask;
+	
 	private bool m_PhysicsWallCheck;
 	private float m_KnockbackCount;
 	private bool m_KnockbackRight;		// Used to determine direction when applying knockback force
     private Vector3 m_TouchedWallPoint;
-	
+    private float m_JumpDelayTime;
+    
 	[Header("Events")]
 	[Space]
 
@@ -59,7 +63,6 @@ public class CharacterController2D : MonoBehaviour
 		if (OnCrouchEvent == null)
 			OnCrouchEvent = new BoolEvent();
 		
-		m_LayerMask = LayerMask.GetMask("Wall");
 	}
 
 	private void FixedUpdate()
@@ -95,7 +98,7 @@ public class CharacterController2D : MonoBehaviour
 				crouch = true;
 			}
 		}
-
+		
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
@@ -139,12 +142,10 @@ public class CharacterController2D : MonoBehaviour
 			{
 				if (m_KnockbackRight)
 				{
-					Debug.Log("Right");
 					targetVelocity = new Vector2(-m_KnockbackForce.x, m_KnockbackForce.y);
 				}
 				else
 				{
-					Debug.Log("left");
 					targetVelocity = new Vector2(m_KnockbackForce.x, m_KnockbackForce.y);
 				}
 
@@ -176,23 +177,33 @@ public class CharacterController2D : MonoBehaviour
 		}
 		
 		// Wall Sliding
+		Vector2 facingDirection = new Vector2(Input.GetAxis("Horizontal"), 0f);
+		
+		//m_wallSliding = Physics2D.Raycast(transform.position, facingDirection, m_wallDetectRadius, m_WallLayer);
+		Debug.Log(m_wallSliding+  " wall sliding");
 		m_wallSliding = Physics2D.OverlapCircle(m_WallCheck.position, m_wallDetectRadius, m_LayerMask);
 
+		
+		// Limit player wall slide speed
 		if (m_wallSliding && m_Rigidbody2D.velocity.y <= -0.7f)
 		{
 			
 			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, -0.7f);
 
 		}
-				
-		// If the player should jump...
-		if ((m_Grounded || m_wallSliding) && jump)
-		{
 
+		
+		
+		// If the player should jump...
+		if (((m_Grounded || m_wallSliding || m_JumpDelayTime >= Time.time) && jump))
+		{
+			Debug.Log("Grounded: " +  m_Grounded + " | Wall Sliding: " + m_wallSliding + " | Jump Delay >= Time: " + (m_JumpDelay >= Time.time));
+			
+			//m_Rigidbody2D.constraints = RigidbodyConstraints2D.None;
 			m_Grounded = false;
 
 			// ... and player is touching the wall
-			if (m_wallSliding)
+			if (m_wallSliding || m_JumpDelayTime >= Time.time)
 			{
 				// Add a vertical and horizontal force to the player if he is sliding on the wall
 				m_Rigidbody2D.AddForce(new Vector2((m_HorizontalJumpForce * m_WallNormal) , (m_JumpForce * m_WallJumpVerticalForceMultiplier)));
@@ -202,14 +213,18 @@ public class CharacterController2D : MonoBehaviour
                 Destroy(pWallJump, 1f);
 				// Flip because character will jump off the wall in the other direction
 				Flip();
+				Debug.Log("Wall jump, Wall normal: " + m_WallNormal);
 			}
 			
 			// ... and player is not touching the wall
 			else
 			{
+				Debug.Log("Normal jump");
 				// Add a vertical force to the player.
 				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce), ForceMode2D.Force);
 			}
+
+			m_JumpDelayTime = 0;
 		}
 	}
 
@@ -235,9 +250,27 @@ public class CharacterController2D : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Wall"))
 		{
+			
+			
+			m_JumpDelayTime = Time.time + m_JumpDelay;
 			m_WallNormal = other.contacts[0].normal.x;
+
             m_TouchedWallPoint = other.contacts[0].point;       // Getting the point last touched 
 
-        }
+            
+	        /* Possible alternative fix for poor wall jumping
+            if (Mathf.Abs(m_WallNormal) == 1)
+            {
+	            m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionY |
+	                                        RigidbodyConstraints2D.FreezePositionX |
+	                                        RigidbodyConstraints2D.FreezeRotation;
+            }*/
+		}
 	}
+
+	/* Possible alternative fix for poor wall jumping
+	private void OnCollisionExit2D(Collision2D other)
+	{
+		m_Rigidbody2D.constraints = RigidbodyConstraints2D.None;
+	}*/
 }

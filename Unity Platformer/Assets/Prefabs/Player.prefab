@@ -368,6 +368,11 @@ MonoBehaviour:
   m_JumpForce: 800
   m_WallJumpVerticalForceMultiplier: 0.8
   m_HorizontalJumpForce: 800
+  m_JumpDelay: 0.1
+  m_MaxWallSlideSpeed: 0
+  m_WallLayer:
+    serializedVersion: 2
+    m_Bits: 0
   m_CrouchSpeed: 0.4
   m_GroundMovementSmoothing: 0.2
   m_AirMovementSmoothing: 0.6
