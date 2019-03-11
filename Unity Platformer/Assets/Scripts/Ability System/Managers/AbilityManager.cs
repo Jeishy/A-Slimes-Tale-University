@@ -31,9 +31,13 @@ public class AbilityManager : MonoBehaviour {
 	public event AbilityEventHandler OnEarthCrash;
     #endregion
 
+    
     [HideInInspector] public bool IsAimToShoot;
     [HideInInspector] public float InitialGravityScale;
     [HideInInspector] public Rigidbody2D playerRb;
+
+    private GameObject playerGO;
+    private Player player;
 
 	// Holds the elemental state of the player,
 	// uses accessors to encapsulate current elemental state
@@ -48,9 +52,11 @@ public class AbilityManager : MonoBehaviour {
 	{
 		// Set elemental state to None at beginning of the game
 		CurrentPlayerElementalState = ElementalStates.None;
-        InitialGravityScale = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().gravityScale;
-        playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
+        playerGO = GameObject.FindGameObjectWithTag("Player");
+        InitialGravityScale = playerGO.GetComponent<Rigidbody2D>().gravityScale;
+        playerRb = playerGO.GetComponent<Rigidbody2D>();
+        player = playerGO.GetComponent<Player>();
         IsAimToShoot = true;
 #elif UNITY_PS4
         IsAimToShoot = false;
@@ -110,7 +116,8 @@ public class AbilityManager : MonoBehaviour {
 #if UNITY_PS4
             PS4Input.PadSetLightBar(0, 255, 255, 255);
 #endif
-            OnWindState();
+            player.SetElement(ElementalStates.Wind);
+			OnWindState();
 		}
 	}
 
@@ -123,6 +130,7 @@ public class AbilityManager : MonoBehaviour {
 #if UNITY_PS4
             PS4Input.PadSetLightBar(0, 255, 220, 0);
 #endif
+            player.SetElement(ElementalStates.Fire);
             OnFireState();
 		}
 	}
@@ -136,6 +144,7 @@ public class AbilityManager : MonoBehaviour {
 #if UNITY_PS4			
             PS4Input.PadSetLightBar(0, 50, 50, 255);
 #endif			
+            player.SetElement(ElementalStates.Water);
             OnWaterState();
 		}
 	}
@@ -149,6 +158,7 @@ public class AbilityManager : MonoBehaviour {
 #if UNITY_PS4			
             PS4Input.PadSetLightBar(0, 0, 255, 0);
 #endif			
+            player.SetElement(ElementalStates.Earth);
             OnEarthState();
 		}
 	}

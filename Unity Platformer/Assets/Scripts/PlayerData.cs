@@ -6,7 +6,7 @@ public class PlayerData
 	public int health;
 	public int armour;
 	public float[] position;
-	public Element element;
+	public ElementalStates element;
 
 	public PlayerData(Player player)
 	{

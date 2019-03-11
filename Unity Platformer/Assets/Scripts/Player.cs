@@ -14,12 +14,13 @@ public class Player : MonoBehaviour {
     [SerializeField] public int health;
     [SerializeField] public int armour;
     [SerializeField] private float damageCooldown = 0.5f;
-    [SerializeField] private Element element = Element.None;
     [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField] private Color _damagedColour;
     [Space]
     [SerializeField] private GameObject _onCoinCollectPE;
     [SerializeField] private Image _healthBar;
+    [SerializeField] private ElementalStates element = ElementalStates.None;
+    
 
 
     private const int MaxHealth = 3;
@@ -114,6 +115,11 @@ public class Player : MonoBehaviour {
         _meshRenderer.material.SetColor("_EmissionColor", originalColour);
     }
 
+    public void SetElement(ElementalStates _element)
+    {
+        element = _element;
+    }
+    
     public void AddArmourSlot()
     {
             armour = 6;
@@ -156,7 +162,7 @@ public class Player : MonoBehaviour {
         return SceneManager.GetActiveScene().buildIndex;
     }
 
-    public Element GetElement()
+    public ElementalStates GetElement()
     {
         return element;
     }
