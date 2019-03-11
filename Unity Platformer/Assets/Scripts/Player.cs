@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private Text _healthText;
     [SerializeField] private Text _armourText;
     [SerializeField] private float damageCooldown = 0.5f;
-    [SerializeField] private Element element = Element.None;
+    [SerializeField] private ElementalStates element = ElementalStates.None;
     
 
 
@@ -92,6 +92,10 @@ public class Player : MonoBehaviour {
 
     }
 
+    public void SetElement(ElementalStates _element)
+    {
+        element = _element;
+    }
     
     public void AddArmourSlot()
     {
@@ -135,7 +139,7 @@ public class Player : MonoBehaviour {
         return SceneManager.GetActiveScene().buildIndex;
     }
 
-    public Element GetElement()
+    public ElementalStates GetElement()
     {
         return element;
     }

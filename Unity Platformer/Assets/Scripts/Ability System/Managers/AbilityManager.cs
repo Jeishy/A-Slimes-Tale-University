@@ -27,9 +27,13 @@ public class AbilityManager : MonoBehaviour {
 	public event AbilityEventHandler OnEarthCrash;
     #endregion
 
+    
     [HideInInspector] public bool IsAimToShoot;
     [HideInInspector] public float InitialGravityScale;
     [HideInInspector] public Rigidbody2D playerRb;
+
+    private GameObject playerGO;
+    private Player player;
 
 	// Holds the elemental state of the player,
 	// uses accessors to encapsulate current elemental state
@@ -44,8 +48,10 @@ public class AbilityManager : MonoBehaviour {
 	{
 		// Set elemental state to None at beginning of the game
 		CurrentPlayerElementalState = ElementalStates.None;
-        InitialGravityScale = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().gravityScale;
-        playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        playerGO = GameObject.FindGameObjectWithTag("Player");
+        InitialGravityScale = playerGO.GetComponent<Rigidbody2D>().gravityScale;
+        playerRb = playerGO.GetComponent<Rigidbody2D>();
+        player = playerGO.GetComponent<Player>();
         IsAimToShoot = true;
 	}
 
@@ -84,6 +90,7 @@ public class AbilityManager : MonoBehaviour {
 	{
 		if (OnWindState != null)
 		{
+            player.SetElement(ElementalStates.Wind);
 			OnWindState();
 		}
 	}
@@ -94,7 +101,8 @@ public class AbilityManager : MonoBehaviour {
 	{
 		if (OnFireState != null)
 		{
-			OnFireState();
+            player.SetElement(ElementalStates.Fire);
+            OnFireState();
 		}
 	}
 
@@ -104,7 +112,8 @@ public class AbilityManager : MonoBehaviour {
 	{
 		if (OnWaterState != null)
 		{
-			OnWaterState();
+            player.SetElement(ElementalStates.Water);
+            OnWaterState();
 		}
 	}
 
@@ -114,7 +123,8 @@ public class AbilityManager : MonoBehaviour {
 	{
 		if (OnEarthState != null)
 		{
-			OnEarthState();
+            player.SetElement(ElementalStates.Earth);
+            OnEarthState();
 		}
 	}
 

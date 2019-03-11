@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public int armour;
     public int collectibles;
     
-    public Element element;
+    public ElementalStates element;
 
     public static GameManager instance = null;
 
@@ -73,14 +73,3 @@ public class GameManager : MonoBehaviour
 
     }
 }
-
-
-
-public enum Element
-{
-    None,
-    Earth,
-    Water,
-    Fire,
-    Air
-};
