@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33287027040653060}
   - component: {fileID: 23488941619246180}
   - component: {fileID: 64703606766446238}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flame (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4538937252207478}
   - component: {fileID: 108468036900450642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 33727485672460898}
   - component: {fileID: 23528698276857608}
   - component: {fileID: 64471178755228548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4442058853432458}
   - component: {fileID: 108383590782060958}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4715777387750942}
   - component: {fileID: 33612337486922840}
   - component: {fileID: 23707702184904904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torches
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1065094037398974}
   m_LocalRotation: {x: 0.599092, y: 0.44803, z: 0.3959401, w: 0.53253114}
-  m_LocalPosition: {x: 0.24924, y: 0.12437, z: -0.0052}
+  m_LocalPosition: {x: 0.2492, y: 0.1244, z: 0.0042}
   m_LocalScale: {x: 0.002408372, y: 0.0024083722, z: 0.0024083715}
   m_Children:
   - {fileID: 4538937252207478}
@@ -156,9 +156,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840022249070592}
-  m_LocalRotation: {x: -0, y: -0, z: 0.96291184, w: 0.2698162}
-  m_LocalPosition: {x: -20.26055, y: 16.260859, z: -23.208622}
-  m_LocalScale: {x: 17.972878, y: 17.972878, z: 17.972874}
+  m_LocalRotation: {x: -0.19078884, y: 0.6808815, z: 0.6808815, w: 0.19078884}
+  m_LocalPosition: {x: 22.7, y: -3.8499994, z: 12.420013}
+  m_LocalScale: {x: 17.97293, y: 17.972937, z: 17.972883}
   m_Children:
   - {fileID: 4271289404180490}
   - {fileID: 4175017473684830}
