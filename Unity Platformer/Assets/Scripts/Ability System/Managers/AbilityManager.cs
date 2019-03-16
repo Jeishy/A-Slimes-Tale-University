@@ -34,7 +34,8 @@ public class AbilityManager : MonoBehaviour {
     
     [HideInInspector] public bool IsAimToShoot;
     [HideInInspector] public float InitialGravityScale;
-    [HideInInspector] public Rigidbody2D playerRb;
+    [HideInInspector] public Rigidbody playerRb;
+    [HideInInspector] public float OriginalMass;
 
     private GameObject playerGO;
     private Player player;
@@ -54,8 +55,8 @@ public class AbilityManager : MonoBehaviour {
 		CurrentPlayerElementalState = ElementalStates.None;
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
         playerGO = GameObject.FindGameObjectWithTag("Player");
-        InitialGravityScale = playerGO.GetComponent<Rigidbody2D>().gravityScale;
-        playerRb = playerGO.GetComponent<Rigidbody2D>();
+        playerRb = playerGO.GetComponent<Rigidbody>();
+		OriginalMass = playerRb.mass;
         player = playerGO.GetComponent<Player>();
         IsAimToShoot = true;
 #elif UNITY_PS4

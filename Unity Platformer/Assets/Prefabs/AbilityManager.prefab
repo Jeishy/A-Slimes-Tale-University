@@ -66,7 +66,7 @@ MonoBehaviour:
   SplashRadius: 5
   InitialVelocity: {x: 0, y: 0, z: 0}
   IsCrashAbilityActivated: 0
-  _downwardForce: 5
+  _downwardForce: 20
   _maxDamage: 10
   _timeAbilityActive: 5
   _enemyKnockbackForce: 5
@@ -230,8 +230,6 @@ MonoBehaviour:
     m_Bits: 8192
   _boostedProjectileMaxTime: 0.3
   _rightStickDeadzone: 0.2
-  _rightHorizontalAxis: {fileID: 0}
-  _rightVerticalAxis: {fileID: 0}
 --- !u!114 &114824307246110900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,3 +244,4 @@ MonoBehaviour:
   IsAimToShoot: 1
   InitialGravityScale: 3
   playerRb: {fileID: 0}
+  OriginalMass: 0

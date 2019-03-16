@@ -51,7 +51,7 @@ public class Player : MonoBehaviour {
 	void Update ()
     {
         //Display health and armour in UI
-        _healthBar.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
+        //_healthBar.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
         //_armourText.text = "Armour: " + armour;
 
         //Call Die() function when player is at or below 0 health

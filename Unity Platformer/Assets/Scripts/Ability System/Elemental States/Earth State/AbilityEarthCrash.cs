@@ -16,7 +16,7 @@ public class AbilityEarthCrash : MonoBehaviour {
     
     private Player _playerDur;
     private AbilityManager _abilityManager;
-    private Rigidbody2D _playerRb;
+    private Rigidbody _playerRb;
 
     private void OnEnable()
 	{
@@ -33,7 +33,7 @@ public class AbilityEarthCrash : MonoBehaviour {
 	{
 		_abilityManager = GetComponent<AbilityManager>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        _playerRb = player.GetComponent<Rigidbody2D>();
+        _playerRb = player.GetComponent<Rigidbody>();
         _playerDur = player.GetComponent<Player>();
     }
 
@@ -43,7 +43,7 @@ public class AbilityEarthCrash : MonoBehaviour {
         {
             // Armour slot is removed when ability is used
             _playerDur.RemoveArmourSlot();
-            _playerRb.AddForce(new Vector2(0, -_downwardForce), ForceMode2D.Impulse);
+            _playerRb.AddForce(new Vector2(0, -_downwardForce), ForceMode.Impulse);
             IsCrashAbilityActivated = true;
             StartCoroutine(WaitTimeToActivateAbility());
             InitialVelocity = _playerRb.velocity;

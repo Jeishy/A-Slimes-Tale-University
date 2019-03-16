@@ -20,7 +20,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Transform m_WallCheck;								// Transform of a wall check object
     [SerializeField] private Transform m_BehindWallCheck;
     [SerializeField] private float m_wallDetectRadius = 0.1f;					// Radius of a sphere cast
-	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
+	[SerializeField] private Collider m_CrouchDisableCollider;				// A collider that will be disabled when crouching
 	[SerializeField] private Vector2 m_KnockbackForce;							// Force applied when hit by an enemy
 	[SerializeField] private float m_KnockbackLength;							// Period of time the player will not be able to move after getting knocked bakck
     [SerializeField] private GameObject m_WallJumpEffect;
@@ -30,7 +30,7 @@ public class CharacterController2D : MonoBehaviour
 	[HideInInspector] public bool m_Grounded;            // Whether or not the player is grounded.
 	private bool m_wallSliding;			// Whether or not the player is touching the wall
 	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
-	private Rigidbody2D m_Rigidbody2D;
+	private Rigidbody m_Rigidbody;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 	private float m_WallNormal;
@@ -55,7 +55,7 @@ public class CharacterController2D : MonoBehaviour
 
 	private void Awake()
 	{
-		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		m_Rigidbody = GetComponent<Rigidbody>();
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -76,7 +76,7 @@ public class CharacterController2D : MonoBehaviour
 
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+		Collider[] colliders = Physics.OverlapSphere(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
 		for (int i = 0; i < colliders.Length; i++)
 		{
 			if (colliders[i].gameObject != gameObject)
@@ -106,7 +106,7 @@ public class CharacterController2D : MonoBehaviour
 		if (m_Grounded || m_AirControl)
 		{
 
-			// If crouching
+			/*// If crouching
 			if (crouch)
 			{
 				if (!m_wasCrouching)
@@ -132,14 +132,14 @@ public class CharacterController2D : MonoBehaviour
 					m_wasCrouching = false;
 					OnCrouchEvent.Invoke(false);
 				}
-			}
+			}*/
 
 
 			Vector3 targetVelocity;
 			if (m_KnockbackCount <= 0)
 			{
 				// Move the character by finding the target velocity
-				targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+				targetVelocity = new Vector2(move * 10f, m_Rigidbody.velocity.y);
 			}
 			else
 			{
@@ -157,12 +157,12 @@ public class CharacterController2D : MonoBehaviour
 
 			// And then smoothing it out and applying it to the character
 			if (m_Grounded) 
-				m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_GroundMovementSmoothing);
+				m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref m_Velocity, m_GroundMovementSmoothing);
 
 
 			if (!m_Grounded)
 			{
-				m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_AirMovementSmoothing);
+				m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref m_Velocity, m_AirMovementSmoothing);
 			}
 			
 			// If the input is moving the player right and the player is facing left...
@@ -189,10 +189,10 @@ public class CharacterController2D : MonoBehaviour
 
 
         // Limit player wall slide speed
-        if (m_wallSliding && m_Rigidbody2D.velocity.y <= -m_MaxWallSlideSpeed)
+        if (m_wallSliding && m_Rigidbody.velocity.y <= -m_MaxWallSlideSpeed)
 		{
 			
-			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, -m_MaxWallSlideSpeed);
+			m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, -m_MaxWallSlideSpeed);
 
 		}
 
@@ -214,7 +214,7 @@ public class CharacterController2D : MonoBehaviour
 			if (m_wallSliding)
 			{   
 				// Add a vertical and horizontal force to the player if he is sliding on the wall
-				m_Rigidbody2D.AddForce(new Vector2((m_HorizontalJumpForce * m_WallNormal) , (m_JumpForce * m_WallJumpVerticalForceMultiplier)));
+				m_Rigidbody.AddForce(new Vector2((m_HorizontalJumpForce * m_WallNormal) , (m_JumpForce * m_WallJumpVerticalForceMultiplier)));
 				m_WallJumped = true;
                 // Display wall jumping particle effect
                 GameObject pWallJump = Instantiate(m_WallJumpEffect, m_TouchedWallPoint, Quaternion.identity);
@@ -230,7 +230,7 @@ public class CharacterController2D : MonoBehaviour
 			{
 				Debug.Log("Normal jump");
 				// Add a vertical force to the player.
-				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce), ForceMode2D.Force);
+				m_Rigidbody.AddForce(new Vector2(0f, m_JumpForce), ForceMode.Force);
 			}
 
 		}
@@ -262,15 +262,15 @@ public class CharacterController2D : MonoBehaviour
     private void StickToWall(bool stick)
     {
         if (stick)
-            m_Rigidbody2D.constraints =     RigidbodyConstraints2D.FreezePositionX |
-                                            RigidbodyConstraints2D.FreezeRotation;
+            m_Rigidbody.constraints =     RigidbodyConstraints.FreezePositionX |
+                                            RigidbodyConstraints.FreezeRotation;
         else
         {
-            m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+            m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 
-	private void OnCollisionEnter2D(Collision2D other)
+	private void OnCollisionEnter(Collision other)
 	{
 		if (other.gameObject.CompareTag("Wall"))
 		{
@@ -286,13 +286,13 @@ public class CharacterController2D : MonoBehaviour
 		}
 	}
 
-    private void OnCollisionStay2D(Collision2D other)
+    private void OnCollisionStay(Collision other)
     {
         m_TouchedWallPoint = other.contacts[0].point;       // Getting the point last touched 
     }
 
     // Possible alternative fix for poor wall jumping
-	private void OnCollisionExit2D(Collision2D other)
+	private void OnCollisionExit(Collision other)
 	{
         StickToWall(false);
     }

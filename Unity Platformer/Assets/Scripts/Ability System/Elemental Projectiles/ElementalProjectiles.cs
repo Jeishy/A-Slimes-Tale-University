@@ -49,14 +49,14 @@ public class ElementalProjectiles : MonoBehaviour {
         return projForce;
     }
 
-    public virtual IEnumerator GravityDropOff(Rigidbody2D proj)
+    public virtual IEnumerator GravityDropOff(Rigidbody proj)
     {
         yield return new WaitForSeconds(_dropOffTime);
-        proj.gravityScale = 3;
+        proj.useGravity = true;
 	}
 
     // Does flat damage to hit enemy
-    public virtual void FlatDamageToEnemy(float damage, Collider2D enemyCol)
+    public virtual void FlatDamageToEnemy(float damage, Collider enemyCol)
     {
         Debug.Log("Doing flat damage");
         // Reduce enemy's health by baseDamage
@@ -64,7 +64,7 @@ public class ElementalProjectiles : MonoBehaviour {
     }
 
     // Does DOT to hit enemy
-    public virtual IEnumerator DotToEnemy(float initialDmg, float dot, int dotTime, GameObject proj, Collider2D enemyCol)
+    public virtual IEnumerator DotToEnemy(float initialDmg, float dot, int dotTime, GameObject proj, Collider enemyCol)
     {
         // Do intial damage to enemy with intialDmg
         enemyCol.GetComponent<EnemyAI>().Hit(initialDmg);
@@ -81,7 +81,7 @@ public class ElementalProjectiles : MonoBehaviour {
     }
 
     // Does knockback damage to hit enemy
-    public virtual void KnockbackDamageToEnemy(float damage, float knockbackForce, Transform projTrans, Collider2D enemyCol)
+    public virtual void KnockbackDamageToEnemy(float damage, float knockbackForce, Transform projTrans, Collider enemyCol)
     {
         enemyCol.GetComponent<EnemyAI>().Hit(damage);
         Vector2 enemyPos = enemyCol.transform.position;
@@ -89,10 +89,10 @@ public class ElementalProjectiles : MonoBehaviour {
         Vector2 dir = Vector3.Normalize(enemyPos - projPos);
         // Get x component of direciton vector
         Vector2 dirInX = new Vector3(dir.x, 0);
-        Rigidbody2D enemyRb = enemyCol.GetComponent<Rigidbody2D>();
+        Rigidbody enemyRb = enemyCol.GetComponent<Rigidbody>();
 
         // Reduce enemy's health based on damage amount 
         // Only apply forces in x direction
-        enemyRb.AddForce(dirInX * knockbackForce, ForceMode2D.Impulse);
+        enemyRb.AddForce(dirInX * knockbackForce, ForceMode.Impulse);
     }
 }

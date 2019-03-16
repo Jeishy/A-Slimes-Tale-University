@@ -24,7 +24,7 @@ public class AbilitySetFireState : MonoBehaviour {
 	private void SetFireState()
 	{
 		_abilityManager.CurrentPlayerElementalState = ElementalStates.Fire;
-        _abilityManager.playerRb.gravityScale = _abilityManager.InitialGravityScale;
+        _abilityManager.playerRb.mass = _abilityManager.OriginalMass;
         Debug.Log(_abilityManager.CurrentPlayerElementalState);
 	}
 }

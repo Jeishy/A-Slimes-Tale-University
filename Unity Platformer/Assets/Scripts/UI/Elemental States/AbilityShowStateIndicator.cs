@@ -9,8 +9,9 @@ public class AbilityShowStateIndicator : MonoBehaviour
     [SerializeField] private GameObject[] _elementalStateIndicators;
 
     private AbilityManager _abilityManager;
-	// Use this for initialization
-	private void OnEnable ()
+    
+    // Use this for initialization
+    private void OnEnable ()
     {
         Setup();
         _abilityManager.OnFireState += ShowStateIndicator;
@@ -36,9 +37,25 @@ public class AbilityShowStateIndicator : MonoBehaviour
 
     private void ShowStateIndicator()
     {
-        Debug.Log("Showing state indicator");
-        ElementalStates currentState = _abilityManager.CurrentPlayerElementalState;
+        StopAllCoroutines();    
+        StartCoroutine(WaitToShowStateIndicator());
+    }
 
+    private void DeactiveStateIndicators()
+    {
+        // Set all state indicators that maybe active to inactive when a state is changed
+        foreach (GameObject stateIndicator in _elementalStateIndicators)
+        {
+            if (stateIndicator.activeInHierarchy)
+                stateIndicator.SetActive(false);
+        }
+    }
+
+    private IEnumerator WaitToShowStateIndicator()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        ElementalStates currentState = _abilityManager.CurrentPlayerElementalState;
         DeactiveStateIndicators();
 
         // Turn on the relevant state indicator to true
@@ -56,16 +73,6 @@ public class AbilityShowStateIndicator : MonoBehaviour
             case ElementalStates.Earth:
                 _elementalStateIndicators[3].SetActive(true);
                 break;
-        }
-    }
-
-    private void DeactiveStateIndicators()
-    {
-        // Set all state indicators that maybe active to inactive when a state is changed
-        foreach (GameObject stateIndicator in _elementalStateIndicators)
-        {
-            if (stateIndicator.activeInHierarchy)
-                stateIndicator.SetActive(false);
         }
     }
 }

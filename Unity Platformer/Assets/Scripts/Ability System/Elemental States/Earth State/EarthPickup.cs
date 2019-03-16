@@ -20,7 +20,7 @@ public class EarthPickup : MonoBehaviour
 	// If wind pickup interacts with player,
 	// set players elemental state to Wind
 	// and run method for running OnWindState event
-	private void OnTriggerEnter2D(Collider2D col)
+	private void OnTriggerEnter(Collider col)
 	{
 		if (col.CompareTag("Player"))
         {
