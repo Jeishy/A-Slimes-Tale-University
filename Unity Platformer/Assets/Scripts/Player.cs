@@ -5,28 +5,35 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+#if UNITY_PS4
+using UnityEngine.PS4;
+#endif
 
 public class Player : MonoBehaviour {
 
     [SerializeField] public int health;
     [SerializeField] public int armour;
-    [SerializeField] private Text _healthText;
-    [SerializeField] private Text _armourText;
     [SerializeField] private float damageCooldown = 0.5f;
-    [SerializeField] private Element element = Element.None;
+    [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField] private Color _damagedColour;
+    [Space]
+    [SerializeField] private GameObject _onCoinCollectPE;
+    [SerializeField] private Image _healthBar;
+    [SerializeField] private ElementalStates element = ElementalStates.None;
     
 
 
+    private const int MaxHealth = 3;
     private Vector2 damagePoint;                                        // Position where the player was hit by projectile
     private float nextDamageTime;
     private CharacterController2D controller;
     private GameManager gm;
-    public bool isDead;
+    private AbilityManager _abilityManager;
+    [HideInInspector] public bool isDead;
 
     private void Start()
     {
-        
-        
+        _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
         controller = GetComponent<CharacterController2D>();
         
         gm = GameManager.instance;
@@ -41,8 +48,11 @@ public class Player : MonoBehaviour {
         
     }
 
-	void Update () {
-
+	void Update ()
+    {
+        //Display health and armour in UI
+        _healthBar.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
+        //_armourText.text = "Armour: " + armour;
 
         //Call Die() function when player is at or below 0 health
         if (health <= 0)
@@ -62,14 +72,14 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.M))
             armour++;
 
-        //Display health and armour in UI
-        _healthText.text = "Health: " + health;
-        _armourText.text = "Armour: " + armour;
-	}
 
+	}
 
     public void Hit(int damage = 1)
     {
+        // Show damage effect on player
+        StartCoroutine(ShowDamageMaterial());
+
         if (nextDamageTime <= Time.time)
         {
             //Check if player has armour
@@ -77,9 +87,14 @@ public class Player : MonoBehaviour {
             {
                 //If so, remove armour slot
                 RemoveArmourSlot();
+                if (armour <= 0)
+                    _abilityManager.NoneState();
             }
             else
             {
+#if UNITY_PS4
+                PS4Input.PadSetLightBar(0, 255, 0, 0);
+#endif
                 //Oterwise, decrement health by 1
                 health -= damage;
             }
@@ -92,6 +107,18 @@ public class Player : MonoBehaviour {
 
     }
 
+    private IEnumerator ShowDamageMaterial()
+    {
+        Color originalColour = _meshRenderer.material.GetColor("_EmissionColor");
+        _meshRenderer.material.SetColor("_EmissionColor", _damagedColour);
+        yield return new WaitForSeconds(0.1f);
+        _meshRenderer.material.SetColor("_EmissionColor", originalColour);
+    }
+
+    public void SetElement(ElementalStates _element)
+    {
+        element = _element;
+    }
     
     public void AddArmourSlot()
     {
@@ -135,7 +162,7 @@ public class Player : MonoBehaviour {
         return SceneManager.GetActiveScene().buildIndex;
     }
 
-    public Element GetElement()
+    public ElementalStates GetElement()
     {
         return element;
     }
@@ -182,8 +209,10 @@ public class Player : MonoBehaviour {
         if (other.CompareTag("Collectible"))
         {
             Debug.Log("Collectible");
-            gm.OnCollectiblePickup();
-            Destroy(other.gameObject);
+            //gm.OnCollectiblePickup();
+            StartCoroutine(WaitToCoinCollect(other.gameObject));
+            other.GetComponent<Animator>().SetTrigger("Collect");
+            Destroy(other.gameObject, 1f);
         }
 
         if (other.CompareTag("Gemstone"))
@@ -198,6 +227,15 @@ public class Player : MonoBehaviour {
             Debug.Log("Level complete!!");
             LevelChanger.instance.FadeToLevel(GetCurrentLevel() + 1);
         }
-
     }
+
+    private IEnumerator WaitToCoinCollect(GameObject other)
+    {
+        yield return new WaitForSeconds(0.3f);
+        Vector3 spawnPos = new Vector3(other.transform.position.x - 0.7f, other.transform.position.y,
+            other.transform.position.z);
+        GameObject coinCollect = Instantiate(_onCoinCollectPE, spawnPos, Quaternion.identity);
+        Destroy(coinCollect, 1f);
+    }
+
 }

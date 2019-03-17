@@ -118,7 +118,6 @@ public class EnemyAI : MonoBehaviour
 		            //Get projectile's rigidbody
 		            Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
 
-                    Debug.Log("Spawning projectile");
 
 		            //Apply force to projectile's rigidbody
 		            projRb.velocity = Vector3.Normalize(player.transform.position - transform.position) *

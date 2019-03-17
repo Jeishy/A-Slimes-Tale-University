@@ -10,14 +10,27 @@
           <e p="Ability System" t="Include">
             <e p="AbilityInputHandler.cs" t="Include" />
             <e p="AbilitySwtich.cs" t="Include" />
+            <e p="Elemental Projectiles" t="Include">
+              <e p="AbilityBoostedProjectile.cs" t="Include" />
+              <e p="AbilityProjectile.cs" t="Include" />
+              <e p="EarthProjectile.cs" t="Include" />
+              <e p="ElementalProjectilePooler.cs" t="Include" />
+              <e p="ElementalProjectiles.cs" t="Include" />
+              <e p="FireProjectile.cs" t="Include" />
+              <e p="IPooledProjectile.cs" t="Include" />
+              <e p="WaterProjectile.cs" t="Include" />
+              <e p="WindProjectile.cs" t="Include" />
+            </e>
             <e p="Elemental States" t="Include">
               <e p="Earth State" t="Include">
                 <e p="AbilityEarthCrash.cs" t="Include" />
-                <e p="AbilityEarthWaterSink.cs" t="Include" />
                 <e p="AbilitySetEarthState.cs" t="Include" />
+                <e p="EarthBreakablePlatform.cs" t="Include" />
                 <e p="EarthPickup.cs" t="Include" />
+                <e p="WaterSinkTrigger.cs" t="Include" />
               </e>
               <e p="FireState" t="Include">
+                <e p="AbilityFireGlow.cs" t="Include" />
                 <e p="AbilitySetFireState.cs" t="Include" />
                 <e p="FirePickup.cs" t="Include" />
               </e>
@@ -31,37 +44,50 @@
                 <e p="WindPickup.cs" t="Include" />
               </e>
             </e>
-            <e p="ElementalProjectiles" t="Include">
-              <e p="AbilityProjectile.cs" t="Include" />
-              <e p="EarthProjectile.cs" t="Include" />
-              <e p="ElementalProjectilePooler.cs" t="Include" />
-              <e p="ElementalProjectiles.cs" t="Include" />
-              <e p="FireProjectile.cs" t="Include" />
-              <e p="IPooledProjectile.cs" t="Include" />
-              <e p="WaterProjectile.cs" t="Include" />
-              <e p="WindProjectile.cs" t="Include" />
-            </e>
             <e p="Managers" t="Include">
               <e p="AbilityManager.cs" t="Include" />
             </e>
           </e>
           <e p="AudioManager.cs" t="Include" />
+          <e p="CameraMovement" t="Include">
+            <e p="ChangeCameraMain.cs" t="Include" />
+            <e p="ChangeCameraZoomOut.cs" t="Include" />
+          </e>
           <e p="CharacterController2D.cs" t="Include" />
           <e p="Collectible.cs" t="Include" />
           <e p="DDOL.cs" t="Include" />
+          <e p="Dialogue System" t="Include">
+            <e p="Dialogue.cs" t="Include" />
+            <e p="DialogueManager.cs" t="Include" />
+            <e p="DialogueTrigger.cs" t="Include" />
+          </e>
           <e p="EnemyAI.cs" t="Include" />
           <e p="EnemyAttack.cs" t="Include" />
+          <e p="EnemyDurability.cs" t="Include" />
           <e p="EnemyProjectile.cs" t="Include" />
-          <e p="GameData.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
+          <e p="HubWorld" t="Include">
+            <e p="Shop" t="Include">
+              <e p="GlobalShop.cs" t="Include" />
+              <e p="ShopHubWorld.cs" t="Include" />
+            </e>
+            <e p="TargetCameraScript.cs" t="Include" />
+          </e>
           <e p="LevelChanger.cs" t="Include" />
           <e p="Player.cs" t="Include" />
           <e p="PlayerAttributes.cs" t="Include" />
           <e p="PlayerControls.cs" t="Include" />
           <e p="PlayerData.cs" t="Include" />
+          <e p="PlayerSlingshot.cs" t="Include" />
           <e p="Preload.cs" t="Include" />
           <e p="SaveSystem.cs" t="Include" />
           <e p="Sound.cs" t="Include" />
           <e p="UserInterface.cs" t="Include" />
+        </e>
+        <e p="Shaders" t="Include">
+          <e p="Fire.shader" t="Include" />
+          <e p="Portal.shader" t="Include" />
+          <e p="Water.shader" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Resources" t="Include">

@@ -32,7 +32,7 @@ Material:
     - _Strength: 0.3
     - _WaveLength: 8
     m_Colors:
-    - _Color: {r: 0, g: 1, b: 0.82210064, a: 0.15294118}
+    - _Color: {r: 0.2971698, g: 1, b: 0.8759712, a: 0.5372549}
     - _Colour: {r: 0.6745098, g: 1.9607843, b: 1.9137255, a: 0.2784314}
     - _Direction: {r: 1, g: 1, b: 0, a: 0}
     - _Flutter: {r: 1, g: 1, b: 1, a: 1}

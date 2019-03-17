@@ -17,6 +17,7 @@ TagManager:
   - Patrol Point
   - EnemyProj
   - Gemstone
+  - ElementalPickup
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - EnemyProj
   - Projectile
   - Enemy
-  - 
+  - Collectable
   - 
   - 
   - 

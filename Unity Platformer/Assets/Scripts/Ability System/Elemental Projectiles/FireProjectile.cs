@@ -9,6 +9,7 @@ public class FireProjectile : ElementalProjectiles {
 	private Rigidbody2D _rb;
 	private Plane _plane;							// Plane used for plane.raycast in the Shoot function
 	private Vector3 _distanceFromCamera;		    // Distance from camera that the plane is created at
+    private AbilityInputHandler _inputHandler;
 
     [SerializeField] private float _initialDmg;  // Initial damage done by projectile
 	[SerializeField] private float _dot;			// DOT for fire projectile
@@ -22,6 +23,7 @@ public class FireProjectile : ElementalProjectiles {
 	{
 		_rb = GetComponent<Rigidbody2D>();
 		_originalScale = transform.localScale;
+        _inputHandler = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityInputHandler>();
     }
 
 	public void Shoot()
@@ -50,8 +52,9 @@ public class FireProjectile : ElementalProjectiles {
 		}
 		else
 		{
-			// Sets go's velocity if forward firing projectiles are chosen
-    		_rb.velocity = FireProjectileForward(ProjectileSpeed, playerTrans);
+            // Sets go's velocity if forward firing projectiles are chosen
+            Vector2 joystickDir = _inputHandler.RightStickAxis;
+    		_rb.velocity = JoystickFiringForce(ProjectileSpeed, playerTrans, joystickDir);
 		}
 	}
 

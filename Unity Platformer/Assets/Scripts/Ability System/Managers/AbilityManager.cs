@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_PS4
+using UnityEngine.PS4;
+#endif
 
 // The 5 different states the player can be in
 // numbers assigned to states can be used for 
@@ -23,13 +26,18 @@ public class AbilityManager : MonoBehaviour {
 	public event AbilityEventHandler OnFireState;
 	public event AbilityEventHandler OnWaterState;
 	public event AbilityEventHandler OnEarthState;
+    public event AbilityEventHandler OnNoneState;
 
 	public event AbilityEventHandler OnEarthCrash;
     #endregion
 
+    
     [HideInInspector] public bool IsAimToShoot;
     [HideInInspector] public float InitialGravityScale;
     [HideInInspector] public Rigidbody2D playerRb;
+
+    private GameObject playerGO;
+    private Player player;
 
 	// Holds the elemental state of the player,
 	// uses accessors to encapsulate current elemental state
@@ -44,14 +52,35 @@ public class AbilityManager : MonoBehaviour {
 	{
 		// Set elemental state to None at beginning of the game
 		CurrentPlayerElementalState = ElementalStates.None;
-        InitialGravityScale = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().gravityScale;
-        playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+        playerGO = GameObject.FindGameObjectWithTag("Player");
+        InitialGravityScale = playerGO.GetComponent<Rigidbody2D>().gravityScale;
+        playerRb = playerGO.GetComponent<Rigidbody2D>();
+        player = playerGO.GetComponent<Player>();
         IsAimToShoot = true;
-	}
+#elif UNITY_PS4
+        IsAimToShoot = false;
+        PS4Input.PadSetLightBar(0, 255, 0, 0);
+#endif
+    }
 
-	// Method for running methods subscribed to OnPlayerSwitchAbility event
-	// Currently used for debugging purposes only
-	public void PlayerSwitchAbility()
+
+#if UNITY_PS4
+    public IEnumerator ControllerVibration(bool isLargeVibration)
+    {
+        if (isLargeVibration)
+            PS4Input.PadSetVibration(0, 70, 0);
+        else
+            PS4Input.PadSetVibration(0, 0, 80);
+
+        yield return new WaitForSeconds(0.2f);
+        PS4Input.PadSetVibration(0, 0, 0);
+    }
+#endif
+
+    // Method for running methods subscribed to OnPlayerSwitchAbility event
+    // Currently used for debugging purposes only
+    public void PlayerSwitchAbility()
 	{
 		if (OnPlayerSwitchAbility != null)
 		{
@@ -84,6 +113,10 @@ public class AbilityManager : MonoBehaviour {
 	{
 		if (OnWindState != null)
 		{
+#if UNITY_PS4
+            PS4Input.PadSetLightBar(0, 255, 255, 255);
+#endif
+            player.SetElement(ElementalStates.Wind);
 			OnWindState();
 		}
 	}
@@ -92,9 +125,13 @@ public class AbilityManager : MonoBehaviour {
 	// All fire state methods are run via this function
 	public void FireState()
 	{
-		if (OnFireState != null)
+        if (OnFireState != null)
 		{
-			OnFireState();
+#if UNITY_PS4
+            PS4Input.PadSetLightBar(0, 255, 220, 0);
+#endif
+            player.SetElement(ElementalStates.Fire);
+            OnFireState();
 		}
 	}
 
@@ -102,9 +139,13 @@ public class AbilityManager : MonoBehaviour {
 	// All water state methods are run via this function
 	public void WaterState()
 	{
-		if (OnWaterState != null)
+        if (OnWaterState != null)
 		{
-			OnWaterState();
+#if UNITY_PS4			
+            PS4Input.PadSetLightBar(0, 50, 50, 255);
+#endif			
+            player.SetElement(ElementalStates.Water);
+            OnWaterState();
 		}
 	}
 
@@ -112,9 +153,13 @@ public class AbilityManager : MonoBehaviour {
 	// All earth state methods are run via this function
 	public void EarthState()
 	{
-		if (OnEarthState != null)
+        if (OnEarthState != null)
 		{
-			OnEarthState();
+#if UNITY_PS4			
+            PS4Input.PadSetLightBar(0, 0, 255, 0);
+#endif			
+            player.SetElement(ElementalStates.Earth);
+            OnEarthState();
 		}
 	}
 
@@ -127,4 +172,14 @@ public class AbilityManager : MonoBehaviour {
 			OnEarthCrash();
 		}
 	}
+
+    // Method for running methods subscribed to OnNoneState event
+    // This function is called when the players state is set to none
+    public void NoneState()
+    {
+        if (OnNoneState != null)
+        {
+            OnNoneState();
+        }
+    }
 }

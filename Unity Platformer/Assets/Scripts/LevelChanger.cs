@@ -33,7 +33,6 @@ public class LevelChanger : MonoBehaviour
         
 
 		levelToLoad = levelIndex;
-		
 		//Sets trigger within the animator
 		animator.SetTrigger("FadeOut");
 	}
@@ -42,13 +41,13 @@ public class LevelChanger : MonoBehaviour
     {
         FadeToLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
-	
-	//Called when the FadeOut animation has finished playing
-	public void OnFadeComplete()
+
+    //Called when the FadeOut animation has finished playing
+    public void OnFadeComplete()
 	{
 
 
-        if (SceneManager.sceneCount >= levelToLoad)
+        if (SceneManager.sceneCountInBuildSettings <= levelToLoad)
         {
             SceneManager.LoadScene(levelToLoad);
         } else

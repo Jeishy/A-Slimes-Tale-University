@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_PS4
+using UnityEngine.PS4;
+#endif
 
 public class AbilityProjectile : MonoBehaviour {
 
@@ -46,7 +49,20 @@ public class AbilityProjectile : MonoBehaviour {
         // 0 = Fire, 1 = Water, 2 = Wind, 3 = Earth
         if (_playerDurability.armour > 0)
         {
+#if UNITY_PS4
+            StartCoroutine(_abilityManager.ControllerVibration(false));
+#endif
             _playerDurability.armour--;
+
+            if (_playerDurability.armour == 0 && _abilityManager.CurrentPlayerElementalState != ElementalStates.None)
+            {
+#if UNITY_PS4
+            PS4Input.PadSetLightBar(0, 255, 0, 0);
+#endif
+                Debug.Log("Calling none state");
+                _abilityManager.NoneState();
+            }
+
             switch (state)
             {
                 case ElementalStates.Fire:
@@ -88,8 +104,6 @@ public class AbilityProjectile : MonoBehaviour {
             // Set players current state to None
             // Check if players state isn't already none
             Debug.Log("Used up all armour points! Elemental state set to none");
-            if (_abilityManager.CurrentPlayerElementalState != ElementalStates.None)
-                _abilityManager.CurrentPlayerElementalState = ElementalStates.None;
         }         
     }
 }

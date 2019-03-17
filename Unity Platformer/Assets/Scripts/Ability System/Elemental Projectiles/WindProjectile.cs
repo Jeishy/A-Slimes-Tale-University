@@ -7,8 +7,10 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 	private Rigidbody2D _rb;
 	private Vector3 _originalScale;
 	private Plane _plane;				// Plane used for plane.raycast in the Shoot function
-	private Vector3 _distanceFromCamera;	// Distance from camera that the plane is created at
-	[SerializeField] private float _knockbackForce;
+	private Vector3 _distanceFromCamera;    // Distance from camera that the plane is created at
+    private AbilityInputHandler _inputHandler;
+
+    [SerializeField] private float _knockbackForce;
 	[SerializeField] private float _boostedKnockbackForce;
 	[SerializeField] private float _baseDamage;
 	[SerializeField] private float _boostedDamage;
@@ -18,9 +20,10 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 	{
 		_rb = GetComponent<Rigidbody2D>();
 		_originalScale = transform.localScale;
-	}
+        _inputHandler = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityInputHandler>();
+    }
 
-	public void Shoot()
+    public void Shoot()
 	{
 		// Null check to ensure player variables are set
 		if (playerTrans == null)
@@ -46,9 +49,10 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 		}
 		else
 		{
-			// Sets go's velocity if forward firing projectiles are chosen
-    		_rb.velocity = FireProjectileForward(ProjectileSpeed, playerTrans);
-		}
+            // Sets go's velocity if forward firing projectiles are chosen
+            Vector2 joystickDir = _inputHandler.RightStickAxis;
+            _rb.velocity = JoystickFiringForce(ProjectileSpeed, playerTrans, joystickDir);
+        }
 	}
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -35,13 +35,16 @@ public class PlayerControls : MonoBehaviour
         if (!player.isDead)
         {
 
+#if UNITY_PS4
             //Gets button presses for sideways movement
-            horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+            horizontalMove = Input.GetAxisRaw("LeftStickHorizontal") * speed;
+#elif UNITY_EDITOR_WIN || UNITY_STANDALONE
+            horizontalMove = Input.GetAxis("Horizontal") * speed;
+#endif
             if (!controller.m_Grounded)
                 slimeTrail.Stop();
             else
                 slimeTrail.Play();
-
 
             //Checks if player has pressed the jump button
             if (Input.GetButtonDown("Jump"))

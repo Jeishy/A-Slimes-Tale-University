@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4508141586428648}
   - component: {fileID: 33107124315424104}
   - component: {fileID: 23555866929586282}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pTorus1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4939868991114402}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: canon(Untextured)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4070523945970732}
   - component: {fileID: 33331219212220396}
   - component: {fileID: 23316184268259356}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4811237919971154}
   - component: {fileID: 33437950362942590}
   - component: {fileID: 23118196433623512}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4007039523164170}
   - component: {fileID: 33152501800898406}
   - component: {fileID: 23704098845409724}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4104977506087924}
   - component: {fileID: 33584324007511272}
   - component: {fileID: 23479314243977430}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 4937971351371072}
   - component: {fileID: 33790857835497376}
   - component: {fileID: 23213597641658982}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pTorus2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 4853993552494656}
   - component: {fileID: 33344870594062298}
   - component: {fileID: 23212677349247514}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCube3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 4622297727474282}
   - component: {fileID: 33979197581267104}
   - component: {fileID: 23040583857621362}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCylinder3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1479179074025534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.48, y: 4.87, z: 0}
+  m_LocalPosition: {x: 38.24, y: 4.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4069021394638854}
@@ -748,7 +748,7 @@ MonoBehaviour:
   attackOptions:
     melee: 0
     meleeRange: 0.5
-    range: 15
+    range: 11
     attackSpeed: 3
     projectile: {fileID: 1179139433825628, guid: e244221de90d32b4c9b82b3530d00248,
       type: 2}
@@ -759,7 +759,7 @@ MonoBehaviour:
       m_Bits: 512
     rangeAttackMask:
       serializedVersion: 2
-      m_Bits: 512
+      m_Bits: 768
   patrol: 0
   waypointFollowStyle: 2
   patrolSpeed: 0
