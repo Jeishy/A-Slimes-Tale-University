@@ -53,8 +53,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4109372857246370}
-  - component: {fileID: 111913378119424314}
-  - component: {fileID: 58089425390625450}
+  - component: {fileID: 95489348843580944}
+  - component: {fileID: 65044052911194228}
   m_Layer: 0
   m_Name: Coin (Untextured)
   m_TagString: Gemstone
@@ -135,7 +135,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555970943865986}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.038638093, y: -0.0009633216, z: 0.000026207754}
+  m_LocalPosition: {x: 0.016, y: -0.0009633216, z: 0.000026207754}
   m_LocalScale: {x: 0.56192356, y: 0.48281372, z: 0.2320634}
   m_Children: []
   m_Father: {fileID: 4109372857246370}
@@ -166,7 +166,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1467921185963092}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.054165725, y: -0.016656198, z: 0.000026207754}
+  m_LocalPosition: {x: 0, y: -0.016656198, z: 0.000026207754}
   m_LocalScale: {x: 0.56192356, y: 0.48281372, z: 0.2320634}
   m_Children: []
   m_Father: {fileID: 4109372857246370}
@@ -179,7 +179,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1461748609852884}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.05417528, y: -0.00094024296, z: -0.0000005626678}
+  m_LocalPosition: {x: 0, y: -0.00094024296, z: -0.0000005626678}
   m_LocalScale: {x: 1, y: 1, z: 1.2722453}
   m_Children: []
   m_Father: {fileID: 4109372857246370}
@@ -192,7 +192,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1056792450348338}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.054165725, y: 0.014609436, z: 0.000026207754}
+  m_LocalPosition: {x: 0, y: 0.014609436, z: 0.000026207754}
   m_LocalScale: {x: 0.56192356, y: 0.48281372, z: 0.2320634}
   m_Children: []
   m_Father: {fileID: 4109372857246370}
@@ -205,7 +205,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1565357861349464}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44.34, y: 25.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0.35, z: 0}
   m_LocalScale: {x: 31.165075, y: 31.165075, z: 31.165075}
   m_Children:
   - {fileID: 4109372857246370}
@@ -219,7 +219,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1273253944167914}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.06972374, y: -0.0009381277, z: 0.000026207754}
+  m_LocalPosition: {x: -0.0156, y: -0.0009381277, z: 0.000026207754}
   m_LocalScale: {x: 0.56192356, y: 0.48281372, z: 0.2320634}
   m_Children: []
   m_Father: {fileID: 4109372857246370}
@@ -435,34 +435,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1056792450348338}
   m_Mesh: {fileID: 4300002, guid: a289ddab7b92e8246b87efd1eba7594e, type: 3}
---- !u!58 &58089425390625450
-CircleCollider2D:
+--- !u!65 &65044052911194228
+BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1317287372221180}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.053150024, y: 0}
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.021843674
---- !u!111 &111913378119424314
-Animation:
+  m_Size: {x: 0.04306933, y: 0.043538775, z: 0.012162479}
+  m_Center: {x: 0.000028202405, y: -0.0009995884, z: 0.00062640617}
+--- !u!95 &95489348843580944
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1317287372221180}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 0bf4dc0fbafbc68468e79cf362bafc55, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 0bf4dc0fbafbc68468e79cf362bafc55, type: 2}
-  - {fileID: 7400000, guid: eda607a06332dff4c87f428abb74b729, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eb302aac713f6544792e439c75c9bc04, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

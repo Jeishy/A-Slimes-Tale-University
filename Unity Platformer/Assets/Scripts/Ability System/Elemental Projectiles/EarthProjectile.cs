@@ -26,6 +26,8 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 
     public void Shoot()
 	{
+        _rb.useGravity = false;
+
 		// Null check to ensure player variables are set
 		if (playerTrans == null)
 			LoadPlayerVariables();
@@ -83,7 +85,6 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
             transform.localScale = _originalScale;
             IsBoosted = false;
         }
-        _rb.useGravity = false;
         Destroy(gameObject);
     }
 }

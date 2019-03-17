@@ -171,7 +171,7 @@ public class Player : MonoBehaviour {
     
 
     //Collision checks
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter(Collision other)
     {
         //Check if the player has collided with an enemy projectile
         if (other.gameObject.CompareTag("EnemyProj"))
@@ -199,7 +199,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Checkpoint"))
         {

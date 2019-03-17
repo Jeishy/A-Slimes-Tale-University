@@ -112,8 +112,9 @@ public class EnemyAI : MonoBehaviour
 	            //Check if the raycast hit the player (therefore it hasn't hit anything in between, so line of fire is clear)
 	            if (hit.collider.CompareTag("Player"))
 	            {
-		            //Instantiate the projectile prefab
-		            GameObject proj = Instantiate(attackOptions.projectile, transform.position, Quaternion.identity);
+                    Debug.Log("Firing projectile at player");
+                    //Instantiate the projectile prefab
+                    GameObject proj = Instantiate(attackOptions.projectile, transform.position, Quaternion.identity);
 		            
 		            //Get projectile's rigidbody
 		            Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
