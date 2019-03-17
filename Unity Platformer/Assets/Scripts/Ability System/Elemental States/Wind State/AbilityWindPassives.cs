@@ -5,7 +5,7 @@ using UnityEngine;
 public class AbilityWindPassives : MonoBehaviour {
 
 	private AbilityManager _abilityManager;
-	[SerializeField][Range(0.01f, 0.90f)] private float _windGravityDecrease;
+	[SerializeField][Range(0.01f, 0.6f)] private float _windGravityDecrease;
 	private void OnEnable()
 	{
 		Setup();

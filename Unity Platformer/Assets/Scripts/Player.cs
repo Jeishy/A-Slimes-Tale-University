@@ -87,8 +87,6 @@ public class Player : MonoBehaviour {
             {
                 //If so, remove armour slot
                 RemoveArmourSlot();
-                if (armour <= 0)
-                    _abilityManager.NoneState();
             }
             else
             {
@@ -136,6 +134,8 @@ public class Player : MonoBehaviour {
             armour = 0;
         }
 
+        if (armour <= 0)
+        _abilityManager.NoneState();
     }
 
     void Die()

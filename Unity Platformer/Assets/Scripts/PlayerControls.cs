@@ -77,6 +77,16 @@ public class PlayerControls : MonoBehaviour
 
 	}
 
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
+    
 	void FixedUpdate()
 	{
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);

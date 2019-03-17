@@ -5,7 +5,7 @@ using UnityEngine;
 public class AbilitySetNoneState : MonoBehaviour
 {
     private AbilityManager _abilityManager;
-    private Rigidbody2D _playerRb;
+    private Rigidbody _playerRb;
 
 	// Use this for initialization
 	private void OnEnable ()
@@ -24,14 +24,14 @@ public class AbilitySetNoneState : MonoBehaviour
     private void Setup()
     {
         _abilityManager = GetComponent<AbilityManager>();
-        _playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        _playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
     }
 
     private void SetNoneState()
     {
         Debug.Log("Setting state to none");
         _abilityManager.CurrentPlayerElementalState = ElementalStates.None;
-        if (_playerRb.gravityScale < 3f)
-            _playerRb.gravityScale = 3f;
+        if (_playerRb.mass < 1f)
+            _playerRb.mass = 1f;
     }
 }
