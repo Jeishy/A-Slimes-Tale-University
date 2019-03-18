@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttributes : MonoBehaviour {
 
 	[HideInInspector] public Transform playerTransform;
+    [HideInInspector] public GameObject Player;
 
 	// Singleton pattern for accessing class
 	[HideInInspector] public static PlayerAttributes Instance = null;
@@ -15,7 +16,8 @@ public class PlayerAttributes : MonoBehaviour {
 			Instance = this;
 		}
 
-		// Caching player transform
-		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        Player = GameObject.FindGameObjectWithTag("Player");
+        // Caching player transform
+        playerTransform = Player.transform;
 	}
 }
