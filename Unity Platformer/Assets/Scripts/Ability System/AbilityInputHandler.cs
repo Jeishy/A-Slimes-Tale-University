@@ -43,7 +43,7 @@ public class AbilityInputHandler : MonoBehaviour {
 	// Update is called once per frame
 	private void Update () {
 		InputHandler();
-		//EarthCrashCheck();
+		EarthCrashCheck();
 	}
 
     private void ShootToggle()
@@ -117,7 +117,6 @@ public class AbilityInputHandler : MonoBehaviour {
                     _abilityManager.BoostedProjectileFire();
                 }
 #endif
-
             }
         }
 
