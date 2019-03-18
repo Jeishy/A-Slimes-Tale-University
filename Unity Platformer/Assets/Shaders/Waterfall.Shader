@@ -9,7 +9,7 @@
 		_AlphaCutoff ("Alpha Cutoff", Range (0,1)) = 1.0
 	}
 	SubShader {
-		Tags { "Queue"="Opaque" "RenderType"="Transparent" }
+		Tags { "Queue"="Geometry" "RenderType"="Transparent" }
 		Blend SrcAlpha OneMinusSrcAlpha
 		LOD 200
 
