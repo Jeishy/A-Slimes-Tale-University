@@ -114,10 +114,11 @@ public class EnemyAI : MonoBehaviour
 	            {
                     Debug.Log("Firing projectile at player");
                     //Instantiate the projectile prefab
-                    GameObject proj = Instantiate(attackOptions.projectile, transform.position, Quaternion.identity);
-		            
-		            //Get projectile's rigidbody
-		            Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
+                    GameObject proj = Instantiate(attackOptions.projectile, attackOptions.firePoint.position, Quaternion.identity);
+                    GameObject particle = Instantiate(attackOptions.particleEffect, attackOptions.firePoint.position, Quaternion.identity);
+
+                    //Get projectile's rigidbody
+                    Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
 
 
 		            //Apply force to projectile's rigidbody
@@ -126,9 +127,10 @@ public class EnemyAI : MonoBehaviour
 		            
 		            //Destroy projectile after it's maximum lifespan has been reached
 		            Destroy(proj, attackOptions.projectileLifespan);
-		            
-		            //Calculate and store next attack time
-		            attackCountdown = Time.time + attackOptions.attackSpeed;
+                    Destroy(proj, attackOptions.particleLifespan);
+
+                    //Calculate and store next attack time
+                    attackCountdown = Time.time + attackOptions.attackSpeed;
 	            }
             }
         }

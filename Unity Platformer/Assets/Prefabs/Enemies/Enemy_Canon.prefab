@@ -152,8 +152,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4069021394638854}
   - component: {fileID: 114375523576496216}
-  - component: {fileID: 50280450970999932}
-  - component: {fileID: 61480273896411368}
+  - component: {fileID: 65924466918037712}
+  - component: {fileID: 54840959829107228}
   m_Layer: 12
   m_Name: Enemy
   m_TagString: Enemy
@@ -195,6 +195,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1966847621869386
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4476886379679664}
+  m_Layer: 12
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4007039523164170
 Transform:
   m_ObjectHideFlags: 1
@@ -215,7 +230,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1479179074025534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.24, y: 4.87, z: 0}
+  m_LocalPosition: {x: -13.056322, y: 41.43429, z: 5.8873777}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4069021394638854}
@@ -233,6 +248,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4939868991114402}
+  - {fileID: 4476886379679664}
   m_Father: {fileID: 4019677492028672}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -260,6 +276,19 @@ Transform:
   m_LocalScale: {x: 0.47777778, y: 0.9111111, z: 0.21777779}
   m_Children: []
   m_Father: {fileID: 4939868991114402}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4476886379679664
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1966847621869386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7862, y: 0.149, z: 0.0481}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4069021394638854}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4508141586428648
@@ -684,51 +713,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1909605486923120}
   m_Mesh: {fileID: 4300012, guid: 87e9a478cbac17a4b98e0ca100a52fb3, type: 3}
---- !u!50 &50280450970999932
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!54 &54840959829107228
+Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1592723398982910}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  serializedVersion: 2
   m_Mass: 1
-  m_LinearDrag: 0
+  m_Drag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_Constraints: 0
   m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!61 &61480273896411368
-BoxCollider2D:
+--- !u!65 &65924466918037712
+BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1592723398982910}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.06503296, y: -0.083322525}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4389687, y: 1.2479362}
-  m_EdgeRadius: 0
+  m_Size: {x: 1.422492, y: 1.2179642, z: 1}
+  m_Center: {x: 0.03506136, y: -0.108982086, z: 0}
 --- !u!114 &114375523576496216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -752,8 +763,12 @@ MonoBehaviour:
     attackSpeed: 3
     projectile: {fileID: 1179139433825628, guid: e244221de90d32b4c9b82b3530d00248,
       type: 2}
+    firePoint: {fileID: 4476886379679664}
+    particleEffect: {fileID: 1299640213781866, guid: f8911718fbc5e1d46a558f00ff576f76,
+      type: 2}
     projectileSpeed: 10
     projectileLifespan: 3
+    particleLifespan: 2
     playerMask:
       serializedVersion: 2
       m_Bits: 512
