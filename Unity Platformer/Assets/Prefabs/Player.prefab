@@ -299,9 +299,8 @@ GameObject:
   - component: {fileID: 114510808012603534}
   - component: {fileID: 114529983506472564}
   - component: {fileID: 114364773818319250}
-  - component: {fileID: 61031149970099956}
-  - component: {fileID: 50929110114951760}
-  - component: {fileID: 61519780767610400}
+  - component: {fileID: 54164265017550638}
+  - component: {fileID: 65203835466042252}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -432,7 +431,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1136351022796466}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -8.46, y: -3.89, z: 1.98}
+  m_LocalPosition: {x: -8.46, y: -3.89, z: 1.97}
   m_LocalScale: {x: 0.8928, y: 0.8928, z: 0.8928}
   m_Children:
   - {fileID: 4106510349572880}
@@ -541,8 +540,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950331587363064}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -311.68, y: -16.65, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.28, y: 0.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4475560020013268}
@@ -1126,76 +1125,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1567842747835062}
   m_Mesh: {fileID: 4300008, guid: 360ab2ac0a112b34eb6ff03bbad68010, type: 3}
---- !u!50 &50929110114951760
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!54 &54164265017550638
+Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950331587363064}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  serializedVersion: 2
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!61 &61031149970099956
-BoxCollider2D:
+  m_Constraints: 72
+  m_CollisionDetection: 0
+--- !u!65 &65203835466042252
+BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950331587363064}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.04297638}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.0859528}
-  m_EdgeRadius: 0
---- !u!61 &61519780767610400
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1950331587363064}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.32025695}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.3594861}
-  m_EdgeRadius: 0
+  m_Size: {x: 1.2798543, y: 1.334243, z: 1.384109}
+  m_Center: {x: -0.113693, y: 0.022806287, z: 0.23012424}
 --- !u!114 &114364773818319250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1226,7 +1182,7 @@ MonoBehaviour:
   m_WallCheck: {fileID: 4591116611348048}
   m_BehindWallCheck: {fileID: 4278450528689954}
   m_wallDetectRadius: 0.15
-  m_CrouchDisableCollider: {fileID: 61519780767610400}
+  m_CrouchDisableCollider: {fileID: 0}
   m_KnockbackForce: {x: 0, y: 0}
   m_KnockbackLength: 0
   m_WallJumpEffect: {fileID: 1405286440405556, guid: f24291d303995de45ae0bd002237d6cb,
@@ -1273,7 +1229,7 @@ MonoBehaviour:
   health: 3
   armour: 0
   damageCooldown: 0.5
-  _meshRenderer: {fileID: 23259794109189070}
+  _meshRenderer: {fileID: 23602327539479384}
   _damagedColour: {r: 0.9811321, g: 0.1064436, b: 0.1064436, a: 1}
   _onCoinCollectPE: {fileID: 1659524767510216, guid: 4b6c94ec3a170854e9ebd3f7c2203ba7,
     type: 2}

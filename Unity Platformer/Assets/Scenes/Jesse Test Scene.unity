@@ -529,11 +529,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3a172f3f4154f046bd06f6be52fc0d3, type: 2}
   m_IsPrefabAsset: 0
---- !u!23 &1056006931 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 23602327539479384, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
-    type: 2}
-  m_PrefabInternal: {fileID: 1212046037}
 --- !u!1001 &1095786819
 Prefab:
   m_ObjectHideFlags: 0
@@ -681,44 +676,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114150655687040544, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
-        type: 2}
-      propertyPath: _damagedColour.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114150655687040544, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
-        type: 2}
-      propertyPath: _damagedColour.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114150655687040544, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
-        type: 2}
-      propertyPath: _damagedColour.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114150655687040544, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
-        type: 2}
-      propertyPath: _damagedColour.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114529983506472564, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
-        type: 2}
-      propertyPath: _meshRenderer
-      value: 
-      objectReference: {fileID: 1056006931}
     - target: {fileID: 114529983506472564, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
         type: 2}
       propertyPath: _healthBar
       value: 
       objectReference: {fileID: 1751028634}
-    - target: {fileID: 4291736564978842, guid: 575189cb5ed4cbd4b8cc553e46a10a54, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 1.97
+    - target: {fileID: 114364773818319250, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
+        type: 2}
+      propertyPath: m_CrouchDisableCollider
+      value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 61031149970099956, guid: 575189cb5ed4cbd4b8cc553e46a10a54, type: 2}
-    - {fileID: 61519780767610400, guid: 575189cb5ed4cbd4b8cc553e46a10a54, type: 2}
-    - {fileID: 50929110114951760, guid: 575189cb5ed4cbd4b8cc553e46a10a54, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 575189cb5ed4cbd4b8cc553e46a10a54, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1234147067
@@ -1687,35 +1655,3 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce62dba1f5a550a44a328c615b9ed4c9, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1927524443 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1950331587363064, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
-    type: 2}
-  m_PrefabInternal: {fileID: 1212046037}
---- !u!65 &1927524444
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1927524443}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2798543, y: 1.334243, z: 1.384109}
-  m_Center: {x: -0.113693, y: 0.022806287, z: 0.23012424}
---- !u!54 &1927524445
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1927524443}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 72
-  m_CollisionDetection: 0
