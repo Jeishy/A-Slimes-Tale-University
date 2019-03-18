@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4992090364331352}
   m_Layer: 0
   m_Name: Water Gemstone
-  m_TagString: Untagged
+  m_TagString: Gemstone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,9 +70,10 @@ GameObject:
   - component: {fileID: 33536653002496694}
   - component: {fileID: 23376663930181350}
   - component: {fileID: 95460131878572124}
+  - component: {fileID: 136232708710721296}
   m_Layer: 0
   m_Name: Water Gemstone Model
-  m_TagString: Untagged
+  m_TagString: Gemstone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,6 +261,19 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!136 &136232708710721296
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1714107370884362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.005055409
+  m_Height: 0.038245738
+  m_Direction: 1
+  m_Center: {x: 0.0000000020954758, y: -0.004285385, z: 0.0035133327}
 --- !u!198 &198079986987994668
 ParticleSystem:
   m_ObjectHideFlags: 1
