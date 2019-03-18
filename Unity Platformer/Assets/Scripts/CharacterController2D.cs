@@ -89,51 +89,12 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool crouch, bool jump)
+	public void Move(float move, bool jump)
 	{
-		// If crouching, check to see if the character can stand up
-		if (!crouch)
-		{
-			
-			// If the character has a ceiling preventing them from standing up, keep them crouching
-			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
-			{
-				crouch = true;
-			}
-		}
 		
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
-
-			/*// If crouching
-			if (crouch)
-			{
-				if (!m_wasCrouching)
-				{
-					m_wasCrouching = true;
-					OnCrouchEvent.Invoke(true);
-				}
-
-				// Reduce the speed by the crouchSpeed multiplier
-				move *= m_CrouchSpeed;
-
-				// Disable one of the colliders when crouching
-				if (m_CrouchDisableCollider != null)
-					m_CrouchDisableCollider.enabled = false;
-			} else
-			{
-				// Enable the collider when not crouching
-				if (m_CrouchDisableCollider != null)
-					m_CrouchDisableCollider.enabled = true;
-
-				if (m_wasCrouching)
-				{
-					m_wasCrouching = false;
-					OnCrouchEvent.Invoke(false);
-				}
-			}*/
-
 
 			Vector3 targetVelocity;
 			if (m_KnockbackCount <= 0)
@@ -183,22 +144,23 @@ public class CharacterController2D : MonoBehaviour
 		
 		// Wall Sliding
 		Vector2 facingDirection = new Vector2(Input.GetAxis("Horizontal"), 0f);
-		
-		//m_wallSliding = Physics2D.Raycast(transform.position, facingDirection, m_wallDetectRadius, m_WallLayer);
-		m_wallSliding = Physics2D.OverlapCircle(m_WallCheck.position, m_wallDetectRadius, m_WallLayer) || Physics2D.OverlapCircle(m_BehindWallCheck.position, m_wallDetectRadius, m_WallLayer);
 
+        //m_wallSliding = Physics.Raycast(m_WallCheck.position, facingDirection, m_wallDetectRadius, m_WallLayer);
+        //m_wallSliding = Physics.SphereCast(transform.position, facingDirection, m_wallDetectRadius, m_WallLayer);
+        //m_wallSliding = Physics2D.OverlapCircle(m_WallCheck.position, m_wallDetectRadius, m_WallLayer) || Physics2D.OverlapCircle(m_BehindWallCheck.position, m_wallDetectRadius, m_WallLayer);
 
         // Limit player wall slide speed
         if (m_wallSliding && m_Rigidbody.velocity.y <= -m_MaxWallSlideSpeed)
 		{
-			
+            Debug.Log("LIMITING WALL SPEED!!!");
 			m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, -m_MaxWallSlideSpeed);
 
 		}
 
+
+        //Unstick from wall whenever player tries to move away from the wall
         if (m_WallNormal == Input.GetAxis("Horizontal") && m_WallNormal != 0)
         {
-            //Debug.Log("Unsticking from wall");
             StickToWall(false);
         }
 
@@ -221,15 +183,12 @@ public class CharacterController2D : MonoBehaviour
                 Destroy(pWallJump, 1f);
 				// Flip because character will jump off the wall in the other direction
 				Flip();
-                Debug.Log("Flipping wall jump");
-                //Debug.Log("Wall jump, Wall normal: " + m_WallNormal);
 			}
 			
 			// ... and player is not touching the wall
 			else
 			{
-				Debug.Log("Normal jump");
-				// Add a vertical force to the player.
+				// Add only the vertical force to the player.
 				m_Rigidbody.AddForce(new Vector2(0f, m_JumpForce), ForceMode.Force);
 			}
 
@@ -242,11 +201,16 @@ public class CharacterController2D : MonoBehaviour
 		m_KnockbackCount = m_KnockbackLength;
 	}
 	
+
 	private void Flip()
 	{
         if (m_FlipDelay <= Time.time)
             
         {
+
+            if (m_wallSliding && (m_FacingRight && m_WallNormal == 1) || (!m_FacingRight && m_WallNormal == -1))
+                return;
+
             //Debug.Log("flipping");
             // Switch the way the player is labelled as facing.
             m_FacingRight = !m_FacingRight;
@@ -281,6 +245,7 @@ public class CharacterController2D : MonoBehaviour
 	         //Possible alternative fix for poor wall jumping
             if (Mathf.Abs(m_WallNormal) == 1)
             {
+                m_wallSliding = true;
                 StickToWall(true);
             }
 		}
@@ -294,6 +259,7 @@ public class CharacterController2D : MonoBehaviour
     // Possible alternative fix for poor wall jumping
 	private void OnCollisionExit(Collision other)
 	{
+        m_wallSliding = false;
         StickToWall(false);
     }
 }

@@ -18,7 +18,6 @@ public class PlayerControls : MonoBehaviour
 	private float horizontalMove;
 	private bool jump = false;
 	private bool wallJump = true;
-	private bool crouch = false;
 	
 	// Use this for initialization
 	void Start ()
@@ -58,21 +57,6 @@ public class PlayerControls : MonoBehaviour
                 }
             }
 
-
-            //Crouching, saved for future
-            /*if (Input.GetButtonDown("Crouch"))
-            {
-                Debug.Log("Crouch down");
-                crouch = true;
-            }
-
-            else if (Input.GetButtonUp("Crouch"))
-            {
-                Debug.Log("Crouch up");
-                crouch = false;
-            }*/
-
-
         }
 
 	}
@@ -89,7 +73,7 @@ public class PlayerControls : MonoBehaviour
     
 	void FixedUpdate()
 	{
-		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+		controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
 		jump = false;
 	}
 }

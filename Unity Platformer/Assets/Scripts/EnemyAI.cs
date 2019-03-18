@@ -40,6 +40,7 @@ public class EnemyAI : MonoBehaviour
     private Player playerScript;
     private CharacterController2D controller;
     private float attackCountdown;
+    private bool m_FacingRight = true;
 
     private void Start()
     {
@@ -59,10 +60,23 @@ public class EnemyAI : MonoBehaviour
             Die();
         }
 
+        // If the input is moving the player right and the player is facing left...
+        /*if ( > 0 && !m_FacingRight)
+        {
+            // ... flip the player.
+            Flip();
 
+        }
+        // Otherwise if the input is moving the player left and the player is facing right...
+        else if (move < 0 && m_FacingRight)
+        {
+            // ... flip the player.
+            Flip();
 
-	    //Execute code when patrol boolean is true - Set in editor
-	    if (patrol && !waiting)
+        }*/
+
+        //Execute code when patrol boolean is true - Set in editor
+        if (patrol && !waiting)
 	    {
 		    //When enemy has reached its current waypoint, go to next waypoint
 		    if (IsAtWaypoint())
@@ -149,8 +163,20 @@ public class EnemyAI : MonoBehaviour
         Destroy(gameObject);
     }
 
-	//Increments current waypoint variable, then it makes sure it doesnt go over the amount of set waypoints
-	void NextWaypoint()
+    private void Flip()
+    {
+            //Debug.Log("flipping");
+            // Switch the way the player is labelled as facing.
+            m_FacingRight = !m_FacingRight;
+
+            // Multiply the player's x local scale by -1.
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+    }
+
+    //Increments current waypoint variable, then it makes sure it doesnt go over the amount of set waypoints
+    void NextWaypoint()
 	{
 		
 		//If waitAtWaypoint boolean is true
@@ -191,7 +217,7 @@ public class EnemyAI : MonoBehaviour
 			currentWaypoint = Random.Range(0, waypoints.Length);
 		}
 		
-			}
+	}
 
 	IEnumerator Wait()
 	{
