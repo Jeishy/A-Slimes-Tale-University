@@ -71,9 +71,9 @@ GameObject:
   - component: {fileID: 4466082397407992}
   - component: {fileID: 33607503190950060}
   - component: {fileID: 23668182797257944}
-  - component: {fileID: 58051190121679980}
-  - component: {fileID: 50570259659739746}
   - component: {fileID: 114513603332116728}
+  - component: {fileID: 135535710580622018}
+  - component: {fileID: 54476042811649764}
   m_Layer: 11
   m_Name: FireProjectile
   m_TagString: Projectile
@@ -178,41 +178,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706052494266008}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!50 &50570259659739746
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!54 &54476042811649764
+Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706052494266008}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!58 &58051190121679980
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1706052494266008}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!108 &108914725243911296
 Light:
   m_ObjectHideFlags: 1
@@ -274,6 +254,18 @@ MonoBehaviour:
   _dotTime: 3
   _boostedDotTime: 6
   _onLandPE: {fileID: 1762409889873160, guid: edc1a075cb552bd41baec12a4566dc54, type: 2}
+--- !u!135 &135535710580622018
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706052494266008}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198291428886034882
 ParticleSystem:
   m_ObjectHideFlags: 1

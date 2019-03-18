@@ -25,7 +25,7 @@ public class AbilitySetStateWater : MonoBehaviour {
 	private void SetWaterState()
 	{
 		_abilityManager.CurrentPlayerElementalState = ElementalStates.Water;
-        _abilityManager.playerRb.gravityScale = _abilityManager.InitialGravityScale;
+        _abilityManager.playerRb.mass = _abilityManager.OriginalMass;
         Debug.Log(_abilityManager.CurrentPlayerElementalState);
 	}
 }

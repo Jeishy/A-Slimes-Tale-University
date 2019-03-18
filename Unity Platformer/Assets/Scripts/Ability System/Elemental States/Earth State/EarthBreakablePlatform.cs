@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EarthBreakablePlatform : MonoBehaviour {
-	[SerializeField] private float _timeTillDestroyed;
-	private AbilityEarthCrash _abilityEarthCrash;
+
+    [SerializeField] private GameObject _platformDestroyedPE;
+
+    private AbilityEarthCrash _abilityEarthCrash;
 	private void Start()
 	{
 		_abilityEarthCrash = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityEarthCrash>();
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	private void OnTriggerEnter(Collider col)
 	{
-		Collider2D col = collision.gameObject.GetComponent<Collider2D>();
 		if (col.CompareTag("Player") && _abilityEarthCrash.IsCrashAbilityActivated)
 		{
-            col.GetComponent<Rigidbody2D>().velocity = _abilityEarthCrash.InitialVelocity;
-			// Play particle effect or animation
-			Destroy(gameObject, _timeTillDestroyed);
+            // Play particle effect or animation
+            GameObject particle = Instantiate(_platformDestroyedPE, transform.position, Quaternion.identity);
+            Destroy(particle, 1.1f);
+            Destroy(gameObject);
+            col.GetComponent<Rigidbody>().velocity = _abilityEarthCrash.InitialVelocity;
 		}
 	}
 }

@@ -14,9 +14,6 @@ public class AbilityInputHandler : MonoBehaviour {
 	[SerializeField] private LayerMask _enemyLayerMask;
 	[SerializeField] private float _boostedProjectileMaxTime;	// The longest time mouse button 0 must be held to spawn boosted projectile
     [SerializeField] [Range(0.01f, 0.5f)] private float _rightStickDeadzone;
-    public Text _rightHorizontalAxis;
-    public Text _rightVerticalAxis;
-
 
     private AbilityManager _abilityManager;
 	private AbilityProjectile _abilityProjectile;
@@ -38,10 +35,9 @@ public class AbilityInputHandler : MonoBehaviour {
 		_abilityManager = GetComponent<AbilityManager>();
 		_abilityProjectile = GetComponent<AbilityProjectile>();
 		_projFireTime = 0f;	// Set fire time to zero at beginning of level, Note: This must be set to 0 when each level is left/complete
-		_characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
+		_characterController = PlayerAttributes.Instance.playerTransform.GetComponent<CharacterController2D>();
 		_abilityEarthCrash = GetComponent<AbilityEarthCrash>();
         _isMouseZeroPressed = false;
-
     }
 	
 	// Update is called once per frame
@@ -74,6 +70,7 @@ public class AbilityInputHandler : MonoBehaviour {
         // if elapsed time is greater than fire time (Used for cooldown)
         if (Input.GetButtonDown("Fire1"))
         {
+            Debug.Log("Mouse button pressed");
             if (!_isMouseZeroPressed)
 			{
 				_mousePressedStartTime = Time.time;

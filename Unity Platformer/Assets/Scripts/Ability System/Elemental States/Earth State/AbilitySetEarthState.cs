@@ -24,7 +24,7 @@ public class AbilitySetEarthState : MonoBehaviour {
 	private void SetEarthState()
 	{
 		_abilityManager.CurrentPlayerElementalState = ElementalStates.Earth;
-        _abilityManager.playerRb.gravityScale = _abilityManager.InitialGravityScale;
+        _abilityManager.playerRb.mass = _abilityManager.OriginalMass;
 		Debug.Log(_abilityManager.CurrentPlayerElementalState);
 	}
 }

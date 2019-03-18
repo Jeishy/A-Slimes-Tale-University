@@ -16,7 +16,7 @@ public class AbilityEarthCrash : MonoBehaviour {
     
     private Player _playerDur;
     private AbilityManager _abilityManager;
-    private Rigidbody2D _playerRb;
+    private Rigidbody _playerRb;
 
     private void OnEnable()
 	{
@@ -33,7 +33,7 @@ public class AbilityEarthCrash : MonoBehaviour {
 	{
 		_abilityManager = GetComponent<AbilityManager>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        _playerRb = player.GetComponent<Rigidbody2D>();
+        _playerRb = player.GetComponent<Rigidbody>();
         _playerDur = player.GetComponent<Player>();
     }
 
@@ -43,7 +43,7 @@ public class AbilityEarthCrash : MonoBehaviour {
         {
             // Armour slot is removed when ability is used
             _playerDur.RemoveArmourSlot();
-            _playerRb.AddForce(new Vector2(0, -_downwardForce), ForceMode2D.Impulse);
+            _playerRb.AddForce(new Vector3(0f, -_downwardForce, 0f), ForceMode.Impulse);
             IsCrashAbilityActivated = true;
             StartCoroutine(WaitTimeToActivateAbility());
             InitialVelocity = _playerRb.velocity;
@@ -70,10 +70,10 @@ public class AbilityEarthCrash : MonoBehaviour {
             // Normalize the direction vector
             direction = direction.normalized;
             // Get enemies rigidbody2D component
-            Rigidbody2D enemyRb = enemyCol.GetComponent<Rigidbody2D>();
+            Rigidbody enemyRb = enemyCol.GetComponent<Rigidbody>();
 
             // Apply force to enemies in range
-            enemyRb.AddForce(direction * _enemyKnockbackForce, ForceMode2D.Impulse);
+            enemyRb.AddForce(direction * _enemyKnockbackForce, ForceMode.Impulse);
 			// Do higher damage the closer an enemy is
             float damage = (1f / distance) * _maxDamage;
 			Debug.Log("Damage done to enemy " + enemyCol.name + ": " + damage);

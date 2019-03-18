@@ -31,8 +31,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private bool randomWaitTime;				//If true, the wait time will be random between minimumRandomWaitTime and maximiumRandomWaitTime
     [SerializeField] private float maximiumRandomWaitTime;		//Maximum random wait time
     [SerializeField] private float minimumRandomWaitTime;		//Minimum random wait time
-    [SerializeField] private float waypointDetectDistance;		//How close the enemy needs to be to the waypoint to cnonsider as reached
-   
+    [SerializeField] private float waypointDetectDistance;      //How close the enemy needs to be to the waypoint to cnonsider as reached
+
     private int currentWaypoint = 0;							//Stores the value of the current waypoint index
     private int waypointIncrement = 1;							//Used for the Ping-Pong waypoint following method
     private bool waiting = false;								//When true the enemy pauses its patrol
@@ -112,8 +112,9 @@ public class EnemyAI : MonoBehaviour
 	            //Check if the raycast hit the player (therefore it hasn't hit anything in between, so line of fire is clear)
 	            if (hit.collider.CompareTag("Player"))
 	            {
-		            //Instantiate the projectile prefab
-		            GameObject proj = Instantiate(attackOptions.projectile, transform.position, Quaternion.identity);
+                    Debug.Log("Firing projectile at player");
+                    //Instantiate the projectile prefab
+                    GameObject proj = Instantiate(attackOptions.projectile, transform.position, Quaternion.identity);
 		            
 		            //Get projectile's rigidbody
 		            Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();

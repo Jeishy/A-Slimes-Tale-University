@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class WaterProjectile : ElementalProjectiles,IPooledProjectile {
+[RequireComponent(typeof(Rigidbody))]
+public class WaterProjectile : ElementalProjectiles, IPooledProjectile 
+{
 	
 	private Vector3 _originalScale;
-	private Rigidbody2D _rb;
+	private Rigidbody _rb;
 	private Plane _plane;				// Plane used for plane.raycast in the Shoot function
 	private Vector3 _distanceFromCamera;    // Distance from camera that the plane is created at
     private AbilityInputHandler _inputHandler;
@@ -18,13 +19,16 @@ public class WaterProjectile : ElementalProjectiles,IPooledProjectile {
 	// Rigidbody is set in awake
 	private void Awake()
 	{
-		_rb = GetComponent<Rigidbody2D>();
+		_rb = GetComponent<Rigidbody>();
 		_originalScale = transform.localScale;
         _inputHandler = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityInputHandler>();
     }
 
     public void Shoot()
 	{
+        // Set gravity to false;
+        _rb.useGravity = false;
+
 		// Null check to ensure player variables are set
 		if (playerTrans == null)
 			LoadPlayerVariables();
@@ -57,13 +61,13 @@ public class WaterProjectile : ElementalProjectiles,IPooledProjectile {
         }
 	}
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         GameObject onLand = Instantiate(_OnLandPE, collision.contacts[0].point, Quaternion.identity);
         if (IsBoosted)
             onLand.transform.localScale *= 2.0f;
         Destroy(onLand, 1f);
-        Collider2D col = collision.collider;
+        Collider col = collision.collider;
         if (col.CompareTag("Enemy"))
         {
             if (IsBoosted)
@@ -78,7 +82,7 @@ public class WaterProjectile : ElementalProjectiles,IPooledProjectile {
             transform.localScale = _originalScale;
             IsBoosted = false;
         }
-        _rb.gravityScale = 0;
+        _rb.useGravity = false;
         Destroy(gameObject);
     }
 }

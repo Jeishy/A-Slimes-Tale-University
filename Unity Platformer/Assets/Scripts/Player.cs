@@ -51,7 +51,7 @@ public class Player : MonoBehaviour {
 	void Update ()
     {
         //Display health and armour in UI
-        _healthBar.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
+        //_healthBar.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
         //_armourText.text = "Armour: " + armour;
 
         //Call Die() function when player is at or below 0 health
@@ -87,8 +87,6 @@ public class Player : MonoBehaviour {
             {
                 //If so, remove armour slot
                 RemoveArmourSlot();
-                if (armour <= 0)
-                    _abilityManager.NoneState();
             }
             else
             {
@@ -136,6 +134,8 @@ public class Player : MonoBehaviour {
             armour = 0;
         }
 
+        if (armour <= 0)
+        _abilityManager.NoneState();
     }
 
     void Die()
@@ -171,7 +171,7 @@ public class Player : MonoBehaviour {
     
 
     //Collision checks
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter(Collision other)
     {
         //Check if the player has collided with an enemy projectile
         if (other.gameObject.CompareTag("EnemyProj"))
@@ -199,7 +199,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Checkpoint"))
         {
