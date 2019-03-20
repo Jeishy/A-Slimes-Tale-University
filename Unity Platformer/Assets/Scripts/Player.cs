@@ -218,8 +218,10 @@ public class Player : MonoBehaviour {
         if (other.CompareTag("Gemstone"))
         {
             Debug.Log("Gemstone");
-            gm.OnGemstonePickup();
-            Destroy(other.gameObject);
+            //gm.OnGemstonePickup();
+            other.GetComponentInParent<GemstoneCollect>().IsCollected = true;
+            StartCoroutine(WaitToGemstoneCollect(other.transform.parent));
+            Destroy(other.transform.parent.gameObject, 3f);
         }
 
         if (other.CompareTag("NextLevel"))
@@ -238,4 +240,12 @@ public class Player : MonoBehaviour {
         Destroy(coinCollect, 1f);
     }
 
+    private IEnumerator WaitToGemstoneCollect(Transform other)
+    {
+        yield return new WaitForSeconds(2.98f);
+        Vector3 spawnPos = other.position;
+        GameObject gemstoneCollectPE = other.GetComponent<GemstoneCollect>().OnCollectPE;
+        GameObject gemstoneCollect = Instantiate(gemstoneCollectPE, spawnPos, Quaternion.identity);
+        Destroy(gemstoneCollect, 1f);
+    }
 }
