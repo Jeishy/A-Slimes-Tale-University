@@ -18,6 +18,7 @@ public class ElementalProjectiles : MonoBehaviour {
 
     private Vector2 _projForce;
     private Vector2 _hitPoint;
+
     private void Awake()
     {
         IsBoosted = false;
@@ -58,7 +59,6 @@ public class ElementalProjectiles : MonoBehaviour {
     // Does flat damage to hit enemy
     public virtual void FlatDamageToEnemy(float damage, Collider enemyCol)
     {
-        Debug.Log("Doing flat damage");
         // Reduce enemy's health by baseDamage
         enemyCol.GetComponent<EnemyAI>().Hit(damage);
     }
@@ -69,15 +69,13 @@ public class ElementalProjectiles : MonoBehaviour {
         // Do intial damage to enemy with intialDmg
         enemyCol.GetComponent<EnemyAI>().Hit(initialDmg);
         // Apply dot over time, till dotTime is elapsed
-        int dotCount = 0;
-        while (dotCount < dotTime)
+        for (int i = 0; i < dotTime; i++)
         {
-            dotCount++;
+            yield return new WaitForSeconds(1f);
             // Do damage to enemy
-            Debug.Log("Damage done: " + dot);
             enemyCol.GetComponent<EnemyAI>().Hit(dot);
-            yield return new WaitForSeconds(1);
         }
+        Destroy(gameObject);
     }
 
     // Does knockback damage to hit enemy

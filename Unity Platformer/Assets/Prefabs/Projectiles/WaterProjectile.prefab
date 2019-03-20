@@ -181,8 +181,8 @@ MonoBehaviour:
   abilityManager: {fileID: 0}
   playerTrans: {fileID: 0}
   _dropOffTime: 2
-  _baseDamage: 5
-  _boostedDamage: 10
+  _baseDamage: 1
+  _boostedDamage: 3
   _OnLandPE: {fileID: 1766197264438252, guid: 299682866e3810148b4b974417238ceb, type: 2}
 --- !u!135 &135560869504413278
 SphereCollider:

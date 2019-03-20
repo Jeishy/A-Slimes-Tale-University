@@ -183,8 +183,8 @@ MonoBehaviour:
   _dropOffTime: 50
   _knockbackForce: 5
   _boostedKnockbackForce: 8
-  _baseDamage: 10
-  _boostedDamage: 20
+  _baseDamage: 1
+  _boostedDamage: 3
   _OnLandPE: {fileID: 1237923862178386, guid: bc68e9969ce7e434e9307620af8e25af, type: 2}
 --- !u!135 &135026650090880754
 SphereCollider:

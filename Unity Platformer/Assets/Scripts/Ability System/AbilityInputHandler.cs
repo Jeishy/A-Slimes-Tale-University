@@ -36,7 +36,7 @@ public class AbilityInputHandler : MonoBehaviour {
 		_abilityProjectile = GetComponent<AbilityProjectile>();
 		_projFireTime = 0f;	// Set fire time to zero at beginning of level, Note: This must be set to 0 when each level is left/complete
         Debug.Log(PlayerAttributes.Instance == null ? "Instance is null" : "Instance is not null");
-		_characterController = PlayerAttributes.Instance.Player.GetComponent<CharacterController2D>();
+        _characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
 		_abilityEarthCrash = GetComponent<AbilityEarthCrash>();
         _isMouseZeroPressed = false;
     }
