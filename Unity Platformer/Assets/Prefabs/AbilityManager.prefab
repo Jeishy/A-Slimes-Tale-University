@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
+  Player: {fileID: 0}
 --- !u!114 &114298609340141486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6822695b31beac646a28ccea4fec3acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _windGravityDecrease: 0.5
+  _windGravityDecrease: 0.131
 --- !u!114 &114301560330848006
 MonoBehaviour:
   m_ObjectHideFlags: 1
