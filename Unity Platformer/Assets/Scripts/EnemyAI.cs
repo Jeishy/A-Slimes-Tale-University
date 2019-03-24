@@ -96,7 +96,8 @@ public class EnemyAI : MonoBehaviour
         {
 
 	        //Check if enemy's attack is off cooldown and it is within melee range of the player
-            if (attackCountdown <= Time.time && Physics2D.OverlapCircle(transform.position, attackOptions.meleeRange, attackOptions.playerMask))
+	        if (attackCountdown <= Time.time &&
+	            Physics.OverlapSphere(transform.position, attackOptions.meleeRange, attackOptions.playerMask).Length > 0);
             {
                 //Call the Hit() method on the PlayerDurability script
                 playerScript.Hit();
