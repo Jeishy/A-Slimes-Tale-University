@@ -71,7 +71,6 @@ public class AbilityInputHandler : MonoBehaviour {
         // if elapsed time is greater than fire time (Used for cooldown)
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("Mouse button pressed");
             if (!_isMouseZeroPressed)
 			{
 				_mousePressedStartTime = Time.time;
