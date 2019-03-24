@@ -19,6 +19,7 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
     // Rigidbody is set in awake
     private void Awake()
 	{
+        projectileElementalState = ElementalStates.Earth;
 		_rb = GetComponent<Rigidbody>();
 		_originalScale = transform.localScale;
         _inputHandler = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityInputHandler>();

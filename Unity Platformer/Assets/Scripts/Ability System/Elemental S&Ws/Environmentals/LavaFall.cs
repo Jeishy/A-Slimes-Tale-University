@@ -32,7 +32,7 @@ public class LavaFall : MonoBehaviour {
 					rb.velocity = new Vector3(-vel.x * _knockbackMultiplier, vel.y, 0f);
 					_solidCol.isTrigger = false;
 					// Do damage to player
-					_player.Hit();
+					_player.Hit(_abilityManager.CurrentPlayerElementalState, ElementalStates.Fire);
 					break;
 				case ElementalStates.Earth:
 					_solidCol.isTrigger = false;
@@ -43,7 +43,7 @@ public class LavaFall : MonoBehaviour {
 				case ElementalStates.None:
 					_solidCol.isTrigger = false;
                     // Do damage to player
-                    _player.Hit();
+					_player.Hit(_abilityManager.CurrentPlayerElementalState, ElementalStates.Fire);
                     break;
 				case ElementalStates.Fire:
 					// Allow player to pass through lavalfall if in fire state

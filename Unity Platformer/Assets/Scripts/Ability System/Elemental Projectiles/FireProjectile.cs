@@ -23,6 +23,7 @@ public class FireProjectile : ElementalProjectiles {
 	// Rigidbody is set in awake
 	private void Awake()
 	{
+        projectileElementalState = ElementalStates.Fire;
 		_rb = GetComponent<Rigidbody>();
 		_originalScale = transform.localScale;
         _inputHandler = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityInputHandler>();

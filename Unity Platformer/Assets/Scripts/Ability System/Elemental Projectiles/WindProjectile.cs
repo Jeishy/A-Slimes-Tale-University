@@ -18,6 +18,7 @@ public class WindProjectile : ElementalProjectiles,IPooledProjectile {
 
     private void Awake()
 	{
+        projectileElementalState = ElementalStates.Wind;
 		_rb = GetComponent<Rigidbody>();
 		_originalScale = transform.localScale;
         _inputHandler = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityInputHandler>();

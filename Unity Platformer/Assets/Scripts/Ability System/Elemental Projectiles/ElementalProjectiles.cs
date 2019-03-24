@@ -13,6 +13,7 @@ public class ElementalProjectiles : MonoBehaviour {
     [HideInInspector] public bool IsBoosted;
     [HideInInspector] public AbilityManager abilityManager;
     [HideInInspector] public Transform playerTrans;
+    [HideInInspector] public ElementalStates projectileElementalState;
 
     [SerializeField] private float _dropOffTime;
 
@@ -59,15 +60,18 @@ public class ElementalProjectiles : MonoBehaviour {
     // Does flat damage to hit enemy
     public virtual void FlatDamageToEnemy(float damage, Collider enemyCol)
     {
+        ElementalStates enemyElementalState = enemyCol.gameObject.GetComponent<EnemyDurability>().element;
         // Reduce enemy's health by baseDamage
-        enemyCol.GetComponent<EnemyAI>().Hit(damage);
+        enemyCol.GetComponent<EnemyAI>().Hit(CalculateDamage(projectileElementalState, enemyElementalState, damage));
     }
 
     // Does DOT to hit enemy
     public virtual IEnumerator DotToEnemy(float initialDmg, float dot, int dotTime, GameObject proj, Collider enemyCol)
     {
+        ElementalStates enemyElementalState = enemyCol.GetComponent<EnemyDurability>().element;
+
         // Do intial damage to enemy with intialDmg
-        enemyCol.GetComponent<EnemyAI>().Hit(initialDmg);
+        enemyCol.GetComponent<EnemyAI>().Hit(CalculateDamage(projectileElementalState, enemyElementalState, initialDmg));
         // Apply dot over time, till dotTime is elapsed
         for (int i = 0; i < dotTime; i++)
         {
@@ -81,7 +85,9 @@ public class ElementalProjectiles : MonoBehaviour {
     // Does knockback damage to hit enemy
     public virtual void KnockbackDamageToEnemy(float damage, float knockbackForce, Transform projTrans, Collider enemyCol)
     {
-        enemyCol.GetComponent<EnemyAI>().Hit(damage);
+        ElementalStates enemyElementalState = enemyCol.GetComponent<EnemyDurability>().element;
+
+        enemyCol.GetComponent<EnemyAI>().Hit(CalculateDamage(projectileElementalState, enemyElementalState, damage));
         Vector2 enemyPos = enemyCol.transform.position;
         Vector2 projPos = projTrans.position;
         Vector2 dir = Vector3.Normalize(enemyPos - projPos);
@@ -92,5 +98,24 @@ public class ElementalProjectiles : MonoBehaviour {
         // Reduce enemy's health based on damage amount 
         // Only apply forces in x direction
         enemyRb.AddForce(dirInX * knockbackForce, ForceMode.Impulse);
+    }
+
+    private float CalculateDamage(ElementalStates projectileElementalState, ElementalStates otherElementalState, float dmg)
+    {
+        float damage = dmg;
+        if ((projectileElementalState == ElementalStates.Fire && otherElementalState == ElementalStates.Earth) ||
+            (projectileElementalState == ElementalStates.Earth && otherElementalState == ElementalStates.Wind) ||
+            (projectileElementalState == ElementalStates.Wind && otherElementalState == ElementalStates.Water) ||
+            (projectileElementalState == ElementalStates.Water && otherElementalState == ElementalStates.Fire))
+        {
+            // Apply damage multiplier
+            damage = damage * abilityManager.PlayerElementalDmgMultiplier;
+        }
+        /*else if (projectileElementalState == otherElementalState)
+        {
+            // OPTIONAL: Do less damage when 
+            damage *= 
+        }*/
+        return damage;
     }
 }
