@@ -1207,15 +1207,15 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 3379
+    m_Bits: 19762
   m_GroundCheck: {fileID: 4948325435663198}
   m_CeilingCheck: {fileID: 4475560020013268}
   m_WallCheck: {fileID: 4591116611348048}
   m_BehindWallCheck: {fileID: 4278450528689954}
   m_wallDetectRadius: 0.15
   m_CrouchDisableCollider: {fileID: 0}
-  m_KnockbackForce: {x: 0, y: 0}
-  m_KnockbackLength: 0
+  m_KnockbackForce: {x: 5, y: 25}
+  m_KnockbackLength: 0.2
   m_WallJumpEffect: {fileID: 1405286440405556, guid: f24291d303995de45ae0bd002237d6cb,
     type: 2}
   m_Grounded: 1

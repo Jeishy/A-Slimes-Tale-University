@@ -40,7 +40,7 @@ public class EnemyAI : MonoBehaviour
     private Player playerScript;
     private CharacterController2D controller;
     private float attackCountdown;
-    private bool m_FacingRight = true;
+    private bool m_FacingRight = false;
 
     private void Start()
     {
@@ -51,29 +51,16 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    void FixedUpdate ()
+    void Update ()
     {
-	    
 
         if (enemyDurability.health <= 0)
         {
             Die();
         }
 
-        // If the input is moving the player right and the player is facing left...
-        /*if ( > 0 && !m_FacingRight)
-        {
-            // ... flip the player.
-            Flip();
-
-        }
-        // Otherwise if the input is moving the player left and the player is facing right...
-        else if (move < 0 && m_FacingRight)
-        {
-            // ... flip the player.
-            Flip();
-
-        }*/
+        
+        
 
         //Execute code when patrol boolean is true - Set in editor
         if (patrol && !waiting)
@@ -86,6 +73,14 @@ public class EnemyAI : MonoBehaviour
 		    //Or else keep moving to current waypoint
 		    else
 		    {
+			    
+			    Vector2 dir = (waypoints[currentWaypoint].position - transform.position).normalized;
+        
+			    if (dir.x < 0 && m_FacingRight)
+				    Flip();
+			    else if (dir.x > 0 && !m_FacingRight)
+				    Flip();
+			    
 			    transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypoint].position,
 				    patrolSpeed * Time.deltaTime);
 		    }
@@ -96,9 +91,9 @@ public class EnemyAI : MonoBehaviour
         {
 
 	        //Check if enemy's attack is off cooldown and it is within melee range of the player
-	        if (attackCountdown <= Time.time &&
-	            Physics.OverlapSphere(transform.position, attackOptions.meleeRange, attackOptions.playerMask).Length > 0);
+	        if (attackCountdown <= Time.time && (Physics.OverlapSphere(transform.position, attackOptions.meleeRange, attackOptions.playerMask).Length > 0))
             {
+	            Debug.Log("Melee hit");
                 //Call the Hit() method on the PlayerDurability script
                 playerScript.Hit();
                 
@@ -113,16 +108,19 @@ public class EnemyAI : MonoBehaviour
         } else
         //If enemy is ranged...
         {
+	        if (attackOptions.rotate)
+				PointToPlayer(attackOptions.rotator);
+	        
             //Debug.DrawRay(transform.position, Vector3.Normalize(player.transform.position - transform.position) * attackOptions.range, Color.red);
 
             //Get the direction vector towards the player
             Vector2 directionToPlayer = player.transform.position - transform.position;
-            
+            RaycastHit hit;
             //Check if any object is not in between the enemy position and the player position, a.k.a if the line of fire is clear
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, attackOptions.range, attackOptions.rangeAttackMask);
+            
             
 	        //Make sure the enemy attack is available and check if the raycast has hit anything
-            if (attackCountdown <= Time.time && hit)
+            if (attackCountdown <= Time.time && Physics.Raycast(transform.position, directionToPlayer, out hit, attackOptions.range, attackOptions.rangeAttackMask))
             {
 	            //Check if the raycast hit the player (therefore it hasn't hit anything in between, so line of fire is clear)
 	            if (hit.collider.CompareTag("Player"))
@@ -133,7 +131,7 @@ public class EnemyAI : MonoBehaviour
                     GameObject particle = Instantiate(attackOptions.particleEffect, attackOptions.firePoint.position, Quaternion.identity);
 
                     //Get projectile's rigidbody
-                    Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
+                    Rigidbody projRb = proj.GetComponent<Rigidbody>();
 
 
 		            //Apply force to projectile's rigidbody
@@ -142,7 +140,7 @@ public class EnemyAI : MonoBehaviour
 		            
 		            //Destroy projectile after it's maximum lifespan has been reached
 		            Destroy(proj, attackOptions.projectileLifespan);
-                    Destroy(proj, attackOptions.particleLifespan);
+                    Destroy(particle, attackOptions.particleLifespan);
 
                     //Calculate and store next attack time
                     attackCountdown = Time.time + attackOptions.attackSpeed;
@@ -166,14 +164,11 @@ public class EnemyAI : MonoBehaviour
 
     private void Flip()
     {
-            //Debug.Log("flipping");
-            // Switch the way the player is labelled as facing.
+            Debug.Log("flipping");
+            // Switch the way the enemy is labelled as facing.
             m_FacingRight = !m_FacingRight;
 
-            // Multiply the player's x local scale by -1.
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
+            transform.localScale = transform.localScale * -1;
     }
 
     //Increments current waypoint variable, then it makes sure it doesnt go over the amount of set waypoints
@@ -219,6 +214,26 @@ public class EnemyAI : MonoBehaviour
 		}
 		
 	}
+
+    void PointToPlayer(Transform rotator)
+    {
+	    
+	    /*
+	    //find the vector pointing from our position to the target
+		Vector2 direction = (player.transform.position - transform.position).normalized;
+ 
+	    //create the rotation we need to be in to look at the target
+	    Quaternion lookRotation = Quaternion.LookRotation(direction);
+ 
+	    Debug.Log("Rotating, dir: " + direction + " | look rot: " + lookRotation);
+	    
+	    //rotate us over time according to speed until we are in the required rotation
+	    rotator.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * attackOptions.rotateSpeed);*/
+	    
+	    Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
+	    rotator.transform.rotation = targetRotation;
+    }
+    
 
 	IEnumerator Wait()
 	{

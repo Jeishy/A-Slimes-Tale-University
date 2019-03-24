@@ -16,6 +16,9 @@ public class EnemyAttack {
     public float particleLifespan = 3f;
     public LayerMask playerMask;
     public LayerMask rangeAttackMask;
+    public bool rotate;
+    public Transform rotator;
+    public float rotateSpeed = 1f;
 
 
 }
