@@ -23,7 +23,7 @@ public class UserInterface : MonoBehaviour
 			{
 				Time.timeScale = 0f;
 				pauseMenu.alpha = 1f;
-				pauseMenu.blocksRaycasts = false;
+				pauseMenu.blocksRaycasts = true;
 			} else
             {
                 OnContinueGame();
