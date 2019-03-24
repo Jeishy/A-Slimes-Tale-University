@@ -558,7 +558,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950331587363064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.97, y: 0.79, z: 0}
+  m_LocalPosition: {x: -14.491, y: 0.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4898990851119828}
@@ -1214,7 +1214,7 @@ MonoBehaviour:
   m_BehindWallCheck: {fileID: 4278450528689954}
   m_wallDetectRadius: 0.15
   m_CrouchDisableCollider: {fileID: 0}
-  m_KnockbackForce: {x: 5, y: 25}
+  m_KnockbackForce: {x: 5, y: 12}
   m_KnockbackLength: 0.2
   m_WallJumpEffect: {fileID: 1405286440405556, guid: f24291d303995de45ae0bd002237d6cb,
     type: 2}
@@ -1264,6 +1264,7 @@ MonoBehaviour:
   _damagedColour: {r: 0.9811321, g: 0.1064436, b: 0.1064436, a: 1}
   _onCoinCollectPE: {fileID: 1659524767510216, guid: 4b6c94ec3a170854e9ebd3f7c2203ba7,
     type: 2}
+  _onHitPE: {fileID: 1243082678986966, guid: 272ed1b5351fccb4a8e5e9360daa513e, type: 2}
   _healthBar: {fileID: 0}
   element: 0
   isDead: 0

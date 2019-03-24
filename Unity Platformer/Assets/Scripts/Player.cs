@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private Color _damagedColour;
     [Space]
     [SerializeField] private GameObject _onCoinCollectPE;
+    [SerializeField] private GameObject _onHitPE;
     [SerializeField] private Image _healthBar;
     [SerializeField] private ElementalStates element = ElementalStates.None;
     
@@ -83,6 +84,9 @@ public class Player : MonoBehaviour {
 
 #endif
 
+        GameObject onHitParticle = Instantiate(_onHitPE, transform);
+        Destroy(onHitParticle, 2f);
+        
         // Show damage effect on player
         StartCoroutine(ShowDamageMaterial());
 
