@@ -77,6 +77,12 @@ public class Player : MonoBehaviour {
 
     public void Hit(int damage = 1)
     {
+#if UNITY_PS4
+
+        StartCoroutine(_abilityManager.ControllerVibration(false));
+
+#endif
+
         // Show damage effect on player
         StartCoroutine(ShowDamageMaterial());
 

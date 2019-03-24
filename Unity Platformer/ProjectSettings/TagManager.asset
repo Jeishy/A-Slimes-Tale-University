@@ -18,6 +18,8 @@ TagManager:
   - EnemyProj
   - Gemstone
   - ElementalPickup
+  - Fire
+  - Shop
   layers:
   - Default
   - TransparentFX
@@ -33,7 +35,7 @@ TagManager:
   - Projectile
   - Enemy
   - Collectable
-  - 
+  - Ground
   - 
   - 
   - 
