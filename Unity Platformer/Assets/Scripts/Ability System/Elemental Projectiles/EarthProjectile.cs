@@ -19,7 +19,7 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
     // Rigidbody is set in awake
     private void Awake()
 	{
-        projectileElementalState = ElementalStates.Earth;
+        ProjectileElementalState = ElementalStates.Earth;
 		_rb = GetComponent<Rigidbody>();
 		_originalScale = transform.localScale;
         _inputHandler = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityInputHandler>();
@@ -30,7 +30,7 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
         _rb.useGravity = false;
 
 		// Null check to ensure player variables are set
-		if (playerTrans == null)
+		if (PlayerTrans == null)
 			LoadPlayerVariables();
 
 		StartCoroutine(GravityDropOff(_rb));
@@ -38,17 +38,17 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
         // Destroy the projectile after specified number of seconds
         Destroy(gameObject, TimeTillDestroy);
 
-        _distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, playerTrans.position.z);
+        _distanceFromCamera = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, PlayerTrans.position.z);
 		_plane = new Plane(Vector3.forward, _distanceFromCamera);
 
-		if (abilityManager.IsAimToShoot)
+		if (AbilityManager.IsAimToShoot)
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			float enter = 1000.0f;
 			if (_plane.Raycast(ray, out enter))
 			{
 				// Set gameobjects velocity to returned value of AimToFireProjectileForce method
-				_rb.velocity = AimToFireProjectileForce(ProjectileSpeed, ray, enter, playerTrans);
+				_rb.velocity = AimToFireProjectileForce(ProjectileSpeed, ray, enter, PlayerTrans);
 				// Debug ray to see raycast in viewport
 				Debug.DrawRay(ray.origin, ray.direction * enter, Color.green, 2f);
 			}
@@ -57,7 +57,7 @@ public class EarthProjectile : ElementalProjectiles,IPooledProjectile {
 		{
             // Sets go's velocity if forward firing projectiles are chosen
             Vector2 joystickDir = _inputHandler.RightStickAxis;
-            _rb.velocity = JoystickFiringForce(ProjectileSpeed, playerTrans, joystickDir);
+            _rb.velocity = JoystickFiringForce(ProjectileSpeed, PlayerTrans, joystickDir);
         }
 	}
 

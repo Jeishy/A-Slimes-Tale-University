@@ -189,7 +189,7 @@ public class Player : MonoBehaviour {
             
             //Destroy projectile
             Destroy(other.gameObject);
-            ElementalStates enemyElementalState = other.gameObject.GetComponent<EnemyDurability>().element;
+            ElementalStates enemyElementalState = other.gameObject.GetComponent<EnemyAI>().Element;
             //Calculate new health/armour
             Hit(_abilityManager.CurrentPlayerElementalState, enemyElementalState);
             

@@ -856,7 +856,12 @@ Prefab:
     - target: {fileID: 114824307246110900, guid: a5eb62e9129fd2148bbb8815c8a50721,
         type: 2}
       propertyPath: PlayerElementalDmgMultiplier
-      value: 1.2
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114824307246110900, guid: a5eb62e9129fd2148bbb8815c8a50721,
+        type: 2}
+      propertyPath: ElementalEnemyDmgReductionMultiplier
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5eb62e9129fd2148bbb8815c8a50721, type: 2}
@@ -1329,6 +1334,11 @@ Prefab:
         type: 2}
       propertyPath: enemyDurability.element
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114375523576496216, guid: 91978b8e40800904eb9181d287367e14,
+        type: 2}
+      propertyPath: Element
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91978b8e40800904eb9181d287367e14, type: 2}

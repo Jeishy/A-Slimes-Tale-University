@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
 	[SerializeField] private bool flying;
     [SerializeField] private EnemyDurability enemyDurability;
     [SerializeField] private EnemyAttack attackOptions;
+    public ElementalStates Element;
 
 
     [Header("Patrol Options")]
@@ -98,7 +99,7 @@ public class EnemyAI : MonoBehaviour
             if (attackCountdown <= Time.time && Physics2D.OverlapCircle(transform.position, attackOptions.meleeRange, attackOptions.playerMask))
             {
                 //Call the Hit() method on the PlayerDurability script
-                playerScript.Hit(_abilityManager.CurrentPlayerElementalState, enemyDurability.element);
+                playerScript.Hit(_abilityManager.CurrentPlayerElementalState, Element);
                 
                 //Call the Knockback(bool: right) method on the CharacterController2D script
                 controller.Knockback(transform.position.x > player.transform.position.x);

@@ -37,6 +37,7 @@ public class AbilityManager : MonoBehaviour {
     [HideInInspector] public Rigidbody playerRb;
     [HideInInspector] public float OriginalMass;
 	[Range(0.1f, 3.0f)] public float PlayerElementalDmgMultiplier;				// Multiplier for player's damage on enemies
+	[Range(0.1f, 3.0f)] public float ElementalEnemyDmgReductionMultiplier; 		// Multiplier for damage reduction against enemies
 
     private GameObject playerGO;
     private Player player;
