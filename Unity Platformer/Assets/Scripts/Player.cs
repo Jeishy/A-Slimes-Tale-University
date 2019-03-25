@@ -9,11 +9,12 @@ using UnityEngine.UI;
 using UnityEngine.PS4;
 #endif
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
     [SerializeField] public int health;
     [SerializeField] public int armour;
-    [SerializeField] private float damageCooldown = 0.5f;
+    [SerializeField] private float damageCooldown = 1f;
     [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField] private Color _damagedColour;
     [Space]
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private GameObject _onHitPE;
     [SerializeField] private Image _healthBar;
     [SerializeField] private ElementalStates element = ElementalStates.None;
-    
+
 
 
     private const int MaxHealth = 3;
@@ -36,9 +37,9 @@ public class Player : MonoBehaviour {
     {
         _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
         controller = GetComponent<CharacterController2D>();
-        
+
         gm = GameManager.instance;
-        
+
         if (gm.hasData)
         {
             health = gm.health;
@@ -46,10 +47,10 @@ public class Player : MonoBehaviour {
             transform.position = gm.position;
             element = gm.element;
         }
-        
+
     }
 
-	void Update ()
+    void Update()
     {
         //Display health and armour in UI
         //_healthBar.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
@@ -66,7 +67,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.P))
             gm.LoadPlayer(true);
-        
+
         if (Input.GetKeyDown(KeyCode.N))
             Hit();
 
@@ -74,24 +75,26 @@ public class Player : MonoBehaviour {
             armour++;
 
 
-	}
+    }
 
     public void Hit(int damage = 1)
     {
+
+        if (nextDamageTime <= Time.time)
+        {
+
 #if UNITY_PS4
 
         StartCoroutine(_abilityManager.ControllerVibration(false));
 
 #endif
 
-        GameObject onHitParticle = Instantiate(_onHitPE, transform);
-        Destroy(onHitParticle, 2f);
-        
-        // Show damage effect on player
-        StartCoroutine(ShowDamageMaterial());
+            GameObject onHitParticle = Instantiate(_onHitPE, transform);
+            Destroy(onHitParticle, 2f);
 
-        if (nextDamageTime <= Time.time)
-        {
+            // Show damage effect on player
+            StartCoroutine(ShowDamageMaterial());
+
             //Check if player has armour
             if (armour > 0)
             {
@@ -106,7 +109,7 @@ public class Player : MonoBehaviour {
                 //Oterwise, decrement health by 1
                 health -= damage;
             }
-            
+
 
             nextDamageTime = Time.time + damageCooldown;
 
@@ -127,10 +130,10 @@ public class Player : MonoBehaviour {
     {
         element = _element;
     }
-    
+
     public void AddArmourSlot()
     {
-            armour = 6;
+        armour = 6;
     }
 
     public void RemoveArmourSlot()
@@ -139,13 +142,14 @@ public class Player : MonoBehaviour {
         if (armour > 3)
         {
             armour = 3;
-        } else
+        }
+        else
         {
             armour = 0;
         }
 
         if (armour <= 0)
-        _abilityManager.NoneState();
+            _abilityManager.NoneState();
     }
 
     void Die()
@@ -176,9 +180,9 @@ public class Player : MonoBehaviour {
     {
         return element;
     }
-    
-    
-    
+
+
+
 
     //Collision checks
     private void OnCollisionEnter(Collision other)
@@ -188,13 +192,13 @@ public class Player : MonoBehaviour {
         {
             //Apply knockback
             controller.Knockback(other.transform.position.x > transform.position.x);
-            
+
             //Destroy projectile
             Destroy(other.gameObject);
-            
+
             //Calculate new health/armour
             Hit();
-            
+
         }
 
         if (other.gameObject.CompareTag("DeathTrigger"))
@@ -248,4 +252,9 @@ public class Player : MonoBehaviour {
         Destroy(coinCollect, 1f);
     }
 
+    void OnParticleCollision(GameObject other)
+    {
+        if (_abilityManager.CurrentPlayerElementalState != ElementalStates.Fire)
+            Hit();
+    }
 }

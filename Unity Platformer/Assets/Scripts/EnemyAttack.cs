@@ -4,10 +4,11 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyAttack {
 
-    public bool melee = true;
+    public AttackStyle attackStyle;
     public float meleeRange = 0.5f;
     public float range = 5f;
     public float attackSpeed = 1f;
+    public float ghostMoveAttackSpeed;
     public GameObject projectile;
     public Transform firePoint;
     public GameObject particleEffect;
@@ -21,4 +22,9 @@ public class EnemyAttack {
     public float rotateSpeed = 1f;
 
 
+}
+
+public enum AttackStyle
+{
+    Melee, Ranged, Ghost
 }
