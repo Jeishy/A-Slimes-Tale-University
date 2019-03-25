@@ -134,7 +134,7 @@ MonoBehaviour:
     value: 0
   postExposure:
     overrideState: 1
-    value: 1.3
+    value: 1
   contrast:
     overrideState: 1
     value: 2
@@ -1412,7 +1412,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 7.26
+    value: 0.54
   threshold:
     overrideState: 1
     value: 1
@@ -1424,7 +1424,7 @@ MonoBehaviour:
     value: 65472
   diffusion:
     overrideState: 1
-    value: 7
+    value: 3.29
   anamorphicRatio:
     overrideState: 1
     value: 0

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public int health;
     public int armour;
     public int collectibles;
+    public int gemstones;
+    public int maxGemstones;
     
     public ElementalStates element;
 
@@ -41,11 +43,13 @@ public class GameManager : MonoBehaviour
         collectibles++;
     }
 
-    /*public void OnGemstonePickup()
+    public void OnGemstonePickup()
     {
-        
-        LevelChanger.instance.OnLevelComplete();
-    }*/
+        gemstones++;
+        if (gemstones >= maxGemstones)
+            LevelChanger.instance.OnLevelComplete();
+
+    }
 
     public void LoadPlayer(bool LoadLevel = false)
     {

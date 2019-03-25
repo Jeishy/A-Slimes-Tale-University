@@ -39,6 +39,8 @@ public class EnemyAI : MonoBehaviour
     private float attackCountdown;
     private bool m_FacingRight = false;
 
+    public ElementalStates Element;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
