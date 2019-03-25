@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField] private ElementalStates element = ElementalStates.None;
 
 
-
+    private Image _healthBarFilled;
     private const int MaxHealth = 3;
     private Vector2 damagePoint;                                        // Position where the player was hit by projectile
     private float nextDamageTime;
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     {
         _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
         controller = GetComponent<CharacterController2D>();
-
+        _healthBarFilled = GameObject.Find("HealthBarFilled").GetComponent<Image>();
         gm = GameManager.instance;
 
         if (gm.hasData)
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Display health and armour in UI
-        //_healthBar.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
+        _healthBarFilled.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
         //_armourText.text = "Armour: " + armour;
 
         //Call Die() function when player is at or below 0 health
