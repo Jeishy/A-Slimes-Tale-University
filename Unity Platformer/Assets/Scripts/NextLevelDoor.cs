@@ -21,12 +21,12 @@ public class NextLevelDoor : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator NextLevel(GameObject player, GameObject particleEffect)
+	private IEnumerator NextLevel(GameObject player, GameObject nextLevelPoofPE)
 	{	
 		yield return new WaitForSeconds(0.2f);
-		GameObject pe = Instantiate(particleEffect, player.transform.position, Quaternion.identity);
+		GameObject nextLevelPoof = Instantiate(nextLevelPoofPE, player.transform.position, Quaternion.identity);
 		player.SetActive(false);
-		Destroy(pe, 1f);
+		Destroy(nextLevelPoof, 1f);
 		yield return new WaitForSeconds(0.5f);
 		_levelChanger.OnLevelComplete();
 		player.SetActive(true);
