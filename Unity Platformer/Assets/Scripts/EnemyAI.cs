@@ -38,6 +38,7 @@ public class EnemyAI : MonoBehaviour
     private CharacterController2D controller;
     private float attackCountdown;
     private bool m_FacingRight = false;
+    private AbilityManager _abilityManager;
 
     public ElementalStates Element;
 
@@ -46,6 +47,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<Player>();
         controller = player.GetComponent<CharacterController2D>();
+        _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
 
 
     }
@@ -119,7 +121,7 @@ public class EnemyAI : MonoBehaviour
         {
             Debug.Log("Melee hit");
             //Call the Hit() method on the PlayerDurability script
-            playerScript.Hit();
+            playerScript.Hit(_abilityManager.CurrentPlayerElementalState, Element);
 
             //Call the Knockback(bool: right) method on the CharacterController2D script
             controller.Knockback(transform.position.x > player.transform.position.x);

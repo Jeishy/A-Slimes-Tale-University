@@ -92,6 +92,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1164601677740666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4356981684270730}
+  m_Layer: 9
+  m_Name: GemstoneFollow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1190945903014068
 GameObject:
   m_ObjectHideFlags: 1
@@ -473,6 +488,19 @@ Transform:
   m_Father: {fileID: 4291736564978842}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4356981684270730
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1164601677740666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.28, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4503012138185060}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4360043611551614
 Transform:
   m_ObjectHideFlags: 1
@@ -558,7 +586,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950331587363064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -87.69, y: 94.02, z: 0}
+  m_LocalPosition: {x: -3.37, y: 0.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4898990851119828}
@@ -569,6 +597,7 @@ Transform:
   - {fileID: 4154458082499214}
   - {fileID: 4291736564978842}
   - {fileID: 4278450528689954}
+  - {fileID: 4356981684270730}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1265,7 +1294,6 @@ MonoBehaviour:
   _onCoinCollectPE: {fileID: 1659524767510216, guid: 4b6c94ec3a170854e9ebd3f7c2203ba7,
     type: 2}
   _onHitPE: {fileID: 1343523490988014, guid: c806dbf73d3213e4181e73e908d3e4e5, type: 2}
-  _healthBar: {fileID: 0}
   element: 0
   isDead: 0
 --- !u!198 &198959913522774230

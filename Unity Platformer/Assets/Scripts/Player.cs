@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
     [Space]
     [SerializeField] private GameObject _onCoinCollectPE;
     [SerializeField] private GameObject _onHitPE;
-    [SerializeField] private Image _healthBar;
     [SerializeField] private ElementalStates element = ElementalStates.None;
 
 
@@ -69,7 +68,7 @@ public class Player : MonoBehaviour
             gm.LoadPlayer(true);
 
         if (Input.GetKeyDown(KeyCode.N))
-            Hit();
+            Hit(_abilityManager.CurrentPlayerElementalState, ElementalStates.None);
 
         if (Input.GetKeyDown(KeyCode.M))
             armour++;
@@ -77,7 +76,7 @@ public class Player : MonoBehaviour
 
     }
 
-    public void Hit(int damage = 1)
+    public void Hit(ElementalStates currentElementalState, ElementalStates enemyElementalState, int damage = 1)
     {
 
         if (nextDamageTime <= Time.time)
@@ -89,19 +88,22 @@ public class Player : MonoBehaviour
 
 #endif
 
-            GameObject onHitParticle = Instantiate(_onHitPE, transform);
-            Destroy(onHitParticle, 2f);
+            GameObject OnHitParticle = Instantiate(_onHitPE, transform);
+            Destroy(OnHitParticle, 2f);
 
             // Show damage effect on player
             StartCoroutine(ShowDamageMaterial());
 
-            //Check if player has armour
-            if (armour > 0)
+            if ((enemyElementalState == ElementalStates.Fire && currentElementalState == ElementalStates.Earth) ||
+            (enemyElementalState == ElementalStates.Earth && currentElementalState == ElementalStates.Wind) ||
+            (enemyElementalState == ElementalStates.Wind && currentElementalState == ElementalStates.Water) ||
+            (enemyElementalState == ElementalStates.Water && currentElementalState == ElementalStates.Fire))
             {
-                //If so, remove armour slot
+                // Remove all armour slots if hit by element state player is currently weak to
+                RemoveArmourSlot();
                 RemoveArmourSlot();
             }
-            else
+            else if (armour <= 0)
             {
 #if UNITY_PS4
                 PS4Input.PadSetLightBar(0, 255, 0, 0);
@@ -109,13 +111,14 @@ public class Player : MonoBehaviour
                 //Oterwise, decrement health by 1
                 health -= damage;
             }
-
+            else
+            {
+                //If so, remove armour slot
+                RemoveArmourSlot();
+            }
 
             nextDamageTime = Time.time + damageCooldown;
-
         }
-
-
     }
 
     private IEnumerator ShowDamageMaterial()
@@ -195,9 +198,9 @@ public class Player : MonoBehaviour
 
             //Destroy projectile
             Destroy(other.gameObject);
-
+            ElementalStates enemyElementalState = other.gameObject.GetComponent<EnemyAI>().Element;
             //Calculate new health/armour
-            Hit();
+            Hit(_abilityManager.CurrentPlayerElementalState, enemyElementalState);
 
         }
 
@@ -232,9 +235,11 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Gemstone"))
         {
             Debug.Log("Gemstone");
-            gm.OnGemstonePickup();
-            Destroy(other.gameObject);
-        }
+            //gm.OnGemstonePickup();
+            other.GetComponentInParent<GemstoneCollect>().IsCollected = true;
+            StartCoroutine(WaitToGemstoneCollect(other.transform.parent));
+            Destroy(other.transform.parent.gameObject, 3f);
+}
 
         if (other.CompareTag("NextLevel"))
         {
@@ -252,9 +257,17 @@ public class Player : MonoBehaviour
         Destroy(coinCollect, 1f);
     }
 
+    private IEnumerator WaitToGemstoneCollect(Transform other)
+    {
+        yield return new WaitForSeconds(2.98f);
+        Vector3 spawnPos = other.position;
+        GameObject gemstoneCollectPE = other.GetComponent<GemstoneCollect>().OnCollectPE;
+        GameObject gemstoneCollect = Instantiate(gemstoneCollectPE, spawnPos, Quaternion.identity);
+        Destroy(gemstoneCollect, 1f);
+    }
     void OnParticleCollision(GameObject other)
     {
         if (_abilityManager.CurrentPlayerElementalState != ElementalStates.Fire)
-            Hit();
+            Hit(_abilityManager.CurrentPlayerElementalState, ElementalStates.Fire);
     }
 }
