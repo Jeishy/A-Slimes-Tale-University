@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,7 +11,6 @@ public class EnemyAI : MonoBehaviour
 	[SerializeField] private bool flying;
     [SerializeField] private EnemyDurability enemyDurability;
     [SerializeField] private EnemyAttack attackOptions;
-    public ElementalStates Element;
 
 
     [Header("Patrol Options")]
@@ -40,116 +37,160 @@ public class EnemyAI : MonoBehaviour
     private Player playerScript;
     private CharacterController2D controller;
     private float attackCountdown;
-    private bool m_FacingRight = true;
-	private AbilityManager _abilityManager;
+    private bool m_FacingRight = false;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<Player>();
         controller = player.GetComponent<CharacterController2D>();
-		_abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
+
+
     }
 
-    void FixedUpdate ()
+    void Update ()
     {
-	    
 
         if (enemyDurability.health <= 0)
         {
             Die();
         }
 
-        // If the input is moving the player right and the player is facing left...
-        /*if ( > 0 && !m_FacingRight)
-        {
-            // ... flip the player.
-            Flip();
-
-        }
-        // Otherwise if the input is moving the player left and the player is facing right...
-        else if (move < 0 && m_FacingRight)
-        {
-            // ... flip the player.
-            Flip();
-
-        }*/
-
         //Execute code when patrol boolean is true - Set in editor
         if (patrol && !waiting)
 	    {
-		    //When enemy has reached its current waypoint, go to next waypoint
-		    if (IsAtWaypoint())
-		    {
-			    NextWaypoint();
-		    }
-		    //Or else keep moving to current waypoint
-		    else
-		    {
-			    transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypoint].position,
-				    patrolSpeed * Time.deltaTime);
-		    }
+            Patrol();
 	    }
 
         //If enemy is melee...
-        if (attackOptions.melee)
+        if (attackOptions.attackStyle == AttackStyle.Melee)
         {
-
-	        //Check if enemy's attack is off cooldown and it is within melee range of the player
-            if (attackCountdown <= Time.time && Physics2D.OverlapCircle(transform.position, attackOptions.meleeRange, attackOptions.playerMask))
-            {
-                //Call the Hit() method on the PlayerDurability script
-                playerScript.Hit(_abilityManager.CurrentPlayerElementalState, Element);
-                
-                //Call the Knockback(bool: right) method on the CharacterController2D script
-                controller.Knockback(transform.position.x > player.transform.position.x);
-                
-                //Calculate next attack time
-                attackCountdown = Time.time + attackOptions.attackSpeed;
-
-            }
-
-        } else
+            MeleeAttack();
+	        
+        }
+        else if (attackOptions.attackStyle == AttackStyle.Ranged)
         //If enemy is ranged...
         {
-            //Debug.DrawRay(transform.position, Vector3.Normalize(player.transform.position - transform.position) * attackOptions.range, Color.red);
+            RangeAttack();
+        }
+        else if (attackOptions.attackStyle == AttackStyle.Ghost)
+        {
+            GhostAttack();
+        }
 
-            //Get the direction vector towards the player
-            Vector2 directionToPlayer = player.transform.position - transform.position;
+
+
+    }
+
+    void Patrol()
+    {
+
+        Debug.Log("is at waypoint: " + IsAtWaypoint());
+
+        //When enemy has reached its current waypoint, go to next waypoint
+        if (IsAtWaypoint())
+        {
+            Debug.Log("next waypoint");
+            NextWaypoint();
             
-            //Check if any object is not in between the enemy position and the player position, a.k.a if the line of fire is clear
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, attackOptions.range, attackOptions.rangeAttackMask);
-            
-	        //Make sure the enemy attack is available and check if the raycast has hit anything
-            if (attackCountdown <= Time.time && hit)
+        }
+        //Or else keep moving to current waypoint
+        else
+        {
+
+            Vector2 dir = (waypoints[currentWaypoint].position - transform.position).normalized;
+
+            if (dir.x < 0 && m_FacingRight)
+                Flip();
+            else if (dir.x > 0 && !m_FacingRight)
+                Flip();
+
+            transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypoint].position,
+                patrolSpeed * Time.deltaTime);
+        }
+    }
+
+    void MeleeAttack()
+    {
+        //Check if enemy's attack is off cooldown and it is within melee range of the player
+        if (CanAttack() && (Physics.OverlapSphere(transform.position, attackOptions.meleeRange, attackOptions.playerMask).Length > 0))
+        {
+            Debug.Log("Melee hit");
+            //Call the Hit() method on the PlayerDurability script
+            playerScript.Hit();
+
+            //Call the Knockback(bool: right) method on the CharacterController2D script
+            controller.Knockback(transform.position.x > player.transform.position.x);
+
+            //Calculate next attack time
+            attackCountdown = Time.time + attackOptions.attackSpeed;
+
+        }
+    }
+
+    void RangeAttack()
+    {
+        if (attackOptions.rotate)
+            PointToPlayer(attackOptions.rotator);
+
+        //Debug.DrawRay(transform.position, Vector3.Normalize(player.transform.position - transform.position) * attackOptions.range, Color.red);
+
+        //Get the direction vector towards the player
+        Vector2 directionToPlayer = player.transform.position - transform.position;
+        RaycastHit hit;
+        //Check if any object is not in between the enemy position and the player position, a.k.a if the line of fire is clear
+
+
+        //Make sure the enemy attack is available and check if the raycast has hit anything
+        if (CanAttack() && Physics.Raycast(transform.position, directionToPlayer, out hit, attackOptions.range, attackOptions.rangeAttackMask))
+        {
+            //Check if the raycast hit the player (therefore it hasn't hit anything in between, so line of fire is clear)
+            if (hit.collider.CompareTag("Player"))
             {
-	            //Check if the raycast hit the player (therefore it hasn't hit anything in between, so line of fire is clear)
-	            if (hit.collider.CompareTag("Player"))
-	            {
-                    Debug.Log("Firing projectile at player");
-                    //Instantiate the projectile prefab
-                    GameObject proj = Instantiate(attackOptions.projectile, attackOptions.firePoint.position, Quaternion.identity);
-                    GameObject particle = Instantiate(attackOptions.particleEffect, attackOptions.firePoint.position, Quaternion.identity);
+                Debug.Log("Firing projectile at player");
+                //Instantiate the projectile prefab
+                GameObject proj = Instantiate(attackOptions.projectile, attackOptions.firePoint.position, Quaternion.identity);
+                GameObject particle = Instantiate(attackOptions.particleEffect, attackOptions.firePoint.position, Quaternion.identity);
 
-                    //Get projectile's rigidbody
-                    Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
+                //Get projectile's rigidbody
+                Rigidbody projRb = proj.GetComponent<Rigidbody>();
 
 
-		            //Apply force to projectile's rigidbody
-		            projRb.velocity = Vector3.Normalize(player.transform.position - transform.position) *
-		                              attackOptions.projectileSpeed;
-		            
-		            //Destroy projectile after it's maximum lifespan has been reached
-		            Destroy(proj, attackOptions.projectileLifespan);
-                    Destroy(proj, attackOptions.particleLifespan);
+                //Apply force to projectile's rigidbody
+                projRb.velocity = Vector3.Normalize(player.transform.position - transform.position) *
+                                  attackOptions.projectileSpeed;
 
-                    //Calculate and store next attack time
-                    attackCountdown = Time.time + attackOptions.attackSpeed;
-	            }
+                //Destroy projectile after it's maximum lifespan has been reached
+                Destroy(proj, attackOptions.projectileLifespan);
+                Destroy(particle, attackOptions.particleLifespan);
+
+                //Calculate and store next attack time
+                attackCountdown = Time.time + attackOptions.attackSpeed;
             }
         }
-        
+    }
 
+    void GhostAttack()
+    {
+
+        Vector2 directionToPlayer = player.transform.position - transform.position;
+        RaycastHit hit;
+        Vector3 preAttackPosition;
+        Debug.Log("Checking if in range of player");
+        if (Physics.Raycast(transform.position, directionToPlayer, out hit, attackOptions.range, attackOptions.rangeAttackMask))
+        {
+
+            Debug.Log("In range of player, attacking!!");
+            preAttackPosition = transform.position;
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, attackOptions.ghostMoveAttackSpeed * Time.deltaTime);
+            MeleeAttack();
+
+        }
+    }
+
+    bool CanAttack()
+    {
+        return attackCountdown <= Time.time;
     }
 
     public void Hit(float amount = 1f)
@@ -163,16 +204,13 @@ public class EnemyAI : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Flip()
+    void Flip()
     {
-            //Debug.Log("flipping");
-            // Switch the way the player is labelled as facing.
+            Debug.Log("flipping");
+            // Switch the way the enemy is labelled as facing.
             m_FacingRight = !m_FacingRight;
 
-            // Multiply the player's x local scale by -1.
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
+            transform.localScale = transform.localScale * -1;
     }
 
     //Increments current waypoint variable, then it makes sure it doesnt go over the amount of set waypoints
@@ -218,6 +256,13 @@ public class EnemyAI : MonoBehaviour
 		}
 		
 	}
+
+    void PointToPlayer(Transform rotator)
+    {	    
+	    Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
+	    rotator.transform.rotation = targetRotation;
+    }
+    
 
 	IEnumerator Wait()
 	{

@@ -2,6 +2,7 @@
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
+		_BumpMap ("Bumpmap", 2D) = "bump" {}
 		_AlphaTex ("Alpha Texture", 2D) = "white" {}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
@@ -21,10 +22,13 @@
 		#pragma target 3.0
 
 		sampler2D _MainTex;
+		sampler2D _BumpMap;
 		sampler2D _AlphaTex;
+		
 
 		struct Input {
 			float2 uv_MainTex;
+			float2 uv_BumpMap;
 		};
 
 		half _Glossiness;
@@ -41,12 +45,12 @@
 		UNITY_INSTANCING_BUFFER_END(Props)
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
-		
 				
 			float2 uv = IN.uv_MainTex;
 				
 			uv.y += -_Waterspeed * _Time.y; 
 			uv.x += sin ((uv.x + uv.y) * 8 + _Time.g * 1.3) * 0.01; 
+			
 			// Albedo comes from a texture tinted by color
 			fixed4 c = tex2D (_MainTex, uv) * _Color;
 			float a = tex2D(_AlphaTex, uv).r;
@@ -55,6 +59,7 @@
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
+			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
 
 			if (a > _AlphaCutoff)
 				o.Alpha = 1;

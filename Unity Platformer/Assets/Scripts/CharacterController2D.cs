@@ -141,13 +141,6 @@ public class CharacterController2D : MonoBehaviour
 
             }
         }
-		
-		// Wall Sliding
-		Vector2 facingDirection = new Vector2(Input.GetAxis("Horizontal"), 0f);
-
-        //m_wallSliding = Physics.Raycast(m_WallCheck.position, facingDirection, m_wallDetectRadius, m_WallLayer);
-        //m_wallSliding = Physics.SphereCast(transform.position, facingDirection, m_wallDetectRadius, m_WallLayer);
-        //m_wallSliding = Physics2D.OverlapCircle(m_WallCheck.position, m_wallDetectRadius, m_WallLayer) || Physics2D.OverlapCircle(m_BehindWallCheck.position, m_wallDetectRadius, m_WallLayer);
 
         // Limit player wall slide speed
         if (m_wallSliding && m_Rigidbody.velocity.y <= -m_MaxWallSlideSpeed)
@@ -238,8 +231,6 @@ public class CharacterController2D : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Wall"))
 		{
-			
-			
 			m_WallNormal = other.contacts[0].normal.x;
             
 	         //Possible alternative fix for poor wall jumping

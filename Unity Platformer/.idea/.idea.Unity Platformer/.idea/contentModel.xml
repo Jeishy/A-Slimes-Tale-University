@@ -4,8 +4,50 @@
     <e p="C:\Users\Axel\.Rider2018.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\Axel\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_Unity Platformer.1370324506.00" t="ExcludeRecursive" />
     <e p="D:\Dokumenty\Studia\Year 3\Platformer\Unity-Platformer\Unity Platformer" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="EffectExamples" t="Include">
+          <e p="Editor" t="Include">
+            <e p="PackageManagerAssembly" t="Include">
+              <e p="PackageImportList.txt" t="Include" />
+            </e>
+          </e>
+          <e p="Shared" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="DecalDestroyer.cs" t="Include" />
+              <e p="ExtinguishableFire.cs" t="Include" />
+              <e p="GunAim.cs" t="Include" />
+              <e p="GunShoot.cs" t="Include" />
+              <e p="ParticleCollision.cs" t="Include" />
+              <e p="ParticleExamples.cs" t="Include" />
+              <e p="ParticleMenu.cs" t="Include" />
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="SurfaceShader_VC.shader" t="Include" />
+            </e>
+          </e>
+          <e p="TutorialInfo" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="Editor" t="Include">
+                <e p="ReadmeEditor.cs" t="Include" />
+              </e>
+              <e p="Readme.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Lava_Flowing_Shader" t="Include">
+          <e p="ReadMe.txt" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="ScrollingUVs_Layers.cs" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="Diffuse_Lava_Distort.shader" t="Include" />
+            <e p="Unlit_Lava_Distort.shader" t="Include" />
+            <e p="Unlit_Lava_Distort_Transparent.shader" t="Include" />
+            <e p="Unlit_Lava_Simple.shader" t="Include" />
+          </e>
+        </e>
         <e p="Scripts" t="Include">
           <e p="Ability System" t="Include">
             <e p="AbilityInputHandler.cs" t="Include" />
@@ -21,6 +63,12 @@
               <e p="WaterProjectile.cs" t="Include" />
               <e p="WindProjectile.cs" t="Include" />
             </e>
+            <e p="Elemental S&amp;Ws" t="Include">
+              <e p="Environmentals" t="Include">
+                <e p="LavaFall.cs" t="Include" />
+                <e p="WaterFall.cs" t="Include" />
+              </e>
+            </e>
             <e p="Elemental States" t="Include">
               <e p="Earth State" t="Include">
                 <e p="AbilityEarthCrash.cs" t="Include" />
@@ -33,6 +81,9 @@
                 <e p="AbilityFireGlow.cs" t="Include" />
                 <e p="AbilitySetFireState.cs" t="Include" />
                 <e p="FirePickup.cs" t="Include" />
+              </e>
+              <e p="None State" t="Include">
+                <e p="AbilitySetNoneState.cs" t="Include" />
               </e>
               <e p="Water State" t="Include">
                 <e p="AbilitySetStateWater.cs" t="Include" />
@@ -67,6 +118,7 @@
           <e p="EnemyProjectile.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
           <e p="HubWorld" t="Include">
+            <e p="DoorTarget.cs" t="Include" />
             <e p="Shop" t="Include">
               <e p="GlobalShop.cs" t="Include" />
               <e p="ShopHubWorld.cs" t="Include" />
@@ -82,6 +134,12 @@
           <e p="Preload.cs" t="Include" />
           <e p="SaveSystem.cs" t="Include" />
           <e p="Sound.cs" t="Include" />
+          <e p="UI" t="Include">
+            <e p="Elemental States" t="Include">
+              <e p="AbilityShowStateIndicator.cs" t="Include" />
+              <e p="ArmourSlotGUI.cs" t="Include" />
+            </e>
+          </e>
           <e p="UserInterface.cs" t="Include" />
         </e>
         <e p="Shaders" t="Include">
@@ -112,6 +170,25 @@
           </e>
           <e p="Sprites" t="Include">
             <e p="EmojiOne Attribution.txt" t="Include" />
+          </e>
+        </e>
+        <e p="unity-ui-extensions" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="Effects" t="Include">
+              <e p="UIParticleSystem.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="UI Particle Add.shader" t="Include" />
+            <e p="UI Particle AddMultiply.shader" t="Include" />
+            <e p="UI Particle AddSmooth.shader" t="Include" />
+            <e p="UI Particle Alpha Blend.shader" t="Include" />
+            <e p="UI Particle Blend.shader" t="Include" />
+            <e p="UI Particle Multiply.shader" t="Include" />
+            <e p="UI Particle MultiplyDouble.shader" t="Include" />
+            <e p="UI Particle Premultiply Blend.shader" t="Include" />
+            <e p="UI Particle VertexLit Blended.shader" t="Include" />
+            <e p="UISoftAdditive.shader" t="Include" />
           </e>
         </e>
       </e>
