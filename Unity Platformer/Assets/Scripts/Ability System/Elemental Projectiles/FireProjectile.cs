@@ -86,7 +86,7 @@ public class FireProjectile : ElementalProjectiles {
                 : DotToEnemy(_initialDmg, _dot, _dotTime, gameObject, col));
 
         }
-        // Hide projectile till its destroyed
+        // Hide projectile and all projectile particle effects on hit
         GetComponent<MeshRenderer>().enabled = false;
         for (int i = 0; i < _projPE.Length; i++)
         {
