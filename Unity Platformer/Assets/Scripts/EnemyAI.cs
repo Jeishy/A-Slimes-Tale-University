@@ -1,5 +1,4 @@
 ﻿using System;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +13,7 @@ public class EnemyAI : MonoBehaviour
 	[SerializeField] private bool flying;
     [SerializeField] private EnemyDurability enemyDurability;
     [SerializeField] private EnemyAttack attackOptions;
+    public ElementalStates Element;
 
 
     [Header("Patrol Options")]
@@ -41,14 +41,14 @@ public class EnemyAI : MonoBehaviour
     private CharacterController2D controller;
     private float attackCountdown;
     private bool m_FacingRight = true;
+	private AbilityManager _abilityManager;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<Player>();
         controller = player.GetComponent<CharacterController2D>();
-
-
+		_abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
     }
 
     void FixedUpdate ()
@@ -99,7 +99,7 @@ public class EnemyAI : MonoBehaviour
             if (attackCountdown <= Time.time && Physics2D.OverlapCircle(transform.position, attackOptions.meleeRange, attackOptions.playerMask))
             {
                 //Call the Hit() method on the PlayerDurability script
-                playerScript.Hit();
+                playerScript.Hit(_abilityManager.CurrentPlayerElementalState, Element);
                 
                 //Call the Knockback(bool: right) method on the CharacterController2D script
                 controller.Knockback(transform.position.x > player.transform.position.x);

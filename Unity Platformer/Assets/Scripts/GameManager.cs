@@ -41,11 +41,11 @@ public class GameManager : MonoBehaviour
         collectibles++;
     }
 
-    public void OnGemstonePickup()
+    /*public void OnGemstonePickup()
     {
         
         LevelChanger.instance.OnLevelComplete();
-    }
+    }*/
 
     public void LoadPlayer(bool LoadLevel = false)
     {

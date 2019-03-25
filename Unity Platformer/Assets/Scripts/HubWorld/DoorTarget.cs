@@ -50,7 +50,7 @@ public class DoorTarget : MonoBehaviour {
 	{
 		if (doorLookAt == dungeonDoor)
         {
-            DungeonPanel.SetActive(true); //Activates the shop panel UI
+            DungeonPanel.SetActive(true); //Activates the dungeon
 		}
 		else { DungeonPanel.SetActive(false); }
 	}

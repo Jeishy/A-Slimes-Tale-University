@@ -181,8 +181,8 @@ MonoBehaviour:
   abilityManager: {fileID: 0}
   playerTrans: {fileID: 0}
   _dropOffTime: 1
-  _baseDamage: 10
-  _boostedDamage: 20
+  _baseDamage: 1
+  _boostedDamage: 3
   _boostedKnockbackForce: 10
   _OnLandPE: {fileID: 1558192354684444, guid: b8d37fa396945f947ad06125e7803220, type: 2}
 --- !u!135 &135581242362855298

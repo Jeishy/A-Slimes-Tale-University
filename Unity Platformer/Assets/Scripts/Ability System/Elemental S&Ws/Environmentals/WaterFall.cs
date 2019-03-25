@@ -8,6 +8,7 @@ public class WaterFall : MonoBehaviour {
     [SerializeField] private float _knockbackMultiplier;
     [SerializeField] private Collider _solidCol;
     [SerializeField] [Range(0.01f, 0.9f)] private float _moveSpeedReductionPercentage;
+
     private AbilityManager _abilityManager;
     private Player _player;
     private PlayerControls _playerControls;
@@ -17,9 +18,9 @@ public class WaterFall : MonoBehaviour {
     // Use this for initialization
     private void Start () {
         _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
-        GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
-        _player = playerGO.GetComponent<Player>();
-        _playerControls = playerGO.GetComponent<PlayerControls>();
+        GameObject playerGo = GameObject.FindGameObjectWithTag("Player");
+        _player = playerGo.GetComponent<Player>();
+        _playerControls = playerGo.GetComponent<PlayerControls>();
         _originalSpeed = _playerControls.GetSpeed();
 		_isSpeedChanged = false;
     }
@@ -32,10 +33,11 @@ public class WaterFall : MonoBehaviour {
 			Rigidbody rb = col.GetComponent<Rigidbody>();
             switch (state)
 			{
-				case ElementalStates.Earth:
+				case ElementalStates.Water:
+                    // Note reduce player's velocity
+                    //
 					_solidCol.isTrigger = true;
-                    // Send player down stream if in earth state
-                    Debug.Log("In waterfall in earth state");
+                    // Send player down stream if in water state
                     rb.AddForce(0f, _downwardForce, 0f, ForceMode.Acceleration);
                     // Reduce movement speed
 					if (!_isSpeedChanged)
@@ -44,8 +46,8 @@ public class WaterFall : MonoBehaviour {
 						_playerControls.SetSpeed(_playerControls.GetSpeed() * _moveSpeedReductionPercentage);
                     }
                     break;
-				case ElementalStates.Water:
-					// Allow player to pass through waterfall if in water state
+				case ElementalStates.Earth:
+					// Allow player to pass through waterfall if in earth state
                     _solidCol.isTrigger = true;
                     break;
 				case ElementalStates.Wind:

@@ -248,12 +248,16 @@ MonoBehaviour:
   abilityManager: {fileID: 0}
   playerTrans: {fileID: 0}
   _dropOffTime: 1.5
-  _initialDmg: 5
-  _dot: 2
-  _boostedDot: 5
-  _dotTime: 3
-  _boostedDotTime: 6
+  _initialDmg: 1
+  _dot: 1
+  _boostedDot: 2
+  _dotTime: 2
+  _boostedDotTime: 4
   _onLandPE: {fileID: 1762409889873160, guid: edc1a075cb552bd41baec12a4566dc54, type: 2}
+  _projPE:
+  - {fileID: 1275828730543746}
+  - {fileID: 1259131005660542}
+  - {fileID: 1473626711879432}
 --- !u!135 &135535710580622018
 SphereCollider:
   m_ObjectHideFlags: 1

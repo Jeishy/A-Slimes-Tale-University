@@ -31,8 +31,8 @@ public class LavaFall : MonoBehaviour {
 					// Knocback player if entered the lavafall in water state 
 					rb.velocity = new Vector3(-vel.x * _knockbackMultiplier, vel.y, 0f);
 					_solidCol.isTrigger = false;
-					// Remove armour slot
-					_player.RemoveArmourSlot();
+					// Do damage to player
+					_player.Hit(_abilityManager.CurrentPlayerElementalState, ElementalStates.Fire);
 					break;
 				case ElementalStates.Earth:
 					_solidCol.isTrigger = false;
@@ -42,7 +42,9 @@ public class LavaFall : MonoBehaviour {
 					break;
 				case ElementalStates.None:
 					_solidCol.isTrigger = false;
-					break;
+                    // Do damage to player
+					_player.Hit(_abilityManager.CurrentPlayerElementalState, ElementalStates.Fire);
+                    break;
 				case ElementalStates.Fire:
 					// Allow player to pass through lavalfall if in fire state
 					_solidCol.isTrigger = true;

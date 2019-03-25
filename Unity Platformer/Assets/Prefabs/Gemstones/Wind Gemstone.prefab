@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4712498849288364}
+  - component: {fileID: 114958910022626040}
   m_Layer: 0
   m_Name: Wind Gemstone
   m_TagString: Gemstone
@@ -118,7 +119,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1023414935617270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.38, y: 1.24, z: 0}
+  m_LocalPosition: {x: 0.39000034, y: 1.269, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4167901743926302}
@@ -261,6 +262,22 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114958910022626040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1023414935617270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f53bdf1d151e39540ab38652d9a67e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollectPE: {fileID: 1728508916335190, guid: d1b3d4c9e98bf314b84e02fc416d249e,
+    type: 2}
+  IsCollected: 0
+  _smoothTime: 0.3
+  _rotSpeed: 3
 --- !u!136 &136907814161859812
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -254,6 +254,10 @@ MonoBehaviour:
   _dotTime: 3
   _boostedDotTime: 6
   _onLandPE: {fileID: 1762409889873160, guid: edc1a075cb552bd41baec12a4566dc54, type: 2}
+  _projPE:
+  - {fileID: 1781261519645330}
+  - {fileID: 1969958940050256}
+  - {fileID: 1696150531382678}
 --- !u!135 &135452362110795676
 SphereCollider:
   m_ObjectHideFlags: 1
