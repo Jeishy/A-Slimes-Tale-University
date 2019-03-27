@@ -49,6 +49,7 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+#if UNITY_PS4
     public void PlayPS4(string name)
     {
         // find sound in sounds array where Sound.name is equal to name
@@ -63,5 +64,6 @@ public class AudioManager : MonoBehaviour
         }
         s.source.PlayOnDualShock4PadIndex(0);
     }
+#endif
 
 }
