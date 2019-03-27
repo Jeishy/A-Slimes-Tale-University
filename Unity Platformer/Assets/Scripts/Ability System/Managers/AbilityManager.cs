@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 #if UNITY_PS4
 using UnityEngine.PS4;
 #endif
@@ -42,6 +43,8 @@ public class AbilityManager : MonoBehaviour {
     private GameObject playerGO;
     private Player player;
 
+    [SerializeField] private Text _debugTxt;
+
 	// Holds the elemental state of the player,
 	// uses accessors to encapsulate current elemental state
 	private ElementalStates _currentPlayerElementalState;
@@ -55,11 +58,12 @@ public class AbilityManager : MonoBehaviour {
 	{
 		// Set elemental state to None at beginning of the game
 		CurrentPlayerElementalState = ElementalStates.None;
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
         playerGO = GameObject.FindGameObjectWithTag("Player");
-        playerRb = playerGO.GetComponent<Rigidbody>();
-		OriginalMass = playerRb.mass;
         player = playerGO.GetComponent<Player>();
+        playerRb = playerGO.GetComponent<Rigidbody>();
+        OriginalMass = playerRb.mass;
+
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
         IsAimToShoot = true;
 #elif UNITY_PS4
         IsAimToShoot = false;
@@ -133,6 +137,10 @@ public class AbilityManager : MonoBehaviour {
 #if UNITY_PS4
             PS4Input.PadSetLightBar(0, 255, 220, 0);
 #endif
+            if (player == null)
+            {
+                _debugTxt.text = "null";
+            }
             player.SetElement(ElementalStates.Fire);
             OnFireState();
 		}

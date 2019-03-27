@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngineInternal;
 
 public class AbilityShowStateIndicator : MonoBehaviour
 {
@@ -37,6 +36,7 @@ public class AbilityShowStateIndicator : MonoBehaviour
 
     private void ShowStateIndicator()
     {
+        Debug.Log("Changing elemental indicator");
         StopAllCoroutines();    
         StartCoroutine(WaitToShowStateIndicator());
     }

@@ -86,12 +86,18 @@ public class AbilityProjectile : MonoBehaviour {
                     Destroy(waterMf, 1f);
                     break;
                 case ElementalStates.Wind:
+#if UNITY_PS4
+                    _audioManager.PlayPS4("WindWoosh");
+#endif
                     GameObject wind = Instantiate(_windProj, _projectileSpawnTrans.position, Quaternion.identity);
                     wind.GetComponent<WindProjectile>().Shoot();
                     GameObject windMf = Instantiate(_windMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
                     Destroy(windMf, 1f);
                     break;
                 case ElementalStates.Earth:
+#if UNITY_PS4
+                    _audioManager.PlayPS4("EarthWod");
+#endif
                     GameObject earth = Instantiate(_earthProj, _projectileSpawnTrans.position, Quaternion.identity);
                     earth.GetComponent<EarthProjectile>().Shoot();
                     GameObject earthMf = Instantiate(_earthMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);

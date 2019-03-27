@@ -14,6 +14,8 @@ public class AbilityInputHandler : MonoBehaviour {
 	[SerializeField] private LayerMask _enemyLayerMask;
 	[SerializeField] private float _boostedProjectileMaxTime;	// The longest time mouse button 0 must be held to spawn boosted projectile
     [SerializeField] [Range(0.01f, 0.5f)] private float _rightStickDeadzone;
+    [SerializeField] private AudioManager _audioManager;
+    [SerializeField] private Text _debugTxt;
 
     private AbilityManager _abilityManager;
 	private AbilityProjectile _abilityProjectile;
@@ -67,7 +69,7 @@ public class AbilityInputHandler : MonoBehaviour {
 			_abilityManager.PlayerSwitchAbility();
 		}
 
-		// Check if mouse button 0 (Left click) is clicked and 
+        // Check if mouse button 0 (Left click) is clicked and 
         // if elapsed time is greater than fire time (Used for cooldown)
         if (Input.GetButtonDown("Fire1"))
         {
