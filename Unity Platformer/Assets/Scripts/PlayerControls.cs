@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PS4;
 
 [RequireComponent(typeof(CharacterController2D))]
 public class PlayerControls : MonoBehaviour
@@ -30,13 +31,13 @@ public class PlayerControls : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
+        
         if (!player.isDead)
         {
 
 #if UNITY_PS4
-            //Gets button presses for sideways movement
-            horizontalMove = Input.GetAxisRaw("LeftStickHorizontal") * speed;
+            Debug.log("Last orientation: " + PS4Input.GetLastOrientation() + " | Last acceleration: " + PS4Input.GetLastAcceleration());
+            
 #elif UNITY_EDITOR_WIN || UNITY_STANDALONE
             horizontalMove = Input.GetAxis("Horizontal") * speed;
 #endif
