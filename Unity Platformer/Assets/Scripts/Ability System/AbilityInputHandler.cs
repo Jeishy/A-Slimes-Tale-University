@@ -15,7 +15,6 @@ public class AbilityInputHandler : MonoBehaviour {
 	[SerializeField] private float _boostedProjectileMaxTime;	// The longest time mouse button 0 must be held to spawn boosted projectile
     [SerializeField] [Range(0.01f, 0.5f)] private float _rightStickDeadzone;
     [SerializeField] private AudioManager _audioManager;
-    [SerializeField] private Text _debugTxt;
 
     private AbilityManager _abilityManager;
 	private AbilityProjectile _abilityProjectile;

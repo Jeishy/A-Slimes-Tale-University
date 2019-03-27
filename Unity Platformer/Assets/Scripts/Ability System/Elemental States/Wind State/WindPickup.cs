@@ -5,6 +5,9 @@ using UnityEngine;
 public class WindPickup : MonoBehaviour {
 
     [SerializeField] private GameObject _onWindCollectPE;
+#if UNITY_PS4
+    [SerializeField] private AudioManager _audioManager;
+#endif
 
     private AbilityManager _abilityManager;
     private Player _player;
@@ -23,6 +26,10 @@ public class WindPickup : MonoBehaviour {
 	{
 		if (col.CompareTag("Player"))
 		{
+
+#if UNITY_PS4
+            _audioManager.PlayPS4("ElementalPickupCollect");
+#endif
             _pickupAnim.SetTrigger("Wind");
             StartCoroutine(WaitToCollect());
             _player.AddArmourSlot();

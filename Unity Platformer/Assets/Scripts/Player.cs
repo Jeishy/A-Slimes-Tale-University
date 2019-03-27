@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _onCoinCollectPE;
     [SerializeField] private GameObject _onHitPE;
     [SerializeField] private ElementalStates element = ElementalStates.None;
+    [SerializeField] private AudioManager _audioManager;
 
 
     private Image _healthBarFilled;
@@ -225,6 +226,9 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("Collectible"))
         {
+#if UNITY_PS4
+            _audioManager.PlayPS4("CoinCollect");
+#endif
             Debug.Log("Collectible");
             //gm.OnCollectiblePickup();
             StartCoroutine(WaitToCoinCollect(other.gameObject));

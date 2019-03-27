@@ -5,6 +5,9 @@ using UnityEngine;
 public class WaterPickup : MonoBehaviour {
 
     [SerializeField] private GameObject _onWaterCollectPE;
+#if UNITY_PS4
+    [SerializeField] private AudioManager _audioManager;
+#endif
 
     private AbilityManager _abilityManager;
     private Player _player;
@@ -23,6 +26,9 @@ public class WaterPickup : MonoBehaviour {
 	{
 		if (col.CompareTag("Player"))
 		{
+#if UNITY_PS4
+            _audioManager.PlayPS4("ElementalPickupCollect");
+#endif
             _pickupAnim.SetTrigger("Water");
             StartCoroutine(WaitToCollect());
             _player.AddArmourSlot();

@@ -29,6 +29,11 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float maximiumRandomWaitTime;		//Maximum random wait time
     [SerializeField] private float minimumRandomWaitTime;		//Minimum random wait time
     [SerializeField] private float waypointDetectDistance;      //How close the enemy needs to be to the waypoint to cnonsider as reached
+    [Space]
+    [Header("PS4")]
+#if UNITY_PS4
+    [SerializeField] private AudioManager _audioManager;
+#endif
 
     private int currentWaypoint = 0;							//Stores the value of the current waypoint index
     private int waypointIncrement = 1;							//Used for the Ping-Pong waypoint following method
@@ -205,6 +210,10 @@ public class EnemyAI : MonoBehaviour
 
     void Die()
     {
+#if UNITY_PS4
+        Debug.Log("Playing cannon explosion noise");
+        _audioManager.PlayPS4("CannonExplosion");
+#endif
         Destroy(gameObject);
     }
 

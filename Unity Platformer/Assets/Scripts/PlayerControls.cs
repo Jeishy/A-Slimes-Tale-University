@@ -39,12 +39,12 @@ public class PlayerControls : MonoBehaviour
         {
 
 #if UNITY_PS4
-            text1.text = "Last orientation: " + PS4Input.PadGetLastOrientation(0);
-            text2.text = "Last acceleration: " + PS4Input.PadGetLastAcceleration(0);
-            text3.text = "Last gyro: " + PS4Input.PadGetLastGyro(0);
 
-            
-            horizontalMove = -PS4Input.PadGetLastAcceleration(0).x * speed;
+            if (-PS4Input.PadGetLastAcceleration(0).x <= 0.2 && -PS4Input.PadGetLastAcceleration(0).x >= -0.2)
+                horizontalMove = 0f;
+            else
+                horizontalMove = -PS4Input.PadGetLastAcceleration(0).x * speed;
+
             jump = PS4Input.PadGetLastAcceleration(0).y < 0.3f;
 
 #elif UNITY_EDITOR_WIN || UNITY_STANDALONE

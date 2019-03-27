@@ -6,8 +6,11 @@ public class EarthPickup : MonoBehaviour
 {
 
     [SerializeField] private GameObject _onEarthCollectPE;
+#if UNITY_PS4
+    [SerializeField] private AudioManager _audioManager;
+#endif
 
-	private AbilityManager _abilityManager;
+    private AbilityManager _abilityManager;
     private Player _player;
     private Animator _pickupAnim;
 
@@ -24,6 +27,9 @@ public class EarthPickup : MonoBehaviour
 	{
 		if (col.CompareTag("Player"))
         {
+#if UNITY_PS4
+            _audioManager.PlayPS4("ElementalPickupCollect");
+#endif
             _pickupAnim.SetTrigger("Earth");
             StartCoroutine(WaitToCollect());
             _player.AddArmourSlot();

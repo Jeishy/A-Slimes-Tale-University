@@ -43,8 +43,6 @@ public class AbilityManager : MonoBehaviour {
     private GameObject playerGO;
     private Player player;
 
-    [SerializeField] private Text _debugTxt;
-
 	// Holds the elemental state of the player,
 	// uses accessors to encapsulate current elemental state
 	private ElementalStates _currentPlayerElementalState;
@@ -137,10 +135,6 @@ public class AbilityManager : MonoBehaviour {
 #if UNITY_PS4
             PS4Input.PadSetLightBar(0, 255, 220, 0);
 #endif
-            if (player == null)
-            {
-                _debugTxt.text = "null";
-            }
             player.SetElement(ElementalStates.Fire);
             OnFireState();
 		}

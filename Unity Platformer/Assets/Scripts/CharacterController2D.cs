@@ -145,7 +145,6 @@ public class CharacterController2D : MonoBehaviour
         // Limit player wall slide speed
         if (m_wallSliding && m_Rigidbody.velocity.y <= -m_MaxWallSlideSpeed)
 		{
-            Debug.Log("LIMITING WALL SPEED!!!");
 			m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, -m_MaxWallSlideSpeed);
 
 		}

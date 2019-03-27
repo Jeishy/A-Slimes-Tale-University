@@ -76,6 +76,8 @@ public class ElementalProjectiles : MonoBehaviour {
         for (int i = 0; i < dotTime; i++)
         {
             yield return new WaitForSeconds(1f);
+            if (enemyCol == null)
+                break;
             // Do damage to enemy
             enemyCol.GetComponent<EnemyAI>().Hit(dot);
         }
