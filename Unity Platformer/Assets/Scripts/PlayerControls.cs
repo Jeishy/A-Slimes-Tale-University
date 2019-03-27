@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PS4;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController2D))]
 public class PlayerControls : MonoBehaviour
@@ -12,6 +14,8 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private ParticleSystem slimeTrail;
     [SerializeField] private Transform grounCheckTrans;
 
+    /*PS4 Screen Debugs*/
+    public Text text1, text2, text3;
 
     private CharacterController2D controller;
     private Player player;
@@ -30,13 +34,19 @@ public class PlayerControls : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
+        
         if (!player.isDead)
         {
 
 #if UNITY_PS4
-            //Gets button presses for sideways movement
-            horizontalMove = Input.GetAxisRaw("LeftStickHorizontal") * speed;
+            text1.text = "Last orientation: " + PS4Input.PadGetLastOrientation(0);
+            text2.text = "Last acceleration: " + PS4Input.PadGetLastAcceleration(0);
+            text3.text = "Last gyro: " + PS4Input.PadGetLastGyro(0);
+
+            
+            horizontalMove = -PS4Input.PadGetLastAcceleration(0).x * speed;
+            jump = PS4Input.PadGetLastAcceleration(0).y < 0.3f;
+
 #elif UNITY_EDITOR_WIN || UNITY_STANDALONE
             horizontalMove = Input.GetAxis("Horizontal") * speed;
 #endif
