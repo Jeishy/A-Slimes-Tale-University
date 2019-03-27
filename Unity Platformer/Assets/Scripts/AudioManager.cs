@@ -49,4 +49,19 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    public void PlayPS4(string name)
+    {
+        // find sound in sounds array where Sound.name is equal to name
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        if (s == null)
+        {
+            // display sound not found error message
+            Debug.LogWarning("[Warning] " + name + " sound not found");
+            // don't execute
+            return;
+        }
+        s.source.PlayOnDualShock4PadIndex(0);
+    }
+
 }

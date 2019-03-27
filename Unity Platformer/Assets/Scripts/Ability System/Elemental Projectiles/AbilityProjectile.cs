@@ -19,6 +19,8 @@ public class AbilityProjectile : MonoBehaviour {
     [SerializeField] private GameObject _waterMuzzleFlash;
     [SerializeField] private GameObject _windMuzzleFlash;
     [SerializeField] private GameObject _earthMuzzleFlash;
+    [Space]
+    [SerializeField] private AudioManager _audioManager;
 
     private AbilityManager _abilityManager;
     private Player _playerDurability;
@@ -66,12 +68,18 @@ public class AbilityProjectile : MonoBehaviour {
             switch (state)
             {
                 case ElementalStates.Fire:
+#if UNITY_PS4
+                    _audioManager.PlayPS4("FireWoosh");      
+#endif
                     GameObject fire = Instantiate(_fireProj, _projectileSpawnTrans.position, Quaternion.identity);
                     fire.GetComponent<FireProjectile>().Shoot();
                     GameObject fireMf = Instantiate(_fireMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
                     Destroy(fireMf, 1f);
                     break;
                 case ElementalStates.Water:
+#if UNITY_PS4
+                    _audioManager.PlayPS4("WaterWoosh");
+#endif
                     GameObject water = Instantiate(_waterProj, _projectileSpawnTrans.position, Quaternion.identity);
                     water.GetComponent<WaterProjectile>().Shoot();
                     GameObject waterMf = Instantiate(_waterMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
