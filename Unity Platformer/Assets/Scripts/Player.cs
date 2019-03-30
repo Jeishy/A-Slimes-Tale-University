@@ -5,9 +5,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-#if UNITY_PS4
-using UnityEngine.PS4;
-#endif
 
 public class Player : MonoBehaviour
 {
@@ -81,13 +78,6 @@ public class Player : MonoBehaviour
 
         if (nextDamageTime <= Time.time)
         {
-
-#if UNITY_PS4
-
-        StartCoroutine(_abilityManager.ControllerVibration(false));
-
-#endif
-
             GameObject OnHitParticle = Instantiate(_onHitPE, transform);
             Destroy(OnHitParticle, 2f);
 
@@ -105,9 +95,6 @@ public class Player : MonoBehaviour
             }
             else if (armour <= 0)
             {
-#if UNITY_PS4
-                PS4Input.PadSetLightBar(0, 255, 0, 0);
-#endif
                 //Oterwise, decrement health by 1
                 health -= damage;
             }

@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-#if UNITY_PS4
-using UnityEngine.PS4;
-#endif
 
 public class AbilityInputHandler : MonoBehaviour {
 
@@ -27,15 +24,13 @@ public class AbilityInputHandler : MonoBehaviour {
 	private bool _isMouseZeroPressed; 
 	private float _mousePressedStartTime;
 	private float _mousePressedEndTime;
-    private float ps4Horizontal;
-    private float ps4Vertical;
+
 
     // Use this for initialization
     private void Start () {
 		_abilityManager = GetComponent<AbilityManager>();
 		_abilityProjectile = GetComponent<AbilityProjectile>();
 		_projFireTime = 0f;	// Set fire time to zero at beginning of level, Note: This must be set to 0 when each level is left/complete
-        Debug.Log(PlayerAttributes.Instance == null ? "Instance is null" : "Instance is not null");
         _characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
 		_abilityEarthCrash = GetComponent<AbilityEarthCrash>();
         _isMouseZeroPressed = false;
@@ -54,12 +49,6 @@ public class AbilityInputHandler : MonoBehaviour {
 
 	private void InputHandler()
 	{
-#if UNITY_PS4
-        // Read input from dualshock controller
-        ps4Horizontal = Input.GetAxis("RightStickHorizontal");
-        ps4Vertical = Input.GetAxis("RightStickVertical");
-#endif
-
         // Toggles between ability states
         // Used for debugging
         if (Input.GetKeyDown(KeyCode.Q))
@@ -79,10 +68,6 @@ public class AbilityInputHandler : MonoBehaviour {
 		}
 		else if (Input.GetButtonUp("Fire1"))
 		{
-            // Check if aimtoshoot is false, if so then set right stick axis variable
-            if (!_abilityManager.IsAimToShoot)
-                RightStickAxis = new Vector2(ps4Horizontal, ps4Vertical);
-
             _mousePressedEndTime = Time.time;
 			float mousePressedDeltaTime = _mousePressedEndTime - _mousePressedStartTime;
             //Debug.Log(mousePressedDeltaTime);
@@ -94,29 +79,14 @@ public class AbilityInputHandler : MonoBehaviour {
 				// ensures projectile only fired when new fire time is elapsed
 				_projFireRate = _abilityProjectile.fireRate;
 				_projFireTime = _projFireRate + Time.time;
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
                 _abilityManager.ProjectileFire();
-#elif UNITY_PS4
-                if (RightStickAxis.x > _rightStickDeadzone || RightStickAxis.x < -_rightStickDeadzone || RightStickAxis.y > _rightStickDeadzone || RightStickAxis.y < -_rightStickDeadzone)
-                {
-                    _abilityManager.ProjectileFire();
-                }
-
-#endif
             }
             else if (mousePressedDeltaTime > _boostedProjectileMaxTime)
 			{
 				// Spawn boosted projectile if mouse 0 is pressed long enough
 				_projFireRate = _abilityProjectile.fireRate;
 				_projFireTime = _projFireRate + Time.time;
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
                 _abilityManager.BoostedProjectileFire();
-#elif UNITY_PS4
-                if (RightStickAxis.x > _rightStickDeadzone || RightStickAxis.x < -_rightStickDeadzone || RightStickAxis.y > _rightStickDeadzone || RightStickAxis.y < -_rightStickDeadzone)
-                {
-                    _abilityManager.BoostedProjectileFire();
-                }
-#endif
             }
         }
 

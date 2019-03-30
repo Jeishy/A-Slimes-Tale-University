@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_PS4
-using UnityEngine.PS4;
-#endif
 
 public class AbilityBoostedProjectile : MonoBehaviour {
 
@@ -48,17 +45,11 @@ public class AbilityBoostedProjectile : MonoBehaviour {
 
 		if (_playerDurability.armour > 0)
 		{
-#if UNITY_PS4
-            StartCoroutine(_abilityManager.ControllerVibration(true));
-#endif
             // Remove armour slot if boosted projectile is fired
             _playerDurability.RemoveArmourSlot();
 
             if (_playerDurability.armour == 0 && _abilityManager.CurrentPlayerElementalState != ElementalStates.None)
             {
-#if UNITY_PS4
-                PS4Input.PadSetLightBar(0, 255, 0, 0);
-#endif
                 Debug.Log("Calling none state");
                 _abilityManager.NoneState();
             }
@@ -110,9 +101,6 @@ public class AbilityBoostedProjectile : MonoBehaviour {
 			// Set players current state to none
 			if (_abilityManager.CurrentPlayerElementalState != ElementalStates.None)
             {
-#if UNITY_PS4
-                PS4Input.PadSetLightBar(0, 255, 0, 0);
-#endif
                 _abilityManager.NoneState();
             }
         }
