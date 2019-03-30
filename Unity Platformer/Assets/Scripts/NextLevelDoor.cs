@@ -6,13 +6,6 @@ public class NextLevelDoor : MonoBehaviour {
 
 	[SerializeField] private GameObject _levelChangePE;
 
-	private LevelChanger _levelChanger;
-
-	private void Start()
-	{
-		_levelChanger = GameObject.Find("_levelChanger").GetComponent<LevelChanger>();
-	}
-
 	private void OnTriggerEnter(Collider col)
 	{
 		if (col.CompareTag("Player"))
@@ -28,7 +21,7 @@ public class NextLevelDoor : MonoBehaviour {
 		player.SetActive(false);
 		Destroy(nextLevelPoof, 1f);
 		yield return new WaitForSeconds(0.5f);
-		_levelChanger.OnLevelComplete();
+		LevelChanger.instance.OnLevelComplete();
 		player.SetActive(true);
 	}
 }

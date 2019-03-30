@@ -20,6 +20,11 @@ TagManager:
   - ElementalPickup
   - Fire
   - Shop
+  - FireDoor
+  - EarthDoor
+  - WaterDoor
+  - WindDoor
+  - ExitDoor
   layers:
   - Default
   - TransparentFX
@@ -36,8 +41,8 @@ TagManager:
   - Enemy
   - Collectable
   - Ground
-  - 
-  - 
+  - ActiveDoor
+  - InactiveDoor
   - 
   - 
   - 

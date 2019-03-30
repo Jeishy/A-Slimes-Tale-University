@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4945424086309326}
   - component: {fileID: 33622197953918888}
   - component: {fileID: 23382406632991618}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4703187031678876}
   - component: {fileID: 33295448398200504}
   - component: {fileID: 23462310256732096}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4907097177935586}
   - component: {fileID: 33863702550951620}
   - component: {fileID: 23555882820457594}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4978693782361094}
   - component: {fileID: 33659845535931038}
   - component: {fileID: 23097497463003044}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4675918039503424}
   - component: {fileID: 33217562110232448}
   - component: {fileID: 23963858434185744}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Eye_Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4469897704079360}
   - component: {fileID: 33018211913458308}
   - component: {fileID: 23699863389067878}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 4643765006445324}
   - component: {fileID: 33413076035036168}
   - component: {fileID: 23133192436382564}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 4642239053116608}
   - component: {fileID: 33013789288434862}
   - component: {fileID: 23364091979941294}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 4115183874207626}
   - component: {fileID: 198872018195162348}
   - component: {fileID: 199115172879207294}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: PortalParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 4252309684679616}
   - component: {fileID: 198101709170251290}
   - component: {fileID: 199667813971908992}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DarkBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,13 +190,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4887075903381582}
   - component: {fileID: 108016046628994806}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1477006411912404
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +205,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4712764461253220}
-  m_Layer: 0
+  - component: {fileID: 65916725437974802}
+  m_Layer: 16
   m_Name: Earth Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +223,7 @@ GameObject:
   - component: {fileID: 4302672002244600}
   - component: {fileID: 33913250646381958}
   - component: {fileID: 23016175858664622}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +240,7 @@ GameObject:
   - component: {fileID: 4209986516042502}
   - component: {fileID: 33893016595480128}
   - component: {fileID: 23608484870537614}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pSphere1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +257,7 @@ GameObject:
   - component: {fileID: 4402299557835548}
   - component: {fileID: 33804196117989144}
   - component: {fileID: 23442368114663344}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +275,7 @@ GameObject:
   - component: {fileID: 33862058203811718}
   - component: {fileID: 23090933380668408}
   - component: {fileID: 64115637666537630}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +292,7 @@ GameObject:
   - component: {fileID: 4904155219658700}
   - component: {fileID: 33280059509855814}
   - component: {fileID: 23778672669574826}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +309,7 @@ GameObject:
   - component: {fileID: 4280003540144236}
   - component: {fileID: 33882250450256920}
   - component: {fileID: 23680503475148386}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +327,7 @@ GameObject:
   - component: {fileID: 33217657698067196}
   - component: {fileID: 23848132903820532}
   - component: {fileID: 64119201897040660}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: EarthDissolve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +344,7 @@ GameObject:
   - component: {fileID: 4265199067015672}
   - component: {fileID: 33232805890235540}
   - component: {fileID: 23262314874916102}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +361,7 @@ GameObject:
   - component: {fileID: 4008407005820320}
   - component: {fileID: 33436869795963920}
   - component: {fileID: 23610472349475488}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +378,7 @@ GameObject:
   - component: {fileID: 4654111492895888}
   - component: {fileID: 33894145173986664}
   - component: {fileID: 23521322100588638}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +395,7 @@ GameObject:
   - component: {fileID: 4278494431837558}
   - component: {fileID: 33309320742584590}
   - component: {fileID: 23319061711122128}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +412,7 @@ GameObject:
   - component: {fileID: 4987707846033768}
   - component: {fileID: 33210365720157588}
   - component: {fileID: 23632500575379470}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pSphere2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,7 +429,7 @@ GameObject:
   - component: {fileID: 4352658431011850}
   - component: {fileID: 33101816310843018}
   - component: {fileID: 23393447652630210}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +446,7 @@ GameObject:
   - component: {fileID: 4289960137250674}
   - component: {fileID: 33645868752503026}
   - component: {fileID: 23862714258688470}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +463,7 @@ GameObject:
   - component: {fileID: 4951086043421498}
   - component: {fileID: 33659714185392094}
   - component: {fileID: 23332020333895136}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +481,7 @@ GameObject:
   - component: {fileID: 33430220680810968}
   - component: {fileID: 23403895659720060}
   - component: {fileID: 64708743548423986}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,8 +755,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1477006411912404}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 66.11, y: 15.16, z: 16.92}
-  m_LocalScale: {x: 208.66862, y: 208.66862, z: 208.66862}
+  m_LocalPosition: {x: 26.676968, y: 2.3920956, z: 8.775335}
+  m_LocalScale: {x: 112.92458, y: 112.92458, z: 112.92458}
   m_Children:
   - {fileID: 4675918039503424}
   - {fileID: 4703187031678876}
@@ -1928,6 +1929,18 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65916725437974802
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477006411912404}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04062297, y: 0.04454762, z: 0.03372925}
+  m_Center: {x: -0.0013818552, y: 0.0060159736, z: 0.09422577}
 --- !u!108 &108016046628994806
 Light:
   m_ObjectHideFlags: 1

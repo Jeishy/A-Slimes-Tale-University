@@ -27,11 +27,13 @@ public class Player : MonoBehaviour
     private CharacterController2D controller;
     private GameManager gm;
     private AbilityManager _abilityManager;
+    private HubWorldManager _hubWorldManager;
     [HideInInspector] public bool isDead;
 
     private void Start()
     {
         _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
+        _hubWorldManager = GameObject.FindGameObjectWithTag("HubWorldManager").GetComponent<HubWorldManager>();
         controller = GetComponent<CharacterController2D>();
         _healthBarFilled = GameObject.Find("HealthBarFilled").GetComponent<Image>();
         gm = GameManager.instance;
@@ -49,7 +51,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Display health and armour in UI
-        _healthBarFilled.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
+        //_healthBarFilled.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
         //_armourText.text = "Armour: " + armour;
 
         //Call Die() function when player is at or below 0 health

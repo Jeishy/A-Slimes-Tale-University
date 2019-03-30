@@ -45,9 +45,7 @@ public class LevelChanger : MonoBehaviour
     //Called when the FadeOut animation has finished playing
     public void OnFadeComplete()
 	{
-
-
-        if (SceneManager.sceneCountInBuildSettings <= levelToLoad)
+        if (levelToLoad <= SceneManager.sceneCountInBuildSettings)
         {
             SceneManager.LoadScene(levelToLoad);
         } else

@@ -9,21 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/_preload.unity
     guid: 2a29996aa1b08a64f91e993c785b568d
   - enabled: 1
-    path: Assets/Scenes/TutorialMap/Tutorial.unity
+    path: Assets/Scenes/MainMenu.unity
+    guid: eb9882f65f85dc643a777168beae2744
+  - enabled: 1
+    path: Assets/Scenes/Old Scenes/TutorialMap/Tutorial.unity
     guid: cdccc1c30fddd5f4cbfd2219660e83d1
   - enabled: 0
     path: Assets/Scenes/dungeon_PS4_Test.unity
     guid: 80ddc4f9f3553064e8caf669773ae605
   - enabled: 0
-    path: Assets/Scenes/Jesse Test Scene.unity
+    path: Assets/Scenes/Test Scenes/Jesse Test Scene.unity
     guid: cb7c1d3538f1ee84880c7d9614754f1e
   - enabled: 1
-    path: Assets/Scenes/DungeonMaps/dungeon_1.unity
-    guid: d363eb3283cc4d845835fb4b269c34cc
+    path: Assets/Scenes/Hub_World.unity
+    guid: c4da2db06de54284e846c6570baa23d2
   - enabled: 1
-    path: Assets/Scenes/DungeonMaps/dungeon_world2.unity
-    guid: 9273288df1a126a49a40882aaa59cbae
-  - enabled: 1
-    path: Assets/Scenes/DungeonMaps/Dungeon_World3.unity
-    guid: 3314b15dfabfe934b936ded3f317367f
+    path: Assets/Scenes/ChinaMountain_World2.unity
+    guid: c0eae463332c0d6478e33b0816707f50
   m_configObjects: {}

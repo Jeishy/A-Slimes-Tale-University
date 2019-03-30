@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4728966505313582}
   - component: {fileID: 33096766368678964}
   - component: {fileID: 23997369276366790}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WD_Rightside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,13 +37,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4431961475941926}
   - component: {fileID: 108602056741114746}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1183142994367024
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4742449240257314}
   - component: {fileID: 33273968342623624}
   - component: {fileID: 23856375232537994}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pPlane2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 33960337020463648}
   - component: {fileID: 23539238969077886}
   - component: {fileID: 64258032257055300}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WaterDissolve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 33315564505620516}
   - component: {fileID: 23771353728408148}
   - component: {fileID: 64077777005935192}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 33029659219775512}
   - component: {fileID: 23487039465573564}
   - component: {fileID: 64541119489040238}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 4742134852668832}
   - component: {fileID: 33765332868727116}
   - component: {fileID: 23282785504747418}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WD_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4543980606802674}
-  m_Layer: 0
+  - component: {fileID: 65006654793439282}
+  m_Layer: 16
   m_Name: Water Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +158,7 @@ GameObject:
   - component: {fileID: 4302952595650480}
   - component: {fileID: 198516744455202568}
   - component: {fileID: 199931488518849012}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DarkBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +175,7 @@ GameObject:
   - component: {fileID: 4137201473599374}
   - component: {fileID: 33214577767118710}
   - component: {fileID: 23599065249012656}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WD_leftside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +192,7 @@ GameObject:
   - component: {fileID: 4415384699781908}
   - component: {fileID: 33219384332758328}
   - component: {fileID: 23807001805412508}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Eye_brow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +209,7 @@ GameObject:
   - component: {fileID: 4904138888064826}
   - component: {fileID: 33270796875489100}
   - component: {fileID: 23252480538141148}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WD_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +226,7 @@ GameObject:
   - component: {fileID: 4311137452187790}
   - component: {fileID: 198701236638257298}
   - component: {fileID: 199121003071314576}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: PortalParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,8 +318,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1404584729315936}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 52.64089, y: 11.67, z: 5.08}
-  m_LocalScale: {x: 186.18738, y: 186.42346, z: 181.61078}
+  m_LocalPosition: {x: 18.926968, y: 0.6320958, z: 2.7412357}
+  m_LocalScale: {x: 115.0023, y: 115.14812, z: 112.175476}
   m_Children:
   - {fileID: 4978982715503884}
   - {fileID: 4311137452187790}
@@ -833,6 +834,18 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65006654793439282
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404584729315936}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.038949404, y: 0.043356292, z: 0.035627585}
+  m_Center: {x: 0.013858904, y: 0.02112682, z: 0.040355943}
 --- !u!108 &108602056741114746
 Light:
   m_ObjectHideFlags: 1

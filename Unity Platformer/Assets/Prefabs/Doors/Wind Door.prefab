@@ -36,6 +36,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4356679676730552}
+  - component: {fileID: 65214380176061578}
   m_Layer: 0
   m_Name: Wind Door
   m_TagString: Untagged
@@ -53,7 +54,6 @@ GameObject:
   - component: {fileID: 4405749507684088}
   - component: {fileID: 33285835595759320}
   - component: {fileID: 23624311631189378}
-  - component: {fileID: 64613820416208694}
   m_Layer: 0
   m_Name: WindDissolve
   m_TagString: Untagged
@@ -138,7 +138,6 @@ GameObject:
   - component: {fileID: 4667876618506266}
   - component: {fileID: 33260805758472370}
   - component: {fileID: 23896374599704498}
-  - component: {fileID: 64845998889884550}
   m_Layer: 0
   m_Name: BG (1)
   m_TagString: Untagged
@@ -244,8 +243,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1264541333466270}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 41.07, y: 16.93, z: 7.53}
-  m_LocalScale: {x: 289.11047, y: 289.11047, z: 289.11047}
+  m_LocalPosition: {x: 12.316968, y: 3.5246954, z: 3.300436}
+  m_LocalScale: {x: 152.42223, y: 169.84409, z: 152.42223}
   m_Children:
   - {fileID: 4405749507684088}
   - {fileID: 4667876618506266}
@@ -659,34 +658,18 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64613820416208694
-MeshCollider:
+--- !u!65 &65214380176061578
+BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1333561156266778}
+  m_GameObject: {fileID: 1264541333466270}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64845998889884550
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1709310889685148}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.03332644, y: 0.029564017, z: 0.099136956}
+  m_Center: {x: 0.0009736602, y: -0.0026927176, z: 0.00097649137}
 --- !u!108 &108664415335092934
 Light:
   m_ObjectHideFlags: 1
