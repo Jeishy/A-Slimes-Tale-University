@@ -728,10 +728,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 1002845411139580, guid: c69cf88efe4615542af44e9b656f885d, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c69cf88efe4615542af44e9b656f885d, type: 2}
   m_IsPrefabAsset: 0
@@ -1280,15 +1276,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4019677492028672, guid: 91978b8e40800904eb9181d287367e14, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.47
+      value: 3.399876
       objectReference: {fileID: 0}
     - target: {fileID: 4019677492028672, guid: 91978b8e40800904eb9181d287367e14, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -5.45
+      value: 0.87
       objectReference: {fileID: 0}
     - target: {fileID: 4019677492028672, guid: 91978b8e40800904eb9181d287367e14, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.29674554
       objectReference: {fileID: 0}
     - target: {fileID: 4019677492028672, guid: 91978b8e40800904eb9181d287367e14, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1296,7 +1292,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4019677492028672, guid: 91978b8e40800904eb9181d287367e14, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.0000019818542
       objectReference: {fileID: 0}
     - target: {fileID: 4019677492028672, guid: 91978b8e40800904eb9181d287367e14, type: 2}
       propertyPath: m_LocalRotation.z
@@ -1304,7 +1300,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4019677492028672, guid: 91978b8e40800904eb9181d287367e14, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.00000041723246
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4019677492028672, guid: 91978b8e40800904eb9181d287367e14, type: 2}
       propertyPath: m_RootOrder
@@ -1312,7 +1308,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4019677492028672, guid: 91978b8e40800904eb9181d287367e14, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180.00002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114375523576496216, guid: 91978b8e40800904eb9181d287367e14,
         type: 2}

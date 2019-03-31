@@ -29,8 +29,7 @@ public class NextLevelDoor : MonoBehaviour {
 		player.SetActive(false);
 		Destroy(nextLevelPoof, 1f);
 		yield return new WaitForSeconds(0.5f);
-        int buildIndex = SceneManager.GetSceneByName("Hub_World").buildIndex;
-        LevelChanger.instance.FadeToLevel(buildIndex);
+        LevelChanger.instance.FadeToLevel(3);
         yield return new WaitForSeconds(1f);
         player.SetActive(true);
         _isNextLevel = false;
