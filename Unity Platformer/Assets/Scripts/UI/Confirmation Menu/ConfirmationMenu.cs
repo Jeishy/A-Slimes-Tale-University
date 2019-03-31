@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class ConfirmationMenu : MonoBehaviour {
 
-	private void Start()
+    [SerializeField] private HubWorldManager _hubWorldManager;
+
+    [HideInInspector] public int BuildIndex;
+    private void Start()
 	{
         gameObject.SetActive(false);
     }
 
-	public void GoToMainMenu()
+	public void GoToLevel()
 	{
         Time.timeScale = 1;
-        LevelChanger.instance.FadeToLevel(1);
+        LevelChanger.instance.FadeToLevel(BuildIndex);
         gameObject.SetActive(true);
+		_hubWorldManager.IsDoorSelected = false;
+    }
+
+	public void Continue()
+	{
+        Time.timeScale = 1;
+        gameObject.SetActive(false);
+        _hubWorldManager.IsDoorSelected = false;
     }
 }

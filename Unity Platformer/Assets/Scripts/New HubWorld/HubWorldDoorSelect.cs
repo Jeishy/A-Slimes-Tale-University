@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class HubWorldDoorSelect : MonoBehaviour {
 
-    [SerializeField] private GameObject[] portalSelectPEs = new GameObject[3];
-    [SerializeField] private GameObject _ConfirmationCanvas;
+    [SerializeField] private GameObject _confirmationCanvas; 
 
     private HubWorldManager _hubWorldManager;
+    private ConfirmationMenu _confirmMenu;
     private GameObject _player;
 
     private void OnEnable()
@@ -26,39 +26,34 @@ public class HubWorldDoorSelect : MonoBehaviour {
 	{
         _hubWorldManager = GetComponent<HubWorldManager>();
         _player = GameObject.FindGameObjectWithTag("Player");
+        _confirmMenu = _confirmationCanvas.GetComponent<ConfirmationMenu>();
     }
 
 	private void DoorSelect(GameObject door)
 	{
         if (!_hubWorldManager.IsDoorSelected)
 		{
-			_hubWorldManager.IsDoorSelected = true;
+            // Display confirmation canvas
+            _confirmationCanvas.SetActive(true);
+			// Pause game
+            Time.timeScale = 0;
+            _hubWorldManager.IsDoorSelected = true; 
+
 			string doorName = door.name;
             switch (doorName)
 			{
 				case "Exit Door":
-                    // Display confirmation canvas
-                    _ConfirmationCanvas.SetActive(true);
-                    Time.timeScale = 0;
+					_confirmMenu.BuildIndex = 1;
                     break;
 				case "Fire Door":
-					StartCoroutine(GoToLevel(3));
-					break;
+                    _confirmMenu.BuildIndex = 3;
+                    break;
 				case "Wind Door":
-                    StartCoroutine(GoToLevel(4));
+					_confirmMenu.BuildIndex = 4;
                     break;
 			}
-		}
-    }
 
-	private IEnumerator GoToLevel(int buildIndex/*, GameObject portalSelectPE*/)
-	{
-		//yield return new WaitForSeconds(0.2f);
-		//GameObject pe = Instantiate(portalSelectPE, _player.transform.position, Quaternion.identity);
-		//_player.SetActive(false);
-		//Destroy(pe, 1f);
-		yield return new WaitForSeconds(0.5f);
-        LevelChanger.instance.FadeToLevel(buildIndex);
-        //_player.SetActive(true);
+			Debug.Log("Current build index: " + _confirmMenu.BuildIndex);
+		}
     }
 }
