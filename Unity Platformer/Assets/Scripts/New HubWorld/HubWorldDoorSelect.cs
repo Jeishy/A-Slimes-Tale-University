@@ -45,15 +45,13 @@ public class HubWorldDoorSelect : MonoBehaviour {
 				case "Exit Door":
 					_confirmMenu.BuildIndex = 1;
                     break;
-				case "Fire Door":
+				case "Dungeon Door":
                     _confirmMenu.BuildIndex = 3;
                     break;
 				case "Wind Door":
 					_confirmMenu.BuildIndex = 4;
                     break;
 			}
-
-			Debug.Log("Current build index: " + _confirmMenu.BuildIndex);
-		}
+        }
     }
 }

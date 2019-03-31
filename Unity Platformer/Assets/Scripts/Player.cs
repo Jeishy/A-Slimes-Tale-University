@@ -27,13 +27,11 @@ public class Player : MonoBehaviour
     private CharacterController2D controller;
     private GameManager gm;
     private AbilityManager _abilityManager;
-    private HubWorldManager _hubWorldManager;
     [HideInInspector] public bool isDead;
 
     private void Start()
     {
         _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
-        _hubWorldManager = GameObject.FindGameObjectWithTag("HubWorldManager").GetComponent<HubWorldManager>();
         controller = GetComponent<CharacterController2D>();
         _healthBarFilled = GameObject.Find("HealthBarFilled").GetComponent<Image>();
         gm = GameManager.instance;

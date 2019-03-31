@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4776822016428736}
   - component: {fileID: 198888980289486184}
   - component: {fileID: 199567421044681816}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: DarkBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4356679676730552}
   - component: {fileID: 65214380176061578}
-  m_Layer: 0
+  - component: {fileID: 114133489975606888}
+  m_Layer: 15
   m_Name: Wind Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +55,7 @@ GameObject:
   - component: {fileID: 4405749507684088}
   - component: {fileID: 33285835595759320}
   - component: {fileID: 23624311631189378}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: WindDissolve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4846702472938536}
   - component: {fileID: 108664415335092934}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +88,7 @@ GameObject:
   - component: {fileID: 4905281725973626}
   - component: {fileID: 33425198362030284}
   - component: {fileID: 23586122876438202}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: pCube3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +105,7 @@ GameObject:
   - component: {fileID: 4169996779329670}
   - component: {fileID: 33537629199920076}
   - component: {fileID: 23167607475857042}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: pCube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +122,7 @@ GameObject:
   - component: {fileID: 4345713811064908}
   - component: {fileID: 33567797710878410}
   - component: {fileID: 23583645641832694}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: pCube4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +139,7 @@ GameObject:
   - component: {fileID: 4667876618506266}
   - component: {fileID: 33260805758472370}
   - component: {fileID: 23896374599704498}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: BG (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +156,7 @@ GameObject:
   - component: {fileID: 4744051426247786}
   - component: {fileID: 33723842035831100}
   - component: {fileID: 23999197181924328}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Eye_Curl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +173,7 @@ GameObject:
   - component: {fileID: 4196564387409028}
   - component: {fileID: 198773960101108754}
   - component: {fileID: 199185581005026446}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: PortalParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +191,7 @@ GameObject:
   - component: {fileID: 33662143988049042}
   - component: {fileID: 23173027425684738}
   - component: {fileID: 64149931748873460}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +319,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1367044934592268}
   m_LocalRotation: {x: -0.38268343, y: 0.9238795, z: -0.0000011290807, w: 0.0000027258411}
-  m_LocalPosition: {x: 0.00218, y: -0.00981, z: 0.02358}
+  m_LocalPosition: {x: 0.00128, y: -0.00981, z: 0.02798}
   m_LocalScale: {x: 0.48962048, y: 0.4896207, z: 0.4896207}
   m_Children: []
   m_Father: {fileID: 4356679676730552}
@@ -668,8 +669,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03332644, y: 0.029564017, z: 0.099136956}
-  m_Center: {x: 0.0009736602, y: -0.0026927176, z: 0.00097649137}
+  m_Size: {x: 0.022953419, y: 0.029564017, z: 0.026086679}
+  m_Center: {x: 0.0009958757, y: -0.0026927176, z: 0.0335487}
 --- !u!108 &108664415335092934
 Light:
   m_ObjectHideFlags: 1
@@ -681,7 +682,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 17.02
-  m_Range: 4.378647
+  m_Range: 2.89
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -707,6 +708,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114133489975606888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264541333466270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c07ba5a2e0ce24db0afbf57d323005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hubWorldManager: {fileID: 0}
 --- !u!198 &198773960101108754
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 4197174}
   - component: {fileID: 4197173}
   - component: {fileID: 4197172}
-  - component: {fileID: 4197171}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -133,20 +132,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
   m_IsActive: 1
---- !u!64 &4197171
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 4197170}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 1982789600}
 --- !u!114 &4197172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3006,7 +2991,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3079,7 +3064,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-763516
+  m_Name: pb_Mesh143892
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -3234,7 +3219,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh88742
+  m_Name: pb_Mesh143858
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -3634,7 +3619,6 @@ GameObject:
   - component: {fileID: 826848234}
   - component: {fileID: 826848233}
   - component: {fileID: 826848232}
-  - component: {fileID: 826848231}
   m_Layer: 0
   m_Name: Cube (7)
   m_TagString: Untagged
@@ -3655,20 +3639,6 @@ Transform:
   m_Father: {fileID: 2019660839}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -215.42099, z: 0}
---- !u!64 &826848231
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 826848229}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 2062457177}
 --- !u!114 &826848232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6528,7 +6498,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -59788,7 +59758,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -59814,7 +59784,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-765228
+  m_Name: pb_Mesh143988
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -60603,7 +60573,6 @@ GameObject:
   - component: {fileID: 1433339167}
   - component: {fileID: 1433339166}
   - component: {fileID: 1433339165}
-  - component: {fileID: 1433339164}
   m_Layer: 0
   m_Name: Cube (6)
   m_TagString: Untagged
@@ -60611,20 +60580,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
   m_IsActive: 1
---- !u!64 &1433339164
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1433339163}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 1493578559}
 --- !u!114 &1433339165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63516,7 +63471,6 @@ GameObject:
   - component: {fileID: 1441421399}
   - component: {fileID: 1441421398}
   - component: {fileID: 1441421397}
-  - component: {fileID: 1441421396}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -63524,20 +63478,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
   m_IsActive: 1
---- !u!64 &1441421396
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1441421395}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 532024288}
 --- !u!114 &1441421397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66423,7 +66363,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-768062
+  m_Name: pb_Mesh143880
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -66578,7 +66518,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-767114
+  m_Name: pb_Mesh143976
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -66804,7 +66744,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh88798
+  m_Name: pb_Mesh143952
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -66959,7 +66899,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-764116
+  m_Name: pb_Mesh143822
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -67731,7 +67671,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-781416
+  m_Name: pb_Mesh143846
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -67892,7 +67832,6 @@ GameObject:
   - component: {fileID: 2063217003}
   - component: {fileID: 2063217002}
   - component: {fileID: 2063217001}
-  - component: {fileID: 2063217000}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -67900,20 +67839,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
   m_IsActive: 1
---- !u!64 &2063217000
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2063216999}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 1785470408}
 --- !u!114 &2063217001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72948,7 +72873,6 @@ GameObject:
   - component: {fileID: 2115631373}
   - component: {fileID: 2115631372}
   - component: {fileID: 2115631371}
-  - component: {fileID: 2115631370}
   m_Layer: 0
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -72956,20 +72880,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
   m_IsActive: 1
---- !u!64 &2115631370
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2115631369}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 1605843572}
 --- !u!114 &2115631371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75861,7 +75771,6 @@ GameObject:
   - component: {fileID: 2128016304}
   - component: {fileID: 2128016303}
   - component: {fileID: 2128016302}
-  - component: {fileID: 2128016301}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -75869,20 +75778,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
   m_IsActive: 1
---- !u!64 &2128016301
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2128016300}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 1250647470}
 --- !u!114 &2128016302
 MonoBehaviour:
   m_ObjectHideFlags: 0

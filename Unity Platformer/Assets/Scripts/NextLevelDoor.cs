@@ -1,16 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NextLevelDoor : MonoBehaviour {
 
 	[SerializeField] private GameObject _levelChangePE;
+    private bool _isNextLevel;
 
-	private void OnTriggerEnter(Collider col)
+	private void Start()
 	{
-		if (col.CompareTag("Player"))
+        _isNextLevel = false;
+    }
+
+    private void OnTriggerEnter(Collider col)
+	{
+		if (col.CompareTag("Player") && !_isNextLevel)
 		{
-			StartCoroutine(NextLevel(col.gameObject, _levelChangePE));
+            _isNextLevel = true;
+            StartCoroutine(NextLevel(col.gameObject, _levelChangePE));
 		}
 	}
 
@@ -21,7 +29,10 @@ public class NextLevelDoor : MonoBehaviour {
 		player.SetActive(false);
 		Destroy(nextLevelPoof, 1f);
 		yield return new WaitForSeconds(0.5f);
-		LevelChanger.instance.OnLevelComplete();
-		player.SetActive(true);
-	}
+        int buildIndex = SceneManager.GetSceneByName("Hub_World").buildIndex;
+        LevelChanger.instance.FadeToLevel(buildIndex);
+        yield return new WaitForSeconds(1f);
+        player.SetActive(true);
+        _isNextLevel = false;
+    }
 }
