@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -49,9 +50,13 @@ public class GameManager : MonoBehaviour
     public void OnGemstonePickup()
     {
         gemstones++;
+        CheckIfLevelIsComplete();
+    }
+
+    public void CheckIfLevelIsComplete()
+    {
         if (gemstones >= maxGemstones)
             IsLevelComplete = true;
-
     }
 
     public void LoadPlayer(bool LoadLevel = false)

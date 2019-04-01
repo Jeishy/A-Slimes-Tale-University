@@ -10,7 +10,6 @@ public class AbilityInputHandler : MonoBehaviour {
 
 	[SerializeField] private LayerMask _enemyLayerMask;
 	[SerializeField] private float _boostedProjectileMaxTime;	// The longest time mouse button 0 must be held to spawn boosted projectile
-    [SerializeField] [Range(0.01f, 0.5f)] private float _rightStickDeadzone;
 
     private AbilityManager _abilityManager;
 	private AbilityProjectile _abilityProjectile;
@@ -81,13 +80,13 @@ public class AbilityInputHandler : MonoBehaviour {
 				_projFireTime = _projFireRate + Time.time;
                 _abilityManager.ProjectileFire();
             }
-            else if (mousePressedDeltaTime > _boostedProjectileMaxTime)
+            /*else if (mousePressedDeltaTime > _boostedProjectileMaxTime)
 			{
 				// Spawn boosted projectile if mouse 0 is pressed long enough
 				_projFireRate = _abilityProjectile.fireRate;
 				_projFireTime = _projFireRate + Time.time;
                 _abilityManager.BoostedProjectileFire();
-            }
+            }*/
         }
 
 		// Left control activates the earth element ability crash

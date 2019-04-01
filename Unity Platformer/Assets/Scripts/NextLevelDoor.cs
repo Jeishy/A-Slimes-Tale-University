@@ -14,8 +14,11 @@ public class NextLevelDoor : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider col)
-	{
-		if (col.CompareTag("Player") && !_isNextLevel && GameManager.instance.IsLevelComplete)
+    {
+        GameManager.instance.CheckIfLevelIsComplete();
+        Debug.Log(GameManager.instance.gemstones);
+        Debug.Log(GameManager.instance.maxGemstones);
+        if (col.CompareTag("Player") && !_isNextLevel && GameManager.instance.IsLevelComplete)
 		{
             _isNextLevel = true;
             StartCoroutine(NextLevel(col.gameObject, _levelChangePE));
@@ -33,7 +36,7 @@ public class NextLevelDoor : MonoBehaviour {
 		Destroy(nextLevelPoof, 1f);
 		// Delay before going to the next level
 		yield return new WaitForSeconds(0.5f);
-        LevelChanger.instance.FadeToLevel(3);
+        LevelChanger.instance.OnLevelComplete();
 		// Delay before reactivating player GO, so that player doesn't reappear during fade out animation
         yield return new WaitForSeconds(1f);
         player.SetActive(true);

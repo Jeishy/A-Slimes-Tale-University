@@ -53,8 +53,10 @@ public class PlayerControls : MonoBehaviour
             }
 
         }
+        controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
+        jump = false;
 
-	}
+    }
 
     public float GetSpeed()
     {
@@ -68,7 +70,6 @@ public class PlayerControls : MonoBehaviour
     
 	void FixedUpdate()
 	{
-		controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
-		jump = false;
+		
 	}
 }

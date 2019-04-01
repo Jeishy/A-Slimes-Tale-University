@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
+using System;
 
 public class HubWorldDoorSelect : MonoBehaviour {
 
-    [SerializeField] private GameObject _confirmationCanvas; 
+    [SerializeField] private GameObject _confirmationCanvas;
+    [SerializeField] private TextMeshProUGUI _levelNameTxt;
 
     private HubWorldManager _hubWorldManager;
     private ConfirmationMenu _confirmMenu;
@@ -43,13 +45,16 @@ public class HubWorldDoorSelect : MonoBehaviour {
             switch (doorName)
 			{
 				case "Exit Door":
-					_confirmMenu.BuildIndex = 1;
+					//_confirmMenu.BuildIndex = Array.Find;
+                    _levelNameTxt.text = "";
                     break;
 				case "Dungeon Door":
                     _confirmMenu.BuildIndex = 4;
+                    _levelNameTxt.text = "Dungeon";
                     break;
 				case "Wind Door":
 					_confirmMenu.BuildIndex = 5;
+                    _levelNameTxt.text = "China Mountain";
                     break;
 			}
         }
