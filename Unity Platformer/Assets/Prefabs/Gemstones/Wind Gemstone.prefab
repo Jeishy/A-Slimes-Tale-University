@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4712498849288364}
   - component: {fileID: 114958910022626040}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wind Gemstone
   m_TagString: Gemstone
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4906644986198010}
   - component: {fileID: 108219239104110374}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 23770602937487700}
   - component: {fileID: 95664664118352192}
   - component: {fileID: 136907814161859812}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ' Wind Gemstone Model'
   m_TagString: Gemstone
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4746453896043480}
   - component: {fileID: 198517226365974846}
   - component: {fileID: 199038633223239666}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wind Mist Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4881260484703074}
   - component: {fileID: 198071596744175242}
   - component: {fileID: 199851799094410318}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wind Gem Shimmer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

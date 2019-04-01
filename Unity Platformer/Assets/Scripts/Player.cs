@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         controller = GetComponent<CharacterController2D>();
         _healthBarFilled = GameObject.Find("HealthBarFilled").GetComponent<Image>();
         gm = GameManager.instance;
-
+        
         if (gm.hasData)
         {
             health = gm.health;
@@ -212,8 +212,7 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("Collectible"))
         {
-            Debug.Log("Collectible");
-            //gm.OnCollectiblePickup();
+            gm.OnCollectiblePickup();
             StartCoroutine(WaitToCoinCollect(other.gameObject));
             other.GetComponent<Animator>().SetTrigger("Collect");
             Destroy(other.gameObject, 1f);
@@ -221,8 +220,7 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("Gemstone"))
         {
-            Debug.Log("Gemstone");
-            //gm.OnGemstonePickup();
+            gm.OnGemstonePickup();
             other.GetComponentInParent<GemstoneCollect>().IsCollected = true;
             StartCoroutine(WaitToGemstoneCollect(other.transform.parent));
             Destroy(other.transform.parent.gameObject, 3f);
@@ -230,7 +228,6 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("NextLevel"))
         {
-            Debug.Log("Level complete!!");
             LevelChanger.instance.FadeToLevel(GetCurrentLevel() + 1);
         }
     }

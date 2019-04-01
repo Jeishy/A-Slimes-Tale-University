@@ -46,10 +46,10 @@ public class HubWorldDoorSelect : MonoBehaviour {
 					_confirmMenu.BuildIndex = 1;
                     break;
 				case "Dungeon Door":
-                    _confirmMenu.BuildIndex = 3;
+                    _confirmMenu.BuildIndex = 4;
                     break;
 				case "Wind Door":
-					_confirmMenu.BuildIndex = 4;
+					_confirmMenu.BuildIndex = 5;
                     break;
 			}
         }

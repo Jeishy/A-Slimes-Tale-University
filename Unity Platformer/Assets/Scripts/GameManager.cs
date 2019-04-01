@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public ElementalStates element;
 
     public static GameManager instance = null;
+    [HideInInspector] public bool IsLevelComplete;
 
     private void Awake()
     {
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Two instances of GameManager have been created!");
             Destroy(this);
         }
+
+        IsLevelComplete = false;
     }
 
     public void SavePlayer(Player player)
@@ -47,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
         gemstones++;
         if (gemstones >= maxGemstones)
-            LevelChanger.instance.OnLevelComplete();
+            IsLevelComplete = true;
 
     }
 

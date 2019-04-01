@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4843873708807906}
   - component: {fileID: 108537510472280628}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 23475612651364494}
   - component: {fileID: 95044408850236960}
   - component: {fileID: 136348370005876016}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Earth Gemstone Model
   m_TagString: Gemstone
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4744928555331824}
   - component: {fileID: 198829980701859134}
   - component: {fileID: 199430993343995098}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Earth Mist Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4464163979514676}
   - component: {fileID: 114382160682957042}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Earth Gemstone
   m_TagString: Gemstone
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4041458884671102}
   - component: {fileID: 198969910680747872}
   - component: {fileID: 199756676037540560}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Earth Gem Shimmer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

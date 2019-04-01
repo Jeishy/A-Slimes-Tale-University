@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23766125687784172}
   - component: {fileID: 95226221915374488}
   - component: {fileID: 136347026028707612}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Water Gemstone Model
   m_TagString: Gemstone
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 4919825993483954}
   - component: {fileID: 198829736354319500}
   - component: {fileID: 199179541157425198}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Water Mist Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4933890118728298}
   - component: {fileID: 114888842163750790}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Water Gemstone
   m_TagString: Gemstone
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4999165101243084}
   - component: {fileID: 198105826368630990}
   - component: {fileID: 199792114183474092}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Water Gem Shimmer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4390848347804434}
   - component: {fileID: 108863189760975978}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
