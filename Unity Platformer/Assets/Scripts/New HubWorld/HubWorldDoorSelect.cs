@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
+using UnityEngine.SceneManagement;
 
 public class HubWorldDoorSelect : MonoBehaviour {
 
@@ -49,14 +49,20 @@ public class HubWorldDoorSelect : MonoBehaviour {
                     _levelNameTxt.text = "";
                     break;
 				case "Dungeon Door":
-                    _confirmMenu.BuildIndex = 4;
+                    _confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GetScenePath("Dungeon_World"));
                     _levelNameTxt.text = "Dungeon";
                     break;
 				case "Wind Door":
-					_confirmMenu.BuildIndex = 5;
+					_confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GetScenePath("ChinaMountain_World2"));
                     _levelNameTxt.text = "China Mountain";
                     break;
 			}
         }
+    }
+
+    private string GetScenePath(string sceneName)
+    {
+        string path = "Assets/Scenes/" + sceneName + ".unity";
+        return path;
     }
 }

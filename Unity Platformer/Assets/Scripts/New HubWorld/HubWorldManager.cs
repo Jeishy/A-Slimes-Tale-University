@@ -27,4 +27,16 @@ public class HubWorldManager : MonoBehaviour {
 		if (OnDoorSelected != null)
             OnDoorSelected(hubWorldDoor);
     }
+
+    public void DoorOver(GameObject hubWorldDoor)
+    {
+        if (OnDoorOver != null)
+            OnDoorOver(hubWorldDoor);
+    }
+
+    public void DoorExit(GameObject hubWorldDoor)
+    {
+        if (OnDoorExit != null)
+            OnDoorExit(hubWorldDoor);
+    }
 }

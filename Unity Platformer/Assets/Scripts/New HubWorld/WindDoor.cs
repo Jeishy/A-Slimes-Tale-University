@@ -20,7 +20,6 @@ public class WindDoor : MonoBehaviour {
 		if (col.CompareTag("Player") && _hubWorldManager.IsDoorInRange)
 		{
 			_hubWorldManager.IsDoorInRange = false;
-			_hubWorldManager.DoorHoveredOver = null;
 		}
 	}
 }

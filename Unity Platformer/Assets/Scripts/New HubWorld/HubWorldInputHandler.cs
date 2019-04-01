@@ -20,12 +20,18 @@ public class HubWorldInputHandler : MonoBehaviour {
 		if (_hubWorldManager.IsDoorInRange)
 		{
 			GameObject door = _hubWorldManager.DoorHoveredOver;
-			// Run on hover over event
-			if (Input.GetKeyDown(KeyCode.E))
+            _hubWorldManager.DoorOver(door);
+            // Run on hover over event
+            if (Input.GetKeyDown(KeyCode.E))
 			{
                 // Play particle effect, run animation, whatever
                 _hubWorldManager.DoorSelected(door);
             }
 		}
+        else
+        {
+            GameObject door = _hubWorldManager.DoorHoveredOver;
+            _hubWorldManager.DoorExit(door);
+        }
 	}
 }
