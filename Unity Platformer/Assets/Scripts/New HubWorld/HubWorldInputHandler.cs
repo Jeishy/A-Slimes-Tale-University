@@ -12,14 +12,16 @@ public class HubWorldInputHandler : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-		DoorInteract();
+        DoorInteract();
     }
 
 	private void DoorInteract()
 	{
 		if (_hubWorldManager.IsDoorInRange)
 		{
-			GameObject door = _hubWorldManager.DoorHoveredOver;
+            Debug.Log("£asdsa");
+
+            GameObject door = _hubWorldManager.DoorHoveredOver;
             _hubWorldManager.DoorOver(door);
             // Run on hover over event
             if (Input.GetKeyDown(KeyCode.E))

@@ -8,17 +8,19 @@ public class ShowAndHideInteractable : MonoBehaviour {
 
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private Light _pointLight;
+    [SerializeField] private float _maxLerpTime;
 
     private float _originalLightRange;
     private float _originalRate;
     private float _originalRadius;
     private ParticleSystem.ShapeModule shapeModule;
     private ParticleSystem.EmissionModule emissionModule;
+    private float _currentLerpTime;
 
     private void Start()
     {
         IsInteractable = false;
-
+        _currentLerpTime = 0;
         shapeModule = _particleSystem.shape;
         emissionModule = _particleSystem.emission;
 
@@ -32,9 +34,18 @@ public class ShowAndHideInteractable : MonoBehaviour {
     {
         if (IsInteractable)
         {
-            _pointLight.range = Mathf.Lerp(_originalLightRange, _originalLightRange + 12, Time.deltaTime);
-            if (_pointLight.range >= 13)
+            if (_currentLerpTime <= _maxLerpTime)
+            {
+                _currentLerpTime += Time.deltaTime;
+                _pointLight.range = Mathf.Lerp(_originalLightRange, _originalLightRange + 12, Time.deltaTime);
+                if (_pointLight.range >= 13)
+                    IsInteractable = false;
+            }
+            else
+            {
                 IsInteractable = false;
+            }
+
         }
     }
 

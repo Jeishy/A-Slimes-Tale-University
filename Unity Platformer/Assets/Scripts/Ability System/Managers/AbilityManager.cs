@@ -57,7 +57,6 @@ public class AbilityManager : MonoBehaviour {
         playerRb = playerGO.GetComponent<Rigidbody>();
         OriginalMass = playerRb.mass;
 
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
         IsAimToShoot = true;
     }
 

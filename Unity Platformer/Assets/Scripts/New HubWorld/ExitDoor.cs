@@ -6,12 +6,13 @@ public class ExitDoor : MonoBehaviour {
 
 	[SerializeField] private HubWorldManager _hubWorldManager;
 
-	private void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter(Collider col)
 	{
-		if (col.CompareTag("Player") && !_hubWorldManager.IsDoorInRange)
+		if (col.CompareTag("Player") /*&& !_hubWorldManager.IsDoorInRange*/)
 		{
-			_hubWorldManager.IsDoorInRange = true;
-			_hubWorldManager.DoorHoveredOver = gameObject;
+            Debug.Log("AHHHH");
+            /*_hubWorldManager.IsDoorInRange = true;
+			_hubWorldManager.DoorHoveredOver = gameObject;*/
 		}
 	}
 

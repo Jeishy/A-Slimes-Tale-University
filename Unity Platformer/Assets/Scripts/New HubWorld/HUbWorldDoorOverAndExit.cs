@@ -27,11 +27,12 @@ public class HUbWorldDoorOverAndExit : MonoBehaviour {
 
     private void DoorOver(GameObject hubWorldDoor)
     {
+        Debug.Log("Hovering over");
+
         ShowAndHideInteractable doorInteractable = hubWorldDoor.GetComponent<ShowAndHideInteractable>();
         if (!_isDoorOver && doorInteractable != null)
         {
             doorInteractable.ShowInteractable();
-            doorInteractable.IsInteractable = true;
             _isDoorOver = true;
         }
     }
