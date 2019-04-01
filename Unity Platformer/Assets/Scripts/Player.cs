@@ -197,9 +197,11 @@ public class Player : MonoBehaviour
             //Apply knockback
             controller.Knockback(other.transform.position.x > transform.position.x);
 
+            ElementalStates enemyElementalState = other.gameObject.GetComponent<EnemyProjectile>().GetElement();
+
             //Destroy projectile
             Destroy(other.gameObject);
-            ElementalStates enemyElementalState = other.gameObject.GetComponent<EnemyAI>().Element;
+
             //Calculate new health/armour
             Hit(_abilityManager.CurrentPlayerElementalState, enemyElementalState);
 

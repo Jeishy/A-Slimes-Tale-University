@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54510689995152076}
   - component: {fileID: 135094780170964276}
   m_Layer: 10
-  m_Name: EnemyProj
+  m_Name: CannonBall
   m_TagString: EnemyProj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

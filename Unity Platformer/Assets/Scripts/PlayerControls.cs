@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PS4;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController2D))]
@@ -38,18 +37,7 @@ public class PlayerControls : MonoBehaviour
         if (!player.isDead)
         {
 
-#if UNITY_PS4
-
-            if (-PS4Input.PadGetLastAcceleration(0).x <= 0.2 && -PS4Input.PadGetLastAcceleration(0).x >= -0.2)
-                horizontalMove = 0f;
-            else
-                horizontalMove = -PS4Input.PadGetLastAcceleration(0).x * speed;
-
-            jump = PS4Input.PadGetLastAcceleration(0).y < 0.3f;
-
-#elif UNITY_EDITOR_WIN || UNITY_STANDALONE
             horizontalMove = Input.GetAxis("Horizontal") * speed;
-#endif
             if (!controller.m_Grounded)
                 slimeTrail.Stop();
             else

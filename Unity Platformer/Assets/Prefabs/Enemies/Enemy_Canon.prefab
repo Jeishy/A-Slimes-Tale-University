@@ -245,7 +245,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1479179074025534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.399765, y: 1.05, z: 0}
+  m_LocalPosition: {x: -7.1501813, y: 1.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4069021394638854}
@@ -784,12 +784,12 @@ MonoBehaviour:
   flying: 0
   enemyDurability:
     health: 1
-    element: 0
   attackOptions:
-    melee: 0
+    attackStyle: 1
     meleeRange: 0.5
     range: 11
     attackSpeed: 3
+    ghostMoveAttackSpeed: 0
     projectile: {fileID: 1179139433825628, guid: e244221de90d32b4c9b82b3530d00248,
       type: 2}
     firePoint: {fileID: 4476886379679664}
@@ -817,3 +817,4 @@ MonoBehaviour:
   maximiumRandomWaitTime: 0
   minimumRandomWaitTime: 0
   waypointDetectDistance: 1
+  Element: 0

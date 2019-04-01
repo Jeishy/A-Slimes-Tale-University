@@ -44,6 +44,7 @@ public class EnemyAI : MonoBehaviour
     private float attackCountdown;
     private bool m_FacingRight = false;
     private AbilityManager _abilityManager;
+    private bool ghostAttacked = false;
 
     public ElementalStates Element;
 
@@ -94,14 +95,11 @@ public class EnemyAI : MonoBehaviour
     void Patrol()
     {
 
-        Debug.Log("is at waypoint: " + IsAtWaypoint());
 
         //When enemy has reached its current waypoint, go to next waypoint
         if (IsAtWaypoint())
         {
-            Debug.Log("next waypoint");
-            NextWaypoint();
-            
+            NextWaypoint();   
         }
         //Or else keep moving to current waypoint
         else
@@ -134,6 +132,12 @@ public class EnemyAI : MonoBehaviour
             //Calculate next attack time
             attackCountdown = Time.time + attackOptions.attackSpeed;
 
+            if (attackOptions.attackStyle == AttackStyle.Ghost) {
+                transform.position = GetRandomWaypoint().position;
+                patrol = true;
+
+            }
+
         }
     }
 
@@ -161,6 +165,9 @@ public class EnemyAI : MonoBehaviour
                 GameObject proj = Instantiate(attackOptions.projectile, attackOptions.firePoint.position, Quaternion.identity);
                 GameObject particle = Instantiate(attackOptions.particleEffect, attackOptions.firePoint.position, Quaternion.identity);
 
+                EnemyProjectile projScript = proj.GetComponent<EnemyProjectile>();
+                projScript.SetElement(Element);
+
                 //Get projectile's rigidbody
                 Rigidbody projRb = proj.GetComponent<Rigidbody>();
 
@@ -184,16 +191,17 @@ public class EnemyAI : MonoBehaviour
 
         Vector2 directionToPlayer = player.transform.position - transform.position;
         RaycastHit hit;
-        Vector3 preAttackPosition;
-        Debug.Log("Checking if in range of player");
-        if (Physics.Raycast(transform.position, directionToPlayer, out hit, attackOptions.range, attackOptions.rangeAttackMask))
+        
+
+        if (Physics.Raycast(transform.position, directionToPlayer, out hit, attackOptions.range, attackOptions.rangeAttackMask) && CanAttack())
         {
 
-            Debug.Log("In range of player, attacking!!");
-            preAttackPosition = transform.position;
+            patrol = false;
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, attackOptions.ghostMoveAttackSpeed * Time.deltaTime);
             MeleeAttack();
 
+        } else {
+            patrol = true;
         }
     }
 
@@ -269,6 +277,11 @@ public class EnemyAI : MonoBehaviour
 		}
 		
 	}
+
+
+    Transform GetRandomWaypoint() {
+        return waypoints[Random.Range(0, waypoints.Length-1)];
+    }
 
     void PointToPlayer(Transform rotator)
     {	    
