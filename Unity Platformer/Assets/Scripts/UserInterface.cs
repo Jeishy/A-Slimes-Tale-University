@@ -91,7 +91,7 @@ public class UserInterface : MonoBehaviour
     public void OnQuitToHubWorld()
     {
         OnContinueGame();
-        LevelChanger.instance.FadeToLevel(1);
+        LevelChanger.instance.FadeToLevel(3);
     }
 
 	public void OnQuitGame()

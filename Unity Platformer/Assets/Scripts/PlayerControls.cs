@@ -36,8 +36,8 @@ public class PlayerControls : MonoBehaviour
         
         if (!player.isDead)
         {
-
             horizontalMove = Input.GetAxis("Horizontal") * speed;
+            
             if (!controller.m_Grounded)
                 slimeTrail.Stop();
             else
@@ -56,8 +56,10 @@ public class PlayerControls : MonoBehaviour
             }
 
         }
+        controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
+        jump = false;
 
-	}
+    }
 
     public float GetSpeed()
     {
@@ -71,7 +73,6 @@ public class PlayerControls : MonoBehaviour
     
 	void FixedUpdate()
 	{
-		controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
-		jump = false;
+		
 	}
 }

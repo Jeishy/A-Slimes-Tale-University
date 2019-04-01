@@ -55,7 +55,6 @@ GameObject:
   - component: {fileID: 4174743776640574}
   - component: {fileID: 33756070127574072}
   - component: {fileID: 23586783219693024}
-  - component: {fileID: 64314598467021402}
   m_Layer: 0
   m_Name: NextLevelPortal
   m_TagString: Untagged
@@ -87,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1613940155715958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.61, y: 103.12, z: 1.19}
+  m_LocalPosition: {x: 9.37, y: 1.88, z: 0.738}
   m_LocalScale: {x: 0.60889924, y: 0.60889924, z: 0.60889924}
   m_Children:
   - {fileID: 4881515417435630}
@@ -176,20 +175,6 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1295908703428400}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64314598467021402
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1295908703428400}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &114438609782266656
 MonoBehaviour:

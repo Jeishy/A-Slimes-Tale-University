@@ -5,9 +5,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-#if UNITY_PS4
-using UnityEngine.PS4;
-#endif
 
 public class Player : MonoBehaviour
 {
@@ -39,7 +36,7 @@ public class Player : MonoBehaviour
         controller = GetComponent<CharacterController2D>();
         _healthBarFilled = GameObject.Find("HealthBarFilled").GetComponent<Image>();
         gm = GameManager.instance;
-
+        
         if (gm.hasData)
         {
             health = gm.health;
@@ -53,7 +50,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Display health and armour in UI
-        _healthBarFilled.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
+        //_healthBarFilled.fillAmount = health <= 0 ? 0 : (float)health / (float)MaxHealth;
         //_armourText.text = "Armour: " + armour;
 
         //Call Die() function when player is at or below 0 health
@@ -82,13 +79,6 @@ public class Player : MonoBehaviour
 
         if (nextDamageTime <= Time.time)
         {
-
-#if UNITY_PS4
-
-        StartCoroutine(_abilityManager.ControllerVibration(false));
-
-#endif
-
             GameObject OnHitParticle = Instantiate(_onHitPE, transform);
             Destroy(OnHitParticle, 2f);
 
@@ -106,9 +96,6 @@ public class Player : MonoBehaviour
             }
             else if (armour <= 0)
             {
-#if UNITY_PS4
-                PS4Input.PadSetLightBar(0, 255, 0, 0);
-#endif
                 //Oterwise, decrement health by 1
                 health -= damage;
             }
@@ -228,11 +215,7 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("Collectible"))
         {
-#if UNITY_PS4
-            _audioManager.PlayPS4("CoinCollect");
-#endif
-            Debug.Log("Collectible");
-            //gm.OnCollectiblePickup();
+            gm.OnCollectiblePickup();
             StartCoroutine(WaitToCoinCollect(other.gameObject));
             other.GetComponent<Animator>().SetTrigger("Collect");
             Destroy(other.gameObject, 1f);
@@ -240,8 +223,7 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("Gemstone"))
         {
-            Debug.Log("Gemstone");
-            //gm.OnGemstonePickup();
+            gm.OnGemstonePickup();
             other.GetComponentInParent<GemstoneCollect>().IsCollected = true;
             StartCoroutine(WaitToGemstoneCollect(other.transform.parent));
             Destroy(other.transform.parent.gameObject, 3f);
@@ -249,7 +231,6 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("NextLevel"))
         {
-            Debug.Log("Level complete!!");
             LevelChanger.instance.FadeToLevel(GetCurrentLevel() + 1);
         }
     }

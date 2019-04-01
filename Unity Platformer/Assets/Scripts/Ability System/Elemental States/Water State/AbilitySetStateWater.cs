@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilitySetStateWater : MonoBehaviour {
-
+	
 	private AbilityManager _abilityManager;
 
 	private void OnEnable()
@@ -25,7 +25,7 @@ public class AbilitySetStateWater : MonoBehaviour {
 	private void SetWaterState()
 	{
 		_abilityManager.CurrentPlayerElementalState = ElementalStates.Water;
-        _abilityManager.playerRb.mass = _abilityManager.OriginalMass;
-        Debug.Log(_abilityManager.CurrentPlayerElementalState);
+    _abilityManager.playerRb.mass = _abilityManager.OriginalMass;
+    Debug.Log(_abilityManager.CurrentPlayerElementalState);
 	}
 }

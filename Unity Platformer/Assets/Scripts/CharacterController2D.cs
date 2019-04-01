@@ -151,9 +151,10 @@ public class CharacterController2D : MonoBehaviour
 
 
         //Unstick from wall whenever player tries to move away from the wall
-        if (m_WallNormal == Input.GetAxis("Horizontal") && m_WallNormal != 0)
+        if (GetRoundedInputs() == m_WallNormal)
         {
             StickToWall(false);
+            m_Rigidbody.AddForce(new Vector3(m_WallNormal * 10, 0, 0));
         }
 
 
@@ -192,9 +193,19 @@ public class CharacterController2D : MonoBehaviour
 		m_KnockbackRight = right;
 		m_KnockbackCount = m_KnockbackLength;
 	}
-	
 
-	private void Flip()
+
+    private int GetRoundedInputs() {
+        int input = 0;
+        if (Input.GetAxis("Horizontal") < 0)
+            input = -1;
+        else if (Input.GetAxis("Horizontal") > 0)
+            input = 1;
+
+        return input;
+    }
+
+            private void Flip()
 	{
         if (m_FlipDelay <= Time.time)
             

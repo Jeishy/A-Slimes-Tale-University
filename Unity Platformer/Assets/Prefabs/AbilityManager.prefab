@@ -246,3 +246,5 @@ MonoBehaviour:
   InitialGravityScale: 3
   playerRb: {fileID: 0}
   OriginalMass: 0
+  PlayerElementalDmgMultiplier: 0
+  ElementalEnemyDmgReductionMultiplier: 0

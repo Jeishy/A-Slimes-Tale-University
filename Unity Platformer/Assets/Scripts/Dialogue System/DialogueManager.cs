@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class DialogueManager : MonoBehaviour {
 
-    [SerializeField] private Text _nameText;
-    [SerializeField] private Text _dialogueText;
+    [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private TextMeshProUGUI _dialogueText;
     [SerializeField] [Range(0.001f, 0.2f)] private float _slowTypeSpeed;             // How slow dialogue text appears on the screen. Decrease to slow the effect
     [SerializeField] private Animator _anim;
 
@@ -24,7 +24,7 @@ public class DialogueManager : MonoBehaviour {
     public void StartDialogue(Dialogue dialogue)
     {
         // Animate text bubble onto screen
-        _anim.SetBool("IsOpen", true);
+        _anim.SetTrigger("Open");
 
         // Set name of text bubble to the character name of the dialogue variable
         _nameText.text = dialogue.characterName;
@@ -72,6 +72,6 @@ public class DialogueManager : MonoBehaviour {
     {
         // End the conversation
         // Animate text bubble off screen
-        _anim.SetBool("IsOpen", false);
+        _anim.SetTrigger("Close");
     }
 }

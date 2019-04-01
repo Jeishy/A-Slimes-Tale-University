@@ -57,12 +57,6 @@ public class FireProjectile : ElementalProjectiles {
 				Debug.DrawRay(ray.origin, ray.direction * enter, Color.green, 2f);
 			}
 		}
-		else
-		{
-            // Sets go's velocity if forward firing projectiles are chosen
-            Vector2 joystickDir = _inputHandler.RightStickAxis;
-    		_rb.velocity = JoystickFiringForce(ProjectileSpeed, PlayerTrans, joystickDir);
-		}
 	}
 
     private void OnCollisionEnter(Collision collision)

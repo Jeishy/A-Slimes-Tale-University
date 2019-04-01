@@ -19,7 +19,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4047178124706436}
-  m_Layer: 0
+  - component: {fileID: 65800331272974258}
+  m_Layer: 16
   m_Name: Fire door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +37,7 @@ GameObject:
   - component: {fileID: 4246146928962894}
   - component: {fileID: 33910400674525132}
   - component: {fileID: 23873975826235650}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +54,7 @@ GameObject:
   - component: {fileID: 4596816810373356}
   - component: {fileID: 33944343006124556}
   - component: {fileID: 23177651871469848}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pPipe2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +72,7 @@ GameObject:
   - component: {fileID: 33847824396001268}
   - component: {fileID: 23365532994816746}
   - component: {fileID: 64909933154609360}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +90,7 @@ GameObject:
   - component: {fileID: 33038691235049836}
   - component: {fileID: 23723400101756406}
   - component: {fileID: 64681472854116000}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +107,7 @@ GameObject:
   - component: {fileID: 4995009646788462}
   - component: {fileID: 33103304931888876}
   - component: {fileID: 23354943115325246}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +124,7 @@ GameObject:
   - component: {fileID: 4853132228804270}
   - component: {fileID: 33107396651127852}
   - component: {fileID: 23917635327352106}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Eye_Shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +141,7 @@ GameObject:
   - component: {fileID: 4585647030672292}
   - component: {fileID: 198567081820011402}
   - component: {fileID: 199554761728932900}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DarkBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +158,7 @@ GameObject:
   - component: {fileID: 4341418625662542}
   - component: {fileID: 33117642622738530}
   - component: {fileID: 23021313197673624}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +175,7 @@ GameObject:
   - component: {fileID: 4743285537098454}
   - component: {fileID: 33159905649737190}
   - component: {fileID: 23015166226623698}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +193,7 @@ GameObject:
   - component: {fileID: 33684887620356400}
   - component: {fileID: 23558387855949594}
   - component: {fileID: 64154871602642730}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: FireDissolve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +210,7 @@ GameObject:
   - component: {fileID: 4807937553084934}
   - component: {fileID: 33496009901021230}
   - component: {fileID: 23186798858262230}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +228,7 @@ GameObject:
   - component: {fileID: 33564548564921216}
   - component: {fileID: 23202096657349060}
   - component: {fileID: 64784417224716462}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Fire (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +246,7 @@ GameObject:
   - component: {fileID: 33877520021558478}
   - component: {fileID: 23059248051016104}
   - component: {fileID: 64714334600051898}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,13 +262,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4349608574385454}
   - component: {fileID: 108996791866919562}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1739076181903594
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +279,7 @@ GameObject:
   - component: {fileID: 4334660113117770}
   - component: {fileID: 198498757963317936}
   - component: {fileID: 199483870306487838}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: PortalParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4758968737508374}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Fire_Door 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +311,7 @@ GameObject:
   - component: {fileID: 4663613272012476}
   - component: {fileID: 33978872707890312}
   - component: {fileID: 23780685351955114}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +328,7 @@ GameObject:
   - component: {fileID: 4873289009148894}
   - component: {fileID: 33557224435139872}
   - component: {fileID: 23194348597245938}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pPipe1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +345,7 @@ GameObject:
   - component: {fileID: 4585150613485472}
   - component: {fileID: 33578535233237958}
   - component: {fileID: 23558483913871896}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pCube13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,9 +358,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1008459665002162}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 69.67, y: 11.509, z: 5.52}
-  m_LocalScale: {x: 185.34354, y: 204.39488, z: 182.36813}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 28.81, y: 0.5220957, z: 2.4107356}
+  m_LocalScale: {x: 96.010185, y: 105.87902, z: 94.46889}
   m_Children:
   - {fileID: 4334660113117770}
   - {fileID: 4585647030672292}
@@ -1330,6 +1331,18 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65800331272974258
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1008459665002162}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.045281373, y: 0.047183014, z: 0.042169776}
+  m_Center: {x: 0.064612925, y: 0.024080107, z: 0.044628024}
 --- !u!108 &108996791866919562
 Light:
   m_ObjectHideFlags: 1
