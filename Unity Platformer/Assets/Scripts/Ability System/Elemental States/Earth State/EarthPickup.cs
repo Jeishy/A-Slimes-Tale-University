@@ -6,6 +6,7 @@ public class EarthPickup : MonoBehaviour
 {
 
     [SerializeField] private GameObject _onEarthCollectPE;
+    [SerializeField] private float cooldownTime;
 #if UNITY_PS4
     [SerializeField] private AudioManager _audioManager;
 #endif
@@ -13,6 +14,7 @@ public class EarthPickup : MonoBehaviour
     private AbilityManager _abilityManager;
     private Player _player;
     private Animator _pickupAnim;
+    private float cooloffTime;
 
 	void Start () {
 		_abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
@@ -23,25 +25,31 @@ public class EarthPickup : MonoBehaviour
 	// If wind pickup interacts with player,
 	// set players elemental state to Wind
 	// and run method for running OnWindState event
-	private void OnTriggerEnter(Collider col)
+
+
+	private void OnTriggerStay(Collider col)
 	{
-		if (col.CompareTag("Player"))
-        {
-#if UNITY_PS4
-            _audioManager.PlayPS4("ElementalPickupCollect");
-#endif
-            _pickupAnim.SetTrigger("Earth");
-            StartCoroutine(WaitToCollect());
-            _player.AddArmourSlot();
-            _abilityManager.EarthState();
-			Destroy(gameObject, 1f);
+		if (col.CompareTag("Player") && Input.GetButtonDown("Interact") && cooloffTime < Time.time)
+		{
+			Debug.Log("Interacted");
+			PickupElement();
 		}
+	}
+
+	private void PickupElement() 
+	{
+        _pickupAnim.SetTrigger("Earth");
+        StartCoroutine(WaitToCollect());
+        _player.AddArmourSlot();
+        _abilityManager.EarthState();
+		Destroy(gameObject, 1f);
 	}
 
     private IEnumerator WaitToCollect( )
     {
         yield return new WaitForSeconds(0.3f);
         GameObject onEarthCollect = Instantiate(_onEarthCollectPE, transform.position, Quaternion.identity);
-        Destroy(onEarthCollect, 1f);
+        cooloffTime = Time.time + cooldownTime;
+        //Destroy(onEarthCollect, 1f);
     }
 }

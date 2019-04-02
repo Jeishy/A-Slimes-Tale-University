@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
 
 	[Space] [Header("Enemy Options")] 
 	[SerializeField] private bool flying;
+	[SerializeField] private Animator animator;
     [SerializeField] private EnemyDurability enemyDurability;
     [SerializeField] private EnemyAttack attackOptions;
 
@@ -66,6 +67,9 @@ public class EnemyAI : MonoBehaviour
             Die();
         }
 
+        if (Input.GetKeyDown(KeyCode.M))
+	        animator.SetTrigger("Attack");
+        
         //Execute code when patrol boolean is true - Set in editor
         if (patrol && !waiting)
 	    {
@@ -94,8 +98,7 @@ public class EnemyAI : MonoBehaviour
 
     void Patrol()
     {
-
-
+	    
         //When enemy has reached its current waypoint, go to next waypoint
         if (IsAtWaypoint())
         {
@@ -104,7 +107,7 @@ public class EnemyAI : MonoBehaviour
         //Or else keep moving to current waypoint
         else
         {
-
+			
             Vector2 dir = (waypoints[currentWaypoint].position - transform.position).normalized;
 
             if (dir.x < 0 && m_FacingRight)
@@ -117,11 +120,22 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    void BeginMelee()
+    {
+	    patrol = false;
+    }
+
+    void EndMelee()
+    {
+	    patrol = true;
+    }
+    
     void MeleeAttack()
     {
         //Check if enemy's attack is off cooldown and it is within melee range of the player
         if (CanAttack() && (Physics.OverlapSphere(transform.position, attackOptions.meleeRange, attackOptions.playerMask).Length > 0))
         {
+	        animator.SetTrigger("Attack");
             Debug.Log("Melee hit");
             //Call the Hit() method on the PlayerDurability script
             playerScript.Hit(_abilityManager.CurrentPlayerElementalState, Element);
@@ -145,8 +159,6 @@ public class EnemyAI : MonoBehaviour
     {
         if (attackOptions.rotate)
             PointToPlayer(attackOptions.rotator);
-
-        //Debug.DrawRay(transform.position, Vector3.Normalize(player.transform.position - transform.position) * attackOptions.range, Color.red);
 
         //Get the direction vector towards the player
         Vector2 directionToPlayer = player.transform.position - transform.position;
@@ -218,10 +230,6 @@ public class EnemyAI : MonoBehaviour
 
     void Die()
     {
-#if UNITY_PS4
-        Debug.Log("Playing cannon explosion noise");
-        _audioManager.PlayPS4("CannonExplosion");
-#endif
         Destroy(gameObject);
     }
 
@@ -231,7 +239,9 @@ public class EnemyAI : MonoBehaviour
             // Switch the way the enemy is labelled as facing.
             m_FacingRight = !m_FacingRight;
 
-            transform.localScale = transform.localScale * -1;
+            Vector3 newScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            transform.localScale = newScale;
+            transform.Rotate(new Vector3(0, 180, 0));
     }
 
     //Increments current waypoint variable, then it makes sure it doesnt go over the amount of set waypoints
@@ -288,7 +298,6 @@ public class EnemyAI : MonoBehaviour
 	    Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
 	    rotator.transform.rotation = targetRotation;
     }
-    
 
 	IEnumerator Wait()
 	{
@@ -309,7 +318,9 @@ public class EnemyAI : MonoBehaviour
 		
 		//Set waiting to true for 'x' amount of seconds
 		waiting = true;
+		animator.SetBool("Walk", false);
 		yield return new WaitForSeconds(seconds);
+		animator.SetBool("Walk", true);
 		waiting = false;
 
 	}

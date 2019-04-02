@@ -36,6 +36,14 @@
             </e>
           </e>
         </e>
+        <e p="Fonts" t="Include">
+          <e p="Acme" t="Include">
+            <e p="OFL.txt" t="Include" />
+          </e>
+          <e p="Viga" t="Include">
+            <e p="OFL.txt" t="Include" />
+          </e>
+        </e>
         <e p="Lava_Flowing_Shader" t="Include">
           <e p="ReadMe.txt" t="Include" />
           <e p="Scripts" t="Include">
@@ -117,6 +125,9 @@
           <e p="EnemyDurability.cs" t="Include" />
           <e p="EnemyProjectile.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
+          <e p="Gemstone Scripts" t="Include">
+            <e p="GemstoneCollect.cs" t="Include" />
+          </e>
           <e p="HubWorld" t="Include">
             <e p="DoorTarget.cs" t="Include" />
             <e p="Shop" t="Include">
@@ -126,6 +137,7 @@
             <e p="TargetCameraScript.cs" t="Include" />
           </e>
           <e p="LevelChanger.cs" t="Include" />
+          <e p="NextLevelDoor.cs" t="Include" />
           <e p="Player.cs" t="Include" />
           <e p="PlayerAttributes.cs" t="Include" />
           <e p="PlayerControls.cs" t="Include" />

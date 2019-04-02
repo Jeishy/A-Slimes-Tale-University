@@ -1,31 +1,80 @@
 fileFormatVersion: 2
-guid: ad52a8484fc53fb4b83886b95d0f772f
+guid: 2fdddd36f72d0e4429c44fc430111f13
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Headbanger_Body
-    100004: Left_Eye
-    100006: Mouth
-    100008: Right_Eye
-    400000: //RootNode
-    400002: Headbanger_Body
-    400004: Left_Eye
-    400006: Mouth
-    400008: Right_Eye
-    2100000: lambert1
-    2300000: Headbanger_Body
-    2300002: Left_Eye
-    2300004: Mouth
-    2300006: Right_Eye
-    3300000: Headbanger_Body
-    3300002: Left_Eye
-    3300004: Mouth
-    3300006: Right_Eye
-    4300000: Headbanger_Body
-    4300002: Mouth
-    4300004: Left_Eye
-    4300006: Right_Eye
+    100000: Head
+    100002: Head_Banger_Complete
+    100004: Head_Flop
+    100006: //RootNode
+    100008: Headbanger_Body3
+    100010: joint11
+    100012: joint12
+    100014: joint13
+    100016: joint14
+    100018: joint16
+    100020: joint17
+    100022: joint19
+    100024: joint20
+    100026: joint22
+    100028: joint23
+    100030: joint24
+    100032: joint25
+    100034: joint6
+    100036: joint7
+    100038: joint8
+    100040: joint9
+    100042: Left_Arm
+    100044: Left_Eye2
+    100046: Left_Leg
+    100048: Mouth2
+    100050: Pelvis1
+    100052: Right_Arm
+    100054: Right_arm_controller
+    100056: Right_Leg
+    100058: Shoulders
+    100060: Upper_body
+    400000: Head
+    400002: Head_Banger_Complete
+    400004: Head_Flop
+    400006: //RootNode
+    400008: Headbanger_Body3
+    400010: joint11
+    400012: joint12
+    400014: joint13
+    400016: joint14
+    400018: joint16
+    400020: joint17
+    400022: joint19
+    400024: joint20
+    400026: joint22
+    400028: joint23
+    400030: joint24
+    400032: joint25
+    400034: joint6
+    400036: joint7
+    400038: joint8
+    400040: joint9
+    400042: Left_Arm
+    400044: Left_Eye2
+    400046: Left_Leg
+    400048: Mouth2
+    400050: Pelvis1
+    400052: Right_Arm
+    400054: Right_arm_controller
+    400056: Right_Leg
+    400058: Shoulders
+    400060: Upper_body
+    2100000: Head_Banger_texture
+    2100002: Black_eyes_and_Mouth
+    4300000: Headbanger_Body3
+    4300002: Left_Eye2
+    4300004: Mouth2
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Headbanger_Body3
+    13700002: Left_Eye2
+    13700004: Mouth2
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -77,8 +126,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -103,7 +152,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
