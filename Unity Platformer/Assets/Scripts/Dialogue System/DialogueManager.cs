@@ -9,12 +9,17 @@ public class DialogueManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _dialogueText;
     [SerializeField] [Range(0.001f, 0.2f)] private float _slowTypeSpeed;             // How slow dialogue text appears on the screen. Decrease to slow the effect
     [SerializeField] private Animator _anim;
+    [SerializeField] private GameObject _continueTxt;
+    [SerializeField] private Transform _groundCheck;
 
     [HideInInspector] public static DialogueManager Instance = null;
     private Queue<string> _sentences;
     private PlayerControls _playerControls;
-    private CharacterController2D _charController;
     private float _originalSpeed;
+    private bool _isDialogueRunning;
+    private bool _isSentenceRunning;
+    private bool _isSentenceSkipped;
+    private bool _canDialogueEnd;
 
     private void Awake()
     {
@@ -27,11 +32,32 @@ public class DialogueManager : MonoBehaviour {
     private void Start()
     {
         _playerControls = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
-        _charController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
+        _isDialogueRunning = false;
+        _isSentenceSkipped = false;
+        _isSentenceRunning = false;
+        _canDialogueEnd = false;
+    }
+
+    private void Update()
+    {
+        Debug.Log(_isSentenceRunning);
+        if (Input.GetMouseButtonDown(0) && _isDialogueRunning && _isSentenceRunning)
+            _isSentenceSkipped = true;
+
+        else if (Input.GetMouseButtonDown(0) && !_isSentenceRunning && _canDialogueEnd)
+        {
+            _isDialogueRunning = false;
+            EndDialogue();
+        }
+        else if (Input.GetMouseButtonDown(0) && !_isSentenceRunning)
+            DisplayNextSentence();
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+        // Set dialogue and sentence started flag to true
+        _isDialogueRunning = true;
+        _isSentenceRunning = true;
         // Animate text bubble onto screen
         _anim.SetTrigger("Open");
         // Set name of text bubble to the character name of the dialogue variable
@@ -40,8 +66,11 @@ public class DialogueManager : MonoBehaviour {
         _originalSpeed = _playerControls.GetSpeed();
         // Reduce movement speed to 0
         _playerControls.SetSpeed(0);
-        // Disable jumping
+        // Disable jumping by moving ground check gameobject off the ground
+        _groundCheck.position = new Vector3(_groundCheck.position.x, _groundCheck.position.y + 1, _groundCheck.position.z);
 
+        // Deactivate continue text during sentence
+        _continueTxt.SetActive(false);
         // Clear any previously queued sentences
         _sentences.Clear();
 
@@ -57,11 +86,10 @@ public class DialogueManager : MonoBehaviour {
 
     public void DisplayNextSentence()
     {
-        if (_sentences.Count == 0)
-        {
-            EndDialogue();
-            return;
-        }
+        _isSentenceRunning = true;
+        // If sentence was skipped, reset sentence skipped flag
+        if (_isSentenceSkipped == true)
+            _isSentenceSkipped = false;
 
         string sentence = _sentences.Dequeue();
         // Stop all coroutines that may be running
@@ -76,8 +104,25 @@ public class DialogueManager : MonoBehaviour {
         _dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            _dialogueText.text += letter;
-            yield return new WaitForSeconds(_slowTypeSpeed);
+            if (!_isSentenceSkipped)
+            {
+                _dialogueText.text += letter;
+                yield return new WaitForSeconds(_slowTypeSpeed);       
+            }
+            else
+            {
+                _dialogueText.text = sentence;
+            }
+        }
+        // Activate continue text after sentence
+        _continueTxt.SetActive(true);
+        _isSentenceRunning = false;
+
+        if (_sentences.Count == 0 && !_isSentenceRunning)
+        {
+            _canDialogueEnd = true;
+            Debug.Log("Dialogue can now end");
+            yield return null;
         }
     }
 
@@ -86,8 +131,13 @@ public class DialogueManager : MonoBehaviour {
         // Set players movement speed back to normal
         _playerControls.SetSpeed(_originalSpeed);
         // Renable jumping
-        _charController.m_Grounded = true;
+        _groundCheck.position = new Vector3(_groundCheck.position.x, _groundCheck.position.y - 1, _groundCheck.position.z);
         // End the conversation
+        // Reset all flags 
+        _isDialogueRunning = false;
+        _isSentenceRunning = false;
+        _isSentenceSkipped = false;
+        _canDialogueEnd = false;
         // Animate text bubble off screen
         _anim.SetTrigger("Close");
     }
