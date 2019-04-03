@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // The 5 different states the player can be in
 // numbers assigned to states can be used for 
@@ -60,6 +61,8 @@ public class AbilityManager : MonoBehaviour {
         IsAimToShoot = true;
     }
 
+
+
     // Method for running methods subscribed to OnPlayerSwitchAbility event
     // Currently used for debugging purposes only
     public void PlayerSwitchAbility()
@@ -116,7 +119,7 @@ public class AbilityManager : MonoBehaviour {
 	public void WaterState()
 	{
         if (OnWaterState != null)
-		{			
+		{		
             player.SetElement(ElementalStates.Water);
             OnWaterState();
 		}
@@ -131,6 +134,17 @@ public class AbilityManager : MonoBehaviour {
             player.SetElement(ElementalStates.Earth);
             OnEarthState();
 		}
+	}
+
+	public void SetState(ElementalStates element) {
+		if (element == ElementalStates.Earth)
+			EarthState();
+		else if (element == ElementalStates.Fire)
+			FireState();
+		else if (element == ElementalStates.Water)
+			WaterState();
+		else if (element == ElementalStates.Wind)
+			WindState();	
 	}
 
     // Method for running methods subscribed to OnEarthCrash event

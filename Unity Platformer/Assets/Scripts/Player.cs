@@ -18,9 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _onCoinCollectPE;
     [SerializeField] private GameObject _onHitPE;
     [SerializeField] private ElementalStates element = ElementalStates.None;
-    [SerializeField] private AudioManager _audioManager;
-
-
+    
     private Image _healthBarFilled;
     private const int MaxHealth = 3;
     private Vector2 damagePoint;                                        // Position where the player was hit by projectile
@@ -28,6 +26,7 @@ public class Player : MonoBehaviour
     private CharacterController2D controller;
     private GameManager gm;
     private AbilityManager _abilityManager;
+    private AudioManager _audioManager;
     [HideInInspector] public bool isDead;
 
     private void Start()
@@ -35,6 +34,7 @@ public class Player : MonoBehaviour
         _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
         controller = GetComponent<CharacterController2D>();
         _healthBarFilled = GameObject.Find("HealthBarFilled").GetComponent<Image>();
+        _audioManager = AudioManager.instance;
         gm = GameManager.instance;
         
         if (gm.hasData)
@@ -79,6 +79,8 @@ public class Player : MonoBehaviour
 
         if (nextDamageTime <= Time.time)
         {
+            
+
             GameObject OnHitParticle = Instantiate(_onHitPE, transform);
             Destroy(OnHitParticle, 2f);
 
