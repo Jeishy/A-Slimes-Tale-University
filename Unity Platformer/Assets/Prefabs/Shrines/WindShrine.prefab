@@ -66,9 +66,9 @@ GameObject:
   - component: {fileID: 4214450729913218}
   - component: {fileID: 33468362756485960}
   - component: {fileID: 23456939814374248}
-  - component: {fileID: 114647089165189414}
   - component: {fileID: 95278678395601848}
-  - component: {fileID: 65131120059429532}
+  - component: {fileID: 135700151599915786}
+  - component: {fileID: 114901088542399670}
   m_Layer: 13
   m_Name: WindPickup
   m_TagString: Untagged
@@ -286,7 +286,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1520235949795496}
   m_LocalRotation: {x: -0, y: -0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 5.238, y: 0.13999999, z: 0.034}
+  m_LocalPosition: {x: -69.14285, y: 97, z: 1.43}
   m_LocalScale: {x: 41.294716, y: 41.294716, z: 41.294716}
   m_Children:
   - {fileID: 4320934524079800}
@@ -394,18 +394,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1306844453326928}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65131120059429532
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1306844453326928}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95278678395601848
 Animator:
   serializedVersion: 3
@@ -415,7 +403,7 @@ Animator:
   m_GameObject: {fileID: 1306844453326928}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6db8f0a922ac44d4f9e3707686e969b7, type: 2}
+  m_Controller: {fileID: 9100000, guid: d6868b6cc61adca448cd21a90b480f2c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -461,7 +449,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114647089165189414
+--- !u!114 &114901088542399670
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -469,11 +457,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1306844453326928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4493f7864610b68448c9ae15b2c014b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4747a452dd57ff9459c2e2976d76cbfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onWindCollectPE: {fileID: 1245812749890516, guid: 1cedac085ec66a54393f811bb33c6df6,
+  element: 3
+  _onEarthCollectPE: {fileID: 1245812749890516, guid: 1cedac085ec66a54393f811bb33c6df6,
     type: 2}
+  cooldownTime: 15
+  _followSpeed: 15
+  _deleteAtRange: 0.2
+--- !u!135 &135700151599915786
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1306844453326928}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.43
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198358483574986994
 ParticleSystem:
   m_ObjectHideFlags: 1

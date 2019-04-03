@@ -161,9 +161,9 @@ GameObject:
   - component: {fileID: 4017999389708330}
   - component: {fileID: 33730355683185178}
   - component: {fileID: 23355787703389992}
-  - component: {fileID: 114104912984762522}
   - component: {fileID: 95846316712797000}
-  - component: {fileID: 65037685881569018}
+  - component: {fileID: 135030728667136368}
+  - component: {fileID: 114441372363208062}
   m_Layer: 13
   m_Name: WaterPickup
   m_TagString: Untagged
@@ -299,7 +299,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1018116945826954}
   m_LocalRotation: {x: -0, y: -0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 3.512, y: 0.13999999, z: 0.034}
+  m_LocalPosition: {x: -74.98801, y: 95, z: 1.52}
   m_LocalScale: {x: 41.294716, y: 41.294716, z: 41.294716}
   m_Children:
   - {fileID: 4133052237237444}
@@ -394,18 +394,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1821104966732330}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65037685881569018
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1821104966732330}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95846316712797000
 Animator:
   serializedVersion: 3
@@ -415,7 +403,7 @@ Animator:
   m_GameObject: {fileID: 1821104966732330}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6db8f0a922ac44d4f9e3707686e969b7, type: 2}
+  m_Controller: {fileID: 9100000, guid: d6868b6cc61adca448cd21a90b480f2c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -461,7 +449,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114104912984762522
+--- !u!114 &114441372363208062
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -469,11 +457,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1821104966732330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a20a20decde6684ba7d39e3892dfb22, type: 3}
+  m_Script: {fileID: 11500000, guid: 4747a452dd57ff9459c2e2976d76cbfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onWaterCollectPE: {fileID: 1911116556604382, guid: 56cea6d051fe872419aeb79be2aac991,
+  element: 2
+  _onEarthCollectPE: {fileID: 1911116556604382, guid: 56cea6d051fe872419aeb79be2aac991,
     type: 2}
+  cooldownTime: 15
+  _followSpeed: 15
+  _deleteAtRange: 0.2
+--- !u!135 &135030728667136368
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821104966732330}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.43
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198051260005202670
 ParticleSystem:
   m_ObjectHideFlags: 1

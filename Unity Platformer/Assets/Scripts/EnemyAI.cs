@@ -174,6 +174,7 @@ public class EnemyAI : MonoBehaviour
             {
                 Debug.Log("Firing projectile at player");
                 //Instantiate the projectile prefab
+                animator.SetTrigger("Shoot");
                 GameObject proj = Instantiate(attackOptions.projectile, attackOptions.firePoint.position, Quaternion.identity);
                 GameObject particle = Instantiate(attackOptions.particleEffect, attackOptions.firePoint.position, Quaternion.identity);
 
@@ -207,10 +208,12 @@ public class EnemyAI : MonoBehaviour
 
         if (Physics.Raycast(transform.position, directionToPlayer, out hit, attackOptions.range, attackOptions.rangeAttackMask) && CanAttack())
         {
-
-            patrol = false;
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, attackOptions.ghostMoveAttackSpeed * Time.deltaTime);
-            MeleeAttack();
+            if (hit.collider.CompareTag("Player")) 
+            {
+                patrol = false;
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, attackOptions.ghostMoveAttackSpeed * Time.deltaTime);
+                MeleeAttack();
+            }
 
         } else {
             patrol = true;
@@ -319,8 +322,10 @@ public class EnemyAI : MonoBehaviour
 		//Set waiting to true for 'x' amount of seconds
 		waiting = true;
 		animator.SetBool("Walk", false);
+        Debug.Log("Stopped walking");
 		yield return new WaitForSeconds(seconds);
 		animator.SetBool("Walk", true);
+        Debug.Log("Started walking");
 		waiting = false;
 
 	}

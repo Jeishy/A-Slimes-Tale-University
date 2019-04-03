@@ -21,9 +21,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _onCoinCollectPE;
     [SerializeField] private GameObject _onHitPE;
     [SerializeField] private ElementalStates element = ElementalStates.None;
-    [SerializeField] private AudioManager _audioManager;
-
-
+    
     private Image _healthBarFilled;
     private const int MaxHealth = 3;
     private Vector2 damagePoint;                                        // Position where the player was hit by projectile
@@ -31,6 +29,7 @@ public class Player : MonoBehaviour
     private CharacterController2D controller;
     private GameManager gm;
     private AbilityManager _abilityManager;
+    private AudioManager _audioManager;
     [HideInInspector] public bool isDead;
 
     private void Start()
@@ -38,6 +37,7 @@ public class Player : MonoBehaviour
         _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
         controller = GetComponent<CharacterController2D>();
         _healthBarFilled = GameObject.Find("HealthBarFilled").GetComponent<Image>();
+        _audioManager = AudioManager.instance;
         gm = GameManager.instance;
 
         if (gm.hasData)
@@ -82,12 +82,7 @@ public class Player : MonoBehaviour
 
         if (nextDamageTime <= Time.time)
         {
-
-#if UNITY_PS4
-
-        StartCoroutine(_abilityManager.ControllerVibration(false));
-
-#endif
+            
 
             GameObject OnHitParticle = Instantiate(_onHitPE, transform);
             Destroy(OnHitParticle, 2f);
@@ -106,9 +101,6 @@ public class Player : MonoBehaviour
             }
             else if (armour <= 0)
             {
-#if UNITY_PS4
-                PS4Input.PadSetLightBar(0, 255, 0, 0);
-#endif
                 //Oterwise, decrement health by 1
                 health -= damage;
             }
@@ -228,9 +220,6 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("Collectible"))
         {
-#if UNITY_PS4
-            _audioManager.PlayPS4("CoinCollect");
-#endif
             Debug.Log("Collectible");
             //gm.OnCollectiblePickup();
             StartCoroutine(WaitToCoinCollect(other.gameObject));

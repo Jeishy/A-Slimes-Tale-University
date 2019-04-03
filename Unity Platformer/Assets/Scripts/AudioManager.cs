@@ -8,10 +8,21 @@ public class AudioManager : MonoBehaviour
 {
 
     public Sound[] sounds;
-    
+    public static AudioManager instance = null;
 
     void Awake()
     {
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Two instances of AudioManager have been created!");
+            Destroy(this);
+        }
+
         // populate array attributes from sound source attributes
         foreach (Sound s in sounds)
             
