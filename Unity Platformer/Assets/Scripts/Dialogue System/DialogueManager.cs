@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour {
         // Reduce movement speed to 0
         _playerControls.SetSpeed(0);
         // Disable jumping
-        _charController.m_Grounded = false;
+
         // Clear any previously queued sentences
         _sentences.Clear();
 
