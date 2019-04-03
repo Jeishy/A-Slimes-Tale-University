@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
         if (nextDamageTime <= Time.time)
         {
             
-
+            _audioManager.Play("PlayerHit");
             GameObject OnHitParticle = Instantiate(_onHitPE, transform);
             Destroy(OnHitParticle, 2f);
 
@@ -219,6 +219,7 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("Collectible"))
         {
+            _audioManager.Play("Collectible");
             gm.OnCollectiblePickup();
             StartCoroutine(WaitToCoinCollect(other.gameObject));
             other.GetComponent<Animator>().SetTrigger("Collect");
@@ -229,6 +230,7 @@ public class Player : MonoBehaviour
         {
             _isGemstoneCollected = true;
             Debug.Log("Picking up gemstone");
+            _audioManager.Play("Gemstone");
             gm.OnGemstonePickup();
             other.GetComponentInParent<GemstoneCollect>().IsCollected = true;
             StartCoroutine(WaitToGemstoneCollect(other.transform.parent));
@@ -237,6 +239,7 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("NextLevel"))
         {
+            _audioManager.Play("NextLevel");
             LevelChanger.instance.FadeToLevel(GetCurrentLevel() + 1);
         }
     }

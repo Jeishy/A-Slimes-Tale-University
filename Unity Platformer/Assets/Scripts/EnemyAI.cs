@@ -31,10 +31,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float minimumRandomWaitTime;		//Minimum random wait time
     [SerializeField] private float waypointDetectDistance;      //How close the enemy needs to be to the waypoint to cnonsider as reached
     [Space]
-    [Header("PS4")]
-#if UNITY_PS4
-    [SerializeField] private AudioManager _audioManager;
-#endif
 
     private int currentWaypoint = 0;							//Stores the value of the current waypoint index
     private int waypointIncrement = 1;							//Used for the Ping-Pong waypoint following method
@@ -45,6 +41,7 @@ public class EnemyAI : MonoBehaviour
     private float attackCountdown;
     private bool m_FacingRight = false;
     private AbilityManager _abilityManager;
+    private AudioManager _audioManager;
     private bool ghostAttacked = false;
 
     public ElementalStates Element;
@@ -54,6 +51,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<Player>();
         controller = player.GetComponent<CharacterController2D>();
+        _audioManager = AudioManager.instance;
         _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
 
 
@@ -66,10 +64,9 @@ public class EnemyAI : MonoBehaviour
         {
             Die();
         }
+        if (Input.GetKeyDown(KeyCode.V))
+            Die();
 
-        if (Input.GetKeyDown(KeyCode.M))
-	        animator.SetTrigger("Attack");
-        
         //Execute code when patrol boolean is true - Set in editor
         if (patrol && !waiting)
 	    {
@@ -135,13 +132,11 @@ public class EnemyAI : MonoBehaviour
         //Check if enemy's attack is off cooldown and it is within melee range of the player
         if (CanAttack() && (Physics.OverlapSphere(transform.position, attackOptions.meleeRange, attackOptions.playerMask).Length > 0))
         {
+	        waiting = true;
+	        
 	        animator.SetTrigger("Attack");
-            Debug.Log("Melee hit");
-            //Call the Hit() method on the PlayerDurability script
-            playerScript.Hit(_abilityManager.CurrentPlayerElementalState, Element);
 
-            //Call the Knockback(bool: right) method on the CharacterController2D script
-            controller.Knockback(transform.position.x > player.transform.position.x);
+	        StartCoroutine(DelayedDamage());
 
             //Calculate next attack time
             attackCountdown = Time.time + attackOptions.attackSpeed;
@@ -149,10 +144,23 @@ public class EnemyAI : MonoBehaviour
             if (attackOptions.attackStyle == AttackStyle.Ghost) {
                 transform.position = GetRandomWaypoint().position;
                 patrol = true;
-
             }
 
         }
+    }
+    
+    IEnumerator DelayedDamage() 
+    {
+		yield return new WaitForSeconds(attackOptions.animationDamageDelay);
+		
+		//Call the Hit() method on the PlayerDurability script
+		playerScript.Hit(_abilityManager.CurrentPlayerElementalState, Element);
+
+		//Call the Knockback(bool: right) method on the CharacterController2D script
+		controller.Knockback(transform.position.x > player.transform.position.x);
+
+		waiting = false;
+
     }
 
     void RangeAttack()
@@ -175,6 +183,7 @@ public class EnemyAI : MonoBehaviour
                 Debug.Log("Firing projectile at player");
                 //Instantiate the projectile prefab
                 animator.SetTrigger("Shoot");
+                _audioManager.Play("CannonFire");
                 GameObject proj = Instantiate(attackOptions.projectile, attackOptions.firePoint.position, Quaternion.identity);
                 GameObject particle = Instantiate(attackOptions.particleEffect, attackOptions.firePoint.position, Quaternion.identity);
 
@@ -210,6 +219,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player")) 
             {
+                _audioManager.Play("GhostAttack");
                 patrol = false;
                 transform.position = Vector2.MoveTowards(transform.position, player.transform.position, attackOptions.ghostMoveAttackSpeed * Time.deltaTime);
                 MeleeAttack();
@@ -233,12 +243,13 @@ public class EnemyAI : MonoBehaviour
 
     void Die()
     {
+        if (attackOptions.attackStyle == AttackStyle.Ghost)
+            _audioManager.Play("GhostDeath");
         Destroy(gameObject);
     }
 
     void Flip()
     {
-            Debug.Log("flipping");
             // Switch the way the enemy is labelled as facing.
             m_FacingRight = !m_FacingRight;
 
@@ -300,11 +311,12 @@ public class EnemyAI : MonoBehaviour
     {	    
 	    Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
 	    rotator.transform.rotation = targetRotation;
+        //rotator.transform.LookAt(player.transform);
     }
 
 	IEnumerator Wait()
 	{
-		float seconds;
+		float seconds;  
 		
 		//If wait time is random
 		if (randomWaitTime)

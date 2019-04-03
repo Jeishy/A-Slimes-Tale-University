@@ -17,8 +17,8 @@ public class AbilityProjectile : MonoBehaviour {
     [SerializeField] private GameObject _windMuzzleFlash;
     [SerializeField] private GameObject _earthMuzzleFlash;
     [Space]
-    [SerializeField] private AudioManager _audioManager;
 
+    private AudioManager _audioManager;
     private AbilityManager _abilityManager;
     private Player _playerDurability;
     private Transform _playerTrans;
@@ -36,6 +36,7 @@ public class AbilityProjectile : MonoBehaviour {
 
     private void Setup()
     {
+        _audioManager = AudioManager.instance;
         _abilityManager = GetComponent<AbilityManager>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         _playerTrans = player.GetComponent<Transform>();
@@ -59,37 +60,29 @@ public class AbilityProjectile : MonoBehaviour {
             switch (state)
             {
                 case ElementalStates.Fire:
-#if UNITY_PS4
-                    _audioManager.PlayPS4("FireWoosh");      
-#endif
                     GameObject fire = Instantiate(_fireProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    _audioManager.Play("FireProj");
                     fire.GetComponent<FireProjectile>().Shoot();
                     GameObject fireMf = Instantiate(_fireMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
                     Destroy(fireMf, 1f);
                     break;
                 case ElementalStates.Water:
-#if UNITY_PS4
-                    _audioManager.PlayPS4("WaterWoosh");
-#endif
                     GameObject water = Instantiate(_waterProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    _audioManager.Play("WaterProj");
                     water.GetComponent<WaterProjectile>().Shoot();
                     GameObject waterMf = Instantiate(_waterMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
                     Destroy(waterMf, 1f);
                     break;
                 case ElementalStates.Wind:
-#if UNITY_PS4
-                    _audioManager.PlayPS4("WindWoosh");
-#endif
                     GameObject wind = Instantiate(_windProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    _audioManager.Play("WindProj");
                     wind.GetComponent<WindProjectile>().Shoot();
                     GameObject windMf = Instantiate(_windMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
                     Destroy(windMf, 1f);
                     break;
                 case ElementalStates.Earth:
-#if UNITY_PS4
-                    _audioManager.PlayPS4("EarthWod");
-#endif
                     GameObject earth = Instantiate(_earthProj, _projectileSpawnTrans.position, Quaternion.identity);
+                    _audioManager.Play("EarthProj");
                     earth.GetComponent<EarthProjectile>().Shoot();
                     GameObject earthMf = Instantiate(_earthMuzzleFlash, _projectileSpawnTrans.position, Quaternion.identity, _playerTrans);
                     Destroy(earthMf, 1f);

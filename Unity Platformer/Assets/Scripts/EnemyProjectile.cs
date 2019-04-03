@@ -6,7 +6,7 @@ public class EnemyProjectile : MonoBehaviour {
 
 	private ElementalStates elementalState = ElementalStates.None;
 
-	private void OnCollisionEnter2D(Collision2D other)
+	private void OnCollisionEnter(Collision other)
 	{
 		if (!other.gameObject.CompareTag("Player"))
 		{
@@ -21,4 +21,5 @@ public class EnemyProjectile : MonoBehaviour {
 	public ElementalStates GetElement() {
 		return elementalState;
 	}
+
 }

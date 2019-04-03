@@ -41,6 +41,7 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_KnockbackRight;		// Used to determine direction when applying knockback force
     private Vector3 m_TouchedWallPoint;
     private float m_FlipDelay;
+	private AudioManager _audioManager;
     
 	[Header("Events")]
 	[Space]
@@ -56,6 +57,7 @@ public class CharacterController2D : MonoBehaviour
 	private void Awake()
 	{
 		m_Rigidbody = GetComponent<Rigidbody>();
+		_audioManager = AudioManager.instance;
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -91,7 +93,7 @@ public class CharacterController2D : MonoBehaviour
 
 	public void Move(float move, bool jump)
 	{
-		
+
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
@@ -164,9 +166,10 @@ public class CharacterController2D : MonoBehaviour
 			
 			StickToWall(false);
             m_Grounded = false;
+			_audioManager.Play("PlayerJump");
 
 			// ... and player is touching the wall
-			if (m_wallSliding)
+			if (m_wallSliding && !m_Grounded)
 			{   
 				// Add a vertical and horizontal force to the player if he is sliding on the wall
 				m_Rigidbody.AddForce(new Vector2((m_HorizontalJumpForce * m_WallNormal) , (m_JumpForce * m_WallJumpVerticalForceMultiplier)));
@@ -214,7 +217,6 @@ public class CharacterController2D : MonoBehaviour
             if (m_wallSliding && (m_FacingRight && m_WallNormal == 1) || (!m_FacingRight && m_WallNormal == -1))
                 return;
 
-            //Debug.Log("flipping");
             // Switch the way the player is labelled as facing.
             m_FacingRight = !m_FacingRight;
 

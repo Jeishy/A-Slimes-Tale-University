@@ -32,6 +32,7 @@ public class AudioManager : MonoBehaviour
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
+            s.source.loop = s.looping;
 
             
         }
@@ -39,7 +40,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        Play("Theme");
+        Play("ThemeDungeon");
     }
 
 
@@ -60,10 +61,7 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-#if UNITY_PS4
-    public void PlayPS4(string name)
-    {
-        // find sound in sounds array where Sound.name is equal to name
+    public void Stop(string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
         if (s == null)
@@ -73,8 +71,8 @@ public class AudioManager : MonoBehaviour
             // don't execute
             return;
         }
-        s.source.PlayOnDualShock4PadIndex(0);
+        s.source.Stop();
     }
-#endif
+
 
 }

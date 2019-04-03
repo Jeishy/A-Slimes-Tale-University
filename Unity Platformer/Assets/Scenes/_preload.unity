@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 1460950723}
   - component: {fileID: 1460950722}
   - component: {fileID: 1460950721}
+  - component: {fileID: 1460950725}
   m_Layer: 0
   m_Name: _app
   m_TagString: Untagged
@@ -187,6 +188,114 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1460950725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1460950720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c193bc10a86eef1479e35619beb20cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: ThemeHub
+    clip: {fileID: 8300000, guid: 424eefa09f8a1b947b2aea542496deea, type: 3}
+    volume: 0.3
+    pitch: 1
+    looping: 1
+    source: {fileID: 0}
+  - name: ThemeDungeon
+    clip: {fileID: 8300000, guid: 1a31133e90b6c35488588cb24380352c, type: 3}
+    volume: 0.3
+    pitch: 1
+    looping: 1
+    source: {fileID: 0}
+  - name: PlayerHit
+    clip: {fileID: 8300000, guid: 8e286e8fb90d98440a2f77d03f4a43df, type: 3}
+    volume: 1
+    pitch: 0.906
+    looping: 0
+    source: {fileID: 0}
+  - name: PlayerJump
+    clip: {fileID: 8300000, guid: c92ecf6c55619f1458fd850df4e55603, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: WindProj
+    clip: {fileID: 8300000, guid: 29ffaf872ef94dc4ba94d6f3c1562d57, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: FireProj
+    clip: {fileID: 8300000, guid: 5a8a8c8a597b7d84d84e6656bb5c1cf9, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: WaterProj
+    clip: {fileID: 8300000, guid: 28d6e8da1c7da6c459ced5f762cd58ef, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: EarthProj
+    clip: {fileID: 8300000, guid: c448f46e75c2d6443a08ba706a2cd2a4, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: CannonFire
+    clip: {fileID: 8300000, guid: e5c2e56926a97d24fae5f0db70f7a80f, type: 3}
+    volume: 0.2
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: Gemstone
+    clip: {fileID: 8300000, guid: 766ca3667ea647042ac7227e85749bb5, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: Collectible
+    clip: {fileID: 8300000, guid: 9ae2bc84296f12b47a01f6d477728eda, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: NextLevel
+    clip: {fileID: 8300000, guid: a9b871352c918f44fae6158d8af5cb2a, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: ElementFlying
+    clip: {fileID: 8300000, guid: a125ef5a0ec594a418ecd73bc8e1c93a, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: ElementPickup
+    clip: {fileID: 8300000, guid: 766ca3667ea647042ac7227e85749bb5, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: GhostAttack
+    clip: {fileID: 8300000, guid: 25ed3246885e1e543b3363ea68cdbd45, type: 3}
+    volume: 0.7
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: GhostDeath
+    clip: {fileID: 8300000, guid: 1943a8d35eb208c43821d509b863db2a, type: 3}
+    volume: 0.5
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
 --- !u!1 &1938422572
 GameObject:
   m_ObjectHideFlags: 0
