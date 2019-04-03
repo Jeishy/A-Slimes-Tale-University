@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElementPickup : MonoBehaviour
 {
-
+    [SerializeField] private Animator _anim;
     [SerializeField] private ElementalStates element;
     [SerializeField] private GameObject _onEarthCollectPE;
     [SerializeField] private float cooldownTime = 0;
@@ -17,8 +17,11 @@ public class ElementPickup : MonoBehaviour
     private Animator _pickupAnim;
     private float cooloffTime;
     private bool followingPlayer = false;
+    private AudioManager _audioManager;
+    private Vector3 preAnimationPos;
 
 	void Start () {
+        _audioManager = AudioManager.instance;
 		_abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _pickupAnim = GetComponent<Animator>();
@@ -45,19 +48,43 @@ public class ElementPickup : MonoBehaviour
             }
         }
     }
+    
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            _anim.SetTrigger("Open");
+        }
+    }
 
 	private void OnTriggerStay(Collider col)
 	{
         Debug.Log("In trigger");
-		if (col.CompareTag("Player") && Input.GetButtonDown("Interact") && cooloffTime < Time.time)
-		{
-			Debug.Log("Interacted");
-			PickupElement();
+		if (col.CompareTag("Player"))
+		{       
+            //Display text 'Press E To Absorb'  
+            if (Input.GetButtonDown("Interact")) {
+                
+
+                if (cooloffTime < Time.time) {
+                    Debug.Log("Interacted");
+                    PickupElement();
+                }
+            }
 		}
 	}
 
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            _anim.SetTrigger("Close");
+        }
+    }
+
 	private void PickupElement() 
 	{
+        preAnimationPos = transform.position;
         _pickupAnim.SetTrigger("Collect");
         StartCoroutine(FollowAfterAnimation());
         _player.AddArmourSlot();
@@ -67,13 +94,19 @@ public class ElementPickup : MonoBehaviour
     private IEnumerator WaitToCollect( )
     {
         yield return new WaitForSeconds(0.3f);
+        _audioManager.Play("ElementPickup");
+        _audioManager.Stop("ElementFlying");
         GameObject onEarthCollect = Instantiate(_onEarthCollectPE, transform.position, Quaternion.identity);
         cooloffTime = Time.time + cooldownTime;
         Destroy(onEarthCollect, 1.5f);
-        Destroy(gameObject);
+        _pickupAnim.enabled = true;
+        _pickupAnim.SetTrigger("Regenerate");
+        yield return new WaitForSeconds(0.5f);
+        transform.position = preAnimationPos;
     }
 
     private IEnumerator FollowAfterAnimation() {  
+        _audioManager.Play("ElementFlying");
         yield return new WaitForSeconds(0.8f);
         _pickupAnim.enabled = false;
         Debug.Log("Begin following player");

@@ -41,7 +41,6 @@ public class DialogueManager : MonoBehaviour {
 
     private void Update()
     {
-        Debug.Log(_isSentenceRunning);
         if (Input.GetMouseButtonDown(0) && IsDialogueRunning && _isSentenceRunning)
             _isSentenceSkipped = true;
 
