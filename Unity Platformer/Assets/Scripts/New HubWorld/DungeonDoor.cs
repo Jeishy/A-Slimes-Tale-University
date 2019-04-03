@@ -11,7 +11,6 @@ public class DungeonDoor : MonoBehaviour {
         if (col.CompareTag("Player") && !_hubWorldManager.IsDoorInRange)
 		{
             _hubWorldManager.IsDoorInRange = true;
-            Debug.Log("Dungeon door in range");
             _hubWorldManager.DoorHoveredOver = transform.parent.gameObject;
         }
 	}
