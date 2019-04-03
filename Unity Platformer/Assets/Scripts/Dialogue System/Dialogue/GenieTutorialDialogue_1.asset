@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416bff3c2bf61894abd4270636e5844b, type: 3}
   m_Name: GenieTutorialDialogue_1
   m_EditorClassIdentifier: 
-  characterName: 
+  characterName: Genie
   sentences:
-  - 
-  - 
+  - Hahaha... Foolish mortal! Now you are trapped in my realm! Lets see you wiggle
+    your way out of this one!
+  - Use WASD to move and SPACE to jump. Come on, lets see you struggle...

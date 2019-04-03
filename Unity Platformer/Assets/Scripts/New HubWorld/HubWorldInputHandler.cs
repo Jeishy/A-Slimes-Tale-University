@@ -24,7 +24,6 @@ public class HubWorldInputHandler : MonoBehaviour {
 		if (_hubWorldManager.IsDoorInRange && !_isOpen)
 		{
             _isOpen = true;
-            Debug.Log("Opening");
             _interactCanvasAnim.SetTrigger("Open");
             GameObject door = _hubWorldManager.DoorHoveredOver;
             _hubWorldManager.DoorOver(door);
@@ -38,7 +37,6 @@ public class HubWorldInputHandler : MonoBehaviour {
         else if ( !_hubWorldManager.IsDoorInRange && _isOpen)
         {
             _isOpen = false;  
-            Debug.Log("Closing");          
             _interactCanvasAnim.SetTrigger("Close");
             GameObject door = _hubWorldManager.DoorHoveredOver;
             _hubWorldManager.DoorExit(door);

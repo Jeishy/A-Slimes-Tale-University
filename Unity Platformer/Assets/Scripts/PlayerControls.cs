@@ -13,9 +13,6 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private ParticleSystem slimeTrail;
     [SerializeField] private Transform grounCheckTrans;
 
-    /*PS4 Screen Debugs*/
-    public Text text1, text2, text3;
-
     private CharacterController2D controller;
     private Player player;
 	private float horizontalMove;

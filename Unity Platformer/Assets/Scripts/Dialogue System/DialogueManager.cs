@@ -12,8 +12,11 @@ public class DialogueManager : MonoBehaviour {
 
     [HideInInspector] public static DialogueManager Instance = null;
     private Queue<string> _sentences;
+    private PlayerControls _playerControls;
+    private CharacterController2D _charController;
+    private float _originalSpeed;
 
-	private void Awake()
+    private void Awake()
     {
         if (Instance == null)
             Instance = this;
@@ -21,14 +24,24 @@ public class DialogueManager : MonoBehaviour {
         _sentences = new Queue<string>();
     }
 
+    private void Start()
+    {
+        _playerControls = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
+        _charController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
+    }
+
     public void StartDialogue(Dialogue dialogue)
     {
         // Animate text bubble onto screen
         _anim.SetTrigger("Open");
-
         // Set name of text bubble to the character name of the dialogue variable
         _nameText.text = dialogue.characterName;
-
+        // Cache original player speed
+        _originalSpeed = _playerControls.GetSpeed();
+        // Reduce movement speed to 0
+        _playerControls.SetSpeed(0);
+        // Disable jumping
+        _charController.m_Grounded = false;
         // Clear any previously queued sentences
         _sentences.Clear();
 
@@ -70,6 +83,10 @@ public class DialogueManager : MonoBehaviour {
 
     private void EndDialogue()
     {
+        // Set players movement speed back to normal
+        _playerControls.SetSpeed(_originalSpeed);
+        // Renable jumping
+        _charController.m_Grounded = true;
         // End the conversation
         // Animate text bubble off screen
         _anim.SetTrigger("Close");
