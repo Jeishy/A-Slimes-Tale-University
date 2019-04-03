@@ -69,12 +69,17 @@ public class NextLevelDoor : MonoBehaviour {
 		// Deactive player GO to give illusion that player has teleported
 		player.SetActive(false);
 		Destroy(nextLevelPoof, 1f);
+
 		// Delay before going to the next level
 		yield return new WaitForSeconds(0.5f);
-        LevelChanger.instance.OnLevelComplete();
+        // Get hubworld build index and load the hub world
+        int buildIndex = SceneUtility.GetBuildIndexByScenePath(GameManager.instance.GetScenePath("Hub_World"));
+        LevelChanger.instance.FadeToLevel(buildIndex);
+
 		// Delay before reactivating player GO, so that player doesn't reappear during fade out animation
         yield return new WaitForSeconds(1f);
         player.SetActive(true);
+
 		// Reset variables
         _isNextLevel = false;
         GameManager.instance.IsLevelComplete = false;

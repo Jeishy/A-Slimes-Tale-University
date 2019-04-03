@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class DirectionalLightTrigger : MonoBehaviour {
 
-    [SerializeField][Range(0.01f, 1.0f)] private float _maxFadeTime;
+    [SerializeField] private Light _mainLight;
+    [SerializeField] private Light _sideLight;
+    [SerializeField] private Light _tintLight;
+    [SerializeField][Range(0.01f, 5.0f)] private float _maxFadeTime;
 
     private bool _isEntered;
-    private float _exposureAmount;
+    private float _fadeTime;
+    private float _origMainLight;
+    private float _origSideLight;
+    private float _origTintLight;
+
 
     private void Start()
     {
-        _exposureAmount = 0;
+        _isEntered = false;
+        _fadeTime = 0f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,43 +27,33 @@ public class DirectionalLightTrigger : MonoBehaviour {
         if (other.CompareTag("Player") && !_isEntered)
         {
             _isEntered = true;
-            StartCoroutine(FadeToDim());
+            StopAllCoroutines();
+            StartCoroutine(DimLights());
         }
         else if (other.CompareTag("Player") && _isEntered)
         {
             _isEntered = false;
-            StartCoroutine(FadeBack());
         }
     }
 
-    private IEnumerator FadeToDim()
+    private IEnumerator DimLights()
     {
-        float elapsedTime = 0f;
-        float originalExposure = RenderSettings.skybox.GetFloat("_Exposure");
-        float currentExposure = 0f;
-        while (elapsedTime <= _maxFadeTime)
-        {
-            Debug.Log("Fading");
-            elapsedTime += Time.deltaTime;
-            currentExposure = Mathf.Lerp(originalExposure, 0.2f, elapsedTime);
-            Debug.Log(currentExposure);
-            RenderSettings.skybox.SetFloat("_Exposure", currentExposure);
-            yield return new WaitForEndOfFrame();
-        }
-    }
+        _origMainLight = _mainLight.intensity;
+        _origSideLight = _sideLight.intensity;
+        _origTintLight = _tintLight.intensity;
 
-    private IEnumerator FadeBack()
-    {
-        float elapsedTime = 0f;
-        float originalExposure = RenderSettings.skybox.GetFloat("_Exposure");
-        float currentExposure = 0f;
-        while (elapsedTime <= _maxFadeTime)
+        while (_fadeTime <= _maxFadeTime)
         {
-            Debug.Log("Fading");
-            elapsedTime += Time.deltaTime;
-            currentExposure = Mathf.Lerp(0.2f, originalExposure, elapsedTime);
-            Debug.Log(currentExposure);
-            RenderSettings.skybox.SetFloat("_Exposure", currentExposure);
+            Debug.Log("Diming lights. Fade time is: " + _fadeTime);
+            _fadeTime += Time.deltaTime;
+            // Lerp between original and new intensity
+            float newMain = Mathf.Lerp(_origMainLight, 0f, _fadeTime);
+            float newSide = Mathf.Lerp(_origSideLight, 0f, _fadeTime);
+            float newTint = Mathf.Lerp(_origTintLight, 0.1f, _fadeTime);
+            // Set intensity of lights
+            _mainLight.intensity = newMain;
+            _sideLight.intensity = newSide;
+            _tintLight.intensity = newTint;
             yield return new WaitForEndOfFrame();
         }
     }
