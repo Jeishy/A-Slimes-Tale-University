@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 114375523576496216}
   - component: {fileID: 65924466918037712}
   - component: {fileID: 54840959829107228}
+  - component: {fileID: 95892378164374746}
   m_Layer: 12
   m_Name: Enemy
   m_TagString: Enemy
@@ -770,6 +771,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.422492, y: 1.2179642, z: 1}
   m_Center: {x: 0.03506136, y: -0.108982086, z: 0}
+--- !u!95 &95892378164374746
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592723398982910}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114375523576496216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -783,7 +802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DEBUG: 1
   flying: 0
-  animator: {fileID: 0}
+  animator: {fileID: 95892378164374746}
   enemyDurability:
     health: 1
   attackOptions:
@@ -791,6 +810,7 @@ MonoBehaviour:
     meleeRange: 0.5
     range: 11
     attackSpeed: 3
+    animationDamageDelay: 0.1
     ghostMoveAttackSpeed: 0
     projectile: {fileID: 1179139433825628, guid: e244221de90d32b4c9b82b3530d00248,
       type: 2}

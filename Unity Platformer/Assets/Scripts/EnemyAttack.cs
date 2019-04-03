@@ -8,6 +8,7 @@ public class EnemyAttack {
     public float meleeRange = 0.5f;
     public float range = 5f;
     public float attackSpeed = 1f;
+    public float animationDamageDelay = 0.1f;
     public float ghostMoveAttackSpeed;
     public GameObject projectile;
     public Transform firePoint;

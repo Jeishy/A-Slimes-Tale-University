@@ -82,9 +82,9 @@
                 <e p="AbilityEarthCrash.cs" t="Include" />
                 <e p="AbilitySetEarthState.cs" t="Include" />
                 <e p="EarthBreakablePlatform.cs" t="Include" />
-                <e p="EarthPickup.cs" t="Include" />
                 <e p="WaterSinkTrigger.cs" t="Include" />
               </e>
+              <e p="ElementPickup.cs" t="Include" />
               <e p="FireState" t="Include">
                 <e p="AbilityFireGlow.cs" t="Include" />
                 <e p="AbilitySetFireState.cs" t="Include" />
@@ -119,7 +119,9 @@
             <e p="Dialogue.cs" t="Include" />
             <e p="DialogueManager.cs" t="Include" />
             <e p="DialogueTrigger.cs" t="Include" />
+            <e p="DialougeTriggerVolume.cs" t="Include" />
           </e>
+          <e p="DirectionalLightTrigger.cs" t="Include" />
           <e p="EnemyAI.cs" t="Include" />
           <e p="EnemyAttack.cs" t="Include" />
           <e p="EnemyDurability.cs" t="Include" />
@@ -128,7 +130,26 @@
           <e p="Gemstone Scripts" t="Include">
             <e p="GemstoneCollect.cs" t="Include" />
           </e>
-          <e p="HubWorld" t="Include">
+          <e p="Level.cs" t="Include" />
+          <e p="LevelChanger.cs" t="Include" />
+          <e p="Main Menu" t="Include">
+            <e p="CameraRotate.cs" t="Include" />
+          </e>
+          <e p="New HubWorld" t="Include">
+            <e p="DungeonDoor.cs" t="Include" />
+            <e p="EarthDoor.cs" t="Include" />
+            <e p="ExitDoor.cs" t="Include" />
+            <e p="FireDoor.cs" t="Include" />
+            <e p="HUbWorldDoorOverAndExit.cs" t="Include" />
+            <e p="HubWorldDoorSelect.cs" t="Include" />
+            <e p="HubWorldInputHandler.cs" t="Include" />
+            <e p="HubWorldManager.cs" t="Include" />
+            <e p="ShowAndHideInteractable.cs" t="Include" />
+            <e p="WaterDoor.cs" t="Include" />
+            <e p="WindDoor.cs" t="Include" />
+          </e>
+          <e p="NextLevelDoor.cs" t="Include" />
+          <e p="Old HubWorld" t="Include">
             <e p="DoorTarget.cs" t="Include" />
             <e p="Shop" t="Include">
               <e p="GlobalShop.cs" t="Include" />
@@ -136,8 +157,6 @@
             </e>
             <e p="TargetCameraScript.cs" t="Include" />
           </e>
-          <e p="LevelChanger.cs" t="Include" />
-          <e p="NextLevelDoor.cs" t="Include" />
           <e p="Player.cs" t="Include" />
           <e p="PlayerAttributes.cs" t="Include" />
           <e p="PlayerControls.cs" t="Include" />
@@ -147,9 +166,16 @@
           <e p="SaveSystem.cs" t="Include" />
           <e p="Sound.cs" t="Include" />
           <e p="UI" t="Include">
+            <e p="Confirmation Menu" t="Include">
+              <e p="ConfirmationMenu.cs" t="Include" />
+            </e>
             <e p="Elemental States" t="Include">
               <e p="AbilityShowStateIndicator.cs" t="Include" />
               <e p="ArmourSlotGUI.cs" t="Include" />
+            </e>
+            <e p="InteractCavasFollow.cs" t="Include" />
+            <e p="Main Menu" t="Include">
+              <e p="MainMenu.cs" t="Include" />
             </e>
           </e>
           <e p="UserInterface.cs" t="Include" />

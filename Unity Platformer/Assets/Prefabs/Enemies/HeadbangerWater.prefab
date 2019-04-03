@@ -1069,6 +1069,7 @@ MonoBehaviour:
     meleeRange: 1
     range: 10
     attackSpeed: 3
+    animationDamageDelay: 0.25
     ghostMoveAttackSpeed: 0
     projectile: {fileID: 0}
     firePoint: {fileID: 0}

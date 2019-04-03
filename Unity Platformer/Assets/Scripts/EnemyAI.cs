@@ -132,13 +132,11 @@ public class EnemyAI : MonoBehaviour
         //Check if enemy's attack is off cooldown and it is within melee range of the player
         if (CanAttack() && (Physics.OverlapSphere(transform.position, attackOptions.meleeRange, attackOptions.playerMask).Length > 0))
         {
+	        waiting = true;
+	        
 	        animator.SetTrigger("Attack");
 
-            //Call the Hit() method on the PlayerDurability script
-            playerScript.Hit(_abilityManager.CurrentPlayerElementalState, Element);
-
-            //Call the Knockback(bool: right) method on the CharacterController2D script
-            controller.Knockback(transform.position.x > player.transform.position.x);
+	        StartCoroutine(DelayedDamage());
 
             //Calculate next attack time
             attackCountdown = Time.time + attackOptions.attackSpeed;
@@ -146,10 +144,23 @@ public class EnemyAI : MonoBehaviour
             if (attackOptions.attackStyle == AttackStyle.Ghost) {
                 transform.position = GetRandomWaypoint().position;
                 patrol = true;
-
             }
 
         }
+    }
+    
+    IEnumerator DelayedDamage() 
+    {
+		yield return new WaitForSeconds(attackOptions.animationDamageDelay);
+		
+		//Call the Hit() method on the PlayerDurability script
+		playerScript.Hit(_abilityManager.CurrentPlayerElementalState, Element);
+
+		//Call the Knockback(bool: right) method on the CharacterController2D script
+		controller.Knockback(transform.position.x > player.transform.position.x);
+
+		waiting = false;
+
     }
 
     void RangeAttack()
