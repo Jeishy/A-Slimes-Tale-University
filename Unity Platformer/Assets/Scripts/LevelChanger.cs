@@ -52,9 +52,12 @@ public class LevelChanger : MonoBehaviour
         {
             Debug.LogWarning("GAME COMPLETETE!!!!!!");
         }
-		
+
+        Debug.Log("Loading new scene");
+
+        int newBuildIndex = SceneUtility.GetBuildIndexByScenePath(GameManager.instance.GetScenePath("Hub_World"));
         // If the last two scenes have been loaded, set max gems to 4
-		if (SceneManager.GetActiveScene().buildIndex == 3)
+		if (SceneManager.GetActiveScene().buildIndex == newBuildIndex)
         {
             Debug.Log("Resetting max gemstones");
             GameManager.instance.maxGemstones = 4;

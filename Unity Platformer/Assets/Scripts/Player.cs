@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private GameManager gm;
     private AbilityManager _abilityManager;
     private AudioManager _audioManager;
+    private bool _isGemstoneCollected;
     [HideInInspector] public bool isDead;
 
     private void Start()
@@ -36,7 +37,8 @@ public class Player : MonoBehaviour
         _healthBarFilled = GameObject.Find("HealthBarFilled").GetComponent<Image>();
         _audioManager = AudioManager.instance;
         gm = GameManager.instance;
-        
+        _isGemstoneCollected = false;
+
         if (gm.hasData)
         {
             health = gm.health;
@@ -223,13 +225,15 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject, 1f);
         }
 
-        if (other.CompareTag("Gemstone"))
+        if (other.CompareTag("Gemstone") && !_isGemstoneCollected)
         {
+            _isGemstoneCollected = true;
+            Debug.Log("Picking up gemstone");
             gm.OnGemstonePickup();
             other.GetComponentInParent<GemstoneCollect>().IsCollected = true;
             StartCoroutine(WaitToGemstoneCollect(other.transform.parent));
             Destroy(other.transform.parent.gameObject, 3f);
-}
+        }
 
         if (other.CompareTag("NextLevel"))
         {
@@ -252,6 +256,7 @@ public class Player : MonoBehaviour
         Vector3 spawnPos = other.position;
         GameObject gemstoneCollectPE = other.GetComponent<GemstoneCollect>().OnCollectPE;
         GameObject gemstoneCollect = Instantiate(gemstoneCollectPE, spawnPos, Quaternion.identity);
+        _isGemstoneCollected = false;
         Destroy(gemstoneCollect, 1f);
     }
     void OnParticleCollision(GameObject other)

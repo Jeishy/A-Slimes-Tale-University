@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Two instances of GameManager have been created!");
             Destroy(this);
         }
 
@@ -38,7 +37,6 @@ public class GameManager : MonoBehaviour
     public void SavePlayer(Player player)
     {
         SaveSystem.SavePlayer(player);
-        Debug.Log("Saving...");
 
     }
     
@@ -50,6 +48,7 @@ public class GameManager : MonoBehaviour
     public void OnGemstonePickup()
     {
         gemstones++;
+        Debug.Log(gemstones);
         CheckIfLevelIsComplete();
     }
 
@@ -62,7 +61,6 @@ public class GameManager : MonoBehaviour
     public void LoadPlayer(bool LoadLevel = false)
     {
         
-        Debug.Log("Loading...");
         PlayerData data = SaveSystem.LoadPlayer();
 
         position.x = data.position[0];
@@ -83,5 +81,11 @@ public class GameManager : MonoBehaviour
             LevelChanger.instance.FadeToLevel(data.level);
         }
 
+    }
+
+    public string GetScenePath(string sceneName)
+    {
+        string path = "Assets/Scenes/" + sceneName + ".unity";
+        return path;
     }
 }

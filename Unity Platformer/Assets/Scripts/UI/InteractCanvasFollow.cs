@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractCavasFollow : MonoBehaviour {
+public class InteractCanvasFollow : MonoBehaviour {
 
     [SerializeField] private float yOffset;
     private Transform _playerTrans;

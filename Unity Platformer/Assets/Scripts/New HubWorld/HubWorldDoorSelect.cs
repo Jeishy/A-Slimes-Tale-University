@@ -46,23 +46,17 @@ public class HubWorldDoorSelect : MonoBehaviour {
 			{
 				case "Exit Door":
                     _levelNameTxt.text = "Exit to Main Menu";
-                    _confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GetScenePath("MainMenu"));
+                    _confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GameManager.instance.GetScenePath("MainMenu"));
                     break;
 				case "Dungeon Door":
-                    _confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GetScenePath("Dungeon_World"));
+                    _confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GameManager.instance.GetScenePath("Dungeon_World"));
                     _levelNameTxt.text = "Dungeon";
                     break;
 				case "Wind Door":
-					_confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GetScenePath("ChinaMountain_World2"));
+					_confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GameManager.instance.GetScenePath("ChinaMountain_World2"));
                     _levelNameTxt.text = "China Mountain";
                     break;
 			}
         }
-    }
-
-    private string GetScenePath(string sceneName)
-    {
-        string path = "Assets/Scenes/" + sceneName + ".unity";
-        return path;
     }
 }
