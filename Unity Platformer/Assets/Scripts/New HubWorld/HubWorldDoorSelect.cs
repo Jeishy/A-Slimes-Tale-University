@@ -45,8 +45,8 @@ public class HubWorldDoorSelect : MonoBehaviour {
             switch (doorName)
 			{
 				case "Exit Door":
-					//_confirmMenu.BuildIndex = Array.Find;
-                    _levelNameTxt.text = "";
+                    _levelNameTxt.text = "Exit to Main Menu";
+                    _confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GetScenePath("MainMenu"));
                     break;
 				case "Dungeon Door":
                     _confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GetScenePath("Dungeon_World"));

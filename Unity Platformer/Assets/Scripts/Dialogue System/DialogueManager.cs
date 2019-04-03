@@ -5,6 +5,8 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour {
 
+    [HideInInspector] public bool IsDialogueRunning;
+
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _dialogueText;
     [SerializeField] [Range(0.001f, 0.2f)] private float _slowTypeSpeed;             // How slow dialogue text appears on the screen. Decrease to slow the effect
@@ -16,7 +18,6 @@ public class DialogueManager : MonoBehaviour {
     private Queue<string> _sentences;
     private PlayerControls _playerControls;
     private float _originalSpeed;
-    private bool _isDialogueRunning;
     private bool _isSentenceRunning;
     private bool _isSentenceSkipped;
     private bool _canDialogueEnd;
@@ -32,7 +33,7 @@ public class DialogueManager : MonoBehaviour {
     private void Start()
     {
         _playerControls = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
-        _isDialogueRunning = false;
+        IsDialogueRunning = false;
         _isSentenceSkipped = false;
         _isSentenceRunning = false;
         _canDialogueEnd = false;
@@ -41,12 +42,12 @@ public class DialogueManager : MonoBehaviour {
     private void Update()
     {
         Debug.Log(_isSentenceRunning);
-        if (Input.GetMouseButtonDown(0) && _isDialogueRunning && _isSentenceRunning)
+        if (Input.GetMouseButtonDown(0) && IsDialogueRunning && _isSentenceRunning)
             _isSentenceSkipped = true;
 
         else if (Input.GetMouseButtonDown(0) && !_isSentenceRunning && _canDialogueEnd)
         {
-            _isDialogueRunning = false;
+            IsDialogueRunning = false;
             EndDialogue();
         }
         else if (Input.GetMouseButtonDown(0) && !_isSentenceRunning)
@@ -56,7 +57,7 @@ public class DialogueManager : MonoBehaviour {
     public void StartDialogue(Dialogue dialogue)
     {
         // Set dialogue and sentence started flag to true
-        _isDialogueRunning = true;
+        IsDialogueRunning = true;
         _isSentenceRunning = true;
         // Animate text bubble onto screen
         _anim.SetTrigger("Open");
@@ -134,7 +135,7 @@ public class DialogueManager : MonoBehaviour {
         _groundCheck.position = new Vector3(_groundCheck.position.x, _groundCheck.position.y - 1, _groundCheck.position.z);
         // End the conversation
         // Reset all flags 
-        _isDialogueRunning = false;
+        IsDialogueRunning = false;
         _isSentenceRunning = false;
         _isSentenceSkipped = false;
         _canDialogueEnd = false;

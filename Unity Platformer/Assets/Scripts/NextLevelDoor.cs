@@ -6,24 +6,59 @@ using UnityEngine.SceneManagement;
 public class NextLevelDoor : MonoBehaviour {
 
 	[SerializeField] private GameObject _levelChangePE;
-    private bool _isNextLevel;
+    [SerializeField] private bool _canShowDialogue;
 
-	private void Start()
+    private bool _isNextLevel;
+    private bool _hasActivatedNextLevel;
+    private DialogueTrigger _dialogueTrigger;
+    private bool _nextLevelDialogueStarted;
+    private GameObject _player;
+
+    private void Start()
 	{
         _isNextLevel = false;
+        _nextLevelDialogueStarted = false;
+        _hasActivatedNextLevel = false;
+        _dialogueTrigger = GetComponent<DialogueTrigger>();
     }
 
     private void OnTriggerEnter(Collider col)
     {
         GameManager.instance.CheckIfLevelIsComplete();
-        Debug.Log(GameManager.instance.gemstones);
-        Debug.Log(GameManager.instance.maxGemstones);
         if (col.CompareTag("Player") && !_isNextLevel && GameManager.instance.IsLevelComplete)
 		{
+            _player = col.gameObject;
             _isNextLevel = true;
-            StartCoroutine(NextLevel(col.gameObject, _levelChangePE));
+            if (_canShowDialogue)
+                TriggerDialouge();
+            else
+                StartCoroutine(NextLevel(_player, _levelChangePE));
 		}
 	}
+
+    private void Update()
+    {
+        if (_nextLevelDialogueStarted)
+        {
+            if (!DialogueManager.Instance.IsDialogueRunning && !_hasActivatedNextLevel)
+            {
+                StartCoroutine(NextLevel(_player, _levelChangePE));
+                _hasActivatedNextLevel = true;
+            }
+        }
+    }
+
+    private void TriggerDialouge()
+    {
+        if (_dialogueTrigger._dialogue != null)
+        {
+            _dialogueTrigger.TriggerDialogue();
+            _nextLevelDialogueStarted = true;
+        }
+        else
+            Debug.LogError("There is no dialogue attatched to this trigger.");
+    }
+
 
 	private IEnumerator NextLevel(GameObject player, GameObject nextLevelPoofPE)
 	{	
@@ -44,5 +79,6 @@ public class NextLevelDoor : MonoBehaviour {
         _isNextLevel = false;
         GameManager.instance.IsLevelComplete = false;
         GameManager.instance.gemstones = 0;
+        _hasActivatedNextLevel = false;
     }
 }

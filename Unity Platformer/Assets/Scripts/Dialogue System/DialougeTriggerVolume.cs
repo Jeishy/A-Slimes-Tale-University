@@ -24,7 +24,10 @@ public class DialougeTriggerVolume : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             if (!_waitToTrigger && !_waitToLand)
+            {
                 _dialogueTrigger.TriggerDialogue();
+                gameObject.SetActive(false);
+            }
             else if (_waitToTrigger)
                 StartCoroutine(WaitToCollect());
             else if (_waitToLand)
@@ -36,6 +39,7 @@ public class DialougeTriggerVolume : MonoBehaviour {
     {
         yield return new WaitForSeconds(_timeToWait);
         _dialogueTrigger.TriggerDialogue();
+        gameObject.SetActive(false);
     }
 
     private void Update()
@@ -46,6 +50,7 @@ public class DialougeTriggerVolume : MonoBehaviour {
             {
                 _dialogueTrigger.TriggerDialogue();
                 _canWaitToLand = false;
+                gameObject.SetActive(false);
             }
         }
     }

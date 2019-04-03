@@ -8,6 +8,7 @@ public class HubWorldInputHandler : MonoBehaviour {
     [SerializeField] private Animator _interactCanvasAnim;
 
     private HubWorldManager _hubWorldManager;
+    private GameObject _door;
     private bool _isOpen;
 
     private void Start()
@@ -25,14 +26,10 @@ public class HubWorldInputHandler : MonoBehaviour {
 		{
             _isOpen = true;
             _interactCanvasAnim.SetTrigger("Open");
-            GameObject door = _hubWorldManager.DoorHoveredOver;
-            _hubWorldManager.DoorOver(door);
+            _door = _hubWorldManager.DoorHoveredOver;
+            _hubWorldManager.DoorOver(_door);
             // Run on hover over event
-            if (Input.GetKeyDown(KeyCode.E))
-			{
-                // Play particle effect, run animation, whatever
-                _hubWorldManager.DoorSelected(door);
-            }
+
 		}
         else if ( !_hubWorldManager.IsDoorInRange && _isOpen)
         {
@@ -41,5 +38,12 @@ public class HubWorldInputHandler : MonoBehaviour {
             GameObject door = _hubWorldManager.DoorHoveredOver;
             _hubWorldManager.DoorExit(door);
         }
-	}
+
+        if (Input.GetKeyDown(KeyCode.E) && _hubWorldManager.IsDoorInRange)
+        {
+            Debug.Log("Selecting a door");
+            // Play particle effect, run animation, whatever
+            _hubWorldManager.DoorSelected(_door);
+        }
+    }
 }
