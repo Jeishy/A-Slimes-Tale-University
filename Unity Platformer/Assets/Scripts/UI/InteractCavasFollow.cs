@@ -16,6 +16,6 @@ public class InteractCavasFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        _trans.position = new Vector3(_playerTrans.position.x - 0.1f, _playerTrans.position.y + yOffset, _playerTrans.position.z);
+        _trans.position = new Vector3(_playerTrans.position.x , _playerTrans.position.y + yOffset, transform.position.z);
     }
 }

@@ -1306,8 +1306,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: E to Interact
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d5053fb8a03eda144b22192f31542ad8, type: 2}
-  m_sharedMaterial: {fileID: 21802723835099624, guid: d5053fb8a03eda144b22192f31542ad8,
+  m_fontAsset: {fileID: 11400000, guid: 3efa5af5a86889540b1bd19e0240c78b, type: 2}
+  m_sharedMaterial: {fileID: 21204921085951802, guid: 3efa5af5a86889540b1bd19e0240c78b,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6414,7 +6414,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1347816546}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.3449999}
+  m_LocalPosition: {x: 0, y: 0, z: -0.089}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 591414684}
@@ -6423,7 +6423,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -5.7390003, y: 5.715}
+  m_AnchoredPosition: {x: -5.7390003, y: 3.708}
   m_SizeDelta: {x: 2.72, y: 0.562}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1347816548
@@ -6480,7 +6480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f529c09e7e687c44a9e20ea19fa29819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yOffset: 1.14
+  yOffset: -0.39
 --- !u!95 &1347816551
 Animator:
   serializedVersion: 3
