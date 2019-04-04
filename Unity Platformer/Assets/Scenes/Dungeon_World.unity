@@ -19748,31 +19748,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 21
       objectReference: {fileID: 0}
-    - target: {fileID: 23512629359993194, guid: 8dfc71820d182ef459c58edeac178652,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ce2320ac54e558849b6970bfed852941, type: 2}
-    - target: {fileID: 23162737045664566, guid: 8dfc71820d182ef459c58edeac178652,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: cf6f08718fcb3924783c32ddf1f677ea, type: 2}
-    - target: {fileID: 23109006560005186, guid: 8dfc71820d182ef459c58edeac178652,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e70f04a5e91a87b4eac3f2c9e899fc23, type: 2}
-    - target: {fileID: 23402986781460990, guid: 8dfc71820d182ef459c58edeac178652,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4aeb55795ff02744f99051081e6c662c, type: 2}
-    - target: {fileID: 23497400068536364, guid: 8dfc71820d182ef459c58edeac178652,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: db2348f6082e42540874e06a20440cf2, type: 2}
     - target: {fileID: 1607584251634536, guid: 8dfc71820d182ef459c58edeac178652, type: 2}
       propertyPath: m_Name
       value: Coin (1)
