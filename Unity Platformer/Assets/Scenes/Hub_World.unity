@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08955863, g: 0.08404541, b: 0.060539823, a: 1}
+  m_IndirectSpecularColor: {r: 0.08955833, g: 0.08404524, b: 0.060539722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1231,6 +1231,53 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 407973644}
   m_Mesh: {fileID: 4300000, guid: 360ab2ac0a112b34eb6ff03bbad68010, type: 3}
+--- !u!1001 &485421968
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4466203983152690, guid: 52ecbfa21fcbc4b4d84f9dd17873322f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.67291
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466203983152690, guid: 52ecbfa21fcbc4b4d84f9dd17873322f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 6.3715415
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466203983152690, guid: 52ecbfa21fcbc4b4d84f9dd17873322f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 2.0489557
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466203983152690, guid: 52ecbfa21fcbc4b4d84f9dd17873322f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466203983152690, guid: 52ecbfa21fcbc4b4d84f9dd17873322f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466203983152690, guid: 52ecbfa21fcbc4b4d84f9dd17873322f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466203983152690, guid: 52ecbfa21fcbc4b4d84f9dd17873322f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466203983152690, guid: 52ecbfa21fcbc4b4d84f9dd17873322f, type: 2}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114657865358166924, guid: 52ecbfa21fcbc4b4d84f9dd17873322f,
+        type: 2}
+      propertyPath: _themeName
+      value: ThemeHub
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 52ecbfa21fcbc4b4d84f9dd17873322f, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &517428035
 GameObject:
   m_ObjectHideFlags: 0
