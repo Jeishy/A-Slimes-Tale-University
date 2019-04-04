@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElementPickup : MonoBehaviour
 {
-    [SerializeField] private Animator _anim;
+    [SerializeField] private Animator _textAnim;
     [SerializeField] private ElementalStates element;
     [SerializeField] private GameObject _onEarthCollectPE;
     [SerializeField] private float cooldownTime = 0;
@@ -53,13 +53,12 @@ public class ElementPickup : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            _anim.SetTrigger("Open");
+            _textAnim.SetTrigger("Open");
         }
     }
 
 	private void OnTriggerStay(Collider col)
 	{
-        Debug.Log("In trigger");
 		if (col.CompareTag("Player"))
 		{       
             //Display text 'Press E To Absorb'  
@@ -78,7 +77,7 @@ public class ElementPickup : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            _anim.SetTrigger("Close");
+            _textAnim.SetTrigger("Close");
         }
     }
 

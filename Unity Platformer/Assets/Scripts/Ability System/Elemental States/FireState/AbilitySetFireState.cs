@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilitySetFireState : MonoBehaviour {
-
+public class AbilitySetFireState : MonoBehaviour
+{
 	private AbilityManager _abilityManager;
+
 	private void OnEnable()
 	{
 		Setup();

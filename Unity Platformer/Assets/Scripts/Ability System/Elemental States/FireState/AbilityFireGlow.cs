@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class AbilityFireGlow : MonoBehaviour
 {
+    [SerializeField] private GameObject _fireGlowLight;
 
     private AbilityManager _abilityManager;
 
     private void OnEnable()
     {
         Setup();
-        _abilityManager.OnFireState += SpawnProjectile;
+        _abilityManager.OnFireState += FireGlowOn;
+        _abilityManager.OnWaterState += FireGlowOff;
+        _abilityManager.OnEarthCrash += FireGlowOff;
+        _abilityManager.OnWindState += FireGlowOff;
     }
 
     private void OnDisable()
     {
-        _abilityManager.OnFireState -= SpawnProjectile;
+        _abilityManager.OnFireState -= FireGlowOn;
+        _abilityManager.OnWaterState -= FireGlowOff;
+        _abilityManager.OnEarthCrash -= FireGlowOff;
+        _abilityManager.OnWindState -= FireGlowOff;
     }
 
     private void Setup()
@@ -23,8 +30,14 @@ public class AbilityFireGlow : MonoBehaviour
         _abilityManager = GetComponent<AbilityManager>();
     }
 
-    private void SpawnProjectile()
+    private void FireGlowOn()
     {
-      
+        _fireGlowLight.SetActive(true);
+    }
+
+    private void FireGlowOff()
+    {
+        if (_fireGlowLight.activeInHierarchy)
+            _fireGlowLight.SetActive(false);
     }
 }
