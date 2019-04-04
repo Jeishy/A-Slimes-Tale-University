@@ -33,6 +33,8 @@ public class DirectionalLightTrigger : MonoBehaviour {
         else if (other.CompareTag("Player") && _isEntered)
         {
             _isEntered = false;
+            StopAllCoroutines();
+            StartCoroutine(BrightenLights());
         }
     }
 
@@ -44,7 +46,6 @@ public class DirectionalLightTrigger : MonoBehaviour {
 
         while (_fadeTime <= _maxFadeTime)
         {
-            Debug.Log("Diming lights. Fade time is: " + _fadeTime);
             _fadeTime += Time.deltaTime;
             // Lerp between original and new intensity
             float newMain = Mathf.Lerp(_origMainLight, 0f, _fadeTime);
@@ -56,5 +57,31 @@ public class DirectionalLightTrigger : MonoBehaviour {
             _tintLight.intensity = newTint;
             yield return new WaitForEndOfFrame();
         }
+
+        _fadeTime = 0f;
+    }
+
+    private IEnumerator BrightenLights()
+    {
+        float currentMainIntensity = _mainLight.intensity;
+        float currentSideIntensity = _sideLight.intensity;
+        float currentTintIntensity = _tintLight.intensity;
+
+        while (_fadeTime <= _maxFadeTime)
+        {
+            _fadeTime += Time.deltaTime;
+            Debug.Log("fade time is: " + _fadeTime);
+            // Lerp between current and original intensity
+            float newMain = Mathf.Lerp(currentMainIntensity, _origMainLight, _fadeTime);
+            float newSide = Mathf.Lerp(currentSideIntensity, _origSideLight, _fadeTime);
+            float newTint = Mathf.Lerp(currentTintIntensity, _origTintLight, _fadeTime);
+            // Set intensity of lights
+            _mainLight.intensity = newMain;
+            _sideLight.intensity = newSide;
+            _tintLight.intensity = newTint;
+            yield return new WaitForEndOfFrame();
+        }
+
+        _fadeTime = 0f;
     }
 }
