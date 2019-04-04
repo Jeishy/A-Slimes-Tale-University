@@ -297,7 +297,7 @@ MonoBehaviour:
   attackOptions:
     attackStyle: 2
     meleeRange: 1
-    range: 10
+    range: 6
     attackSpeed: 3
     animationDamageDelay: 0.1
     ghostMoveAttackSpeed: 5

@@ -142,8 +142,8 @@ public class EnemyAI : MonoBehaviour
             attackCountdown = Time.time + attackOptions.attackSpeed;
 
             if (attackOptions.attackStyle == AttackStyle.Ghost) {
-                transform.position = GetRandomWaypoint().position;
-                patrol = true;
+                waiting = true;
+                StartCoroutine(TeleportAway());
             }
 
         }
@@ -161,6 +161,15 @@ public class EnemyAI : MonoBehaviour
 
 		waiting = false;
 
+    }
+
+    IEnumerator TeleportAway()
+    {
+        yield return new WaitForSeconds(1f);
+        transform.position = GetRandomWaypoint().position;
+        animator.SetTrigger("GhostFadeIn");
+        waiting = false;
+        patrol = true;
     }
 
     void RangeAttack()
@@ -213,20 +222,24 @@ public class EnemyAI : MonoBehaviour
 
         Vector2 directionToPlayer = player.transform.position - transform.position;
         RaycastHit hit;
-        
 
-        if (Physics.Raycast(transform.position, directionToPlayer, out hit, attackOptions.range, attackOptions.rangeAttackMask) && CanAttack())
+
+        //if (Physics.Raycast(transform.position, directionToPlayer, out hit, attackOptions.range, attackOptions.rangeAttackMask) && CanAttack())
+        if (Physics.OverlapSphere(transform.position, attackOptions.range, attackOptions.rangeAttackMask).Length > 0 && CanAttack())
         {
-            if (hit.collider.CompareTag("Player")) 
-            {
+            Debug.Log("Player in range, attacking!");
+            //if (hit.collider.CompareTag("Player")) 
+            //{
+                
                 _audioManager.Play("GhostAttack");
                 patrol = false;
                 transform.position = Vector2.MoveTowards(transform.position, player.transform.position, attackOptions.ghostMoveAttackSpeed * Time.deltaTime);
                 MeleeAttack();
-            }
+            //}
 
         } else {
             patrol = true;
+            Debug.Log("Player not in range, patrolling...    " + CanAttack() + " " + Physics.Raycast(transform.position, directionToPlayer, out hit, attackOptions.range, attackOptions.rangeAttackMask));
         }
     }
 
