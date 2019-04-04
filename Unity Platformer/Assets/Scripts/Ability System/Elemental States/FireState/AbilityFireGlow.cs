@@ -15,6 +15,7 @@ public class AbilityFireGlow : MonoBehaviour
         _abilityManager.OnWaterState += FireGlowOff;
         _abilityManager.OnEarthCrash += FireGlowOff;
         _abilityManager.OnWindState += FireGlowOff;
+        _abilityManager.OnNoneState += FireGlowOff;
     }
 
     private void OnDisable()
@@ -23,6 +24,7 @@ public class AbilityFireGlow : MonoBehaviour
         _abilityManager.OnWaterState -= FireGlowOff;
         _abilityManager.OnEarthCrash -= FireGlowOff;
         _abilityManager.OnWindState -= FireGlowOff;
+        _abilityManager.OnNoneState -= FireGlowOff;
     }
 
     private void Setup()
