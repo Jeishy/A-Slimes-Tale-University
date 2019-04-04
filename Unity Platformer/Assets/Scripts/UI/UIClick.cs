@@ -15,4 +15,9 @@ public class UIClick : MonoBehaviour {
     {
         _audioManager.Play("UIClick");
     }
+
+    public void PlayUIOnClickSoudns()
+    {
+        _audioManager.Play("UIOnClick");
+    }
 }
