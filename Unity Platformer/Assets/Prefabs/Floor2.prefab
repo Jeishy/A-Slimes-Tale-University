@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4978519074089194}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor2
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,9 +39,9 @@ GameObject:
   - component: {fileID: 65892765355667942}
   - component: {fileID: 65204922006402436}
   - component: {fileID: 114963083899067376}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor2
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1266122760697374}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 46.89, y: -44.89, z: 0.006}
+  m_LocalPosition: {x: 105.89, y: -1.89, z: 16.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4173495287609314}
@@ -150,4 +150,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d442c266f2d1d8e48bc054b85f17ec07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _platformDestroyedPE: {fileID: 0}
+  _platformDestroyedPE: {fileID: 1732612014737406, guid: 0ee597b273fcbdd44bf1a18d92ff61d9,
+    type: 2}
