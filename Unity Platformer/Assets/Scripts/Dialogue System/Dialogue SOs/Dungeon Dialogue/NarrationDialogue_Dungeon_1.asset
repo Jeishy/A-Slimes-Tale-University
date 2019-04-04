@@ -13,5 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: '...'
   sentences:
+  - Shrines around the map give you access to the Elements! They also give you armour.
   - An enemy is nearby! Use MOUSE and LEFT MOUST BUTTON to aim and fire a projectile!
+    But be careful how you use it...
   - Must be in FIRE, WATER, WIND or EARTH state.
