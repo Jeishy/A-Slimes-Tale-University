@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour {
     private bool _isSentenceRunning;
     private bool _isSentenceSkipped;
     private bool _canDialogueEnd;
+    private AbilityManager _abilityManager;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class DialogueManager : MonoBehaviour {
     private void Start()
     {
         _playerControls = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
+        _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
         IsDialogueRunning = false;
         _isSentenceSkipped = false;
         _isSentenceRunning = false;
@@ -66,6 +68,9 @@ public class DialogueManager : MonoBehaviour {
         _originalSpeed = _playerControls.GetSpeed();
         // Reduce movement speed to 0
         _playerControls.SetSpeed(0);
+        // Disable shooting if there is an ability manager in the scene
+        if (_abilityManager != null)
+            _abilityManager.GetComponent<AbilityProjectile>().enabled = false;
         // Disable jumping by moving ground check gameobject off the ground
         _groundCheck.position = new Vector3(_groundCheck.position.x, _groundCheck.position.y + 1, _groundCheck.position.z);
 
@@ -130,6 +135,9 @@ public class DialogueManager : MonoBehaviour {
     {
         // Set players movement speed back to normal
         _playerControls.SetSpeed(_originalSpeed);
+        // Renable shooting if the ability manager is in the scene
+        if (_abilityManager != null)
+            _abilityManager.GetComponent<AbilityProjectile>().enabled = true;
         // Renable jumping
         _groundCheck.position = new Vector3(_groundCheck.position.x, _groundCheck.position.y - 1, _groundCheck.position.z);
         // End the conversation
