@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirectionalLightTrigger : MonoBehaviour {
-
+public class DirectionalLightTrigger : MonoBehaviour
+{
+    [SerializeField] private Light _fireGlowLight;
     [SerializeField] private Light _mainLight;
     [SerializeField] private Light _sideLight;
     [SerializeField] private Light _tintLight;
@@ -29,12 +30,14 @@ public class DirectionalLightTrigger : MonoBehaviour {
             _isEntered = true;
             StopAllCoroutines();
             StartCoroutine(DimLights());
+            _fireGlowLight.intensity = 31f;
         }
         else if (other.CompareTag("Player") && _isEntered)
         {
             _isEntered = false;
             StopAllCoroutines();
             StartCoroutine(BrightenLights());
+            _fireGlowLight.intensity = 5f;
         }
     }
 

@@ -14485,6 +14485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77276eee587b46341912c0ae580a3c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fireGlowLight: {fileID: 1954026897}
   _mainLight: {fileID: 2003461002}
   _sideLight: {fileID: 1867668550}
   _tintLight: {fileID: 1099641031}
@@ -28803,6 +28804,11 @@ Transform:
 --- !u!4 &1954026896 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4763663452435368, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
+    type: 2}
+  m_PrefabInternal: {fileID: 1954026894}
+--- !u!108 &1954026897 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 108123300495115442, guid: 575189cb5ed4cbd4b8cc553e46a10a54,
     type: 2}
   m_PrefabInternal: {fileID: 1954026894}
 --- !u!1001 &1996220482
