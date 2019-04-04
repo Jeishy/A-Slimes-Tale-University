@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416bff3c2bf61894abd4270636e5844b, type: 3}
+  m_Name: GenieDialogue_CM_1
+  m_EditorClassIdentifier: 
+  characterName: Genie
+  sentences:
+  - This is quite the dangerous realm, CHINA MOUNTAIN. You'll receive no more instructions
+    from me.
+  - Collect my gemstones, don't die, you've heard it all before. You're survivability
+    is quite a nuisance...
+  - (This is the last level in this demo! Hope you have enjoyed playing thus far!)
