@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class AbilityInputHandler : MonoBehaviour {
 
-    [HideInInspector] public Vector2 RightStickAxis;
-
 	[SerializeField] private LayerMask _enemyLayerMask;
 	[SerializeField] private float _boostedProjectileMaxTime;	// The longest time mouse button 0 must be held to spawn boosted projectile
 

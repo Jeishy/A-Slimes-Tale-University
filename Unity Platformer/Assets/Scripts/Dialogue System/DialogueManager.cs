@@ -126,7 +126,6 @@ public class DialogueManager : MonoBehaviour {
         if (_sentences.Count == 0 && !_isSentenceRunning)
         {
             _canDialogueEnd = true;
-            Debug.Log("Dialogue can now end");
             yield return null;
         }
     }

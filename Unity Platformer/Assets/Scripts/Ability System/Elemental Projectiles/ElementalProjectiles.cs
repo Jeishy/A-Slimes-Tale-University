@@ -43,14 +43,6 @@ public class ElementalProjectiles : MonoBehaviour {
         return _projForce;
     }
 
-    // Note, elemental projectile prefabs have rigidbodies on them
-    public virtual Vector2 JoystickFiringForce(float projectileSpeed, Transform PlayerTrans, Vector2 joystickDir)
-    {
-        // Set force to be the direction the right joystick is held in * the speed of the projectile
-        Vector2 projForce = joystickDir * projectileSpeed;
-        return projForce;
-    }
-
     public virtual IEnumerator GravityDropOff(Rigidbody proj)
     {
         yield return new WaitForSeconds(_dropOffTime);

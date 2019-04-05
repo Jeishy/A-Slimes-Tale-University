@@ -74,7 +74,7 @@ public class AbilityManager : MonoBehaviour {
 	}
 
 	// Method for running methods subscribed to OnProjectileFire event
-	// Implementation in PlayerProjectile class
+	// Implementation in AbilityProjectile class
 	// Triggered in AbilityInputHandler class
 	public void ProjectileFire()
 	{

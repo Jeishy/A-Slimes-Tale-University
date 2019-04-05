@@ -24,7 +24,9 @@ public class AbilitySetFireState : MonoBehaviour
 
 	private void SetFireState()
 	{
+		// Change the current player elemental state variable to fire state
 		_abilityManager.CurrentPlayerElementalState = ElementalStates.Fire;
+		// Set player's mass to its original value
         _abilityManager.playerRb.mass = _abilityManager.OriginalMass;
         Debug.Log(_abilityManager.CurrentPlayerElementalState);
 	}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DirectionalLightTrigger : MonoBehaviour
 {
+    // Directional lights in the scene, as well as the point light for on fire state glow
     [SerializeField] private Light _fireGlowLight;
     [SerializeField] private Light _mainLight;
     [SerializeField] private Light _sideLight;
@@ -19,6 +20,7 @@ public class DirectionalLightTrigger : MonoBehaviour
 
     private void Start()
     {
+        // Initialise variables
         _isEntered = false;
         _fadeTime = 0f;
     }
@@ -30,6 +32,7 @@ public class DirectionalLightTrigger : MonoBehaviour
             _isEntered = true;
             StopAllCoroutines();
             StartCoroutine(DimLights());
+            // Increase fire glow when in dark areas
             _fireGlowLight.intensity = 31f;
         }
         else if (other.CompareTag("Player") && _isEntered)
@@ -37,6 +40,7 @@ public class DirectionalLightTrigger : MonoBehaviour
             _isEntered = false;
             StopAllCoroutines();
             StartCoroutine(BrightenLights());
+            // Set fire glow intensity back to normal when exiting dark area
             _fireGlowLight.intensity = 5f;
         }
     }
@@ -84,7 +88,7 @@ public class DirectionalLightTrigger : MonoBehaviour
             _tintLight.intensity = newTint;
             yield return new WaitForEndOfFrame();
         }
-
+        // Reset fade time
         _fadeTime = 0f;
     }
 }

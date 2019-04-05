@@ -53,8 +53,6 @@ public class FireProjectile : ElementalProjectiles {
 			{
 				// Set gameobjects velocity to returned value of AimToFireProjectileForce method
 				_rb.velocity = AimToFireProjectileForce(ProjectileSpeed, ray, enter, PlayerTrans);
-				// Debug ray to see raycast in viewport
-				Debug.DrawRay(ray.origin, ray.direction * enter, Color.green, 2f);
 			}
 		}
 	}
