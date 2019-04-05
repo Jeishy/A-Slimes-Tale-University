@@ -9,12 +9,13 @@ A hunter looking for treasure stumbles across a suspicious cave that leads to a 
 ## Gameplay Features
 
 - Players have access to the 4 elements! Earth, Wind, Water and Fire. Interacting with the elemental shrines on the map allows players to enter an elemental state. They also gain 2 armour slots, each with 3 armour points in them
-- Players can  fire proejectiles! But becareful, projectiles use up your armoour points
+- Players can  fire proejectiles! But becareful, projectiles use up your armour points!
 - Projectiles carry an elemental state, and can do increased or decreased damage to enemies, depending on it's state
 - Players can jump, vault off of walls and shoot their way through 3 levels; Tutorial, Dungeon World, and China Mountain
 - Waterfalls block your way, and only let you through if you've got the right elemental state
 - Flames do the same, but with different elemental state requirements for entry and exit
 - Fire zones require the fire elemental state! Or else, you won't be able to find your way
+- Dialogue from the evil Genie guides you, as you journey across the game's levels
 
 
 
