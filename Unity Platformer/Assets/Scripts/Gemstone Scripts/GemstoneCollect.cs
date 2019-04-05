@@ -27,11 +27,14 @@ public class GemstoneCollect : MonoBehaviour {
 	void Update () {
 	    if (IsCollected)
         {
+            // Smoothly transition position, from previous to gemstonefollow gameobject's position
             transform.position = Vector3.SmoothDamp(transform.position, _gemstoneFollowTrans.position, ref _velocity, _smoothTime);
-
+            // Calculate new rotation
             var newRotation = Quaternion.LookRotation(transform.position - _playerTrans.position, -Vector3.forward);
+            // Set x and y components to 0
             newRotation.x = 0.0f;
             newRotation.y = 0.0f;
+            // Apply slerp between old and new calculated rotations over time
             transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * _rotSpeed);
         }
 	}
