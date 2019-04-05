@@ -4,7 +4,7 @@ This project was a group project, created and developed as part of the Game Crea
 
 ## The Game's Story
 
-A hunter looking for treasure stumbles across a suspicious cave that leads to a room with a large locked door and a lamp. After attempting to get past the door decides to inspect the lamp and to the hunter’s surprise a genie appears. “Hey, you polish my lamp and I appear, one with you get while a am here. Be careful as it could cost you, dear.” Overcome with amazement, he wishes “to be sent through the door”. “Say no more” says the genie, as he clicks his fingers. The hunter is immediately turned into slime and pushed through the door in no time.
+A hunter looking for treasure stumbles across a suspicious cave that leads to a room with a large locked door and a lamp. After attempting to get past the door, the treasure hunter decides to inspect the lamp and to the hunter’s surprise a genie appears. “Hey, you polish my lamp and I appear, one with you get while a am here. Be careful as it could cost you, dear.” Overcome with amazement, he wishes “To be sent through the door”. “Say no more” says the genie, as he clicks his fingers. The hunter is immediately turned into slime and pushed through the door in no time!
 
 ## Gameplay Features
 
