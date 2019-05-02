@@ -18,7 +18,7 @@ public class TargetCameraScript : MonoBehaviour {
 
     private void Start()
     {
-        //possibleTargets = GameObject.FindGameObjectsWithTag("Door");
+        //Fill array with all targets
         possibleTargets[0] = GameObject.Find("DungeonCentre");
         possibleTargets[1] = GameObject.Find("WindCentre");
         possibleTargets[2] = GameObject.Find("WaterCentre");
