@@ -1,0 +1,5 @@
+newmtl SandTexture
+map_Kd -o 0 0 -s 1 1 SandTexture.jpg
+Kd 1 0.838342 0.2783019
+d 1
+
