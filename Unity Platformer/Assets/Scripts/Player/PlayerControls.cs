@@ -6,8 +6,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CharacterController2D))]
 public class PlayerControls : MonoBehaviour
 {
-
-
 	[SerializeField] private float speed = 40f;
     [SerializeField] private GameObject normalJumpParticles;
     [SerializeField] private ParticleSystem slimeTrail;
@@ -17,7 +15,6 @@ public class PlayerControls : MonoBehaviour
     private Player player;
 	private float horizontalMove;
 	private bool jump = false;
-	private bool wallJump = true;
 	
 	// Use this for initialization
 	void Start ()
@@ -26,15 +23,12 @@ public class PlayerControls : MonoBehaviour
 		controller = GetComponent<CharacterController2D>();
     }
     
-	
 	// Update is called once per frame
 	void Update ()
 	{
-        
         if (!player.isDead)
         {
             horizontalMove = Input.GetAxis("Horizontal") * speed;
-            
             if (!controller.m_Grounded)
                 slimeTrail.Stop();
             else
@@ -51,11 +45,9 @@ public class PlayerControls : MonoBehaviour
                     Destroy(jumpParticles, 1f);
                 }
             }
-
         }
         controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
         jump = false;
-
     }
 
     public float GetSpeed()
@@ -67,9 +59,4 @@ public class PlayerControls : MonoBehaviour
     {
         speed = newSpeed;
     }
-    
-	void FixedUpdate()
-	{
-		
-	}
 }

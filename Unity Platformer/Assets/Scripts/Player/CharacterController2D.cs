@@ -9,6 +9,7 @@ public class CharacterController2D : MonoBehaviour
 	[Range(0.25f, 1)] [SerializeField] private float m_WallJumpVerticalForceMultiplier = 0.3f;	// Amount the jump force is multiplied by when jumping off a wall
 	[SerializeField] private float m_HorizontalJumpForce = 200f;				// Amount of lateral force added when the player jumps from a wall
 	[SerializeField] private float m_MaxWallSlideSpeed;							// Maximum wall sliding speed
+	[SerializeField] private float m_MaxWallSlideTime;							// Maximum wall slinding time
 	[SerializeField] private LayerMask m_WallLayer;
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, 2f)] [SerializeField] private float m_GroundMovementSmoothing = .05f;	// How much to smooth out the movement
@@ -41,6 +42,7 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_KnockbackRight;		// Used to determine direction when applying knockback force
     private Vector3 m_TouchedWallPoint;
     private float m_FlipDelay;
+	private float m_WallSlideTime;
 	private AudioManager _audioManager;
     
 	[Header("Events")]
@@ -51,27 +53,17 @@ public class CharacterController2D : MonoBehaviour
 	[System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
 
-	public BoolEvent OnCrouchEvent;
-	private bool m_wasCrouching = false;
-
 	private void Awake()
 	{
 		m_Rigidbody = GetComponent<Rigidbody>();
 		_audioManager = AudioManager.instance;
 
 		if (OnLandEvent == null)
-			OnLandEvent = new UnityEvent();
-
-		if (OnCrouchEvent == null)
-			OnCrouchEvent = new BoolEvent();
-		
+			OnLandEvent = new UnityEvent();	
 	}
 
 	private void FixedUpdate()
 	{
-
-        
-
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 		m_WallJumped = false;
@@ -148,9 +140,9 @@ public class CharacterController2D : MonoBehaviour
         if (m_wallSliding && m_Rigidbody.velocity.y <= -m_MaxWallSlideSpeed)
 		{
 			m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, -m_MaxWallSlideSpeed);
-
+			// Start wall sliding timer coroutine
+			StartCoroutine(WallSlidingTimer());
 		}
-
 
         //Unstick from wall whenever player tries to move away from the wall
         if (GetRoundedInputs() == m_WallNormal)
@@ -191,12 +183,34 @@ public class CharacterController2D : MonoBehaviour
 		}
 	}
 
+
 	public void Knockback(bool right)
 	{
 		m_KnockbackRight = right;
 		m_KnockbackCount = m_KnockbackLength;
 	}
 
+	private IEnumerator WallSlidingTimer()
+	{
+		bool isTimerActive = true;
+		m_WallSlideTime = 0;
+		while (m_WallSlideTime < m_MaxWallSlideTime && isTimerActive)
+		{
+			m_WallSlideTime += Time.deltaTime;
+			// If player stops wall sliding while timer is active, set timer to false
+			if (!m_wallSliding)
+				isTimerActive = false;
+			yield return null;
+		}
+		// If the timer stayed active after while loop, turn wall sliding off
+		if (isTimerActive)
+			m_wallSliding = false;
+	}
+
+    private IEnumerator MovementLimiter()
+    {
+
+    }
 
     private int GetRoundedInputs() {
         int input = 0;
@@ -208,15 +222,13 @@ public class CharacterController2D : MonoBehaviour
         return input;
     }
 
-            private void Flip()
+    private void Flip()
 	{
-        if (m_FlipDelay <= Time.time)
-            
+        if (m_FlipDelay <= Time.time) 
         {
-
-            if (m_wallSliding && (m_FacingRight && m_WallNormal == 1) || (!m_FacingRight && m_WallNormal == -1))
+			// Dont flip if facing the correct way when wall sliding
+            if (m_wallSliding && ((m_FacingRight && m_WallNormal == 1) || (!m_FacingRight && m_WallNormal == -1)))
                 return;
-
             // Switch the way the player is labelled as facing.
             m_FacingRight = !m_FacingRight;
 
@@ -250,6 +262,7 @@ public class CharacterController2D : MonoBehaviour
             {
                 m_wallSliding = true;
                 StickToWall(true);
+				Debug.Log("Sticking to wall. WallSliding is " + m_wallSliding);
             }
 		}
 	}
@@ -257,6 +270,7 @@ public class CharacterController2D : MonoBehaviour
     private void OnCollisionStay(Collision other)
     {
         m_TouchedWallPoint = other.contacts[0].point;       // Getting the point last touched 
+
     }
 
     // Possible alternative fix for poor wall jumping
