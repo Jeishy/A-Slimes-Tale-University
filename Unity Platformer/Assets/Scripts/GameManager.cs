@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
     public void OnGemstonePickup()
     {
         gemstones++;
-        Debug.Log(gemstones);
         CheckIfLevelIsComplete();
     }
 

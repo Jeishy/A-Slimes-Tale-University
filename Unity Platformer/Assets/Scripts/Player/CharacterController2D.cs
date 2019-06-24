@@ -9,7 +9,8 @@ public class CharacterController2D : MonoBehaviour
 	[Range(0.25f, 1)] [SerializeField] private float m_WallJumpVerticalForceMultiplier = 0.3f;	// Amount the jump force is multiplied by when jumping off a wall
 	[SerializeField] private float m_HorizontalJumpForce = 200f;				// Amount of lateral force added when the player jumps from a wall
 	[SerializeField] private float m_MaxWallSlideSpeed;							// Maximum wall sliding speed
-	[SerializeField] private float m_MaxWallSlideTime;							// Maximum wall slinding time
+	[SerializeField] private float m_MaxWallSlideTime;							// Maximum wall sliding time
+    [SerializeField] private float m_WallJumpMovementLimiterTime;               // Time taken till player can move again after wall jumping
 	[SerializeField] private LayerMask m_WallLayer;
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, 2f)] [SerializeField] private float m_GroundMovementSmoothing = .05f;	// How much to smooth out the movement
@@ -66,8 +67,7 @@ public class CharacterController2D : MonoBehaviour
 	{
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
-		m_WallJumped = false;
-
+        Debug.Log(m_WallJumped);
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
 		Collider[] colliders = Physics.OverlapSphere(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
@@ -93,9 +93,14 @@ public class CharacterController2D : MonoBehaviour
 			Vector3 targetVelocity;
 			if (m_KnockbackCount <= 0)
 			{
-				// Move the character by finding the target velocity
-				targetVelocity = new Vector2(move * 10f, m_Rigidbody.velocity.y);
-			}
+                if (!m_WallJumped)
+                {
+                    // Move the character by finding the target velocity
+                    targetVelocity = new Vector2(move * 10f, m_Rigidbody.velocity.y);
+                }
+                else
+                    targetVelocity = Vector3.zero;
+            }
 			else
 			{
 				if (m_KnockbackRight)
@@ -171,10 +176,11 @@ public class CharacterController2D : MonoBehaviour
                 Destroy(pWallJump, 1f);
 				// Flip because character will jump off the wall in the other direction
 				Flip();
-			}
-			
-			// ... and player is not touching the wall
-			else
+                StartCoroutine(WallJumpMovementLimiter());
+            }
+
+            // ... and player is not touching the wall
+            else
 			{
 				// Add only the vertical force to the player.
 				m_Rigidbody.AddForce(new Vector2(0f, m_JumpForce), ForceMode.Force);
@@ -207,9 +213,21 @@ public class CharacterController2D : MonoBehaviour
 			m_wallSliding = false;
 	}
 
-    private IEnumerator MovementLimiter()
+    private IEnumerator WallJumpMovementLimiter()
     {
-
+        float time = Time.time;
+        float limitTime = Time.time + m_WallJumpMovementLimiterTime;
+        while (time <= limitTime)
+        {
+            time += Time.deltaTime;
+            if (m_Grounded)
+            {
+                m_WallJumped = false;
+                yield break;
+            }
+            yield return null;
+        }
+        m_WallJumped = false;
     }
 
     private int GetRoundedInputs() {
@@ -262,7 +280,6 @@ public class CharacterController2D : MonoBehaviour
             {
                 m_wallSliding = true;
                 StickToWall(true);
-				Debug.Log("Sticking to wall. WallSliding is " + m_wallSliding);
             }
 		}
 	}

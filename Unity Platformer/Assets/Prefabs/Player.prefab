@@ -5516,6 +5516,7 @@ MonoBehaviour:
   m_HorizontalJumpForce: 570
   m_MaxWallSlideSpeed: 0.7
   m_MaxWallSlideTime: 3
+  m_WallJumpMovementLimiterTime: 2
   m_WallLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -5541,11 +5542,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnCrouchEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: CharacterController2D+BoolEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!54 &54164265017550638
 Rigidbody:
