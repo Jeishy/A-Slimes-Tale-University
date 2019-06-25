@@ -67,7 +67,6 @@ public class CharacterController2D : MonoBehaviour
 	{
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
-        Debug.Log(m_WallJumped);
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
 		Collider[] colliders = Physics.OverlapSphere(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
@@ -99,7 +98,9 @@ public class CharacterController2D : MonoBehaviour
                     targetVelocity = new Vector2(move * 10f, m_Rigidbody.velocity.y);
                 }
                 else
-                    targetVelocity = Vector3.zero;
+                {
+                    targetVelocity = new Vector2(0f, m_Rigidbody.velocity.y);
+                }
             }
 			else
 			{
@@ -126,14 +127,14 @@ public class CharacterController2D : MonoBehaviour
 			}
 			
 			// If the input is moving the player right and the player is facing left...
-			if (move > 0 && !m_FacingRight)
+			if (move > 0 && !m_FacingRight && !m_WallJumped)
 			{
 				// ... flip the player.
 				Flip();
 
             }
             // Otherwise if the input is moving the player left and the player is facing right...
-            else if (move < 0 && m_FacingRight)
+            else if (move < 0 && m_FacingRight && !m_WallJumped)
 			{
 				// ... flip the player.
 				Flip();
@@ -216,7 +217,7 @@ public class CharacterController2D : MonoBehaviour
     private IEnumerator WallJumpMovementLimiter()
     {
         float time = Time.time;
-        float limitTime = Time.time + m_WallJumpMovementLimiterTime;
+        float limitTime = time + m_WallJumpMovementLimiterTime;
         while (time <= limitTime)
         {
             time += Time.deltaTime;
