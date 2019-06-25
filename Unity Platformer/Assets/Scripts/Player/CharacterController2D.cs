@@ -84,12 +84,11 @@ public class CharacterController2D : MonoBehaviour
 
 	public void Move(float move, bool jump)
 	{
-
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
 
-			Vector3 targetVelocity;
+			Vector3 targetVelocity = Vector3.zero;
 			if (m_KnockbackCount <= 0)
 			{
                 if (!m_WallJumped)
@@ -99,7 +98,8 @@ public class CharacterController2D : MonoBehaviour
                 }
                 else
                 {
-                    targetVelocity = new Vector2(0f, m_Rigidbody.velocity.y);
+                    Debug.Log("Limiting movement");
+                    m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, m_Rigidbody.velocity.y);
                 }
             }
 			else
@@ -121,7 +121,7 @@ public class CharacterController2D : MonoBehaviour
 				m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref m_Velocity, m_GroundMovementSmoothing);
 
 
-			if (!m_Grounded)
+			if (!m_Grounded && !m_WallJumped)
 			{
 				m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref m_Velocity, m_AirMovementSmoothing);
 			}
@@ -160,8 +160,7 @@ public class CharacterController2D : MonoBehaviour
 
         // If the player should jump...
         if (((m_Grounded || m_wallSliding) && jump))
-		{
-			
+		{		
 			StickToWall(false);
             m_Grounded = false;
 			_audioManager.Play("PlayerJump");
