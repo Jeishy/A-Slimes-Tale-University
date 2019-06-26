@@ -5,8 +5,6 @@
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _NoiseTex ("Noise Texture", 2D) = "white" {}
-        _Fresnel ("Fresnel intensity", Range(0,200)) = 0.3
-        _FresnelWidth ("Fresnel width", Range(0,2)) = 3.0
         _ScrollSpeedX("X Scroll Speed", Range(-10, 10)) = 0
         _ScrollSpeedY("Y Scroll Speed", Range(-10, 10)) = 0
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
@@ -33,7 +31,7 @@
 
         half _Glossiness;
         half _Metallic;
-        fixed _Fresnel, _FresnelWidth, _ScrollSpeedX, _ScrollSpeedY;
+        fixed _ScrollSpeedX, _ScrollSpeedY;
         fixed4 _Color;
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
@@ -45,12 +43,11 @@
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            float2 uv = In.uv_MainTex;
+            float2 uv = IN.uv_MainTex;
             // Scroll uv x and y over time
             uv.x += _ScrollSpeedX * _Time.x;
-            uv.y += _scrollSpeedY * _Time.y;
+            uv.y += _ScrollSpeedY * _Time.y;
             // Fresnel
-            fixed3 viewDir = normalize(ObjSpaceViewDir(o. ))
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, uv) * _Color;
             // Sample the perlin noise texture
