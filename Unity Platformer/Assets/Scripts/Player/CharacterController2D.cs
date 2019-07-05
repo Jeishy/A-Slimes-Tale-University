@@ -19,6 +19,7 @@ public class CharacterController2D : MonoBehaviour
 	public LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;							// A position marking where to check for ceilings
+    [SerializeField] private Collider m_GroundCheckCol;
 	[SerializeField] private Transform m_WallCheck;								// Transform of a wall check object
     [SerializeField] private Transform m_BehindWallCheck;
     [SerializeField] private float m_wallDetectRadius = 0.1f;					// Radius of a sphere cast
@@ -31,7 +32,7 @@ public class CharacterController2D : MonoBehaviour
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	[HideInInspector] public bool m_Grounded;            // Whether or not the player is grounded.
 	private bool m_wallSliding;			// Whether or not the player is touching the wall
-	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
+	const float k_CeilingRadius = 1.6f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody m_Rigidbody;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
@@ -69,8 +70,9 @@ public class CharacterController2D : MonoBehaviour
 		m_Grounded = false;
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		Collider[] colliders = Physics.OverlapSphere(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-		for (int i = 0; i < colliders.Length; i++)
+		/*Collider[] colliders = Physics.OverlapSphere(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+
+        for (int i = 0; i < colliders.Length; i++)
 		{
 			if (colliders[i].gameObject != gameObject)
 			{
@@ -78,11 +80,16 @@ public class CharacterController2D : MonoBehaviour
 				if (!wasGrounded)
 					OnLandEvent.Invoke();
 			}
-		}	
+		}*/
 	}
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(m_GroundCheck.position, k_GroundedRadius);
+    }
 
-	public void Move(float move, bool jump)
+    public void Move(float move, bool jump)
 	{
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
@@ -94,7 +101,8 @@ public class CharacterController2D : MonoBehaviour
                 if (!m_WallJumped)
                 {
                     // Move the character by finding the target velocity
-                    targetVelocity = new Vector2(move * 10f, m_Rigidbody.velocity.y);
+                    targetVelocity = move * 10f * transform.right;
+                    targetVelocity.y = m_Rigidbody.velocity.y;
                 }
                 else
                 {
@@ -115,7 +123,8 @@ public class CharacterController2D : MonoBehaviour
 
 				m_KnockbackCount -= Time.deltaTime;
 			}
-
+            Debug.DrawRay(transform.position, transform.right , Color.red);
+            Debug.Log("The players forward direction is " + transform.right);
 			// And then smoothing it out and applying it to the character
 			if (m_Grounded) 
 				m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref m_Velocity, m_GroundMovementSmoothing);
@@ -163,7 +172,7 @@ public class CharacterController2D : MonoBehaviour
 		{		
 			StickToWall(false);
             m_Grounded = false;
-			_audioManager.Play("PlayerJump");
+			//_audioManager.Play("PlayerJump");
 
 			// ... and player is touching the wall
 			if (m_wallSliding && !m_Grounded)
@@ -274,9 +283,9 @@ public class CharacterController2D : MonoBehaviour
 		if (other.gameObject.CompareTag("Wall"))
 		{
 			m_WallNormal = other.contacts[0].normal.x;
-            
+            float absWallNormal = Mathf.Abs(m_WallNormal);
 	         //Possible alternative fix for poor wall jumping
-            if (Mathf.Abs(m_WallNormal) == 1)
+            if (absWallNormal >= 0.7 && absWallNormal <= 1)
             {
                 m_wallSliding = true;
                 StickToWall(true);
