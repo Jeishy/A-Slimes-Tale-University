@@ -64,16 +64,12 @@ public class DialogueManager : MonoBehaviour {
         _anim.SetTrigger("Open");
         // Set name of text bubble to the character name of the dialogue variable
         _nameText.text = dialogue.characterName;
-        // Cache original player speed
-        _originalSpeed = _playerControls.GetSpeed();
-        // Reduce movement speed to 0
-        _playerControls.SetSpeed(0);
+        // Disable movement
+        _playerControls.DisableMovement();
         // Disable shooting if there is an ability manager in the scene
         if (_abilityManager != null)
             _abilityManager.GetComponent<AbilityProjectile>().enabled = false;
-        // Disable jumping by moving ground check gameobject off the ground
-        _groundCheck.position = new Vector3(_groundCheck.position.x, _groundCheck.position.y + 1, _groundCheck.position.z);
-
+    
         // Deactivate continue text during sentence
         _continueTxt.SetActive(false);
         // Clear any previously queued sentences
@@ -132,13 +128,11 @@ public class DialogueManager : MonoBehaviour {
 
     private void EndDialogue()
     {
-        // Set players movement speed back to normal
-        _playerControls.SetSpeed(_originalSpeed);
+        // Renable movement
+        _playerControls.EnableMovement();
         // Renable shooting if the ability manager is in the scene
         if (_abilityManager != null)
             _abilityManager.GetComponent<AbilityProjectile>().enabled = true;
-        // Renable jumping
-        _groundCheck.position = new Vector3(_groundCheck.position.x, _groundCheck.position.y - 1, _groundCheck.position.z);
         // End the conversation
         // Reset all flags 
         IsDialogueRunning = false;

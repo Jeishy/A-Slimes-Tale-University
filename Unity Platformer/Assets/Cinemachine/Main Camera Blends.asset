@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -28,6 +29,17 @@ MonoBehaviour:
     m_Blend:
       m_Style: 1
       m_Time: 0.7
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: CM vcam Main
+    m_To: CM vcam Cave
+    m_Blend:
+      m_Style: 1
+      m_Time: 2
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []

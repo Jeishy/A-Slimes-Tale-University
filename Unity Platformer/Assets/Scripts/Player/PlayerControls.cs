@@ -15,6 +15,7 @@ public class PlayerControls : MonoBehaviour
     private Player player;
 	private float horizontalMove;
 	private bool jump = false;
+    private bool canMove = true;
 	
 	// Use this for initialization
 	void Start ()
@@ -26,6 +27,15 @@ public class PlayerControls : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        if (canMove)
+        {
+            Movement();
+        }
+        
+    }
+
+    private void Movement()
+    {
         if (!player.isDead)
         {
             horizontalMove = Input.GetAxis("Horizontal") * speed;
@@ -58,5 +68,17 @@ public class PlayerControls : MonoBehaviour
     public void SetSpeed(float newSpeed)
     {
         speed = newSpeed;
+    }
+
+    public void EnableMovement()
+    {
+        if (!canMove)
+            canMove = true;
+    }
+
+    public void DisableMovement()
+    {
+        if (canMove)
+            canMove = false;
     }
 }

@@ -25,6 +25,7 @@ TagManager:
   - WaterDoor
   - WindDoor
   - ExitDoor
+  - Hunter
   layers:
   - Default
   - TransparentFX
@@ -45,8 +46,6 @@ TagManager:
   - 
   - ActiveDoor
   - InactiveDoor
-  - 
-  - 
   - 
   - 
   - 

@@ -21,7 +21,6 @@ public class ChangeCameraMain : MonoBehaviour
         {
             // Make main camera highest priority vcam
             _vCamZoomed.Priority = _vCamMain.Priority - 1;
-            Debug.Log("Zooming in camera");
         }
     }
 }

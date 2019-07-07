@@ -19,7 +19,6 @@ public class CharacterController2D : MonoBehaviour
 	public LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;							// A position marking where to check for ceilings
-    [SerializeField] private Collider m_GroundCheckCol;
 	[SerializeField] private Transform m_WallCheck;								// Transform of a wall check object
     [SerializeField] private Transform m_BehindWallCheck;
     [SerializeField] private float m_wallDetectRadius = 0.1f;					// Radius of a sphere cast
@@ -68,27 +67,8 @@ public class CharacterController2D : MonoBehaviour
 	{
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
-		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		/*Collider[] colliders = Physics.OverlapSphere(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-
-        for (int i = 0; i < colliders.Length; i++)
-		{
-			if (colliders[i].gameObject != gameObject)
-			{
-				m_Grounded = true;
-				if (!wasGrounded)
-					OnLandEvent.Invoke();
-			}
-		}*/
 	}
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(m_GroundCheck.position, k_GroundedRadius);
-    }
-
+	
     public void Move(float move, bool jump)
 	{
 		//only control the player if grounded or airControl is turned on
@@ -106,7 +86,6 @@ public class CharacterController2D : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Limiting movement");
                     m_Rigidbody.velocity = new Vector2(m_Rigidbody.velocity.x, m_Rigidbody.velocity.y);
                 }
             }
@@ -123,8 +102,6 @@ public class CharacterController2D : MonoBehaviour
 
 				m_KnockbackCount -= Time.deltaTime;
 			}
-            Debug.DrawRay(transform.position, transform.right , Color.red);
-            Debug.Log("The players forward direction is " + transform.right);
 			// And then smoothing it out and applying it to the character
 			if (m_Grounded) 
 				m_Rigidbody.velocity = Vector3.SmoothDamp(m_Rigidbody.velocity, targetVelocity, ref m_Velocity, m_GroundMovementSmoothing);
