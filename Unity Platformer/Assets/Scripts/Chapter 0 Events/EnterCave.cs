@@ -36,6 +36,6 @@ public class EnterCave : MonoBehaviour
             yield return null;
         }
         _charController.enabled = true;
-        _vCamMain.m_Follow = _hunterTrans;
+        _vCamCave.m_Follow = _hunterTrans;
     }
 }

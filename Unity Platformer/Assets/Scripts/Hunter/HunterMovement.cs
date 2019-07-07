@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class HunterMovement : MonoBehaviour
 {
@@ -15,10 +16,13 @@ public class HunterMovement : MonoBehaviour
     private bool _wasFacingRight = true;
     private bool _canMove = true;
     private bool _hasTurned = false;
+    private CinemachineVirtualCamera _highestPriorityVCam;
+    private CinemachineVirtualCamera[] _virtualCams;
 
     private void Start()
     {
         _flipTime = 0f;
+        _highestPriorityVCam = FindHighestPriorityCamera();
     }
 
     // Update is called once per frame
@@ -27,7 +31,8 @@ public class HunterMovement : MonoBehaviour
         if (_charController.isGrounded && _canMove)
         {
             // Horizontal movement only
-            _moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, 0.0f);
+            Vector3 cameraRightDir = _highestPriorityVCam.transform.right;
+            _moveDirection = new Vector3(cameraRightDir.x * Input.GetAxis("Horizontal"), cameraRightDir.y, cameraRightDir.z);
             _moveDirection *= _movementSpeed;
             if (_wasFacingRight && _moveDirection.x < -0.1 && !_hasTurned)
             {
@@ -58,6 +63,25 @@ public class HunterMovement : MonoBehaviour
     {
         _moveDirection = new Vector3(1.0f, 0.0f, 0.0f);
         _moveDirection *= _movementSpeed;
+    }
+
+    public CinemachineVirtualCamera FindHighestPriorityCamera()
+    {
+        _virtualCams = CinemachineVirtualCamera.FindObjectsOfType<CinemachineVirtualCamera>();
+        float highestPriority = 0;
+        CinemachineVirtualCamera highestPriorityCamera = null;
+        foreach (CinemachineVirtualCamera vCam in _virtualCams)
+        {
+            float priority = vCam.m_Priority;
+            if (priority > highestPriority)
+            {
+                highestPriority = vCam.m_Priority;
+                highestPriorityCamera = vCam;
+            }
+            
+        }
+        Debug.Log(_virtualCams.Length);
+        return highestPriorityCamera;
     }
 
     public void DisableMovement()
