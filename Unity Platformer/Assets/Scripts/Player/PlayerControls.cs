@@ -39,7 +39,7 @@ public class PlayerControls : MonoBehaviour
         if (!player.isDead)
         {
             horizontalMove = Input.GetAxis("Horizontal") * speed;
-            if (!controller.m_Grounded)
+            if (!controller.m_Grounded && (Input.GetAxis("Horizontal") < 0.1f && Input.GetAxis("Horizontal") > -0.1f))
                 slimeTrail.Stop();
             else
                 slimeTrail.Play();

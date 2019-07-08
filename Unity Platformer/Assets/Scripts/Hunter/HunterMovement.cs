@@ -6,7 +6,7 @@ using Cinemachine;
 public class HunterMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController _charController;
-    [SerializeField] private Animator _anim;
+    public Animator _anim;
     [SerializeField] private float _movementSpeed;
     [SerializeField] private float _gravity;
     [SerializeField] private float _maxFlipTime;
@@ -59,6 +59,8 @@ public class HunterMovement : MonoBehaviour
             _anim.SetBool("Moving", true);
         else
             _anim.SetBool("Moving", false);
+
+        Debug.Log(_speed);
         _moveDirection.y -= _gravity * Time.deltaTime;
         _charController.Move(_moveDirection * Time.deltaTime);
     }
@@ -94,6 +96,7 @@ public class HunterMovement : MonoBehaviour
     public void DisableMovement()
     {
         _canMove = false;
+        _speed = 0f;
         _moveDirection = Vector3.zero;
         _charController.Move(_moveDirection);
     }
