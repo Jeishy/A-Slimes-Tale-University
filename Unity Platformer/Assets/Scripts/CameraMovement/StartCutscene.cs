@@ -10,6 +10,9 @@ public class StartCutscene : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera _mainCamera, _farCamera;
     [SerializeField] private Transform _hunterTrans;
 
+    public delegate void CutsceneStuff();
+    public event CutsceneStuff OnCutsceneEnd;
+
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -23,6 +26,7 @@ public class StartCutscene : MonoBehaviour
         _mainCamera.m_Follow = null;
         _farCamera.m_Follow = null;
         yield return new WaitForSeconds(_custscenePlayTime);
+        OnCutsceneEnd.Invoke();
         _mainCamera.m_Follow = _hunterTrans;
         _farCamera.m_Follow = _hunterTrans;
     }

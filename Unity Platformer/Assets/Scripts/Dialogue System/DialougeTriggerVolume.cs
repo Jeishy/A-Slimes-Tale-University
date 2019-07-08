@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialougeTriggerVolume : MonoBehaviour {
 
@@ -15,13 +16,14 @@ public class DialougeTriggerVolume : MonoBehaviour {
     private void Start()
     {
         _dialogueTrigger = GetComponent<DialogueTrigger>();
-        _charController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
+        if (SceneManager.GetActiveScene().name != "Chapter_0")
+            _charController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
         _canWaitToLand = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Hunter"))
         {
             if (!_waitToTrigger && !_waitToLand)
             {
