@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class DialogueManager : MonoBehaviour {
     [HideInInspector] public static DialogueManager Instance = null;
     private Queue<string> _sentences;
     private PlayerControls _playerControls;
+    private HunterMovement _hunterMovement;
     private float _originalSpeed;
     private bool _isSentenceRunning;
     private bool _isSentenceSkipped;
@@ -33,8 +35,12 @@ public class DialogueManager : MonoBehaviour {
 
     private void Start()
     {
-        _playerControls = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
-        _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
+        _hunterMovement = FindObjectOfType<HunterMovement>();
+        if (SceneManager.GetActiveScene().name != "Chapter_0")
+        {
+            _playerControls = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
+            _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
+        }
         IsDialogueRunning = false;
         _isSentenceSkipped = false;
         _isSentenceRunning = false;
@@ -64,11 +70,10 @@ public class DialogueManager : MonoBehaviour {
         _anim.SetTrigger("Open");
         // Set name of text bubble to the character name of the dialogue variable
         _nameText.text = dialogue.characterName;
-        // Disable movement
-        _playerControls.DisableMovement();
-        // Disable shooting if there is an ability manager in the scene
-        if (_abilityManager != null)
-            _abilityManager.GetComponent<AbilityProjectile>().enabled = false;
+        if (SceneManager.GetActiveScene().name == "Chapter_0")
+            ChapterZeroSetup();
+        else
+            NormalSetup();
     
         // Deactivate continue text during sentence
         _continueTxt.SetActive(false);
@@ -97,6 +102,34 @@ public class DialogueManager : MonoBehaviour {
         StopAllCoroutines();
         // Start the slow typing coroutine
         StartCoroutine(SentenceSlowType(sentence));
+    }
+
+    private void ChapterZeroSetup()
+    {
+        _hunterMovement.DisableMovement();
+    }
+
+    private void NormalSetup()
+    {
+        // Disable movement
+        _playerControls.DisableMovement();
+        // Disable shooting if there is an ability manager in the scene
+        if (_abilityManager != null)
+            _abilityManager.GetComponent<AbilityProjectile>().enabled = false;
+    }
+    
+    private void ChapterZeroEnd()
+    {
+        _hunterMovement.EnableMovement();
+    }
+
+    private void NormalEnd()
+    {
+        // Renable movement
+        _playerControls.EnableMovement();
+        // Renable shooting if the ability manager is in the scene
+        if (_abilityManager != null)
+            _abilityManager.GetComponent<AbilityProjectile>().enabled = true;
     }
 
     private IEnumerator SentenceSlowType(string sentence)
@@ -128,11 +161,11 @@ public class DialogueManager : MonoBehaviour {
 
     private void EndDialogue()
     {
-        // Renable movement
-        _playerControls.EnableMovement();
-        // Renable shooting if the ability manager is in the scene
-        if (_abilityManager != null)
-            _abilityManager.GetComponent<AbilityProjectile>().enabled = true;
+        if (SceneManager.GetActiveScene().name == "Chapter_0")
+            ChapterZeroEnd();
+        else
+            NormalEnd();
+
         // End the conversation
         // Reset all flags 
         IsDialogueRunning = false;
