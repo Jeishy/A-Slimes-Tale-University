@@ -16,13 +16,14 @@ public class HunterMovement : MonoBehaviour
     private bool _wasFacingRight = true;
     private bool _canMove = true;
     private bool _hasTurned = false;
-    private CinemachineVirtualCamera _highestPriorityVCam;
+    public CinemachineVirtualCamera _highestPriorityVCam;
     private CinemachineVirtualCamera[] _virtualCams;
+    private float _speed;
 
     private void Start()
     {
         _flipTime = 0f;
-        _highestPriorityVCam = FindHighestPriorityCamera();
+        FindHighestPriorityCamera();
     }
 
     // Update is called once per frame
@@ -30,28 +31,31 @@ public class HunterMovement : MonoBehaviour
     {
         if (_charController.isGrounded && _canMove)
         {
-            // Horizontal movement only
+            // Horizontal movement dependant on active cinemachine virtual camera
             Vector3 cameraRightDir = _highestPriorityVCam.transform.right;
-            _moveDirection = new Vector3(cameraRightDir.x * Input.GetAxis("Horizontal"), cameraRightDir.y, cameraRightDir.z);
-            _moveDirection *= _movementSpeed;
-            if (_wasFacingRight && _moveDirection.x < -0.1 && !_hasTurned)
+            _moveDirection = cameraRightDir * Input.GetAxis("Horizontal") * _movementSpeed;
+            _speed = Mathf.Sqrt(Mathf.Pow(_charController.velocity.x, 2) + Mathf.Pow(_charController.velocity.z, 2));
+            if (Input.GetAxis("Horizontal") < 0f)
+                _speed *= -1f;
+
+            if (_wasFacingRight && _speed < -0.1  && !_hasTurned)   
             {
                 Debug.Log("Flip Left");
                 StartCoroutine(Flip());
             }
-            else if (!_wasFacingRight && _moveDirection.x > 0.1 && !_hasTurned)
+            else if (!_wasFacingRight && _speed > 0.1 && !_hasTurned)
             {
                 Debug.Log("Flip Right");
                 StartCoroutine(Flip());
             }
-            
         }
+        
         /*else if (_charController.isGrounded && !_canMove)
         {
             AutomatedWalk();
         }*/
 
-        if (_moveDirection.x > 0.1 || _moveDirection.x < -0.1)
+        if (_speed > 0.1 || _speed < -0.1)
             _anim.SetBool("Moving", true);
         else
             _anim.SetBool("Moving", false);
@@ -59,34 +63,40 @@ public class HunterMovement : MonoBehaviour
         _charController.Move(_moveDirection * Time.deltaTime);
     }
 
-    private void AutomatedWalk()
+    public IEnumerator AutomatedWalkTimed(float t)
     {
-        _moveDirection = new Vector3(1.0f, 0.0f, 0.0f);
-        _moveDirection *= _movementSpeed;
+        Vector3 cameraRightDir = _highestPriorityVCam.transform.right;
+        float time = 0f;
+        while (time <= t)
+        {
+            time += Time.deltaTime;
+            Debug.Log("automated walk");
+            _moveDirection = cameraRightDir * _movementSpeed;
+            yield return null;
+        }
     }
 
-    public CinemachineVirtualCamera FindHighestPriorityCamera()
+    public void FindHighestPriorityCamera()
     {
-        _virtualCams = CinemachineVirtualCamera.FindObjectsOfType<CinemachineVirtualCamera>();
+        _virtualCams = FindObjectsOfType<CinemachineVirtualCamera>();
         float highestPriority = 0;
-        CinemachineVirtualCamera highestPriorityCamera = null;
         foreach (CinemachineVirtualCamera vCam in _virtualCams)
         {
             float priority = vCam.m_Priority;
             if (priority > highestPriority)
             {
                 highestPriority = vCam.m_Priority;
-                highestPriorityCamera = vCam;
+                _highestPriorityVCam = vCam;
             }
             
         }
-        Debug.Log(_virtualCams.Length);
-        return highestPriorityCamera;
     }
 
     public void DisableMovement()
     {
         _canMove = false;
+        _moveDirection = Vector3.zero;
+        _charController.Move(_moveDirection);
     }
 
     public IEnumerator DisableMovementTimed(float time)
@@ -100,6 +110,7 @@ public class HunterMovement : MonoBehaviour
     {
         _hasTurned = true;
         _wasFacingRight = !_wasFacingRight;
+        DisableMovement();
         Quaternion lastRot = transform.rotation;
         Quaternion newRot = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0.0f, -180f, 0.0f));
         while (_flipTime <= _maxFlipTime)
@@ -109,6 +120,7 @@ public class HunterMovement : MonoBehaviour
             yield return null;
         }
         _flipTime = 0f;
+        EnableMovement();
         _hasTurned = false;
     }
 

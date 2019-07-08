@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class EnterCave : MonoBehaviour
+public class CaveSecondTurn : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera _vCamMain;
-    [SerializeField] private CinemachineVirtualCamera _vCamZoomed;
-    [SerializeField] private CinemachineVirtualCamera _vCamCave;
     [SerializeField] private CharacterController _charController;
     [SerializeField] private Transform _hunterTrans;
     [SerializeField] private GameObject _caveInvisWall;
+    [SerializeField] private CinemachineVirtualCamera _vCamCave;
+    [SerializeField] private CinemachineVirtualCamera _vCamCave2;
 
     private HunterMovement _hunterMovement;
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         _hunterMovement = _hunterTrans.gameObject.GetComponent<HunterMovement>();
         _caveInvisWall.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Hunter"))
         {
@@ -32,11 +31,11 @@ public class EnterCave : MonoBehaviour
     private IEnumerator CaveSetup()
     {
         _hunterMovement.DisableMovement();
-        _vCamMain.Priority = _vCamCave.Priority - 1;
+        _vCamCave2.Priority = 15;
         _hunterMovement.FindHighestPriorityCamera();
-        StartCoroutine(_hunterMovement.AutomatedWalkTimed(2f));
+        StartCoroutine(_hunterMovement.AutomatedWalkTimed(1f));
         Quaternion lastRot = _hunterTrans.rotation;
-        Quaternion newRot = Quaternion.Euler(_hunterTrans.rotation.eulerAngles + new Vector3(0.0f, -90f, 0.0f));
+        Quaternion newRot = Quaternion.Euler(_hunterTrans.rotation.eulerAngles + new Vector3(0.0f, -10f, 0.0f));
         float time = 0f;
         while (time <= 1)
         {
@@ -46,10 +45,10 @@ public class EnterCave : MonoBehaviour
         }
         _charController.enabled = true;
         _hunterMovement.EnableMovement();
-        _vCamMain.m_Follow = null;
-        _vCamZoomed.m_Follow = null;
-        _vCamCave.m_Follow = _hunterTrans;
+        _vCamCave.m_Follow = null;
+        _vCamCave2.m_Follow = _hunterTrans;
         yield return new WaitForSeconds(1f);
         _caveInvisWall.SetActive(true);
+        gameObject.SetActive(false);
     }
 }
