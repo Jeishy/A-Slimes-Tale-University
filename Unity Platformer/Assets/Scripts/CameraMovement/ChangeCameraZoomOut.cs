@@ -15,15 +15,12 @@ public class ChangeCameraZoomOut : MonoBehaviour
     }
 
     // Use this for initialization
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("Trigger entered");
-        if (col.CompareTag("Player"))
+        if (col.CompareTag("Player") || col.CompareTag("Hunter"))
         {
-            Debug.Log("Camera zoom trigger entered");
             // Make zoomed camera highest priority vcam
             _vCamZoomed.Priority = _vCamMain.Priority + 1;
-            Debug.Log("Zooming out camera");
         }
     }
 }

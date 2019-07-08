@@ -17,7 +17,7 @@ MonoBehaviour:
     m_To: CM vcam Zoom Out
     m_Blend:
       m_Style: 1
-      m_Time: 0.7
+      m_Time: 2
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -25,17 +25,6 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: CM vcam Zoom Out
-    m_To: CM vcam Main
-    m_Blend:
-      m_Style: 1
-      m_Time: 0.7
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: CM vcam Main
     m_To: CM vcam Cave
     m_Blend:
       m_Style: 1

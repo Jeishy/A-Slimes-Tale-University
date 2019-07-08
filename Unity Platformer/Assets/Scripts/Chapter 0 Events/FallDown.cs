@@ -7,9 +7,7 @@ public class FallDown : MonoBehaviour
     [SerializeField] private HunterMovement _hunterMovement;
     [SerializeField] private CharacterController _charController;
     [SerializeField] private Transform _hunterTrans;
-    [SerializeField] private Transform _slipPosTrans;
-
-    private Vector3 refVel = Vector3.zero;
+    [SerializeField] private Transform[] _slipPosTrans;
 
     private void OnTriggerEnter(Collider other) 
     {
@@ -23,14 +21,22 @@ public class FallDown : MonoBehaviour
     private IEnumerator Slip()
     {
         _charController.enabled = false;
-        Vector3 slipPos = _slipPosTrans.position;
-        float time = 0f;
-        while (time <= 0.8f)
+        foreach (Transform slipTrans in _slipPosTrans)
         {
-            time += Time.deltaTime;
-            _hunterTrans.position = Vector3.SmoothDamp(_hunterTrans.position, slipPos, ref refVel, 0.4f);
-            yield return null;
+            Vector3 slipPos = slipTrans.position;
+            float time = 0f;
+            bool _isPointReached = false;
+            while (time <= 1.0f && !_isPointReached)
+            {
+                time += Time.deltaTime;
+                _hunterTrans.position = Vector3.MoveTowards(_hunterTrans.position, slipPos, 0.25f);
+                float distance = Vector3.Distance(_hunterTrans.position, slipPos);
+                if (Mathf.Abs(distance) < 0.05f)
+                    _isPointReached = true;
+                yield return null;
+            }
         }
+        _hunterMovement._anim.SetTrigger("Fallen");
         _charController.enabled = true;
     }
 }

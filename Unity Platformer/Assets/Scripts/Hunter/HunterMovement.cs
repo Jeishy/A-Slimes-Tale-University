@@ -40,27 +40,19 @@ public class HunterMovement : MonoBehaviour
 
             if (_wasFacingRight && _speed < -0.1  && !_hasTurned)   
             {
-                Debug.Log("Flip Left");
                 StartCoroutine(Flip());
             }
             else if (!_wasFacingRight && _speed > 0.1 && !_hasTurned)
             {
-                Debug.Log("Flip Right");
                 StartCoroutine(Flip());
             }
         }
-        
-        /*else if (_charController.isGrounded && !_canMove)
-        {
-            AutomatedWalk();
-        }*/
 
         if (_speed > 0.1 || _speed < -0.1)
             _anim.SetBool("Moving", true);
         else
             _anim.SetBool("Moving", false);
 
-        Debug.Log(_speed);
         _moveDirection.y -= _gravity * Time.deltaTime;
         _charController.Move(_moveDirection * Time.deltaTime);
     }
@@ -72,7 +64,6 @@ public class HunterMovement : MonoBehaviour
         while (time <= t)
         {
             time += Time.deltaTime;
-            Debug.Log("automated walk");
             _moveDirection = cameraRightDir * _movementSpeed;
             yield return null;
         }

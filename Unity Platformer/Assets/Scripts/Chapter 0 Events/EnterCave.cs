@@ -32,7 +32,7 @@ public class EnterCave : MonoBehaviour
     private IEnumerator CaveSetup()
     {
         _hunterMovement.DisableMovement();
-        _vCamMain.Priority = _vCamCave.Priority - 1;
+         _vCamCave.Priority = 15;
         _hunterMovement.FindHighestPriorityCamera();
         StartCoroutine(_hunterMovement.AutomatedWalkTimed(2f));
         Quaternion lastRot = _hunterTrans.rotation;
