@@ -2,15 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterDoor : MonoBehaviour {
+public class WaterDoor : MonoBehaviour 
+{
+	[SerializeField] private HubWorldManager _hubWorldManager;
 
-	// Use this for initialization
-	void Start () {
-		
+	private void OnTriggerEnter(Collider col)
+	{
+		if (col.CompareTag("Player") && !_hubWorldManager.IsDoorInRange)
+		{
+			_hubWorldManager.IsDoorInRange = true;
+			_hubWorldManager.DoorHoveredOver = gameObject;
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	private void OnTriggerExit(Collider col)
+	{
+		if (col.CompareTag("Player") && _hubWorldManager.IsDoorInRange)
+		{
+			_hubWorldManager.IsDoorInRange = false;
+		}
 	}
 }

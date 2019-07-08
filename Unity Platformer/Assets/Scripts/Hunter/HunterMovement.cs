@@ -87,8 +87,7 @@ public class HunterMovement : MonoBehaviour
             {
                 highestPriority = vCam.m_Priority;
                 _highestPriorityVCam = vCam;
-            }
-            
+            }          
         }
     }
 

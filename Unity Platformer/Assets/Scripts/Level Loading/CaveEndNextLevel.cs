@@ -9,9 +9,11 @@ public class CaveEndNextLevel : MonoBehaviour
     private bool _hasActivatedNextLevel;
     private DialogueTrigger _dialogueTrigger;
     private bool _nextLevelDialogueStarted;
+    private HunterMovement _hunterMovement;
 
     private void Start()
     {
+        _hunterMovement = FindObjectOfType<HunterMovement>();
         _isNextLevel = false;
         _nextLevelDialogueStarted = false;
         _hasActivatedNextLevel = false;
@@ -22,6 +24,7 @@ public class CaveEndNextLevel : MonoBehaviour
     {
         if (col.CompareTag("Hunter") && !_isNextLevel)
         {
+            _hunterMovement.DisableMovement();
             _isNextLevel = true;
             TriggerDialouge();
         }
@@ -54,7 +57,7 @@ public class CaveEndNextLevel : MonoBehaviour
     private void NextLevel()
     {
         // Get hubworld build index and load the hub world
-        int buildIndex = SceneUtility.GetBuildIndexByScenePath(GameManager.instance.GetScenePath("Chapter_1"));
+        int buildIndex = SceneUtility.GetBuildIndexByScenePath(GameManager.instance.GetScenePath("Hub_World"));
         LevelChanger.instance.FadeToLevel(buildIndex);
         // Reset variables
         _isNextLevel = false;

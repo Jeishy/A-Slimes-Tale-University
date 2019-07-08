@@ -7,6 +7,7 @@ public class ShowTutorialText : MonoBehaviour
     [SerializeField] private Animator _anim;
     [SerializeField] private StartCutscene _cutscene;
 
+
     // Start is called before the first frame update
     private void OnEnable()
     {

@@ -56,6 +56,10 @@ public class HubWorldDoorSelect : MonoBehaviour {
 					_confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GameManager.instance.GetScenePath("ChinaMountain_World2"));
                     _levelNameTxt.text = "China Mountain";
                     break;
+                case "Water Door":
+                    _confirmMenu.BuildIndex = SceneUtility.GetBuildIndexByScenePath(GameManager.instance.GetScenePath("Chapter_0"));
+                    _levelNameTxt.text = "Prologue";
+                    break;
 			}
         }
     }
