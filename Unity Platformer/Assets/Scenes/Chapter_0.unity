@@ -11119,7 +11119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hunterMovement: {fileID: 554748777}
-  _custscenePlayTime: 25.3
+  _custscenePlayTime: 25.2
   _mainCamera: {fileID: 1494394465}
   _farCamera: {fileID: 1395481064}
   _hunterTrans: {fileID: 554748779}

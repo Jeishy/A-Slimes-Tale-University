@@ -10,7 +10,6 @@ public class PlayerGroundCheck : MonoBehaviour
     {
         if (other.CompareTag("Wall"))
         {
-            Debug.Log("Grounded");
             m_CharacterController2D.m_Grounded = true;
         }
     }

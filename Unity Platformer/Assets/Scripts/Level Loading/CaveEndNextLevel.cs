@@ -57,7 +57,7 @@ public class CaveEndNextLevel : MonoBehaviour
     private void NextLevel()
     {
         // Get hubworld build index and load the hub world
-        int buildIndex = SceneUtility.GetBuildIndexByScenePath(GameManager.instance.GetScenePath("Hub_World"));
+        int buildIndex = SceneUtility.GetBuildIndexByScenePath(GameManager.instance.GetScenePath("Tutorial"));
         LevelChanger.instance.FadeToLevel(buildIndex);
         // Reset variables
         _isNextLevel = false;
