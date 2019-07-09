@@ -41,8 +41,8 @@ public class DialogueManager : MonoBehaviour {
         {
             _playerControls = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
             _abilityManager = GameObject.FindGameObjectWithTag("AbilityManager").GetComponent<AbilityManager>();
+            _oldSpeed = _playerControls.GetSpeed();
         }
-        _oldSpeed = _playerControls.GetSpeed();
         IsDialogueRunning = false;
         _isSentenceSkipped = false;
         _isSentenceRunning = false;
