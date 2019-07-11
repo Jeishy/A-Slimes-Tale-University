@@ -115,7 +115,6 @@ public class DialogueManager : MonoBehaviour {
     {
         // Disable movement
         _playerControls.DisableMovement();
-        _playerControls.SetSpeed(0f);
         // Disable shooting if there is an ability manager in the scene
         if (_abilityManager != null)
             _abilityManager.GetComponent<AbilityProjectile>().enabled = false;
@@ -130,7 +129,6 @@ public class DialogueManager : MonoBehaviour {
     {
         // Renable movement
         _playerControls.EnableMovement();
-        _playerControls.SetSpeed(_oldSpeed);
         // Renable shooting if the ability manager is in the scene
         if (_abilityManager != null)
             _abilityManager.GetComponent<AbilityProjectile>().enabled = true;
